@@ -7,37 +7,35 @@ export class MainController {
   socket;
   awesomeThings = [];
   newThing = '';
-
+  newConcept = '';
   /*@ngInject*/
   constructor($http, $scope, socket) {
     this.$http = $http;
     this.socket = socket;
 
     $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
+      socket.unsyncUpdates('concept');
     });
   }
 
   $onInit() {
-    this.$http.get('/api/things')
+    this.$http.get('/api/concepts')
       .then(response => {
         this.awesomeThings = response.data;
-        this.socket.syncUpdates('thing', this.awesomeThings);
+        this.socket.syncUpdates('concept', this.awesomeThings);
       });
   }
 
-  addThing() {
-    if(this.newThing) {
-      this.$http.post('/api/things', {
-        name: this.newThing
+  onClick(id) {
+    this.$http.get('/api/concepts')
+    alert(id)
+      .then(response => {
+        this.awesomeThings = response.data;
+        this.socket.syncUpdates('concept', this.awesomeThings);
       });
-      this.newThing = '';
-    }
   }
 
-  deleteThing(thing) {
-    this.$http.delete(`/api/things/${thing._id}`);
-  }
+
 }
 
 export default angular.module('skillGameApp.main', [uiRouter])
