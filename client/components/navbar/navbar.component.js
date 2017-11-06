@@ -5,7 +5,7 @@ import angular from 'angular';
 
 export class NavbarComponent {
   menu = [{
-    title: 'Home',
+    title: 'accueil',
     state: 'main'
   }];
   isLoggedIn: Function;
