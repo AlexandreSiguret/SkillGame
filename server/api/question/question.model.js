@@ -9,7 +9,10 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     enonce: DataTypes.STRING,
-    info: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
+    proprietaire : DataTypes.user,
+    nbApparition : DataTypes.INTEGER,
+    nbContestation : DataTypes.INTEGER,
+    concept : DataTypes.concept,
+    bonneReponse : DataTypes.STRING,    
   });
 }
