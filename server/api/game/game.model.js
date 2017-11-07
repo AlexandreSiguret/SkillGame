@@ -1,5 +1,7 @@
 'use strict';
 
+import User from "../user/user.model";
+import Concept from "../concept/concept.model"
 export default function(sequelize, DataTypes) {
   return sequelize.define('Game', {
     _id: {
@@ -12,7 +14,7 @@ export default function(sequelize, DataTypes) {
     user1: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.User,
+        model : User,
         key : '_id',
       }
     },
@@ -20,7 +22,7 @@ export default function(sequelize, DataTypes) {
     user2: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.User,
+        model : User,
         key : '_id',
       }
     },
@@ -28,7 +30,7 @@ export default function(sequelize, DataTypes) {
     concept: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.Concept,
+        model : Concept,
         key : '_id',
       }
     },
