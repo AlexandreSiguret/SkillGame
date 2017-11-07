@@ -9,12 +9,12 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
 
-    question: DataTypes.STRING,
+    question: DataTypes.TEXT,
     
     owner: {
-      type : DataTypes.user,      
+      type : DataTypes.INTEGER,      
       references :{
-        model : user,
+        model : DataTypes.User,
         key : '_id',
       }
     },
@@ -23,9 +23,9 @@ export default function(sequelize, DataTypes) {
     nbContestation : DataTypes.INTEGER,   
 
     concept: {
-      type : DataTypes.concept,      
+      type : DataTypes.INTEGER,      
       references :{
-        model : concept,
+        model : DataTypes.Concept,
         key : '_id',
       }
     },
