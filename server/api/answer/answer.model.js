@@ -20,7 +20,7 @@ export default function(sequelize, DataTypes) {
     choice: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.choice,
+        model : DataTypes.Choice,
         key : '_id',
       }
     },    
