@@ -8,11 +8,27 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    enonce: DataTypes.STRING,
-    proprietaire : DataTypes.user,
-    nbApparition : DataTypes.INTEGER,
-    nbContestation : DataTypes.INTEGER,
-    concept : DataTypes.concept,
-    bonneReponse : DataTypes.STRING,    
+
+    question: DataTypes.STRING,
+    
+    owner: {
+      type : DataTypes.user,      
+      references :{
+        model : user,
+        key : '_id',
+      }
+    },
+
+    nbAppearance : DataTypes.INTEGER,
+    nbContestation : DataTypes.INTEGER,   
+
+    concept: {
+      type : DataTypes.concept,      
+      references :{
+        model : concept,
+        key : '_id',
+      }
+    },
+    goodAnswer : DataTypes.STRING,    
   });
 }

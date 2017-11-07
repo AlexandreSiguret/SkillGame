@@ -8,8 +8,39 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING,
-    info: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
+
+    question: {
+      type : DataTypes.question,      
+      references :{
+        model : question,
+        key : '_id',
+      }
+    },
+
+    choice: {
+      type : DataTypes.choice,      
+      references :{
+        model : choice,
+        key : '_id',
+      }
+    },    
+    earnedPoint : DataTypes.INTEGER,
+
+    user: {
+      type : DataTypes.user,      
+      references :{
+        model : user,
+        key : '_id',
+      }
+    },
+    
+    quizz: {
+      type : DataTypes.quizz,      
+      references :{
+        model : quizz,
+        key : '_id',
+      }
+    },
   });
 }
+

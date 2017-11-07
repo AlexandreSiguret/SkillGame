@@ -8,8 +8,15 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING,
-    info: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
+    question: {
+      type : DataTypes.question,      
+      references :{
+        model : question,
+        key : '_id',
+      }
+    },
+
+    statement : DataTypes.STRING,
+    
   });
 }

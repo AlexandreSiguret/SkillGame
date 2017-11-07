@@ -8,8 +8,32 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-    name: DataTypes.STRING,
-    info: DataTypes.STRING,
-    active: DataTypes.BOOLEAN
+
+    user1: {
+      type : DataTypes.user,      
+      references :{
+        model : user,
+        key : '_id',
+      }
+    },
+
+    user2: {
+      type : DataTypes.user,      
+      references :{
+        model : user,
+        key : '_id',
+      }
+    },
+
+    concept: {
+      type : DataTypes.concept,      
+      references :{
+        model : concept,
+        key : '_id',
+      }
+    },
+    
+    ended : DataTypes.BOOLEAN,
+    
   });
 }
