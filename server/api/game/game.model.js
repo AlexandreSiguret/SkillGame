@@ -10,7 +10,7 @@ export default function(sequelize, DataTypes) {
     },
 
     user1: {
-      type : DataTypes.STRING,      
+      type : DataTypes.INTEGER,      
       references :{
         model : DataTypes.User,
         key : '_id',
@@ -18,7 +18,7 @@ export default function(sequelize, DataTypes) {
     },
 
     user2: {
-      type : DataTypes.STRING,      
+      type : DataTypes.INTEGER,      
       references :{
         model : DataTypes.User,
         key : '_id',
@@ -26,7 +26,7 @@ export default function(sequelize, DataTypes) {
     },
 
     concept: {
-      type : DataTypes.STRING,      
+      type : DataTypes.INTEGER,      
       references :{
         model : DataTypes.Concept,
         key : '_id',

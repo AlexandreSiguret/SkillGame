@@ -9,9 +9,9 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     question: {
-      type : DataTypes.question,      
+      type : DataTypes.INTEGER,      
       references :{
-        model : question,
+        model : DataTypes.Question,
         key : '_id',
       }
     },
