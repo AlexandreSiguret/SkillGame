@@ -10,25 +10,25 @@ export default function(sequelize, DataTypes) {
     },
 
     user1: {
-      type : DataTypes.user,      
+      type : DataTypes.STRING,      
       references :{
-        model : user,
+        model : DataTypes.User,
         key : '_id',
       }
     },
 
     user2: {
-      type : DataTypes.user,      
+      type : DataTypes.STRING,      
       references :{
-        model : user,
+        model : DataTypes.User,
         key : '_id',
       }
     },
 
     concept: {
-      type : DataTypes.concept,      
+      type : DataTypes.STRING,      
       references :{
-        model : concept,
+        model : DataTypes.Concept,
         key : '_id',
       }
     },
