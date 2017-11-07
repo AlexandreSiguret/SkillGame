@@ -13,7 +13,7 @@ export default function seedDatabaseIfNeeded() {
     let User = sqldb.User;
     let Concept = sqldb.Concept;
 
-    return Concept.destroy({ where: {} })
+     Concept.destroy({ where: {} })
       .then(() => {
         let concept = Concept.bulkCreate([{
           name: 'Computer sciences'         
@@ -25,7 +25,6 @@ export default function seedDatabaseIfNeeded() {
           name: 'Art'
         
         }]);
-        return concept;
       })
       .then(() => console.log('finished populating things'))
       .catch(err => console.log('error populating things', err));
