@@ -10,34 +10,34 @@ export default function(sequelize, DataTypes) {
     },
 
     question: {
-      type : DataTypes.question,      
+      type : DataTypes.INTEGER,      
       references :{
-        model : question,
+        model : DataTypes.Question,
         key : '_id',
       }
     },
 
     choice: {
-      type : DataTypes.choice,      
+      type : DataTypes.INTEGER,      
       references :{
-        model : choice,
+        model : DataTypes.choice,
         key : '_id',
       }
     },    
     earnedPoint : DataTypes.INTEGER,
 
     user: {
-      type : DataTypes.user,      
+      type : DataTypes.INTEGER,      
       references :{
-        model : user,
+        model : DataTypes.User,
         key : '_id',
       }
     },
     
     quizz: {
-      type : DataTypes.quizz,      
+      type : DataTypes.INTEGER,      
       references :{
-        model : quizz,
+        model : DataTypes.Game,
         key : '_id',
       }
     },
