@@ -1,5 +1,11 @@
 'use strict';
 
+import User from "../user/user.model";
+import Game from "../game/game.model"
+import Question from "../question/question.model"
+import Choice from "../choice/choice.model"
+
+
 export default function(sequelize, DataTypes) {
   return sequelize.define('Answer', {
     _id: {
@@ -12,7 +18,7 @@ export default function(sequelize, DataTypes) {
     question: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.Question,
+        model : Question,
         key : '_id',
       }
     },
@@ -20,7 +26,7 @@ export default function(sequelize, DataTypes) {
     choice: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.Choice,
+        model : Choice,
         key : '_id',
       }
     },    
@@ -29,7 +35,7 @@ export default function(sequelize, DataTypes) {
     user: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.User,
+        model : User,
         key : '_id',
       }
     },
@@ -37,7 +43,7 @@ export default function(sequelize, DataTypes) {
     quizz: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.Game,
+        model : Game,
         key : '_id',
       }
     },

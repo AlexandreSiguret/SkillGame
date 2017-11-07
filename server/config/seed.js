@@ -13,7 +13,7 @@ export default function seedDatabaseIfNeeded() {
     let User = sqldb.User;
     let Concept = sqldb.Concept;
 
-     Concept.destroy({ where: {} })
+    /* Concept.destroy({ where: {} })
       .then(() => {
         let concept = Concept.bulkCreate([{
           name: 'Computer sciences'         
@@ -43,6 +43,6 @@ export default function seedDatabaseIfNeeded() {
         password: 'admin'
       }])
         .then(() => console.log('finished populating users'))
-        .catch(err => console.log('error populating users', err)));
+        .catch(err => console.log('error populating users', err)));*/
   }
 }

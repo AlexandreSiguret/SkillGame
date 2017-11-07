@@ -1,5 +1,7 @@
 'use strict';
 
+import User from "../user/user.model";
+import Concept from "../concept/concept.model"
 export default function(sequelize, DataTypes) {
   return sequelize.define('Question', {
     _id: {
@@ -9,12 +11,12 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
 
-    question: DataTypes.TEXT,
+    question: DataTypes.STRING,
     
     owner: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.User,
+        model : User,
         key : '_id',
       }
     },
@@ -25,7 +27,7 @@ export default function(sequelize, DataTypes) {
     concept: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.Concept,
+        model : Concept,
         key : '_id',
       }
     },

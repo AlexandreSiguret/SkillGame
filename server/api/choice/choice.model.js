@@ -1,5 +1,6 @@
 'use strict';
 
+import Question from "../question/question.model"
 export default function(sequelize, DataTypes) {
   return sequelize.define('Choice', {
     _id: {
@@ -11,7 +12,7 @@ export default function(sequelize, DataTypes) {
     question: {
       type : DataTypes.INTEGER,      
       references :{
-        model : DataTypes.Question,
+        model :Question,
         key : '_id',
       }
     },
