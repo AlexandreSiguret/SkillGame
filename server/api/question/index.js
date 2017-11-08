@@ -6,6 +6,7 @@ var controller = require('./question.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/aleatoire/:id',controller.concept);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);

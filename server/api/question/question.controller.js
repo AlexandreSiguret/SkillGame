@@ -1,6 +1,7 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/questions              ->  index
+ * GET     /api/questions/aleatoire    ->  concept
  * POST    /api/questions              ->  create
  * GET     /api/questions/:id          ->  show
  * PUT     /api/questions/:id          ->  upsert
@@ -69,6 +70,18 @@ export function index(req, res) {
   return Question.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+//gets the list of Question for a concept
+
+export function concept(req,res){
+  return Question.findAll({
+    where :{
+      concept : req.params.id 
+    }
+  }) .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Gets a single Question from the DB

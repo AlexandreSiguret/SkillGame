@@ -15,6 +15,7 @@ export default function(app) {
   app.use('/api/concepts', require('./api/concept'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+  app.use('/api/questions',require("./api/question"));
 
   app.use('/auth', require('./auth').default);
 
