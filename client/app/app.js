@@ -26,12 +26,13 @@ import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import QuestionComponent from './question/question.component';
+import JeuComponent from './jeu/jeu.component';
 
 import './app.css';
 
 angular.module('skillGameApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
-  socket, util
+  socket, util, JeuComponent
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
