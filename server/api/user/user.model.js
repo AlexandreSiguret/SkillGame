@@ -1,5 +1,6 @@
 'use strict';
 
+
 import crypto from 'crypto';
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
