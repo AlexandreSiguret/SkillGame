@@ -3,20 +3,8 @@
  ***/
 
  @font-face {
-    font-family: 'Krinkes'; /*a name to be used later*/
-    src: url('../fonts/KrinkesDecorPERSONAL.ttf'), url('../fonts/KrinkesRegularPERSONAL.ttf'); /*URL to font*/
-}
-/*
-body{
-    background-color:#999;
 }
 
-.game{
-    background-color: #eee;
-    margin-top:50px;
-    border:5px solid #333;
-}
-*/
 .container > h1{
     font-family: "Krinkes";
     font-size: 60px;
