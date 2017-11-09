@@ -12,27 +12,27 @@ export default function(sequelize, DataTypes) {
     },
 
     user1: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,      /*
       references :{
         model : User,
         key : '_id',
-      }
+      }*/
     },
 
     user2: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,   /*   
       references :{
         model : User,
         key : '_id',
-      }
+      }*/
     },
 
     concept: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,      /*
       references :{
         model : Concept,
         key : '_id',
-      }
+      }*/
     },
     
     ended : DataTypes.BOOLEAN,

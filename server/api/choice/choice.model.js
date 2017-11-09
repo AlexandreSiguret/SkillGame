@@ -10,11 +10,11 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     question: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,      /*
       references :{
         model :Question,
         key : '_id',
-      }
+      }*/
     },
 
     statement : DataTypes.STRING,
