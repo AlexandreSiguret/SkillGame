@@ -20,25 +20,28 @@ import _Auth from '../components/auth/auth.module';
 import account from './account';
 import admin from './admin';
 import navbar from '../components/navbar/navbar.component';
+import header from '../components/header/header.component';
 import footer from '../components/footer/footer.component';
+import sidebarleft from '../components/sidebarleft/sidebarleft.component';
 import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import socket from '../components/socket/socket.service';
 import QuestionComponent from './question/question.component';
-
+import JeuComponent from './jeu/jeu.component';
+import AutrejeuComponent from './jeu2/jeu2.component';
 import './app.css';
 
 angular.module('skillGameApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
-  socket, util
+  socket, util, JeuComponent, AutrejeuComponent, header, sidebarleft
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
     'ngInject';
     // Redirect to login if route requires auth and you're not logged in
 
-    $rootScope.$on('$stateChangeStart', function(event, next) {
+    $rootScope.$on('$stateChangeStart', function(event, next) { 
       Auth.isLoggedIn(function(loggedIn) {
         if(next.authenticate && !loggedIn) {
           $location.path('/login');

@@ -13,6 +13,49 @@
   letter-spacing: -1px;
 }
 
+header {
+  height: 150px;
+  margin: 0px 0px 0px 0px;
+  border: 1px solid #999999;
+  background: rgb(203, 203, 243);
+}
+
+sidebarleft {
+  float: left;
+  width: 200px;
+  min-height: 500px;
+  border: 1px solid #999999;
+  background: rgb(203, 203, 243);
+}
+
+footer {
+  color: blue;
+  height: 40px;
+  padding: 5px 0 5px 0;
+  border: 1px solid #999999;
+  background: #bbbbbb;
+}
+
+.navbar {
+  background: rgb(54, 64, 252);
+  height: 52px;
+  margin: 0px 0px 0px 0px;
+  border: 1px solid #999999;
+}
+
+.navbar-text {
+  margin-left: 15px;
+}
+
+main {
+  margin: 0px 0px 0px 0px;
+}
+
+main > container  {
+  margin-left: 210px;
+  min-height: 400px;
+}
+
 .hero-unit {
   position: relative;
   padding: 30px 15px;
@@ -22,6 +65,3 @@
   background: #4393B9;
 }
 
-.navbar-text {
-  margin-left: 15px;
-}

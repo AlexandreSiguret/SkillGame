@@ -1,0 +1,23 @@
+
+  <sidebarleft></sidebarleft>
+  <div class="container" style="min-height: 400px; margin-left: 210px">
+    
+        <h1 class="page-header">Page du Jeu Tic Tac Toe...</h1>
+        <h1 class="page-header">Placer ici le tableau du jou</h1>
+
+        <div class="board">
+          <div class="row" ng-repeat="row in ticTacToe.game.board.rows">
+              <div class="col-lg-4">
+                  <button class="cell" ng-disabled="row[0].isChecked || ticTacToe.game.winner" ng-click="ticTacToe.game.fillBox(row[0].id)">{{row[0].value}}</button>
+              </div>
+              <div class="col-lg-4">
+                  <button class="cell" ng-disabled="row[1].isChecked || ticTacToe.game.winner" ng-click="ticTacToe.game.fillBox(row[1].id)">{{row[1].value}}</button>
+              </div>
+              <div class="col-lg-4">
+                  <button class="cell" ng-disabled="row[2].isChecked || ticTacToe.game.winner" ng-click="ticTacToe.game.fillBox(row[2].id)">{{row[2].value}}</button>
+              </div>
+          </div>
+        </div>
+        
+  </div>
+  
