@@ -238,7 +238,7 @@ export default function seedDatabaseIfNeeded() {
 
           concept: 1,
 
-          goodAnswer: "",
+          goodAnswer: "Windows 1.0",
 
         },
 
@@ -256,7 +256,7 @@ export default function seedDatabaseIfNeeded() {
 
           concept: 1,
 
-          goodAnswer: "",
+          goodAnswer: "1936",
 
         },
 
@@ -292,7 +292,7 @@ export default function seedDatabaseIfNeeded() {
 
           concept: 4,
 
-          goodAnswer: "",
+          goodAnswer: "Auguste Bartholdi",
 
         },
 
@@ -310,7 +310,7 @@ export default function seedDatabaseIfNeeded() {
 
           concept: 4,
 
-          goodAnswer: "",
+          goodAnswer: "piano",
 
         },
 
@@ -328,7 +328,7 @@ export default function seedDatabaseIfNeeded() {
 
           concept: 4,
 
-          goodAnswer: "",
+          goodAnswer: "Leonard de vinci",
 
         },
 
@@ -483,6 +483,11 @@ export default function seedDatabaseIfNeeded() {
           statement: "2011"
 
         },
+        {
+          _id: 12,
+          question : 3,
+          statement : "2000"
+        },
 
         {
 
@@ -531,10 +536,68 @@ export default function seedDatabaseIfNeeded() {
           statement: "Beethoven"
 
         },
-
-
-
-        ]);
+        {
+          _id : 17,
+          question:5,
+          statement :"Gustave Eiffel "
+        }
+        ,
+        {
+          _id:18,
+          question:5,
+          statement :"Auguste Bartholdi"
+        },
+        {
+          _id:19,
+          question:5,
+          statement :"Le Corbusier"
+        },
+        {
+          _id:20,
+          question:5,
+          statement :"Ted Mosby"
+        },
+        {
+         _id:21,
+         question:6,
+         statement: "piano"
+        },
+        {
+          _id:22,
+          question:6,
+          statement: "flûte"
+         },
+         {
+          _id:23,
+          question:6,
+          statement: "triangle"
+         },
+         {
+          _id:24,
+          question:6,
+          statement: " violoncelle"
+         },
+         {
+          _id:25,
+          question:7,
+          statement:"Leonardo Dicaprio"
+         },
+         {
+          _id:26,
+          question:7,
+          statement:"Leonard de vinci"
+         },
+         {
+          _id:27,
+          question:7,
+          statement:"Leonardo la tortue ninja"
+         },
+         {
+          _id:28,
+          question:7,
+          statement:"Leonard Cohen"
+         },
+                ]);
 
       })
 
