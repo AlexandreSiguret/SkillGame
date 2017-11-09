@@ -24,6 +24,7 @@ sidebarleft {
   float: left;
   width: 200px;
   min-height: 500px;
+  margin: 0 0 0 0;
   border: 1px solid #999999;
   background: rgb(203, 203, 243);
 }
