@@ -47,7 +47,9 @@
 @import 'admin/admin.css';
 @import 'main/main.css';
 @import 'question/question.css';
+@import '../components/header/header.css';
 @import '../components/footer/footer.css';
 @import '../components/modal/modal.css';
+@import '../components/sidebarleft/sidebarleft.css';
 @import '../components/oauth-buttons/oauth-buttons.css';
 /* endinject */

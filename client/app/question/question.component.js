@@ -6,7 +6,7 @@ export class QuestionController {
   $http;
   socket;
   awesomeThings = [];
-  blabla = "génial"
+  blabla = "génial";
   newThing = '';
 
   /*@ngInject*/

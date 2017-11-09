@@ -16,36 +16,36 @@ export default function(sequelize, DataTypes) {
     },
 
     question: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,     /* 
       references :{
         model : Question,
         key : '_id',
-      }
+      }*/
     },
 
     choice: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,  /*   
       references :{
         model : Choice,
         key : '_id',
-      }
+      }*/
     },    
     earnedPoint : DataTypes.INTEGER,
 
     user: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,      /*
       references :{
         model : User,
         key : '_id',
-      }
+      }*/
     },
     
     quizz: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,    /*  
       references :{
         model : Game,
         key : '_id',
-      }
+      }*/
     },
   });
 }

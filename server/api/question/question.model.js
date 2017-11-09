@@ -14,22 +14,22 @@ export default function(sequelize, DataTypes) {
     question: DataTypes.STRING,
     
     owner: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,    /*  
       references :{
         model : User,
         key : '_id',
-      }
+      }*/
     },
 
     nbAppearance : DataTypes.INTEGER,
     nbContestation : DataTypes.INTEGER,   
 
     concept: {
-      type : DataTypes.INTEGER,      
+      type : DataTypes.INTEGER,   /*   
       references :{
         model : Concept,
         key : '_id',
-      }
+      }*/
     },
     goodAnswer : DataTypes.STRING,    
   });
