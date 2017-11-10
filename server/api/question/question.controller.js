@@ -83,6 +83,18 @@ export function concept(req,res){
   .then(respondWithResult(res))
   .catch(handleError(res));
 }
+//gets the list of Question, who have post
+export function myquestion(req,res){
+  var userId = req.user._id;
+
+  return Question.findAll({
+    where :{
+      owner : userId
+    }
+  }).then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
+}
 
 // Gets a single Question from the DB
 export function show(req, res) {
