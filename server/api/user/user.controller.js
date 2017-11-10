@@ -119,7 +119,7 @@ export function changePassword(req, res) {
  */
 export function me(req, res, next) {
   var userId = req.user._id;
-
+  console.log(userId);
   return User.find({
     where: {
       _id: userId

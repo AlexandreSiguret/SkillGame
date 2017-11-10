@@ -4,7 +4,7 @@
 
  @font-face {
     font-family: 'Krinkes'; /*a name to be used later*/
-    src: url('../fonts/KrinkesDecorPERSONAL.ttf'), url('../fonts/KrinkesRegularPERSONAL.ttf'); /*URL to font*/
+ /* src: url('C:/Users/htsa/Documents/SkillGame/client/assets/fonts/jeu/KrinkesDecorPERSONAL.ttf'), url('C:/Users/htsa/Documents/SkillGame/client/assets/fonts/jeu/KrinkesRegularPERSONAL.ttf'); URL to font*/
 }
 /*
 body{
