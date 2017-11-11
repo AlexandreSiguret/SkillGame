@@ -49,6 +49,7 @@
 @import 'jeu2/jeu2.css';
 @import 'main/main.css';
 @import 'question/question.css';
+@import 'questions/questions.css';
 @import '../components/footer/footer.css';
 @import '../components/header/header.css';
 @import '../components/modal/modal.css';

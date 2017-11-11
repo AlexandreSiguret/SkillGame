@@ -1,8 +1,8 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import routing from './main.routes';
+import routing from './questions.routes';
 
-export class MainController {
+export class QuestionsController {
   $http;
   socket;
   awesomeThings = [];
@@ -18,7 +18,6 @@ export class MainController {
     });
   }
 
-  /*
   $onInit() {
     this.$http.get('/api/concepts')
       .then(response => {
@@ -35,14 +34,15 @@ export class MainController {
         this.socket.syncUpdates('concept', this.awesomeThings);
       });
   }
-*/
+
 
 }
+  
 
-export default angular.module('skillGameApp.main', [uiRouter])
+export default angular.module('skillGameApp.questions', [uiRouter])
   .config(routing)
-  .component('main', {
-    template: require('./main.html'),
-    controller: MainController
+  .component('questions', {
+    template: require('./questions.html'),
+    controller: QuestionsController
   })
   .name;
