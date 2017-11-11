@@ -10,7 +10,7 @@ export class NavbarComponent {
   },
   {
     title: 'Questions',
-    state: 'q'
+    state: 'questions'
   },
   {
     title: 'Jeu',
