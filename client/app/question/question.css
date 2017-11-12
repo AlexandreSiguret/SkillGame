@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url(https://fonts.googleapis.com/css?family=Raleway);
 * {
   font: 16px Raleway, sans-serif;
@@ -101,3 +102,13 @@ h1 {
   color: #000;
   font-size: 20px;
 }
+=======
+.sbleft {
+    float: left;
+    width: 200px;
+    min-height: 500px;
+    margin: 0 0 0 0;
+    border: 1px solid #999999;
+    background: rgb(203, 203, 243);
+  }
+>>>>>>> 6deb39edc5852dc7cd5a7e6a9c92dcea9168158f
