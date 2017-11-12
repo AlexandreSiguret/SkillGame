@@ -45,6 +45,7 @@
 /* Component styles are injected through gulp */
 /* inject:css */
 @import 'admin/admin.css';
+@import 'affrontement/affrontement.css';
 @import 'jeu/jeu.css';
 @import 'jeu2/jeu2.css';
 @import 'main/main.css';
