@@ -1,13 +1,12 @@
 
   <sidebarleft></sidebarleft>
   <div class="container" style="margin-left: 210px">
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="page-header">la question est : {{$ctrl.question}}</h1>
-        
-        
 
    <!-- <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="prop in $ctrl.proposition"> -->
+
+    <!--<div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">la question est : {{$ctrl.question}}</h1>
         <div style="width:500px; margin: 0 auto;">
           <ul ng-repeat="prop in $ctrl.proposition">
             <li><button ng-click="$ctrl.validation(prop)" uib-tooltip="{{prop.id}}">{{prop.pos}} </button></li>
@@ -16,10 +15,38 @@
       </div>
 
       {{$ctrl.message}}
+    </div> -->
+
+    <div class="cover">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-6-lg" id="quiz">
+          <h1>Passer le test !</h1>
+          <h1 id="quiz-name"></h1>
+
+          <div id="question">
+            <h2>Question 1</h2>
+            <input id="choices-0" type="radio" name="choices" value="choices-0">
+            <label for="choices-0">Correct</label>
+
+            <input id="choices-1" type="radio" name="choices" value="choices-1">
+            <label for="choices-1">Wrong 1</label>
+
+            <input id="choices-2" type="radio" name="choices" value="choices-2">
+            <label for="choices-2">Wrong 2</label>
+            
+            <input id="choices-3" type="radio" name="choices" value="choices-3">
+            <label for="choices-3">Wrong 3</label>
+          </div>
+
+          <button class="btn" id="prev-question-button"><i class="fa fa-arrow-left fa-2x"></i></button>
+          <button class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
+          <button class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button>
+          <div id="quiz-results">
+            <p id="quiz-results-message"></p>
+            <p id="quiz-results-score"></p>
+          </div>
+        </div>
+      </div>
     </div>
-
-    
-  
-
   </div>
-  
