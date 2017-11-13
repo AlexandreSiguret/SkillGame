@@ -75,17 +75,8 @@ export class QuestionController {
         id : 4}
     ]
 }];
-    this.question ="Question 1 : ";
-    this.proposition = [{
-        pos :"wrong",
-        id : 1},
-        {pos :"wrong",
-        id : 2},
-        {pos :"wrong",
-        id : 3},
-        {pos : "correct",
-        id : 4}
-    ]
+
+
     this.valide = false;
     this.correct_answer = "";
     this.message = "";
@@ -96,6 +87,7 @@ export class QuestionController {
     });
     
   }
+  
   
   validation(select){
     if(!this.valide){
