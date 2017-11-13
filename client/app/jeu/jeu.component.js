@@ -8,21 +8,28 @@ export class JeuController {
   awesomeThings = [];
   blabla = "Jeu !"
   newThing = '';
-
+  getCurrentUser: Function;
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket,Auth) {
     this.$http = $http;
     this.socket = socket;
     this.fun = " ";
     this.valide = false;
     this.correct_answer = "";
     this.message = "";
+    this.getCurrentUser = Auth.getCurrentUserSync;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
     });
-    
+
   }  // fin constructor
+
+  $onInit() {
+    this.$http.get('/api/questions/myquestion')
+      .then(response =>(console.log(response) ));
+      
+  }
 
  /* 
   jeju(){

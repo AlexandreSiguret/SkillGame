@@ -45,10 +45,18 @@
 /* Component styles are injected through gulp */
 /* inject:css */
 @import 'admin/admin.css';
+<<<<<<< HEAD
+=======
+@import 'affrontement/affrontement.css';
+>>>>>>> 0e34629cca9384e17a91d8f99e2102e29d0c0550
 @import 'jeu/jeu.css';
 @import 'jeu2/jeu2.css';
 @import 'main/main.css';
 @import 'question/question.css';
+<<<<<<< HEAD
+=======
+@import 'questions/questions.css';
+>>>>>>> 0e34629cca9384e17a91d8f99e2102e29d0c0550
 @import '../components/footer/footer.css';
 @import '../components/header/header.css';
 @import '../components/modal/modal.css';

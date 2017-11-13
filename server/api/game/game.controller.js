@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Game} from '../../sqldb';
+import config from '../../config/environment';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -69,6 +70,19 @@ export function index(req, res) {
   return Game.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+export function game(req,res){
+  var userId = req.user._id;
+  console.log(userId);
+  return Game.findAll({
+    
+    where :{
+      user1 : req.user._id
+    }
+  }) .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Gets a single Game from the DB
