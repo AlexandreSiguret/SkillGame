@@ -45,11 +45,14 @@
 /* Component styles are injected through gulp */
 /* inject:css */
 @import 'admin/admin.css';
+@import 'jeu/jeu.css';
+@import 'jeu2/jeu2.css';
 @import 'main/main.css';
 @import 'question/question.css';
-@import '../components/header/header.css';
 @import '../components/footer/footer.css';
+@import '../components/header/header.css';
 @import '../components/modal/modal.css';
-@import '../components/sidebarleft/sidebarleft.css';
+@import '../components/navbar/navbar.css';
 @import '../components/oauth-buttons/oauth-buttons.css';
+@import '../components/sidebarleft/sidebarleft.css';
 /* endinject */

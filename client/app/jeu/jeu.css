@@ -2,10 +2,10 @@
  * Styles of the game
  ***/
 
- @font-face {
-    font-family: 'Krinkes'; /*a name to be used later*/
-    src: url('../fonts/KrinkesDecorPERSONAL.ttf'), url('../fonts/KrinkesRegularPERSONAL.ttf'); /*URL to font*/
-}
+ /*@font-face {*/
+    /*font-family: 'Krinkes'; /*a name to be used later*/
+    /*src: url('../fonts/KrinkesDecorPERSONAL.ttf'), url('../fonts/KrinkesRegularPERSONAL.ttf'); /*URL to font*/
+/*}*/
 /*
 body{
     background-color:#999;
