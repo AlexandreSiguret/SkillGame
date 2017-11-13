@@ -23,7 +23,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 1",
         id : 4}
     ]
 }, {
@@ -35,7 +35,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 2",
         id : 4}
     ]
 }, {
@@ -47,7 +47,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 3",
         id : 4}
     ]
 }, {
@@ -59,7 +59,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 4",
         id : 4}
     ]
 },  {
@@ -71,7 +71,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 5",
         id : 4}
     ]
 }];
@@ -87,8 +87,45 @@ export class QuestionController {
     });
     
   }
-  
-  
+
+    Check_next() {
+    if (this.i == 4) {
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.attr('disabled',"");
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+      }
+
+    if (this.i < 4) {
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+      this.i ++;
+    }
+    else {
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.attr('disabled',"");
+    }
+   }
+
+   Check_prev() {
+    if (this.i == 0) {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.attr('disabled',"");
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+    }
+
+    if (this.i > 0) {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+      this.i --;
+    }
+    else {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.attr('disabled',"");
+    }
+   }
+
   validation(select){
     if(!this.valide){
     this.valide = true;
