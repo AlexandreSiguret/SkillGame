@@ -13,21 +13,83 @@ export class QuestionController {
   constructor($http, $scope, socket) {
     this.$http = $http;
     this.socket = socket;
-    this.fun = "c est marrant "
-    this.question ="quelle est la couleur du cheval blanc d'henri 4 ? ";
-    this.proposition = [{
-        pos :"bleu",
+    this.fun = "c est marrant ";
+    this.all_questions = [{
+  question: "Question 1 ?",
+  choices: [{
+        pos :"wrong",
         id : 1},
-        {pos :"rouge",
+        {pos :"wrong",
         id : 2},
-        {pos :"vert",
+        {pos :"wrong",
         id : 3},
-        {pos : "blanc",
+        {pos : "correct",
+        id : 4}
+    ]
+}, {
+  question: "Question 2 ?",
+  choices: [{
+        pos :"wrong",
+        id : 1},
+        {pos :"wrong",
+        id : 2},
+        {pos :"wrong",
+        id : 3},
+        {pos : "correct",
+        id : 4}
+    ]
+}, {
+  question: "Question 3 ?",
+  choices: [{
+        pos :"wrong",
+        id : 1},
+        {pos :"wrong",
+        id : 2},
+        {pos :"wrong",
+        id : 3},
+        {pos : "correct",
+        id : 4}
+    ]
+}, {
+  question: "Question 4 ?",
+  choices: [{
+        pos :"wrong",
+        id : 1},
+        {pos :"wrong",
+        id : 2},
+        {pos :"wrong",
+        id : 3},
+        {pos : "correct",
+        id : 4}
+    ]
+},  {
+  question: "Question 5 ?",
+  choices: [{
+        pos :"wrong",
+        id : 1},
+        {pos :"wrong",
+        id : 2},
+        {pos :"wrong",
+        id : 3},
+        {pos : "correct",
+        id : 4}
+    ]
+}];
+    this.question ="Question 1 : ";
+    this.proposition = [{
+        pos :"wrong",
+        id : 1},
+        {pos :"wrong",
+        id : 2},
+        {pos :"wrong",
+        id : 3},
+        {pos : "correct",
         id : 4}
     ]
     this.valide = false;
-    this.correct_answer = ""
-    this.message = ""
+    this.correct_answer = "";
+    this.message = "";
+    this.i=0;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('thing');
@@ -38,13 +100,13 @@ export class QuestionController {
   validation(select){
     if(!this.valide){
     this.valide = true;
-    this.correct_answer = {pos :"blanc",id : 4}
+    this.correct_answer = {pos :"correct",id : 1}
     if(this.correct_answer.id ==select.id){
-        this.message = "vous avez trouve la bonne réponse "
+        this.message = "Correct !"
     }
     else{
         
-        this.message = "vous vous êtes trompée la réponse était " + this.correct_answer.pos
+        this.message = "Nop " + this.correct_answer.pos
     }
   }
   else{
