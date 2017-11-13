@@ -1,7 +1,4 @@
 
-  <div class="sbleft"></div>
-
-  <div class="container" style="margin-left: 210px">
    <!-- <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="prop in $ctrl.proposition"> -->
 
     <!--<div class="row">
@@ -24,31 +21,42 @@
     </div> -->
 
 
+
+          <!-- <li><button ng-click="$ctrl.validation(prop)" uib-tooltip="{{prop.id}}">{{prop.pos}} </button></li> -->
+          <!-- <input id="choices-0" type="radio" name="choices" value="choices-0">
+          <label for="choices-0">Correct</label>
+
+          <input id="choices-1" type="radio" name="choices" value="choices-1">
+          <label for="choices-1">Wrong 1</label>
+
+          <input id="choices-2" type="radio" name="choices" value="choices-2">
+          <label for="choices-2">Wrong 2</label>
+          
+          <input id="choices-3" type="radio" name="choices" value="choices-3">
+          <label for="choices-3">Wrong 3</label> -->
+          
+
+<div class="sbleft"></div>
+  <div class="container" style="margin-left: 210px">
     <div class="cover">
     <div class="container">
       <div class="row text-center">
         <div class="col-6-lg" id="quiz">
           <h1>Passer le test !</h1>
           <h1 id="quiz-name"></h1>
-
+          
           <div id="question">
-            <h2>Question 1</h2>
-            <input id="choices-0" type="radio" name="choices" value="choices-0">
-            <label for="choices-0">Correct</label>
-
-            <input id="choices-1" type="radio" name="choices" value="choices-1">
-            <label for="choices-1">Wrong 1</label>
-
-            <input id="choices-2" type="radio" name="choices" value="choices-2">
-            <label for="choices-2">Wrong 2</label>
-            
-            <input id="choices-3" type="radio" name="choices" value="choices-3">
-            <label for="choices-3">Wrong 3</label>
+            <h2>{{$ctrl.all_questions[0].question}}</h2>
+            <ul ng-repeat="choices in $ctrl.all_questions[0].choices">
+              <input id="choices-{{choices.id}}" type="radio" name="choices" value="choices-{{choices.id}}">
+              <label for="choices-{{choices.id}}">{{choices.pos}}</label>
+            </ul>
           </div>
 
           <button class="btn" id="prev-question-button"><i class="fa fa-arrow-left fa-2x"></i></button>
           <button class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
           <button class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button>
+          <button class="btn" id="report-question-button"><i class="fa fa-shield"></i>reporter</button>
           <div id="quiz-results">
             <p id="quiz-results-message"></p>
             <p id="quiz-results-score"></p>
