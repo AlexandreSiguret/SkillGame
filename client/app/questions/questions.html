@@ -1,4 +1,4 @@
- 
+ <!--
  <div class="sbleft">
     <div class="container" >
       <div class="row">
@@ -7,15 +7,58 @@
     
           <div >
             
-            <ul ng-repeat="concept in $ctrl.awesomeThings">
-              <li><a href="/question/{{concept._id}}"  >{{concept.name}}</a></li>
+            <ul ng-repeat="concept in $ctrl.awesomeConcept">
+              <li><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
             </ul>
           </div>
 
         </div>
+        
       </div>
-    
     </br>
     </div>
   </div>
 
+-->
+
+<div class ="sbleft container col-lg-3">
+    <ul ng-repeat="concept in $ctrl.awesomeConcept">
+        <li><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
+      </ul>
+</div>
+
+ 
+
+  <h1> choissisez un théme </h1>
+ 
+ <div ng-if="$ctrl.choice == true">
+ <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p>
+
+
+
+
+ <br> 
+
+ <button ng-click ="$ctrl.askQuestion()"> Poser une question </button>
+<button> défier un joueur aléatoire </button>
+
+
+<form ng-if="$ctrl.controleQuestion == true">
+    
+    
+   Intitulé de la question  <input type="text "ng-model="$ctrl.question">
+   <br>
+   Possibilité correcte <input type="text "ng-model="$ctrl.goodAnswer">
+   <br>
+   Possibilité fausse 1 <input type="text "ng-model="$ctrl.WrongAnswer1">
+   <br>
+   Possibilité fausse 2 <input type="text "ng-model="$ctrl.WrongAnswer2">
+   <br>
+   Possibilité fausse 3 <input type="text "ng-model="$ctrl.WrongAnswer3"> 
+   
+   <button type="submit" class="btn btn-primary" ng-click="$ctrl.addQuestion()">Ajouter la question au concept </button>
+
+
+</form>
+
+</div>
