@@ -19,7 +19,11 @@ export class NavbarComponent {
   {
     title: 'Autre Jeu',
     state: 'jeu2'
-  }];
+  },{
+    title : "Affrontement",
+    state : "affrontement"
+  }
+];
   isLoggedIn: Function;
   isAdmin: Function;
   getCurrentUser: Function;
