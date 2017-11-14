@@ -8,6 +8,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get("/mygame",auth.isAuthenticated(),controller.game);
+router.get('/freeGame/:id',auth.isAuthenticated(),controller.freeGame);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);

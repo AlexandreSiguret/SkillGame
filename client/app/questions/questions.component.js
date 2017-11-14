@@ -47,6 +47,18 @@ export class QuestionsController {
     this.controleQuestion = true
   }
 
+  lookForAGame() {   
+    this.$http.get('/api/games/freeGame/'+ this.currentConcept._id)
+    .then(response => {
+      this.freeAwesomeGames = response.data;
+      
+      
+      console.log(this.freeAwesomeGames)
+    });
+
+
+  }
+
   addQuestion() {
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {
       console.log("tu as tout rempli génial")
