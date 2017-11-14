@@ -9,10 +9,12 @@
  * DELETE  /api/questions/:id          ->  destroy
  */
 
+
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
 import {Question} from '../../sqldb';
+import Sequelize from 'sequelize';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -65,6 +67,10 @@ function handleError(res, statusCode) {
   };
 }
 
+function getRandom(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 // Gets a list of Questions
 export function index(req, res) {
   return Question.findAll()
@@ -83,7 +89,28 @@ export function concept(req,res){
   .then(respondWithResult(res))
   .catch(handleError(res));
 }
-//gets the list of Question, who have post
+
+ 
+//gets a random Question for a concept
+
+export function random(req,res){
+   
+return  Question.findAll({ 
+    order :         Sequelize.fn( 'RANDOM' ) ,    
+    limit : 1
+  })     
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res)); 
+  
+}
+
+
+
+
+
+
+//gets the list of Question, created by a user
 export function myquestion(req,res){
   var userId = req.user._id;
 
@@ -110,6 +137,7 @@ export function show(req, res) {
 
 // Creates a new Question in the DB
 export function create(req, res) {
+  req.body.owner = req.user._id
   return Question.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

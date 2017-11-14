@@ -16,6 +16,7 @@ export class QuestionsController {
   WrongAnswer2 = ""
   WrongAnswer3 = ""
   idNewQuestion = ""
+  message = ""
 
   /*@ngInject*/
   constructor($http, $scope, socket) {
@@ -47,6 +48,18 @@ export class QuestionsController {
     this.controleQuestion = true
   }
 
+  lookForAGame() {   
+    this.$http.get('/api/games/freeGame/'+ this.currentConcept._id)
+    .then(response => {
+      this.freeAwesomeGames = response.data;
+      
+      
+      console.log(this.freeAwesomeGames)
+    });
+
+
+  }
+
   addQuestion() {
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {
       console.log("tu as tout rempli génial")
@@ -66,7 +79,7 @@ export class QuestionsController {
         })
         this.$http.post("/api/choices", {
           question: this.idNewQuestion,
-          statement: this.WrongAnswer1
+          statement: this.WrongAnswer3
         })
         this.$http.post("api/choices", {
           question: this.idNewQuestion,
@@ -75,14 +88,24 @@ export class QuestionsController {
         this.$http.post("api/choices", {
           question: this.idNewQuestion,
           statement: this.goodAnswer
-        })
-
+        }
+        
+      )
+      this.goodAnswer =""
+      this.WrongAnswer1 =""
+      this.WrongAnswer2 =""
+      this.WrongAnswer3 = ""
+      this.question = ""
+      this.message ="La question à bien été ajouté"
       })
+
+
     
     }
     else {
-      console.log("tu as oublié un champ")
+      this.message="tu as oublié un champ"
     }
+    console.log(this.message)
   }
 
 

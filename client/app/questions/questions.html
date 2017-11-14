@@ -39,8 +39,9 @@
 
  <br> 
 
- <button ng-click ="$ctrl.askQuestion()"> Poser une question </button>
-<button> défier un joueur aléatoire </button>
+<button ng-click ="$ctrl.askQuestion()"> Poser une question </button>
+
+<button ng-click ="$ctrl.lookForAGame()"> défier un joueur aléatoire </button>
 
 
 <form ng-if="$ctrl.controleQuestion == true">
@@ -60,5 +61,7 @@
 
 
 </form>
+
+<p> {{$ctrl.message}} </p>
 
 </div>

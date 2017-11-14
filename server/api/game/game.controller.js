@@ -13,6 +13,9 @@
 import jsonpatch from 'fast-json-patch';
 import {Game} from '../../sqldb';
 import config from '../../config/environment';
+import Sequelize from 'sequelize';
+
+const Op = Sequelize.Op;
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -71,6 +74,20 @@ export function index(req, res) {
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
+
+export function freeGame(req,res){
+  
+  return Game.findAll({
+    where :{
+      user1 : { $ne : req.user._id },
+      concept : req.params.id,
+      user2 : null
+    }
+  }) .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
+}
+
 
 export function game(req,res){
   var userId = req.user._id;
