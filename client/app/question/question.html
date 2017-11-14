@@ -49,19 +49,19 @@
           <div id="question">
             <h2>{{$ctrl.awesomeQuestion[0].question}}</h2>
             <ul ng-repeat="choices in $ctrl.all_questions[$ctrl.i].choices">
-              <input id="choices-{{choices.id}}" type="radio" name="choices" value="choices-{{choices.id}}">
-              <label for="choices-{{choices.id}}">{{choices.pos}}</label>
+              <input ng-click="$ctrl.validation(choices)" id="choices-{{choices.id}}" type="radio" name="choices" value="choices-{{choices.id}}">
+              <label id="label-choices-{{choices.id}}" class="" for="choices-{{choices.id}}">{{choices.pos}}</label>
             </ul>
           </div>
 
           <button ng-click="$ctrl.Check_prev($ctrl.i)" class="btn" id="prev-question-button"><i class="fa fa-arrow-left fa-2x"></i></button>
           <button ng-click="$ctrl.Check_next($ctrl.i)" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
-          <button class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button>
+          <button ng-click="$ctrl.submit()" class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button>
           <button ng-click="$ctrl.report($ctrl.awesomeQuestion[0]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
 
-          <div id="quiz-results">
+          <div id="quiz-results" style="display:none;">
             <p id="quiz-results-message">Bravo</p>
-            <p id="quiz-results-score">Score 5/5</p>
+            <p id="quiz-results-score">Score {{$ctrl.resultats}}/5</p>
           </div>
 
           <br/>
