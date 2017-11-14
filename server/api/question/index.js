@@ -10,7 +10,7 @@ router.get('/', controller.index);
 router.get("/myquestion", auth.isAuthenticated(),controller.myquestion);
 router.get('/random/:id',controller.random);
 router.get('/:id', controller.show);
-router.post('/', controller.create);
+router.post('/',auth.isAuthenticated(), controller.create);
 router.put('/:id', controller.upsert);
 router.patch('/:id', controller.patch);
 router.delete('/:id', controller.destroy);
