@@ -126,10 +126,10 @@ export function create(req, res) {
 // Upserts the given Game in the DB at the specified ID
 export function upsert(req, res) {
   req.body.user2 = req.user._id
-  if(req.params._id) {
+  /*if(req.body._id) {
+    console.log("on passe ici")
     Reflect.deleteProperty(req.body, '_id');
-  }
-
+  }*/
   return Game.upsert(req.body, {
     where: {
       _id: req.params.id

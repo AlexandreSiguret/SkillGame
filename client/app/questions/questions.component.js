@@ -62,9 +62,10 @@ export class QuestionsController {
       else{
         console.log(this.freeAwesomeGames)
         this.$http.put("/api/games/" + this.freeAwesomeGames[0]._id, {
-          user1 : this.freeAwesomeGames[0].user1,
+         /* user1 : this.freeAwesomeGames[0].user1,
           concept: this.freeAwesomeGames[0].concept,
-          ended : this.freeAwesomeGames[0].ended
+          ended : this.freeAwesomeGames[0].ended*/
+          _id : this.freeAwesomeGames[0]._id
         })
       }
 
