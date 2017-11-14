@@ -79,7 +79,7 @@ export function freeGame(req,res){
   
   return Game.findAll({
     where :{
-      user1 : { [Op.ne] : req.user._id },
+      user1 : { $ne : req.user._id },
       concept : req.params.id,
       user2 : null
     }
