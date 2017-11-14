@@ -10,8 +10,8 @@ router.get('/', controller.index);
 router.get("/mygame",auth.isAuthenticated(),controller.game);
 router.get('/freeGame/:id',auth.isAuthenticated(),controller.freeGame);
 router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.upsert);
+router.post('/', auth.isAuthenticated(), controller.create);
+router.put('/:id', auth.isAuthenticated(), controller.upsert);
 router.patch('/:id', controller.patch);
 router.delete('/:id', controller.destroy);
 

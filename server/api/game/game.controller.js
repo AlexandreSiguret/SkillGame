@@ -82,7 +82,8 @@ export function freeGame(req,res){
       user1 : { $ne : req.user._id },
       concept : req.params.id,
       user2 : null
-    }
+    },
+    order :         Sequelize.fn('RANDOM')     
   }) .then(handleEntityNotFound(res))
   .then(respondWithResult(res))
   .catch(handleError(res));
@@ -116,6 +117,7 @@ export function show(req, res) {
 
 // Creates a new Game in the DB
 export function create(req, res) {
+  req.body.user1= req.user._id
   return Game.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
@@ -123,7 +125,8 @@ export function create(req, res) {
 
 // Upserts the given Game in the DB at the specified ID
 export function upsert(req, res) {
-  if(req.body._id) {
+  req.body.user2 = req.user._id
+  if(req.params._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
 
