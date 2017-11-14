@@ -5,7 +5,7 @@ import routing from './question.routes';
 export class QuestionController {
   $http;
   socket;
-  awesomeThings = [];
+  awesomeQuestion = [];
   blabla = "génial";
   newThing = '';
 
@@ -17,6 +17,7 @@ export class QuestionController {
     this.all_correct_answers = [4, 4, 4, 4, 4];
     this.all_answers = [];
     this.resultats = 0;
+
     this.all_questions = [{
   question: "Question 1 ?",
   choices: [{
@@ -86,10 +87,22 @@ export class QuestionController {
     this.i=0;
 
     $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
+      socket.unsyncUpdates('question');
     });
     
   }
+  
+// modif
+$onInit() {
+  this.$http.get('/api/questions')
+    .then(response => {
+      this.awesomeQuestion = response.data;
+      console.log(this.controleQuestion)
+      console.log(response.data)
+    });
+}
+
+// modif
 
     Check_next() {
     if (this.i == 4) {
@@ -127,6 +140,27 @@ export class QuestionController {
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.attr('disabled',"");
     }
+   }
+
+   report(){
+    
+    console.log(this.awesomeQuestion[0].nbContestation)
+    console.log("id id ")
+    console.log(this.awesomeQuestion[0]._id)
+    
+     if (this.awesomeQuestion[0]._id == 1){
+       
+       var i = this.awesomeQuestion[0].nbContestation+1;
+       //console.log("Je suis bon")
+       //console.log(i)
+      this.$http.put("/api/questions/1", {  
+        nbContestation: i
+      })
+
+      console.log("après ma condition")
+      console.log(i)
+     }
+
    }
 
   validation(select){

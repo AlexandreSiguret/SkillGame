@@ -117,9 +117,10 @@ export function create(req, res) {
 
 // Upserts the given Question in the DB at the specified ID
 export function upsert(req, res) {
+ /*
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
-  }
+  }*/
 
   return Question.upsert(req.body, {
     where: {
@@ -132,6 +133,7 @@ export function upsert(req, res) {
 
 // Updates an existing Question in the DB
 export function patch(req, res) {
+  
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
