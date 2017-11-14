@@ -14,6 +14,9 @@ export class QuestionController {
     this.$http = $http;
     this.socket = socket;
     this.fun = "c est marrant ";
+    this.all_correct_answers = [4, 4, 4, 4, 4];
+    this.all_answers = [];
+    this.resultats = 0;
     this.all_questions = [{
   question: "Question 1 ?",
   choices: [{
@@ -23,7 +26,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 1",
         id : 4}
     ]
 }, {
@@ -35,7 +38,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 2",
         id : 4}
     ]
 }, {
@@ -47,7 +50,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 3",
         id : 4}
     ]
 }, {
@@ -59,7 +62,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 4",
         id : 4}
     ]
 },  {
@@ -71,7 +74,7 @@ export class QuestionController {
         id : 2},
         {pos :"wrong",
         id : 3},
-        {pos : "correct",
+        {pos : "correct 5",
         id : 4}
     ]
 }];
@@ -87,10 +90,47 @@ export class QuestionController {
     });
     
   }
-  
-  
+
+    Check_next() {
+    if (this.i == 4) {
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.attr('disabled',"");
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+      }
+
+    if (this.i < 4) {
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+      this.i ++;
+    }
+    else {
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.attr('disabled',"");
+    }
+   }
+
+   Check_prev() {
+    if (this.i == 0) {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.attr('disabled',"");
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+    }
+
+    if (this.i > 0) {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+      this.i --;
+    }
+    else {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.attr('disabled',"");
+    }
+   }
+
   validation(select){
-    if(!this.valide){
+/*    if(!this.valide){
     this.valide = true;
     this.correct_answer = {pos :"correct",id : 1}
     if(this.correct_answer.id ==select.id){
@@ -103,8 +143,33 @@ export class QuestionController {
   }
   else{
       alert("tu as déja répondu à cette question")
+  }*/
+
+  this.all_answers[this.i] = select.id;
+  //alert(select.id);
   }
+
+  submit()
+  {
+    this.resultats = 0;
+    for (var i = 0; i < this.all_answers.length; i++) {
+      if (this.all_answers[i] == this.all_correct_answers[i]) {
+        this.resultats ++;
+      }
+    }
+
+  var myEl = angular.element(document.querySelector('#next-question-button'));
+  myEl.removeAttr('disabled');
+
+  var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.attr('disabled',"");
+  var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.attr('disabled',"");
+  var myEl = angular.element(document.querySelector('#submit-button'));
+      myEl.attr('disabled',"");
+
   }
+
 }
 
 export default angular.module('skillGameApp.question', [uiRouter])
