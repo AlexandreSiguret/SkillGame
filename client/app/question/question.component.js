@@ -84,7 +84,7 @@ export class QuestionController {
     this.valide = false;
     this.correct_answer = "";
     this.message = "";
-    this.i=1;
+    this.i=0;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
@@ -105,99 +105,37 @@ $onInit() {
 // modif
 
     Check_next() {
-    if (this.i == 5) {
+    if (this.i == 3) {
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.attr('disabled',"");
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.removeAttr('disabled');
+      this.i ++;
       }
 
-    if (this.i < 5) {
+    if (this.i < 3) {
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.removeAttr('disabled');
+
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+
       this.i ++;
     }
     else {
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.attr('disabled',"");
+
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
     }
    }
 
    Check_prev() {
-    if (this.i == 1) {
-      var myEl = angular.element(document.querySelector('#prev-question-button'));
-      myEl.attr('disabled',"");
-      var myEl = angular.element(document.querySelector('#next-question-button'));
-      myEl.removeAttr('disabled');
-    }
 
-    if (this.i > 1) {
-      var myEl = angular.element(document.querySelector('#prev-question-button'));
-      myEl.removeAttr('disabled');
-      this.i --;
-    }
-    else {
-      var myEl = angular.element(document.querySelector('#prev-question-button'));
-      myEl.attr('disabled',"");
-    }
-   }
+    //(this.all_answers[this.i] != 0) &&
 
-   report(){
-    
-    console.log(this.awesomeQuestion[0].nbContestation)
-    console.log("id id ")
-    console.log(this.awesomeQuestion[0]._id)
-    
-     if (this.awesomeQuestion[0]._id == 1){
-       
-       var i = this.awesomeQuestion[0].nbContestation+1;
-       //console.log("Je suis bon")
-       //console.log(i)
-      this.$http.put("/api/questions/1", {  
-        nbContestation: i
-      })
-
-      console.log("après ma condition")
-      console.log(i)
-     }
-
-   }
-
-  validation(select){
-/*    if(!this.valide){
-    this.valide = true;
-    this.correct_answer = {pos :"correct",id : 1}
-    if(this.correct_answer.id ==select.id){
-        this.message = "Correct !"
-    }
-    else{
-        
-        this.message = "Nop " + this.correct_answer.pos
-    }
-  }
-  else{
-      alert("tu as déja répondu à cette question")
-  }*/
-
-  for (var i = 1; i < 5; i++) {
-      var variable = '#label-choices-'+i;
-      var myEl = angular.element( document.querySelector( variable ) );
-      myEl.removeAttr('class');
-  }
-
-      this.all_answers[this.i] = select.id;
-      var variable = '#label-choices-'+this.all_answers[this.i];
-      var myEl = angular.element( document.querySelector( variable ) );
-      myEl.removeAttr('class');
-      myEl.attr('class',"chicked");
-
-
-      
-  }
-
-  submit(){
-    
-    if ( (this.all_answers[this.i] != 0) && (this.all_answers[this.i] == this.all_correct_answers[this.i]) ) {
+    if ( (this.all_answers[this.i] == this.all_correct_answers[this.i]) ) {
       var variable = '#label-choices-'+this.all_answers[this.i];
       var myEl = angular.element( document.querySelector( variable ) );
       myEl.removeAttr('class');
@@ -208,9 +146,8 @@ $onInit() {
       var myEl = angular.element( document.querySelector( variable ) );
       myEl.attr('disabled',"");
       }
-
     }
-    else if ((this.all_answers[this.i] != 0) && (this.all_answers[this.i] != this.all_correct_answers[this.i])) {
+    else if ((this.all_answers[this.i] != this.all_correct_answers[this.i])) {
 
       var variable = '#label-choices-'+this.all_correct_answers[this.i];
       var myEl = angular.element( document.querySelector( variable ) );
@@ -226,13 +163,127 @@ $onInit() {
       var variable = '#choices-'+i;
       var myEl = angular.element( document.querySelector( variable ) );
       myEl.attr('disabled',"");
-      }
-
-      //alert('____false___'+this.all_answers[this.i])
-
-      
+      } 
     }
 
+    if (this.i == 1) {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.attr('disabled',"");
+
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+      this.i --;
+    }
+
+    if (this.i > 0) {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+      this.i --;
+    }
+    else {
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.attr('disabled',"");
+
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+    }
+   }
+
+   report(){
+
+    this.$http.get("/api/questions/"+this.awesomeQuestion[0]._id).then(response =>{
+      this.$http.put("/api/questions/2",{
+        _id : this.awesomeQuestion[0]._id,
+        nbContestation : response.data.nbContestation + 1
+      })
+    })/*
+    
+    console.log(this.awesomeQuestion[0].nbContestation)
+    console.log("id id ")
+    console.log(this.awesomeQuestion[0]._id)
+    
+     if (this.awesomeQuestion[0]._id == 1){
+       
+       var i = this.awesomeQuestion[0].nbContestation+1;
+       //console.log("Je suis bon")
+       //console.log(i)
+      this.$http.put("/api/questions/1", {  
+        _id : this.awesomeQuestion[0]._id,
+        nbContestation: i,
+        test :"ceci est un test"
+      })
+
+      console.log("après ma condition")
+      console.log(i)
+     }*/
+
+   }
+
+/*    if(!this.valide){
+    this.valide = true;
+    this.correct_answer = {pos :"correct",id : 1}
+    if(this.correct_answer.id ==select.id){
+        this.message = "Correct !"
+    }
+    else{
+        
+        this.message = "Nop " + this.correct_answer.pos
+    }
+  }
+  else{
+      alert("tu as déja répondu à cette question")
+  }*/
+
+
+  validation(select){
+
+    this.all_answers[this.i] = select.id;
+
+      /*var variable = '#label-choices-'+this.all_answers[this.i];
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.removeAttr('class');
+      //myEl.attr('class',"chicked");*/
+
+      //(this.all_answers[this.i] != 0) &&
+
+    if ( (this.all_answers[this.i] == this.all_correct_answers[this.i]) ) {
+      var variable = '#label-choices-'+this.all_answers[this.i];
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.removeAttr('class');
+      myEl.attr('class',"true");
+
+      for (var i = 1; i < 5; i++) {
+      var variable = '#choices-'+i;
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.attr('disabled',"");
+      }
+
+    }
+    else if ( (this.all_answers[this.i] != this.all_correct_answers[this.i])) {
+
+      var variable = '#label-choices-'+this.all_correct_answers[this.i];
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.removeAttr('class');
+      myEl.attr('class',"true");
+
+      var variable2 = '#label-choices-'+this.all_answers[this.i];
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('class');
+      myE2.attr('class',"false");
+
+      for (var i = 1; i < 5; i++) {
+      var variable = '#choices-'+i;
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.attr('disabled',"");
+      } 
+    }
+  }
+
+  submit(){
+    
 
     /*this.resultats = 0;
     for (var i = 0; i < this.all_answers.length; i++) {
