@@ -17,26 +17,7 @@ export class MainController {
       socket.unsyncUpdates('concept');
     });
   }
-
-  /*
-  $onInit() {
-    this.$http.get('/api/concepts')
-      .then(response => {
-        this.awesomeThings = response.data;
-        this.socket.syncUpdates('concept', this.awesomeThings);
-      });
-  }
-
-  onClick(id) {
-    this.$http.get('/api/concepts')
-    alert(id)
-      .then(response => {
-        this.awesomeThings = response.data;
-        this.socket.syncUpdates('concept', this.awesomeThings);
-      });
-  }
-*/
-
+ 
 }
 
 export default angular.module('skillGameApp.main', [uiRouter])

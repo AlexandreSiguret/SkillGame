@@ -14,6 +14,8 @@ import jsonpatch from 'fast-json-patch';
 import {Game} from '../../sqldb';
 import config from '../../config/environment';
 import Sequelize from 'sequelize';
+import Question from '../question';
+
 
 const Op = Sequelize.Op;
 
@@ -115,11 +117,19 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+
 // Creates a new Game in the DB
 export function create(req, res) {
   req.body.user1= req.user._id
   return Game.create(req.body)
     .then(respondWithResult(res, 201))
+    .then(
+      this.$http.post("/api/answers", {
+        question : this.$http.get("/api/questions/random/" + req.body.concept),
+        earnedPoint : 100,
+        user : req.body.user1,
+        quizz : req.body._id
+     }))
     .catch(handleError(res));
 }
 
