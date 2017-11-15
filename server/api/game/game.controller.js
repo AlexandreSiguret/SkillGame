@@ -82,12 +82,8 @@ export function freeGame(req,res){
       user1 : { $ne : req.user._id },
       concept : req.params.id,
       user2 : null
-<<<<<<< HEAD
     },
     order :         Sequelize.fn('RANDOM')     
-=======
-    }
->>>>>>> cc562abd384e6cba604a8b940d72ac18926ab1c3
   }) .then(handleEntityNotFound(res))
   .then(respondWithResult(res))
   .catch(handleError(res));
