@@ -1,15 +1,12 @@
-<div class="sbleft">
-    <div class="container" style="width:180px">
+<div id="sbleft_affront" class="sbleft">
+  <div ng-show="$ctrl.jChoice" class="container" style="width:180px">
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">Jouers :</h1>
-    
-          <div >          
-            <ul >
-              <li><a href=""  ></a>Juan Pérez</li>
-              <li><a href=""  ></a>John Smith</li>
-              <li><a href=""  ></a>Fulano de Tal</li>
-              <li><a href=""  ></a>Caroline C</li>
+
+          <div >
+            <ul ng-repeat="user in $ctrl.listUsers">
+                <li><a href="#" ng-click = "$ctrl.choix_user(user)" alt="{{user.name}}" >{{user.name}}</a></li>
             </ul>
           </div>
 
@@ -17,35 +14,138 @@
       </div>
     
     </br>
-    </div>
+  </div>
 </div>
 
-<div  style="margin-left: 520px">
-    <div class="row">
-      <div class="col-lg-12">
-      <!--   <h1 class="page-header">Jouer Profile : {{$ctrl.affrontement}}</h1> -->
-        <h1 class="page-header"> Name:  Caroline</h1>
-        <div style="width:500px; margin-left: 300px;"></div>
-            <div style="margin-left: 80px;">
-              <img src="assets/images/anonyme.jpg" height="100" widht="100" alt="Jouer anonyme">
-            </div>
-            <p class="lead">Description du jouer:<br>
-            Profil (force, pointage):<br>
-            etc...</p>
+<div id="main_affront" style="margin-left: 220px">
 
-            
-              <ul >
-              <!--    <ul ng-repeat="prop in $ctrl.user">
-                <li><button ng-click="$ctrl.validation" uib-tooltip="{{prop.id}}">{{prop.pos}} </button></li>  -->
-                <li>
-                  <button ng-click="$ctrl.validation" uib-tooltip="{{prop.id}}">Invitacion a jouer </button>
-                  <button ng-click="$ctrl.validation" uib-tooltip="{{prop.id}}">Envoyer un message </button>
-                  <button ng-click="$ctrl.validation" uib-tooltip="{{prop.id}}">Sortir </button>
-                </li>
+  <div ng-show="$ctrl.jChoisi" >
+    
+    <h1 class="page-header"></h1>
+    <div id="">
+            <div id="jouer-image" >
+              <!--<img src="assets/images/{{$ctrl.userChoisi.photo}}" height="100" widht="100" alt="{{user.name}}">-->
+              <!--<img src="assets/images/{{   ? $ctrl.userChoisi.photo : 'user_photo.jpg' }}" height="100" widht="100" alt="{{user.name}}">-->
+              <img src="assets/images/user_foto.png" height="100" widht="100" alt="{{user.name}}">
+              
+            </div>
+            <div id="jouer-tableau">
+              <table border=0 width="150">
+                <tr>
+                  <td>Name:</td>
+                  <td>{{$ctrl.userChoisi.name}}</td>
+                </tr>
+                <tr>
+                  <td>eMail:</td>
+                  <td>{{$ctrl.userChoisi.email}}</td>
+                </tr>
+                <tr>
+                  <td>Ranking:</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Force:</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Points:</td>
+                  <td></td>
+                </tr>
+              </table>
+            </div>
+            <div id="nav_jouerChoice" class="nav-affront">
+              <ul>
+                  <li><button ng-click="$ctrl.affStatus('invitAccepte')" >Acepter invitation</button></li>
+                  <li><button ng-click="$ctrl.affStatus('invitEnvoye')" uib-tooltip="{{prop.id}}">Inviter au jeu</button></li>
+                  <li><button ng-click="" >Message </button></li>
+                  <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
               </ul>
-        </div>
+            </div>
+    </div>
+  </div> <!-- en jChoisi -->
+
+  <div ng-show="$ctrl.jAffront" >
+
+    <div id="head_affront" >
+      
+      <div id="jouer-left">
+          <div id="img-jouerleft">
+              <img src="assets/images/user_foto.png" height="100" widht="100" alt="{{ $ctrl.getCurrentUser().name }}">
+          </div>
+          <div id="table-jouerleft" >
+              <table  style="float:left">
+                <tr>
+                  <td>Name:</td>
+                  <td>{{ $ctrl.getCurrentUser().name }}</td>
+                </tr>
+                <tr>
+                  <td>eMail:</td>
+                  <td>{{ $ctrl.getCurrentUser().email }}</td>
+                </tr>
+                <tr>
+                  <td>Ranking:</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Force:</td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Points:</td>
+                  <td></td>
+                </tr>
+              </table>
+          </div>
+      </div>
+      <div id="jouer-right">
+          <div id="img-jouerright">
+              <img src="assets/images/anonyme.jpg" height="100" widht="100" alt="Jouer anonyme">
+          </div >
+          <div id="table-jouerright">
+            <table style="float:right">
+              <tr>
+                <td>Name:</td>
+                <td>{{ $ctrl.userChoisi.name }}</td>
+              </tr>
+              <tr>
+                <td>Mail:</td>
+                <td>{{ $ctrl.userChoisi.email }}</td>
+              </tr>
+              <tr>
+                <td>Ranking:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Force:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Points:</td>
+                <td></td>
+              </tr>
+            </table>
+          </div>
+      </div>
+      <div style="min-height:250px; text-align: center;">    
+        <h1>Placer ici ... le Titre</h1>           
+      </div>  
+    </div> <!--end hear_affront -->
+    
+    <div id="contain_affront" >
+      <div style="min-height:150px;">
+        <h1>Placer ici ... le code du jeu</h1>   
+      </div>
+        
+      <div id="nav_affront" class="nav-affront">
+        <ul>
+          <li><button ng-click="" >Jou</button></li>
+          <li><button ng-click="" >Message</button></li>
+          <li><button ng-click="$ctrl.affStatus('jChoisi')" >Revoir le Jouer</button></li>
+          <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
+        </ul>
       </div>
 
     </div>
+  </div> <!-- end jAffront -->
 
-</div>
+</div> <!-- end main_affront -->

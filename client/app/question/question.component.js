@@ -193,6 +193,13 @@ $onInit() {
    }
 
    report(){
+
+    this.$http.get("/api/questions/"+this.awesomeQuestion[0]._id).then(response =>{
+      this.$http.put("/api/questions/2",{
+        _id : this.awesomeQuestion[0]._id,
+        nbContestation : response.data.nbContestation + 1
+      })
+    })/*
     
     console.log(this.awesomeQuestion[0].nbContestation)
     console.log("id id ")
@@ -204,12 +211,14 @@ $onInit() {
        //console.log("Je suis bon")
        //console.log(i)
       this.$http.put("/api/questions/1", {  
-        nbContestation: i
+        _id : this.awesomeQuestion[0]._id,
+        nbContestation: i,
+        test :"ceci est un test"
       })
 
       console.log("après ma condition")
       console.log(i)
-     }
+     }*/
 
    }
 
