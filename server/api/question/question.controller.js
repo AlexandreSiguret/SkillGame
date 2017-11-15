@@ -1,7 +1,7 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/questions              ->  index
- * GET     /api/questions/aleatoire    ->  concept
+ * GET     /api/questions/random       ->  concept
  * POST    /api/questions              ->  create
  * GET     /api/questions/:id          ->  show
  * PUT     /api/questions/:id          ->  upsert
