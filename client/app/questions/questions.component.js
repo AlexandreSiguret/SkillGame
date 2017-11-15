@@ -52,7 +52,6 @@ export class QuestionsController {
     this.$http.get('/api/games/freeGame/'+ this.currentConcept._id)
     .then(response => {
       this.freeAwesomeGames = response.data;
-
       if(response.data.length == 0){       
         this.$http.post("/api/games", {          
           concept: this.currentConcept._id,
@@ -71,6 +70,11 @@ export class QuestionsController {
 
       
       
+
+      
+      
+      console.log(this.freeAwesomeGames)
+
     });
 
 
