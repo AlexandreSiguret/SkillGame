@@ -54,9 +54,9 @@
             </ul>
           </div>
 
-          <button ng-click="$ctrl.Check_prev($ctrl.i)" class="btn" id="prev-question-button"><i class="fa fa-arrow-left fa-2x"></i></button>
+          <button ng-click="$ctrl.Check_prev($ctrl.i)" disabled class="btn" id="prev-question-button"><i class="fa fa-arrow-left fa-2x"></i></button>
           <button ng-click="$ctrl.Check_next($ctrl.i)" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
-          <button ng-click="$ctrl.submit()" class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button>
+          <!-- <button ng-click="$ctrl.submit()" class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button> -->
           <button ng-click="$ctrl.report($ctrl.awesomeQuestion[0]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
 
           <div id="quiz-results" style="display:none;">
