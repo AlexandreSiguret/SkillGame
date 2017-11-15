@@ -84,7 +84,7 @@ export class QuestionController {
     this.valide = false;
     this.correct_answer = "";
     this.message = "";
-    this.i=1;
+    this.i=0;
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
@@ -105,40 +105,90 @@ $onInit() {
 // modif
 
     Check_next() {
-    if (this.i == 5) {
+    if (this.i == 3) {
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.attr('disabled',"");
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.removeAttr('disabled');
+      this.i ++;
       }
 
-    if (this.i < 5) {
+    if (this.i < 3) {
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.removeAttr('disabled');
+
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+
       this.i ++;
     }
     else {
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.attr('disabled',"");
+
+      var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
     }
    }
 
    Check_prev() {
+
+    //(this.all_answers[this.i] != 0) &&
+
+    if ( (this.all_answers[this.i] == this.all_correct_answers[this.i]) ) {
+      var variable = '#label-choices-'+this.all_answers[this.i];
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.removeAttr('class');
+      myEl.attr('class',"true");
+
+      for (var i = 1; i < 5; i++) {
+      var variable = '#choices-'+i;
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.attr('disabled',"");
+      }
+    }
+    else if ((this.all_answers[this.i] != this.all_correct_answers[this.i])) {
+
+      var variable = '#label-choices-'+this.all_correct_answers[this.i];
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.removeAttr('class');
+      myEl.attr('class',"true");
+
+      var variable2 = '#label-choices-'+this.all_answers[this.i];
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('class');
+      myE2.attr('class',"false");
+
+      for (var i = 1; i < 5; i++) {
+      var variable = '#choices-'+i;
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.attr('disabled',"");
+      } 
+    }
+
     if (this.i == 1) {
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.attr('disabled',"");
+
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.removeAttr('disabled');
+      this.i --;
     }
 
-    if (this.i > 1) {
+    if (this.i > 0) {
       var myEl = angular.element(document.querySelector('#prev-question-button'));
+      myEl.removeAttr('disabled');
+
+      var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.removeAttr('disabled');
       this.i --;
     }
     else {
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.attr('disabled',"");
+
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
     }
    }
 
@@ -163,7 +213,6 @@ $onInit() {
 
    }
 
-  validation(select){
 /*    if(!this.valide){
     this.valide = true;
     this.correct_answer = {pos :"correct",id : 1}
@@ -179,25 +228,19 @@ $onInit() {
       alert("tu as déja répondu à cette question")
   }*/
 
-  for (var i = 1; i < 5; i++) {
-      var variable = '#label-choices-'+i;
+
+  validation(select){
+
+    this.all_answers[this.i] = select.id;
+
+      /*var variable = '#label-choices-'+this.all_answers[this.i];
       var myEl = angular.element( document.querySelector( variable ) );
       myEl.removeAttr('class');
-  }
+      //myEl.attr('class',"chicked");*/
 
-      this.all_answers[this.i] = select.id;
-      var variable = '#label-choices-'+this.all_answers[this.i];
-      var myEl = angular.element( document.querySelector( variable ) );
-      myEl.removeAttr('class');
-      myEl.attr('class',"chicked");
+      //(this.all_answers[this.i] != 0) &&
 
-
-      
-  }
-
-  submit(){
-    
-    if ( (this.all_answers[this.i] != 0) && (this.all_answers[this.i] == this.all_correct_answers[this.i]) ) {
+    if ( (this.all_answers[this.i] == this.all_correct_answers[this.i]) ) {
       var variable = '#label-choices-'+this.all_answers[this.i];
       var myEl = angular.element( document.querySelector( variable ) );
       myEl.removeAttr('class');
@@ -210,7 +253,7 @@ $onInit() {
       }
 
     }
-    else if ((this.all_answers[this.i] != 0) && (this.all_answers[this.i] != this.all_correct_answers[this.i])) {
+    else if ( (this.all_answers[this.i] != this.all_correct_answers[this.i])) {
 
       var variable = '#label-choices-'+this.all_correct_answers[this.i];
       var myEl = angular.element( document.querySelector( variable ) );
@@ -226,13 +269,12 @@ $onInit() {
       var variable = '#choices-'+i;
       var myEl = angular.element( document.querySelector( variable ) );
       myEl.attr('disabled',"");
-      }
-
-      //alert('____false___'+this.all_answers[this.i])
-
-      
+      } 
     }
+  }
 
+  submit(){
+    
 
     /*this.resultats = 0;
     for (var i = 0; i < this.all_answers.length; i++) {
