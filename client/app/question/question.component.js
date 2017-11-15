@@ -8,7 +8,9 @@ export class QuestionController {
   awesomeQuestion = [];
   blabla = "génial";
   newThing = '';
+  
 
+  
   /*@ngInject*/
   constructor($http, $scope, socket) {
     this.$http = $http;
@@ -17,6 +19,9 @@ export class QuestionController {
     this.all_correct_answers = [4, 4, 4, 4, 4];
     this.all_answers = [];
     this.resultats = 0;
+    this.num = 3;
+    
+    
 
     this.all_questions = [{
   question: "Question 1 ?",
@@ -193,10 +198,9 @@ $onInit() {
    }
 
    report(){
-
-    this.$http.get("/api/questions/"+this.awesomeQuestion[0]._id).then(response =>{
-      this.$http.put("/api/questions/2",{
-        _id : this.awesomeQuestion[0]._id,
+    this.$http.get("/api/questions/"+this.awesomeQuestion[this.num]._id).then(response =>{
+      this.$http.put("/api/questions/"+this.awesomeQuestion[this.num]._id,{ 
+        _id : this.awesomeQuestion[this.num]._id,
         nbContestation : response.data.nbContestation + 1
       })
     })/*
@@ -219,6 +223,7 @@ $onInit() {
       console.log("après ma condition")
       console.log(i)
      }*/
+      
 
    }
 
