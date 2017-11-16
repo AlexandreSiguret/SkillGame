@@ -97,7 +97,7 @@ export function random(req,res){
    
 return  Question.findAll({ 
     order :         Sequelize.fn( 'RANDOM' ) ,    
-    limit : 1
+    limit : 2
   })     
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

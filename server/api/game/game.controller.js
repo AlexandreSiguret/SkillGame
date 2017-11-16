@@ -122,23 +122,25 @@ export function show(req, res) {
 // Creates a new Game in the DB
 export function create(req, res) {
   req.body.user1= req.user._id
+
+  var new_question = {
+
+  }
+
+  
   var new_answer = {
-    question : 1,
-    choice : 2,
+    question : new_question,    
     earnedPoint : 15,
-    user : 7,
-    quizz :2
-  };
-  var new_game = {
-    user1 : 1,
-    concept : 2,
+    user : req.body.user1,
+    quizz : req.body._id
   }
   return Game.create(req.body)
   .then(
     Answer.create(new_answer)
-  )    .then(respondWithResult(res, 201))
+  )    
+  .then(respondWithResult(res, 201))
  
-    .catch(handleError(res));
+  .catch(handleError(res));
 }
 
 // Upserts the given Game in the DB at the specified ID
