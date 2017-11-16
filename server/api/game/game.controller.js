@@ -96,7 +96,7 @@ export function freeGame(req,res){
 
 export function game(req,res){
   var userId = req.user._id;
-  console.log(userId);
+  
   return Game.findAll({
     
     where :{
@@ -121,11 +121,24 @@ export function show(req, res) {
 
 
 // Creates a new Game in the DB
-function allvue(tab){
+function allcreation(tab,idquizz,iduser){
 var taille = tab.length;
 
 for (var i = 0;i < taille;i++){
-console.log(tab[i].dataValues)
+
+var creation1 = {
+  question : tab[i].dataValues._id,
+  user : iduser,
+  quizz : idquizz
+}
+var creation2 = {
+  question : tab[i].dataValues._id,
+  quizz : idquizz
+}
+
+Answer.create(creation1)
+Answer.create(creation2)
+
 }
 
 }
@@ -140,12 +153,12 @@ export function create(req, res) {
   }
   
   return Game.create(req.body)
-  .then(() =>{
+  .then(response =>{
     console.log("on essaye")
     Question.findAll({ 
       order :         Sequelize.fn( 'RANDOM' ) ,    
       limit : 2
-    }).then(succes => allvue(succes))
+    }).then(succes => allcreation(succes,response.dataValues._id,req.user._id))
     .then(respondWithResult(res))
     .catch(handleError(res));
   })
@@ -189,6 +202,16 @@ export function create(req, res) {
   .catch(handleError(res));
 }
 
+function regularisation(idquizz,idplayer){
+  console.log("coucou toi")
+  return Answer.find({
+    where: {
+      _id: idquizz,
+      user : null
+    }
+  }).then(response =>console.log(response))
+}
+
 // Upserts the given Game in the DB at the specified ID
 export function upsert(req, res) {
   req.body.user2 = req.user._id
@@ -200,7 +223,7 @@ export function upsert(req, res) {
     where: {
       _id: req.params.id
     }
-  })
+  }).then(regularisation(req.params.id,req.user._id))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
