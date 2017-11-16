@@ -110,12 +110,8 @@ $onInit() {
 // modif
 
 
-    new_next(){ 
-        this.num++;
-    }
-
-    new_prev(){ 
-      this.num--;
+    new_next(){
+      this.num++
     }
 
     Check_next() {
@@ -212,8 +208,7 @@ $onInit() {
         _id : this.awesomeQuestion[this.num]._id,
         nbContestation : response.data.nbContestation + 1
       })
-    })
-    /*
+    })/*
     
     console.log(this.awesomeQuestion[0].nbContestation)
     console.log("id id ")
