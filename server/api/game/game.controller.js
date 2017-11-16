@@ -14,8 +14,9 @@ import jsonpatch from 'fast-json-patch';
 import {Game} from '../../sqldb';
 import config from '../../config/environment';
 import Sequelize from 'sequelize';
-import Question from '../question';
+import {Question} from '../../sqldb';
 import {Answer} from "../../sqldb";
+
 
 
 const Op = Sequelize.Op;
@@ -120,23 +121,47 @@ export function show(req, res) {
 
 
 // Creates a new Game in the DB
+function allvue(tab){
+var taille = tab.length;
+
+for (var i = 0;i < taille;i++){
+console.log(tab[i].dataValues)
+}
+
+}
+
 export function create(req, res) {
   req.body.user1= req.user._id
-  var new_answer = {
-    question : 1,
-    choice : 2,
-    earnedPoint : 15,
-    user : 7,
-    quizz :2
-  };
+  
   var new_game = {
     user1 : 1,
     concept : 2,
   }
+  
   return Game.create(req.body)
-  .then(
-    Answer.create(new_answer)
-  )    .then(respondWithResult(res, 201))
+  .then(() =>{
+    console.log("on essaye")
+    Question.findAll({ 
+      order :         Sequelize.fn( 'RANDOM' ) ,    
+      limit : 2
+    }).then(succes => allvue(succes))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+  })
+  
+  /*
+  .then(response =>{
+    console.log(response.dataValues);
+    var new_answer = {
+      question : 1,
+      choice : 2,
+      earnedPoint : 15,
+      user : req.user._id,
+      quizz :response.dataValues.concept
+    };
+    
+    Answer.create(new_answer)}
+  )   */ .then(respondWithResult(res, 201))
  
     .catch(handleError(res));
 }
