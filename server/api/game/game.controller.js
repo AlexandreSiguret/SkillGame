@@ -132,6 +132,7 @@ console.log(tab[i].dataValues)
 
 export function create(req, res) {
   req.body.user1= req.user._id
+
   
   var new_game = {
     user1 : 1,
@@ -162,8 +163,30 @@ export function create(req, res) {
     
     Answer.create(new_answer)}
   )   */ .then(respondWithResult(res, 201))
- 
-    .catch(handleError(res));
+/*
+
+  return Game.create(req.body)
+  .then(() =>{
+    Question.findAll({ 
+      order :         Sequelize.fn( 'RANDOM' ) ,    
+      limit : 1
+    }).then(res2 =>{     
+      var new_answer = {
+        question : res2[0].dataValues._id ,    
+        earnedPoint : 15,
+        user : req.body.user1,
+        quizz : req.body._id
+      }
+      Answer.create(new_answer)
+    })  
+
+  }   
+    
+  )    
+  .then(respondWithResult(res, 201))
+
+ */
+  .catch(handleError(res));
 }
 
 // Upserts the given Game in the DB at the specified ID

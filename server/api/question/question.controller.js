@@ -67,9 +67,7 @@ function handleError(res, statusCode) {
   };
 }
 
-function getRandom(min, max) {
-  return Math.random() * (max - min) + min;
-}
+
 
 // Gets a list of Questions
 export function index(req, res) {
@@ -104,10 +102,6 @@ return  Question.findAll({
     .catch(handleError(res)); 
   
 }
-
-
-
-
 
 
 //gets the list of Question, created by a user
