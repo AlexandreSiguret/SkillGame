@@ -92,11 +92,13 @@ export function create(req, res) {
 
 // Upserts the given Answer in the DB at the specified ID
 export function upsert(req, res) {
-  if(req.body._id) {
+/*  if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-
+*/
+console.log()
   return Answer.upsert(req.body, {
+    
     where: {
       _id: req.params.id
     }

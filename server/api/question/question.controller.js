@@ -67,9 +67,7 @@ function handleError(res, statusCode) {
   };
 }
 
-function getRandom(min, max) {
-  return Math.random() * (max - min) + min;
-}
+
 
 // Gets a list of Questions
 export function index(req, res) {
@@ -97,17 +95,13 @@ export function random(req,res){
    
 return  Question.findAll({ 
     order :         Sequelize.fn( 'RANDOM' ) ,    
-    limit : 2
+    limit : 1
   })     
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res)); 
   
 }
-
-
-
-
 
 
 //gets the list of Question, created by a user

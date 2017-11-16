@@ -3,7 +3,8 @@
   font: 16px Raleway, sans-serif;
 }
 body {
-  padding-top: 10%;
+    margin: 0;
+    padding: 0;
 }
 h1 {
   color: #65a5b7;
