@@ -19,7 +19,7 @@ export class QuestionController {
     this.all_correct_answers = [4, 4, 4, 4, 4];
     this.all_answers = [];
     this.resultats = 0;
-    this.num = 3;
+    this.num = 0;
     
     
 
@@ -108,6 +108,16 @@ $onInit() {
 }
 
 // modif
+
+
+    new_next(){
+      if (this.num < this.awesomeQuestion[this.num]._id){
+        this.num++;
+      }else{
+        this.num = 0;
+      }
+
+    }
 
     Check_next() {
     if (this.i == 3) {
