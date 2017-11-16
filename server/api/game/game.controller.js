@@ -14,7 +14,7 @@ import jsonpatch from 'fast-json-patch';
 import {Game} from '../../sqldb';
 import config from '../../config/environment';
 import Sequelize from 'sequelize';
-import Question from '../question';
+import {Question} from '../../sqldb';
 import {Answer} from "../../sqldb";
 
 
@@ -123,20 +123,23 @@ export function show(req, res) {
 export function create(req, res) {
   req.body.user1= req.user._id
 
-  var new_question = {
-
-  }
-
-  
-  var new_answer = {
-    question : new_question,    
-    earnedPoint : 15,
-    user : req.body.user1,
-    quizz : req.body._id
-  }
   return Game.create(req.body)
-  .then(
-    Answer.create(new_answer)
+  .then(() =>{
+    Question.findAll({ 
+      order :         Sequelize.fn( 'RANDOM' ) ,    
+      limit : 1
+    }).then(res2 =>{     
+      var new_answer = {
+        question : res2[0].dataValues._id ,    
+        earnedPoint : 15,
+        user : req.body.user1,
+        quizz : req.body._id
+      }
+      Answer.create(new_answer)
+    })  
+
+  }   
+    
   )    
   .then(respondWithResult(res, 201))
  
