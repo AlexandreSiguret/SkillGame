@@ -15,6 +15,7 @@ import {Game} from '../../sqldb';
 import config from '../../config/environment';
 import Sequelize from 'sequelize';
 import Question from '../question';
+import {Answer} from "../../sqldb";
 
 
 const Op = Sequelize.Op;
@@ -121,15 +122,22 @@ export function show(req, res) {
 // Creates a new Game in the DB
 export function create(req, res) {
   req.body.user1= req.user._id
+  var new_answer = {
+    question : 1,
+    choice : 2,
+    earnedPoint : 15,
+    user : 7,
+    quizz :2
+  };
+  var new_game = {
+    user1 : 1,
+    concept : 2,
+  }
   return Game.create(req.body)
-    .then(respondWithResult(res, 201))
-    .then(
-      this.$http.post("/api/answers", {
-        question : this.$http.get("/api/questions/random/" + req.body.concept),
-        earnedPoint : 100,
-        user : req.body.user1,
-        quizz : req.body._id
-     }))
+  .then(
+    Answer.create(new_answer)
+  )    .then(respondWithResult(res, 201))
+ 
     .catch(handleError(res));
 }
 
