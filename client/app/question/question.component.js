@@ -141,7 +141,6 @@ $onInit() {
 
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.removeAttr('disabled');
-      this.i++;
     }
    }
 
