@@ -18,6 +18,7 @@ export class AffrontementController {
     this.$http = $http;
     this.socket = socket;
     this.jChoice = true;
+    this.jeuChoice = false;
     this.jChoisi = false;
     this.jAffront = false;
 
@@ -45,8 +46,9 @@ export class AffrontementController {
   }
 
   affStatus(a){
-    console.log(a);
+    console.log("ingresa parametro: "+a);
     this.jChoice = false;
+    this.jeuChoice = false;
     this.jChoisi = false;    
     this.jAffront = false;
 
@@ -54,8 +56,12 @@ export class AffrontementController {
       case 'jChoice':
         this.jChoice = true;
       break;
-      case 'Choisi':
+      case 'jeuChoice':
+      this.jeuChoice = true;
+      break;
+      case 'jChoisi':
         this.jChoisi = true;
+        console.log(this.jChoisi);
       break;
       case 'invitAccepte':
         this.jAffront = true;

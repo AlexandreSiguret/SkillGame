@@ -3,17 +3,30 @@
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">Jouers :</h1>
-
           <div >
             <ul ng-repeat="user in $ctrl.listUsers">
-                <li><a href="#" ng-click = "$ctrl.choix_user(user)" alt="{{user.name}}" >{{user.name}}</a></li>
+                <li ng-if="user.name != 'Admin' ">
+                  <a ng-if="$ctrl.getCurrentUser().name != user.name" href="#" ng-click = "$ctrl.choix_user(user)" alt="{{user.name}}" >
+                    <img src="assets/images/{{user.avatar}}">
+                    {{user.name}}
+                  </a>
+                  <a ng-if="$ctrl.getCurrentUser().name == user.name" alt="{{user.name}}" >
+                      <img src="assets/images/{{user.avatar}}">
+                      {{user.name}}
+                  </a>
+                  
+                </li>
             </ul>
           </div>
 
         </div>
-      </div>
+      </div> 
     
     </br>
+  </div>
+
+  <div ng-show="$ctlr.jeuChoice" class container style="width:180px">
+
   </div>
 </div>
 
@@ -24,10 +37,7 @@
     <h1 class="page-header"></h1>
     <div id="">
             <div id="jouer-image" >
-              <!--<img src="assets/images/{{$ctrl.userChoisi.photo}}" height="100" widht="100" alt="{{user.name}}">-->
-              <!--<img src="assets/images/{{   ? $ctrl.userChoisi.photo : 'user_photo.jpg' }}" height="100" widht="100" alt="{{user.name}}">-->
-              <img src="assets/images/user_foto.png" height="100" widht="100" alt="{{user.name}}">
-              
+              <img src="assets/images/{{$ctrl.userChoisi.avatar}}" style="width:190px; height:200px" alt="{{$ctrl.userChoisi.name}}"> 
             </div>
             <div id="jouer-tableau">
               <table border=0 width="150">
@@ -70,7 +80,7 @@
       
       <div id="jouer-left">
           <div id="img-jouerleft">
-              <img src="assets/images/user_foto.png" height="100" widht="100" alt="{{ $ctrl.getCurrentUser().name }}">
+              <img src="assets/images/{{ $ctrl.getCurrentUser().avatar }}" alt="{{ $ctrl.getCurrentUser().name }}">
           </div>
           <div id="table-jouerleft" >
               <table  style="float:left">
@@ -99,7 +109,7 @@
       </div>
       <div id="jouer-right">
           <div id="img-jouerright">
-              <img src="assets/images/anonyme.jpg" height="100" widht="100" alt="Jouer anonyme">
+              <img src="assets/images/{{$ctrl.userChoisi.avatar}}" alt="{{$ctrl.userChoisi.name}}">
           </div >
           <div id="table-jouerright">
             <table style="float:right">
@@ -130,7 +140,7 @@
         <h1>Placer ici ... le Titre</h1>           
       </div>  
     </div> <!--end hear_affront -->
-    
+
     <div id="contain_affront" >
       <div style="min-height:150px;">
         <h1>Placer ici ... le code du jeu</h1>   
@@ -139,8 +149,8 @@
       <div id="nav_affront" class="nav-affront">
         <ul>
           <li><button ng-click="" >Jou</button></li>
-          <li><button ng-click="" >Message</button></li>
           <li><button ng-click="$ctrl.affStatus('jChoisi')" >Revoir le Jouer</button></li>
+          <li><button ng-click="" >Message</button></li>
           <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
         </ul>
       </div>

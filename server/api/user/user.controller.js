@@ -29,7 +29,8 @@ export function index(req, res) {
       'name',
       'email',
       'role',
-      'provider'
+      'provider',
+      'avatar'
     ]
   })
     .then(users => {
@@ -127,6 +128,7 @@ export function me(req, res, next) {
     attributes: [
       '_id',
       'name',
+      'avatar',
       'email',
       'role',
       'provider'
