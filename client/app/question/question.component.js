@@ -3,12 +3,21 @@ import uiRouter from 'angular-ui-router';
 import routing from './question.routes';
 
 export class QuestionController {
-  $timeout;
   $http;
   socket;
   awesomeQuestion = [];
   blabla = "génial";
   newThing = '';
+  stopped;
+  counter = 100;
+
+  link:ng.IDirectiveLinkFn = (scope:ng.IScope, element:ng.IAugmentedJQuery, attr:ng.IAttributes) => {
+      this.$timeout(function () {
+        console.log(this.counter);
+        this.counter--;   
+        this.countdown();
+      },1000);
+    };
   
 
   
@@ -22,9 +31,6 @@ export class QuestionController {
     this.answered = [0,0,0,0,0];
     this.resultats = 0;
     this.num = 0;
-
-
-    $scope.counter = 100;
 
     this.all_questions = [{
   question: "Question 1 ?",
@@ -97,6 +103,17 @@ export class QuestionController {
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
     });
+
+    $scope.counter = 100;
+    $scope.onTimeout = function(){
+        $scope.counter--;
+        mytimeout = $timeout($scope.onTimeout,1000);
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+
+    $scope.stop = function(){
+        $timeout.cancel(mytimeout);
+    }
   }
   
 // modif
@@ -244,13 +261,15 @@ $onInit() {
     alert('__'+this.answered[this.i]);
   }
 
-  countdown($scope) {
-        $scope.counter --;
-      };
-       
+  countdown() {
+        this.stopped = this.$timeout;
+        //this.counter--;   
+        //this.countdown();   
+      //}, 1000);
+  };
         
-   stop($scope){
-       $scope.counter --;
+   stop(){
+       this.$timeout.cancel(this.stopped);
     } 
 
   submit_()

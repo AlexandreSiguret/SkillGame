@@ -43,7 +43,7 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-6-lg" id="quiz">
-          <h1>Passer le test !</h1>
+          <h1>Passer le test ! <button ng-click="stop()" class="btn"></button> {{counter}}</h1>
           <h1 id="quiz-name"></h1>
           <div id="question" ng-view>
             <h2>{{$ctrl.awesomeQuestion[$ctrl.num].question}}</h2>
@@ -52,7 +52,6 @@
               <label id="label-choices-{{choices.id}}" class="" for="choices-{{choices.id}}">{{choices.pos}}</label>
             </ul>
           </div>
-
           <!--<button ng-click="$ctrl.new_prev()" disabled class="btn" id="prev-question-button"><i class="fa fa-arrow-left fa-2x"></i></button>-->
           <button ng-click="$ctrl.new_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
           <!-- <button ng-click="$ctrl.submit()" class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button> -->
