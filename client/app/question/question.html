@@ -43,7 +43,17 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-6-lg" id="quiz">
-          <h1>Passer le test ! <button ng-click="stop()" class="btn"></button> {{counter}}</h1>
+          <h1>Passer le test !</h1>
+
+          <div class="counter">
+          <div id="countdown">
+             <span class="minutes">{{minutes}}<b>Minutes</b></span>
+             <span class="seconds">{{seconds}}<b>Seconds</b></span>
+           </div>
+           </div>
+
+          
+
           <h1 id="quiz-name"></h1>
           <div id="question" ng-view>
             <h2>{{$ctrl.awesomeQuestion[$ctrl.num].question}}</h2>

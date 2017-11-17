@@ -104,9 +104,11 @@ export class QuestionController {
       socket.unsyncUpdates('question');
     });
 
-    $scope.counter = 100;
+    $scope.counter = 120;
     $scope.onTimeout = function(){
         $scope.counter--;
+        $scope.minutes = Math.floor((($scope.counter / 60)));
+        $scope.seconds = Math.floor($scope.counter - ($scope.minutes * 60));
         mytimeout = $timeout($scope.onTimeout,1000);
     }
     var mytimeout = $timeout($scope.onTimeout,1000);
