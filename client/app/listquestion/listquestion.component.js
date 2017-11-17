@@ -7,7 +7,6 @@ export class ListquestionController {
   socket;
   awesomeListQuestion = [];
   awesomeConcept = [];
-  awesomeUser = [];
   blabla = "génial";
   newThing = '';
   
@@ -17,14 +16,14 @@ export class ListquestionController {
   constructor($http, $scope, socket) {
     this.$http = $http;
     this.socket = socket;
-    //this.i= 0;
-    this.i= this.awesomeListQuestion_id;
+    this.controleConcept = false;
     
+    
+
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
     });
   }
-  
   
   $onInit() {
     this.$http.get('/api/questions/myquestion')
@@ -33,10 +32,17 @@ export class ListquestionController {
         console.log(response.data)
         //console.log(this.controleQuestion)
       });
+
+    this.$http.get('/api/concepts')
+      .then(response => {
+        this.awesomeConcept = response.data;
+        console.log(response.data)
+        //console.log(this.controleQuestion)
+      });
+
+      }
+
       
-  }
-  
- 
 
   }
 

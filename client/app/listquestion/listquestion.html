@@ -9,8 +9,19 @@
         <div class="col-6-lg" id="quiz">
           <h1>La liste des questions soumises par concept</h1>
           <h1 id="quiz-name"></h1>
- 
-           <h2>{{$ctrl.awesomeListQuestion}}</h2> 
+          <div ng-if="$ctrl.awesomeListQuestion.concept == awesomeConcept._id" ng-repeat="concept in $ctrl.awesomeConcept">
+              <p>
+                <strong>
+                  <b>{{concept.name}}</b>
+                </strong>
+              </p>
+            <ul ng-repeat="listquest in $ctrl.awesomeListQuestion">
+              <p><strong>{{listquest.question}}</strong></p>
+            </ul>
+
+          </div> 
+
+          <!-- <h2>{{$ctrl.awesomeListQuestion}}</h2> -->
 
           <!--<ul ng-repeat="listquest in $ctrl.awesomeListQuestion[$ctrl.i]">
             <label > {{listquest.question}} </label>     
