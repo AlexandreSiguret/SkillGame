@@ -113,12 +113,7 @@ $onInit() {
 
 
     new_next(){
-      if (this.num < this.awesomeQuestion[this.num]._id){
-        this.num++;
-      }else{
-        this.num = 0;
-      }
-
+      this.num++
     }
 
     Check_next() {
@@ -146,6 +141,7 @@ $onInit() {
 
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.removeAttr('disabled');
+      this.i++;
     }
    }
 
