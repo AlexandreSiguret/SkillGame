@@ -97,6 +97,8 @@ export default function seedDatabaseIfNeeded() {
 
         name: 'Test User',
 
+        avatar: 'anonyme.png',
+
         email: 'test@example.com',
 
         password: 'test',
@@ -113,6 +115,8 @@ export default function seedDatabaseIfNeeded() {
 
         name: 'Admin',
 
+        avatar: 'anonyme.png',
+
         email: 'admin@example.com',
 
         password: 'admin'
@@ -127,6 +131,8 @@ export default function seedDatabaseIfNeeded() {
 
         name: "Alexandre",
 
+        avatar: 'alexandre.jpg',
+
         email: "alexandre@alexandre.com",
 
         password: "alexandre",
@@ -139,11 +145,13 @@ export default function seedDatabaseIfNeeded() {
 
         provider: "local",
 
-        name: "Momo",
+        name: "Mohamed",
 
-        email: "momo@momo.com",
+        avatar: 'mohamed.jpg',
 
-        password: "momo",
+        email: "mhamed@mohamed.com",
+
+        password: "mohamed",
 
       },
 
@@ -153,11 +161,13 @@ export default function seedDatabaseIfNeeded() {
 
         provider: "local",
 
-        name: "anthonio",
+        name: "Antonio",
 
-        email: "anthonio@anthonio.com",
+        avatar: 'antonio.jpg',
 
-        password: "anthonio",
+        email: "antonio@antonio.com",
+
+        password: "antonio",
 
       },
 
@@ -168,6 +178,8 @@ export default function seedDatabaseIfNeeded() {
         provider: "local",
 
         name: "Yassine",
+
+        avatar: 'yassine.jpg',
 
         email: "yassine@yassine.com",
 
@@ -181,7 +193,9 @@ export default function seedDatabaseIfNeeded() {
 
         provider: "local",
 
-        name: "htsa",
+        name: "HTSA",
+
+        avatar: 'htsa.jpg',
 
         role: 'admin',
 
@@ -198,6 +212,8 @@ export default function seedDatabaseIfNeeded() {
         provider: "local",
 
         name: "David",
+
+        avatar: 'anonyme.png',
 
         role: 'admin',
 

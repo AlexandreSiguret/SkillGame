@@ -1,6 +1,5 @@
 'use strict';
 
-
 import crypto from 'crypto';
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 
@@ -39,6 +38,7 @@ export default function(sequelize, DataTypes) {
     },
     provider: DataTypes.STRING,
     salt: DataTypes.STRING,
+    avatar: DataTypes.STRING,
     facebook: DataTypes.JSON,
     google: DataTypes.JSON,
     github: DataTypes.JSON
