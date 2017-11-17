@@ -3,6 +3,7 @@ import uiRouter from 'angular-ui-router';
 import routing from './question.routes';
 
 export class QuestionController {
+  $timeout;
   $http;
   socket;
   awesomeQuestion = [];
@@ -12,7 +13,7 @@ export class QuestionController {
 
   
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, $timeout) {
     this.$http = $http;
     this.socket = socket;
     this.fun = "c est marrant ";
@@ -21,8 +22,9 @@ export class QuestionController {
     this.answered = [0,0,0,0,0];
     this.resultats = 0;
     this.num = 0;
-    
-    
+
+
+    $scope.counter = 100;
 
     this.all_questions = [{
   question: "Question 1 ?",
@@ -246,6 +248,15 @@ $onInit() {
   submit(){
     alert('__'+this.answered[this.i]);
   }
+
+  countdown($scope) {
+        $scope.counter --;
+      };
+       
+        
+   stop($scope){
+       $scope.counter --;
+    } 
 
   submit_()
   {
