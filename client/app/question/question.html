@@ -47,13 +47,12 @@
           <h1 id="quiz-name"></h1>
 
 
-<<<<<<< HEAD
+
           <div id="question">
             <h2>{{$ctrl.awesomeQuestion[$ctrl.num].question}}</h2>
-=======
           <div id="question" ng-view>
             <h2>{{$ctrl.all_questions[$ctrl.i].question}}</h2>
->>>>>>> b3aa891e615381e9e3b25fcb6737fdd7cb82da69
+
             <ul ng-repeat="choices in $ctrl.all_questions[$ctrl.i].choices">
               <input ng-click="$ctrl.validation(choices)" id="choices-{{choices.id}}" type="radio" name="choices" value="choices-{{choices.id}}">
               <label id="label-choices-{{choices.id}}" class="" for="choices-{{choices.id}}">{{choices.pos}}</label>
