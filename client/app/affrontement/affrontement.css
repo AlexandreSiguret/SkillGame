@@ -7,27 +7,52 @@
     background: rgb(203, 203, 243);
   }
 
-  .nav-affront {font: bold 11px Verdana;line-height:25px;width:100%; margin:10px 0 10px 0;overflow:hidden;}
-  .nav-affront ul { width:100%; text-align:center; list-style-type: none;} 
-  .nav-affront ul li {position: relative;display: inline;border-top-width:thin;}
+  .nav-affront {font: bold 11px Verdana;line-height:25px;width:100%; margin:10px 0 10px 0;}
+  .nav-affront ul { width:100%; text-align:center; list-style: none;  list-style-type: none;} 
+  .nav-affront ul li {position: relative;display: inline;border-top-width:thin; list-style: none;}
   .nav-affront ul li a {display: block;background: #999999;padding: 4px 10px;margin: 0 1px 0 1px;border-right: 0px solid #778;border-top-width:thin;color: white;text-decoration: none;}
   .nav-affront ul li a:link,
   .nav-affront ul li a:visited,
   .nav-affront ul li a:link {color: black;}
   .nav-affront ul li a:hover {color: white;text-decoration: underline;}
   
+  .nav-affront-v {font: bold 11px Verdana;line-height:25px;width:100%; margin:2px 0 ;}
+  .nav-affront-v ul { width:100%; text-align:left; list-style-type: none;} 
+  .nav-affront-v ul li {position: relative;}
+  .nav-affront-v ul li a {display: block;padding: 2px 0px;color: black;}
+  .nav-affront-v ul li a:link,
+  .nav-affront-v ul li a:visited,
+  .nav-affront-v ul li a:link {color: black;}
+  .nav-affront-v ul li a:hover {color: rgb(100, 6, 124);text-decoration: underline;}
 
 
   #jouer-image {width:200px;margin: 0 auto; }
   #jouer-tableau {width:200px;margin: 0 auto; }
+
+  #affront_chat{
+    position:absolute;
+    top: -120px;
+    right:-80px;
+    margin-bottom: 2px;
+    width:250px;
+    height:110px;
+    visibility: hidden;
+    border:1px solid #999999;
+    overflow:auto;
+    background-color:rgb(244, 247, 248);
+  }
+  #messag > p { text-align: left; font: 9px Verdana; margin:0px; padding:0px;}
+  #msgInfo { float:left;text-align: left; font: 9px Verdana;color: #6e0202; margin:0px; padding:0px;}
 
   #sbleft_affront img {margin-right: 3px; width:20px; height:22px;}  
   #main_affront img {margin: 10px 10px; width:75px; height:80px; padding:5px 5px; border: solid 1px  #546489;}
   #head_affront {position: relative;width:100%;}
   #jouer-left {position: absolute; left:5px; top:5px;width:200px;margin: 10px 10px; padding:5px 5px;}
   #jouer-right {position: absolute; right:5px; top:5px;width:200px;margin: 10px 10px; padding:5px 5px;}
-  #img-jouerleft, #img-jouerright {width:100px;margin: 0 auto; }
+  #img-jouerleft {width:100px; }
+  #img-jouerright {width:100px; float: right; }
   #table-jouerleft, #table-jouerright {width:180px;margin: 0 auto; }
   
+  .jouer_table {font:80% Verdana; }
   .clearfloat, .clearleft{ clear:both;height:0;font-size: 1px;line-height: 0px;}
 

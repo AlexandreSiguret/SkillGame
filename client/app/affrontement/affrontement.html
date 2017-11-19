@@ -3,9 +3,9 @@
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">Jouers :</h1>
-          <div >
-            <ul ng-repeat="user in $ctrl.listUsers">
-                <li ng-if="user.name != 'Admin' ">
+          <div class="nav-affront-v">
+            <ul >
+                <li ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers">
                   <a ng-if="$ctrl.getCurrentUser().name != user.name" href="#" ng-click = "$ctrl.choix_user(user)" alt="{{user.name}}" >
                     <img src="assets/images/{{user.avatar}}">
                     {{user.name}}
@@ -14,9 +14,8 @@
                       <img src="assets/images/{{user.avatar}}">
                       {{user.name}}
                   </a>
-                  
                 </li>
-            </ul>
+            </ul>  
           </div>
 
         </div>
@@ -64,13 +63,16 @@
               </table>
             </div>
             <div id="nav_jouerChoice" class="nav-affront">
-              <ul>
-                  <li><button ng-click="$ctrl.affStatus('invitAccepte')" >Acepter invitation</button></li>
-                  <li><button ng-click="$ctrl.affStatus('invitEnvoye')" uib-tooltip="{{prop.id}}">Inviter au jeu</button></li>
-                  <li><button ng-click="" >Message </button></li>
+              <ul> 
+                  <li><button ng-click="$ctrl.affStatus('invitAccepte');$ctrl.submitMessage( 3 )" >Acepter invitation</button></li>
+                  <li><button ng-click="$ctrl.submitMessage(4)" >Refuser invitation</button></li>
+                  <li><button ng-click="$ctrl.submitMessage(2)" uib-tooltip="{{prop.id}}">Inviter au jeu</button></li>
                   <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
+                  <!-- <li><button ng-click = "" >Message </button></li> -->
+                  
               </ul>
             </div>
+            <p id="msgInfo"></p>
     </div>
   </div> <!-- en jChoisi -->
 
@@ -83,7 +85,7 @@
               <img src="assets/images/{{ $ctrl.getCurrentUser().avatar }}" alt="{{ $ctrl.getCurrentUser().name }}">
           </div>
           <div id="table-jouerleft" >
-              <table  style="float:left">
+              <table class="jouer_table" style="float:left">
                 <tr>
                   <td>Name:</td>
                   <td>{{ $ctrl.getCurrentUser().name }}</td>
@@ -112,7 +114,7 @@
               <img src="assets/images/{{$ctrl.userChoisi.avatar}}" alt="{{$ctrl.userChoisi.name}}">
           </div >
           <div id="table-jouerright">
-            <table style="float:right">
+            <table class="jouer_table" style="float:right">
               <tr>
                 <td>Name:</td>
                 <td>{{ $ctrl.userChoisi.name }}</td>
@@ -146,16 +148,30 @@
         <h1>Placer ici ... le code du jeu</h1>   
       </div>
         
-      <div id="nav_affront" class="nav-affront">
+      <div id="nav_affront" class="nav-affront"> 
         <ul>
           <li><button ng-click="" >Jou</button></li>
           <li><button ng-click="$ctrl.affStatus('jChoisi')" >Revoir le Jouer</button></li>
-          <li><button ng-click="" >Message</button></li>
           <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
+          <li id="nav_affront_chat">
+            <input id="input_aff_chat" type="text" name="chat" value="Chat"
+              ng-click = "$ctrl.addChatElement()" 
+              ng-keyup="$event.keyCode == 13 ? $ctrl.submitMessage() : null;" 
+              ng-model="$ctrl.chat_message"  
+              onfocus="if(this.value=='Chat')this.value='';" 
+              onblur="this.value='Chat'"
+               />
+            <div id="affront_chat" >
+                <div id="messag" ng-repeat="mess in $ctrl.listMessages">
+                  <p style="color:#999999;">{{mess.expediteur}}: </p>
+                  <p style="margin-left:4px;">{{mess.message}}</p>
+                </div>      
+            </div>
+          </li>
         </ul>
       </div>
 
     </div>
   </div> <!-- end jAffront -->
-
+  
 </div> <!-- end main_affront -->

@@ -21,15 +21,40 @@ export default function seedDatabaseIfNeeded() {
   if (config.seedDB) {
 
     let Thing = sqldb.Thing;
-
     let User = sqldb.User;
-
     let Concept = sqldb.Concept;
-
     let Question = sqldb.Question;
-
     let Choice = sqldb.Choice;
     let Game = sqldb.Game;
+    let Message = sqldb.Message;
+
+    Message.destroy({where:{}})
+    .then(() =>{
+      let message = Message.bulkCreate([{
+
+        expediteur : "antonio@antonio.com",
+        destinataire : "htsa@htsa.com",
+        msg_type : 1,
+        message : 'Salut',
+        _id: 1
+      }, {
+         expediteur : "htsa@htsa.com",
+         destinataire : "antonio@antonio.com",
+         msg_type : 1,
+         message : 'Salut cava?',
+         _id: 2
+      }, {
+        expediteur : "antonio@antonio.com",
+        destinataire : "htsa@htsa.com",
+        msg_type : 1,
+        message : 'Cava bien ..... !',
+        _id: 3
+     }
+    ])
+    } )
+    .then(() => console.log('finished populating message things'))
+    
+    .catch(err => console.log('error populating message things', err));
 
     Game.destroy({where:{}})
     .then(() =>{
@@ -48,6 +73,9 @@ export default function seedDatabaseIfNeeded() {
       }
     ])
     } )
+    .then(() => console.log('finished populating things'))
+    
+    .catch(err => console.log('error populating things', err));
 
     Concept.destroy({ where: {} })
 
@@ -149,7 +177,7 @@ export default function seedDatabaseIfNeeded() {
 
         avatar: 'mohamed.jpg',
 
-        email: "mhamed@mohamed.com",
+        email: "mohamed@mohamed.com",
 
         password: "mohamed",
 

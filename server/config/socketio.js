@@ -20,6 +20,7 @@ function onConnect(socket) {
   require('../api/game/game.socket').register(socket);
   require('../api/choice/choice.socket').register(socket);
   require('../api/concept/concept.socket').register(socket);
+  require('../api/message/message.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
   require('../api/question/question.socket').register(socket);
 }

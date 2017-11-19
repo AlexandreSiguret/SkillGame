@@ -10,8 +10,12 @@ export class AffrontementController {
   userChoiced = Function;
   affrontStatus = Function;
   listUsers = [];
+  listMessages = [];
   userChoisi = [];
-  currentUser = []
+  currentUser = [];
+  chat_message = '';
+  expediteur = '';
+  destinataire = '';
 
   /*@ngInject*/
   constructor($http, $scope, socket, Auth) {
@@ -27,6 +31,7 @@ export class AffrontementController {
  
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
+      socket.unsyncUpdates('message');
     });
   } // end constructor
 
@@ -36,6 +41,13 @@ export class AffrontementController {
       this.listUsers = response.data;
       this.socket.syncUpdates('user', this.listUsers);
     });
+
+    this.$http.get('/api/messages')
+    .then(response => {
+      this.listMessages = response.data;
+      this.socket.syncUpdates('message', this.listMessages);
+    });
+
   }
 
   choix_user(user) {
@@ -80,7 +92,87 @@ export class AffrontementController {
 
   }
 
-}
+  addChatElement(){
+    document.getElementById('affront_chat').style.visibility='visible';
+  }
+  
+
+  refreshChats(){
+    var string='';
+    this.$http.get('/api/messages')
+    .then(response => {
+      this.listMessages = response.data;
+      this.socket.syncUpdates('message', this.listMessages);
+    });
+    
+    for(var mess in this.ListMessages) {
+      console.log(mess.message);
+    string += '<p>' + mess.expediteur+' : '+mess.message + '</p>';
+    } 
+    console.log(string);
+    var newEle = angular.element(string);
+    var target = document.getElementById('affront-chat');
+    angular.element(target).append(newEle);
+    
+  }  // end refreshChats
+
+  doSubmit(){
+    //console.log(k);
+     //if(k == 13){
+     // console.log("mensaje enviado");
+    // }
+     console.log("mensaje enviado");
+  }  // end doSubmit
+  
+
+  /*
+  * msg_type = 1 :  menssage d'utilisateur
+  * msg_type = 2 :  invitation a jouer
+  * msg_type = 3 :  invitation accepte
+  * msg_type = 4 :  invitation refuse
+  */
+  submitMessage(t = 1) {
+    console.log("parametro enviado: "+t);
+    var myMessage = '';
+    if(t==1)       myMessage = this.chat_message;
+    else if(t==2)  myMessage = 'Invitation envoye';
+    else if(t==3)  myMessage = 'Invitation accepte';
+    else if(t==4)  myMessage = 'Invitation refuse';
+
+    if (myMessage != "" ) {
+      
+      this.$http.post("/api/messages", {
+        expediteur: this.getCurrentUser().email,
+        destinataire: this.userChoisi.email,
+        msg_type: t,
+        message: myMessage
+      })
+      .then(response => {
+        this.idNewMessage = response.data._id;
+        console.log("message created: "+this.idNewMessage);
+      })
+      console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message+' '+t);
+      document.getElementById('input_aff_chat').value='';
+      
+      document.getElementById('msgInfo').innerHTML = myMessage;
+      setTimeout(function(){
+        document.getElementById("msgInfo").innerHTML = "";
+      }, 6000);
+      myMessage = '';
+      this.chat_message = '';
+      
+    }
+    else {
+      this.logMessage="on ne peut pas envoyer un message vide"
+    }
+    
+
+  } // end submit message
+
+
+}   // end class
+
+
 
 
 export default angular.module('skillGameApp.affrontement', [uiRouter])
