@@ -63,6 +63,7 @@ h1 {
   -ms-user-select: none;
   user-select: none;
   border: 1px solid transparent;
+  max-width : 700px; 
 }
 #question label:hover {
   background: #4a8c9f;
@@ -118,6 +119,7 @@ h1 {
   -webkit-box-shadow: inset 0 0 1px #000000;
   box-shadow:         inset 0 0 1px #000000;
   min-height: 0px;
+  max-width : 500px;
   text-align: center;
 }
 
