@@ -13,6 +13,7 @@ export class AffrontementController {
   listMessages = [];
   listGames = [];
   userChoisi = [];
+  conceptChoisi = [];
   currentUser = [];
   chat_message = '';
   expediteur = '';
@@ -57,22 +58,15 @@ export class AffrontementController {
       this.socket.syncUpdates('message', this.listMessages);
     });
 
-    this.$http.get('/api/games')
-    .then(response => {
-      this.listGames = response.data;
-      this.socket.syncUpdates('game', this.listGames);
-    });
   }
 
   choix_concept(c) {
     this.conceptChoisi = c;
-
     this.jChoisi = true;
   }
 
   choix_user(user) {
     this.userChoisi = user;
-
     this.jChoisi = true;
   }
 
@@ -116,8 +110,6 @@ export class AffrontementController {
   scrollElement(){
     elem = document.getElementById('affront_chat');
     if((elem.scrolHeight - elem.scrollTop) < 110){
-      
-
     }
   }
 
@@ -164,7 +156,7 @@ export class AffrontementController {
       })
       .then(response => {
         this.idNewMessage = response.data._id;
-      })
+      });
       //console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message+' '+t);
       document.getElementById('input_aff_chat').value='';
       document.getElementById('msgInfo').innerHTML = myMessage;
@@ -181,6 +173,22 @@ export class AffrontementController {
     
 
   } // end submit message
+
+
+  /*********  Submit Game  ************ */
+  submitGame() {
+       
+      this.$http.post("/api/games", {
+        user1: this.getCurrentUser()._id,
+        user2: this.userChoisi._id,
+        concept: this.conceptChoisi.name,
+      })
+      .then(response => {
+        this.idNewMessage = response.data._id;
+      });
+      console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
+      
+  } // end submit Game
 
 
 }   // end class

@@ -70,7 +70,7 @@
                   <li><button ng-click="$ctrl.submitMessage(2)" uib-tooltip="{{prop.id}}">Inviter au jeu</button></li>   -->
                   <li>
                     <select [(ngModel)]="selectedValue">
-                    <option ng-repeat="c in $ctrl.listConcepts" value="c">{{c.name}}</option>
+                    <option ng-repeat="c in $ctrl.listConcepts" ng-click = "$ctrl.choix_concept(c)" >{{c.name}}</option>
                     </select>
                   </li>
                   <li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>
@@ -146,15 +146,15 @@
           </div>
       </div>
       <div style="min-height:250px; text-align: center;">    
-        <h1>Placer ici ... le Titre</h1>           
+        <h1>Placer ici le Titre: {{ $ctrl.conceptChoisi.name }}  ?</h1>           
       </div>  
     </div> <!--end hear_affront -->
 
     <div id="contain_affront" >
       <div style="min-height:150px;">
-        <h1>Placer ici ... le code du jeu</h1>   
+        <h1>Placer ici le code: {{ $ctrl.getCurrentUser().name }} vs {{ $ctrl.userChoisi.name }} in : {{ $ctrl.conceptChoisi.name }} </h1>   
       </div>
-        
+      
       <div id="nav_affront" class="nav-affront"> 
         <ul>
           <li><button ng-click="" >Jou</button></li>
