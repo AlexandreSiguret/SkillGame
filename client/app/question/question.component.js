@@ -3,13 +3,14 @@ import uiRouter from 'angular-ui-router';
 import routing from './question.routes';
 
 export class QuestionController {
+  $scope;
   $http;
   socket;
   awesomeQuestion = [];
   blabla = "génial";
   newThing = '';
   stopped;
-  counter = 100;
+  num = 0;
 
   link:ng.IDirectiveLinkFn = (scope:ng.IScope, element:ng.IAugmentedJQuery, attr:ng.IAttributes) => {
       this.$timeout(function () {
@@ -23,6 +24,7 @@ export class QuestionController {
   
   /*@ngInject*/
   constructor($http, $scope, socket, $timeout) {
+    this.$scope=$scope;
     this.$http = $http;
     this.socket = socket;
     this.fun = "c est marrant ";
@@ -30,7 +32,9 @@ export class QuestionController {
     this.all_answers = [];
     this.answered = [0,0,0,0,0];
     this.resultats = 0;
-    this.num = 0;
+    $scope.counter = 30;
+    $scope.stopped = false;
+    var vm = this;
 
     this.all_questions = [{
   question: "Question 1 ?",
@@ -104,18 +108,37 @@ export class QuestionController {
       socket.unsyncUpdates('question');
     });
 
-    $scope.counter = 120;
     $scope.onTimeout = function(){
-        $scope.counter--;
+      
+      if($scope.counter == 0) {
+        $scope.counter = 31;
+        $scope.stopped=false;
+        vm.num++;
+      }
+      
+      if($scope.stopped != true)
+          {$scope.counter--;}
+
         $scope.minutes = Math.floor((($scope.counter / 60)));
         $scope.seconds = Math.floor($scope.counter - ($scope.minutes * 60));
         mytimeout = $timeout($scope.onTimeout,1000);
     }
     var mytimeout = $timeout($scope.onTimeout,1000);
 
-    $scope.stop = function(){
-        $timeout.cancel(mytimeout);
+    $scope.stopTimeout = function() {
+      $scope.stopped = true;
+      $timeout.cancel(mytimeout);
     }
+
+    $scope.new_next = function() {
+      this.num++;
+    }
+
+    $scope.restatTimeout = function() {
+      $scope.stopped = false;
+      mytimeout = $timeout($scope.onTimeout, 1000);
+    }
+
   }
   
 // modif
@@ -132,7 +155,9 @@ $onInit() {
 
 
     new_next(){
-      this.num++
+      this.num++;
+      this.$scope.counter = 6;
+      this.$scope.stopped=false;
     }
 
     Check_next() {
@@ -161,6 +186,8 @@ $onInit() {
       var myEl = angular.element(document.querySelector('#prev-question-button'));
       myEl.removeAttr('disabled');
     }
+
+    this.$scope.stopped=false;
    }
 
    Check_prev() {
@@ -256,23 +283,16 @@ $onInit() {
       myEl.attr('disabled',"");
       } 
     }
+    var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.removeAttr('disabled');
+
+      this.$scope.stopped=true;
   }
 
 //ng-if="$ctrl.answered[$ctrl.i] == 1" ng-init="$ctrl.submit()"
   submit(){
     alert('__'+this.answered[this.i]);
   }
-
-  countdown() {
-        this.stopped = this.$timeout;
-        //this.counter--;   
-        //this.countdown();   
-      //}, 1000);
-  };
-        
-   stop(){
-       this.$timeout.cancel(this.stopped);
-    } 
 
   submit_()
   {
