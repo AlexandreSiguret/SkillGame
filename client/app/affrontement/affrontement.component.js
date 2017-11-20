@@ -16,17 +16,15 @@ export class AffrontementController {
   conceptChoisi = [];
   currentUser = [];
   chat_message = '';
-  expediteur = '';
-  destinataire = '';
 
   /*@ngInject*/
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
     this.socket = socket;
     this.jChoice = true;
-    this.jeuChoice = false;
     this.jChoisi = false;
     this.jAffront = false;
+    this.cChoisi = false;
 
 
     this.getCurrentUser = Auth.getCurrentUserSync;
@@ -34,7 +32,6 @@ export class AffrontementController {
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
       socket.unsyncUpdates('message');
-      socket.unsyncUpdates('game');
     });
   } // end constructor
 
@@ -62,27 +59,23 @@ export class AffrontementController {
 
   choix_concept(c) {
     this.conceptChoisi = c;
+    this.clearAll();
     this.jChoisi = true;
   }
 
   choix_user(user) {
     this.userChoisi = user;
+    this.clearAll();
     this.jChoisi = true;
   }
 
   affStatus(a){
-    this.jChoice = false;
-    this.jeuChoice = false;
-    this.jChoisi = false;    
-    this.jAffront = false;
 
+    this.clearAll();
     switch(a){
       case 'jChoice':
         this.jChoice = true;
       break;
- //     case 'jeuChoice':
- //     this.jeuChoice = true;
- //     break;
       case 'jChoisi':
         this.jChoisi = true;
       break;
@@ -90,9 +83,6 @@ export class AffrontementController {
         this.jAffront = true;
       break;
       case 'invitEnvoye':
-        this.jChoisi = true;
-      break;
-      case 'message':
         this.jChoisi = true;
       break;
       case 'ferme':
@@ -189,6 +179,17 @@ export class AffrontementController {
       console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
       
   } // end submit Game
+
+
+  clearAll(){
+    
+    this.chat_message = '';
+    this.jChoice = false;
+    this.jChoisi = false;
+    this.cChoisi = false
+    this.jAffront = false;
+
+  }
 
 
 }   // end class
