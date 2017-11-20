@@ -155,12 +155,13 @@ export class QuestionController {
              myEl.attr('disabled',"");
 
              this.num++;
-             this.$scope.counter = 31;
+             this.$scope.counter = 30;
              this.$scope.stopped=false;
 
            }
 
            report(){
+            alert('Question Reported !');
             this.$http.get("/api/questions/"+this.awesomeQuestion[this.num]._id).then(response =>{
               this.$http.put("/api/questions/"+this.awesomeQuestion[this.num]._id,{ 
                 _id : this.awesomeQuestion[this.num]._id,
