@@ -43,11 +43,13 @@ footer {
   margin: 0px 0px 0px 0px;
   border: 1px solid #999999;
 }
-
 .navbar-text {
   margin-left: 15px;
+  color: blue;
 }
-
+.navbar-default .navbar-nav > li > a {
+    color: #fff;
+}
 main {
   margin: 0px 0px 0px 0px;
 }
