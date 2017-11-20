@@ -36,7 +36,7 @@ export class AffrontementController {
   } // end constructor
 
   $onInit() {
-    this.$http.get('/api/users')
+    this.$http.get('/api/users/notme')
     .then(response => {
       this.listUsers = response.data;
       this.socket.syncUpdates('user', this.listUsers);
