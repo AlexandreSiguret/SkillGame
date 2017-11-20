@@ -11,6 +11,7 @@ export class AffrontementController {
   affrontStatus = Function;
   listUsers = [];
   listMessages = [];
+  listGames = [];
   userChoisi = [];
   currentUser = [];
   chat_message = '';
@@ -32,6 +33,7 @@ export class AffrontementController {
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
       socket.unsyncUpdates('message');
+      socket.unsyncUpdates('game');
     });
   } // end constructor
 
@@ -42,23 +44,39 @@ export class AffrontementController {
       this.socket.syncUpdates('user', this.listUsers);
     });
 
+    this.$http.get('/api/concepts')
+    .then(response => {
+      this.listConcepts = response.data;
+      console.log(response.data)
+
+    });
+
     this.$http.get('/api/messages')
     .then(response => {
       this.listMessages = response.data;
       this.socket.syncUpdates('message', this.listMessages);
     });
 
+    this.$http.get('/api/games')
+    .then(response => {
+      this.listGames = response.data;
+      this.socket.syncUpdates('game', this.listGames);
+    });
+  }
+
+  choix_concept(c) {
+    this.conceptChoisi = c;
+
+    this.jChoisi = true;
   }
 
   choix_user(user) {
     this.userChoisi = user;
-    this.jChoice = false;
+
     this.jChoisi = true;
-    console.log(this.jChoice,this.jChoisi);
   }
 
   affStatus(a){
-    console.log("ingresa parametro: "+a);
     this.jChoice = false;
     this.jeuChoice = false;
     this.jChoisi = false;    
@@ -68,12 +86,11 @@ export class AffrontementController {
       case 'jChoice':
         this.jChoice = true;
       break;
-      case 'jeuChoice':
-      this.jeuChoice = true;
-      break;
+ //     case 'jeuChoice':
+ //     this.jeuChoice = true;
+ //     break;
       case 'jChoisi':
         this.jChoisi = true;
-        console.log(this.jChoisi);
       break;
       case 'invitAccepte':
         this.jAffront = true;
@@ -90,12 +107,19 @@ export class AffrontementController {
 
     }; //end switch
 
-  }
+  }  //end affStatus
 
   addChatElement(){
     document.getElementById('affront_chat').style.visibility='visible';
   }
   
+  scrollElement(){
+    elem = document.getElementById('affront_chat');
+    if((elem.scrolHeight - elem.scrollTop) < 110){
+      
+
+    }
+  }
 
   refreshChats(){
     var string='';
@@ -106,25 +130,16 @@ export class AffrontementController {
     });
     
     for(var mess in this.ListMessages) {
-      console.log(mess.message);
-    string += '<p>' + mess.expediteur+' : '+mess.message + '</p>';
+      
+        string += '<p>' + mess.expediteur+' : '+mess.message + '</p>';
     } 
-    console.log(string);
     var newEle = angular.element(string);
     var target = document.getElementById('affront-chat');
     angular.element(target).append(newEle);
     
   }  // end refreshChats
 
-  doSubmit(){
-    //console.log(k);
-     //if(k == 13){
-     // console.log("mensaje enviado");
-    // }
-     console.log("mensaje enviado");
-  }  // end doSubmit
   
-
   /*
   * msg_type = 1 :  menssage d'utilisateur
   * msg_type = 2 :  invitation a jouer
@@ -132,7 +147,7 @@ export class AffrontementController {
   * msg_type = 4 :  invitation refuse
   */
   submitMessage(t = 1) {
-    console.log("parametro enviado: "+t);
+    
     var myMessage = '';
     if(t==1)       myMessage = this.chat_message;
     else if(t==2)  myMessage = 'Invitation envoye';
@@ -149,11 +164,9 @@ export class AffrontementController {
       })
       .then(response => {
         this.idNewMessage = response.data._id;
-        console.log("message created: "+this.idNewMessage);
       })
-      console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message+' '+t);
+      //console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message+' '+t);
       document.getElementById('input_aff_chat').value='';
-      
       document.getElementById('msgInfo').innerHTML = myMessage;
       setTimeout(function(){
         document.getElementById("msgInfo").innerHTML = "";

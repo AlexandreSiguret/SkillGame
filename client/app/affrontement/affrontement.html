@@ -1,5 +1,6 @@
 <div id="sbleft_affront" class="sbleft">
-  <div ng-show="$ctrl.jChoice" class="container" style="width:180px">
+  <!-- <div ng-show="$ctrl.jChoice" class="container" style="width:180px">  -->
+  <div class="container" style="width:180px">
       <div class="row">
         <div class="col-lg-12">
           <h1 class="page-header">Jouers :</h1>
@@ -64,9 +65,15 @@
             </div>
             <div id="nav_jouerChoice" class="nav-affront">
               <ul> 
-                  <li><button ng-click="$ctrl.affStatus('invitAccepte');$ctrl.submitMessage( 3 )" >Acepter invitation</button></li>
+     <!--             <li><button ng-click="$ctrl.affStatus('invitAccepte');$ctrl.submitMessage( 3 )" >Acepter invitation</button></li>
                   <li><button ng-click="$ctrl.submitMessage(4)" >Refuser invitation</button></li>
-                  <li><button ng-click="$ctrl.submitMessage(2)" uib-tooltip="{{prop.id}}">Inviter au jeu</button></li>
+                  <li><button ng-click="$ctrl.submitMessage(2)" uib-tooltip="{{prop.id}}">Inviter au jeu</button></li>   -->
+                  <li>
+                    <select [(ngModel)]="selectedValue">
+                    <option ng-repeat="c in $ctrl.listConcepts" value="c">{{c.name}}</option>
+                    </select>
+                  </li>
+                  <li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>
                   <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
                   <!-- <li><button ng-click = "" >Message </button></li> -->
                   
@@ -87,13 +94,13 @@
           <div id="table-jouerleft" >
               <table class="jouer_table" style="float:left">
                 <tr>
-                  <td>Name:</td>
+                  <td></td>
                   <td>{{ $ctrl.getCurrentUser().name }}</td>
                 </tr>
-                <tr>
+         <!--       <tr>
                   <td>eMail:</td>
                   <td>{{ $ctrl.getCurrentUser().email }}</td>
-                </tr>
+                </tr>  -->
                 <tr>
                   <td>Ranking:</td>
                   <td></td>
@@ -116,13 +123,13 @@
           <div id="table-jouerright">
             <table class="jouer_table" style="float:right">
               <tr>
-                <td>Name:</td>
+                <td></td>
                 <td>{{ $ctrl.userChoisi.name }}</td>
               </tr>
               <tr>
-                <td>Mail:</td>
+        <!--        <td>Mail:</td>
                 <td>{{ $ctrl.userChoisi.email }}</td>
-              </tr>
+              </tr>  -->
               <tr>
                 <td>Ranking:</td>
                 <td></td>
@@ -161,7 +168,7 @@
               onfocus="if(this.value=='Chat')this.value='';" 
               onblur="this.value='Chat'"
                />
-            <div id="affront_chat" >
+            <div id="affront_chat" #scrollMe [scrollTop]="scrollMe.scrollHeight" >
                 <div id="messag" ng-repeat="mess in $ctrl.listMessages">
                   <p style="color:#999999;">{{mess.expediteur}}: </p>
                   <p style="margin-left:4px;">{{mess.message}}</p>

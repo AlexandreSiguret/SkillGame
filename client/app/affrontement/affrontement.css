@@ -38,11 +38,12 @@
     height:110px;
     visibility: hidden;
     border:1px solid #999999;
-    overflow:auto;
+    overflow: scroll;
+    overflow-x: hidden;
     background-color:rgb(244, 247, 248);
   }
   #messag > p { text-align: left; font: 9px Verdana; margin:0px; padding:0px;}
-  #msgInfo { float:left;text-align: left; font: 9px Verdana;color: #6e0202; margin:0px; padding:0px;}
+  #msgInfo { text-align: left; font: 9px Verdana;color: #6e0202; margin:0px;}
 
   #sbleft_affront img {margin-right: 3px; width:20px; height:22px;}  
   #main_affront img {margin: 10px 10px; width:75px; height:80px; padding:5px 5px; border: solid 1px  #546489;}
