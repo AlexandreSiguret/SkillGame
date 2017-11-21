@@ -38,13 +38,10 @@
     <div id="">
             <div id="jouer-image" >
               <img src="assets/images/{{$ctrl.userChoisi.avatar}}" style="width:190px; height:200px" alt="{{$ctrl.userChoisi.name}}"> 
+              <p>{{$ctrl.userChoisi.name}}</p>
             </div>
             <div id="jouer-tableau">
               <table border=0 width="150">
-                <tr>
-                  <td></td>
-                  <td>{{$ctrl.userChoisi.name}}</td>
-                </tr>
     <!--            <tr>
                  <td>eMail:</td>
                   <td>{{$ctrl.userChoisi.email}}</td>
@@ -90,17 +87,10 @@
       <div id="jouer-left">
           <div id="img-jouerleft">
               <img src="assets/images/{{ $ctrl.getCurrentUser().avatar }}" alt="{{ $ctrl.getCurrentUser().name }}">
+              <p>{{$ctrl.getCurrentUser().name}}</p>
           </div>
           <div id="table-jouerleft" >
-              <table class="jouer_table" style="float:left">
-                <tr>
-                  <td></td>
-                  <td>{{ $ctrl.getCurrentUser().name }}</td>
-                </tr>
-         <!--       <tr>
-                  <td>eMail:</td>
-                  <td>{{ $ctrl.getCurrentUser().email }}</td>
-                </tr>  -->
+              <table class="jouer_table">
                 <tr>
                   <td>Ranking:</td>
                   <td></td>
@@ -119,17 +109,10 @@
       <div id="jouer-right">
           <div id="img-jouerright">
               <img src="assets/images/{{$ctrl.userChoisi.avatar}}" alt="{{$ctrl.userChoisi.name}}">
+              <p>{{$ctrl.userChoisi.name}}</p>
           </div >
           <div id="table-jouerright">
-            <table class="jouer_table" style="float:right">
-              <tr>
-                <td></td>
-                <td>{{ $ctrl.userChoisi.name }}</td>
-              </tr>
-              <tr>
-        <!--        <td>Mail:</td>
-                <td>{{ $ctrl.userChoisi.email }}</td>
-              </tr>  -->
+            <table class="jouer_table" >
               <tr>
                 <td>Ranking:</td>
                 <td></td>
@@ -146,7 +129,7 @@
           </div>
       </div>
       <div style="min-height:250px; text-align: center;">    
-        <h1> {{ $ctrl.conceptChoisi.name }}  ?</h1>           
+        <h1>{{ $ctrl.conceptChoisi.name }}</h1>           
       </div>  
     </div> <!--end hear_affront -->
 
