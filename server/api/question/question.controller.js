@@ -15,6 +15,7 @@
 import jsonpatch from 'fast-json-patch';
 import {Question} from '../../sqldb';
 import Sequelize from 'sequelize';
+import db from "../../sqldb"
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -109,6 +110,7 @@ export function myquestion(req,res){
   var userId = req.user._id;
 
   return Question.findAll({
+    include : db.Concept,
     where :{
       owner : userId
     }

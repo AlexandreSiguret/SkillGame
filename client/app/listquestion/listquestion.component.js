@@ -9,6 +9,7 @@ export class ListquestionController {
   awesomeConcept = [];
   blabla = "génial";
   newThing = '';
+  questionTri = {};
   
 
   
@@ -17,6 +18,7 @@ export class ListquestionController {
     this.$http = $http;
     this.socket = socket;
     this.controleConcept = false;
+    
     
     
 
@@ -29,8 +31,24 @@ export class ListquestionController {
     this.$http.get('/api/questions/myquestion')
       .then(response => {
         this.awesomeListQuestion = response.data;
-        console.log(response.data)
-        //console.log(this.controleQuestion)
+        
+        console.log("coucou toi ")
+        console.log(this.awesomeListQuestion[0]["Concept"]["name"])
+        for(var i= 0; i< this.awesomeListQuestion.length;i++){
+
+         if(this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]] == undefined){
+            this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]] = [];
+            this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]].push(this.awesomeListQuestion[i]["question"])
+          }
+        
+          else{
+            this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]].push(this.awesomeListQuestion[i]["question"])
+          }
+
+
+        }
+
+        console.log(this.questionTri)
       });
 
     this.$http.get('/api/concepts')

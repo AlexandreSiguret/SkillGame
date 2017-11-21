@@ -23,5 +23,23 @@ db.Question = db.sequelize.import("../api/question/question.model")
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
 
+db.Concept.hasMany(db.Question)
+db.Question.belongsTo(db.Concept); 
+
+db.Question.hasMany(db.Choice)
+db.Choice.belongsTo(db.Question)
+
+db.Game.belongsTo(db.Concept)
+db.Concept.hasMany(db.Game)
+
+db.Game.belongsTo(db.User,{ as :"User1bis"}),
+db.Game.belongsTo(db.User,{ as :"User2bis"})
+
+//db.Game.belongsTo(db.User,{as : "userdeux"}),
+//db.User.hasMany(db.Game,{as : "seconduser"})
+//db.Game.belongsTo(db.User, {as: 'user1'});
+//db.Game.belongsTo(db.User, {as: 'user2Id'});
+
+//db.User.hasMany(db.Game),
 
 module.exports = db;

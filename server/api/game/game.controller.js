@@ -16,6 +16,7 @@ import config from '../../config/environment';
 import Sequelize from 'sequelize';
 import { Question } from '../../sqldb';
 import { Answer } from "../../sqldb";
+import db from "../../sqldb"
 
 
 
@@ -74,7 +75,19 @@ function handleError(res, statusCode) {
 
 // Gets a list of Games
 export function index(req, res) {
-  return Game.findAll()
+  return Game.findAll({
+  // include : [db.User]
+  include: [{
+    model: db.User,
+    as: 'User2bis',
+    attributes : ["name"]
+},
+{
+  model: db.User,
+  as: 'User1bis',
+  attributes :  ["name"]
+}]
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
