@@ -87,26 +87,26 @@ export class QuestionsController {
         question: this.question,
         nbAppearance: 0,
         nbContestation: 0,
-        concept: this.currentConcept._id,
+        ConceptId: this.currentConcept._id,
         goodAnswer: this.goodAnswer,
       })
       .then(response => {
         this.idNewQuestion = response.data._id
         console.log(this.idNewQuestion)
         this.$http.post("/api/choices", {
-          question: this.idNewQuestion,
+          QuestionId: this.idNewQuestion,
           statement: this.WrongAnswer1
         })
         this.$http.post("/api/choices", {
-          question: this.idNewQuestion,
+          QuestionId: this.idNewQuestion,
           statement: this.WrongAnswer3
         })
         this.$http.post("api/choices", {
-          question: this.idNewQuestion,
+          QuestionId: this.idNewQuestion,
           statement: this.WrongAnswer2
         })
         this.$http.post("api/choices", {
-          question: this.idNewQuestion,
+          QuestionId: this.idNewQuestion,
           statement: this.goodAnswer
         }
         
