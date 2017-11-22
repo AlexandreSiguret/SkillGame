@@ -16,6 +16,7 @@ import config from '../../config/environment';
 import Sequelize from 'sequelize';
 import { Question } from '../../sqldb';
 import { Answer } from "../../sqldb";
+import db from "../../sqldb"
 
 
 
@@ -74,7 +75,20 @@ function handleError(res, statusCode) {
 
 // Gets a list of Games
 export function index(req, res) {
-  return Game.findAll()
+  return Game.findAll({
+  // include : [db.User]
+  include: [{
+    model: db.User,
+    as: 'User2',
+    attributes : ["name"]
+},
+{
+  model: db.User,
+  as: 'User1',
+  attributes :  ["name"]
+}],
+attributes : { exclude : ["User1Id","User2Id"]}
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -83,9 +97,9 @@ export function freeGame(req, res) {
 
   return Game.findAll({
     where: {
-      user1: { $ne: req.user._id },
-      concept: req.params.id,
-      user2: null
+      User1Id: { $ne: req.user._id },
+      ConceptId: req.params.id,
+      User2Id: null
     },
     order: Sequelize.fn('RANDOM')
   }).then(handleEntityNotFound(res))
@@ -127,13 +141,13 @@ function allcreation(tab, idquizz, iduser) {
   for (var i = 0; i < taille; i++) {
 
     var creation1 = {
-      question: tab[i].dataValues._id,
-      user: iduser,
-      quizz: idquizz
+      QuestionId: tab[i].dataValues._id,
+      UserId: iduser,
+      GameId: idquizz
     }
     var creation2 = {
-      question: tab[i].dataValues._id,
-      quizz: idquizz
+      QuestionId: tab[i].dataValues._id,
+      GameId: idquizz
     }
 
     Answer.create(creation1)
@@ -144,7 +158,7 @@ function allcreation(tab, idquizz, iduser) {
 }
 
 export function create(req, res) {
-  req.body.user1 = req.user._id
+  req.body.User1Id = req.user._id
 
 
   var new_game = {
@@ -207,17 +221,18 @@ function regularisation(idquizz,idplayer) {
   console.log(idquizz)
   return Answer.findAll({
     where: {
-      quizz: idquizz,
-      user: null
+      GameId: idquizz,
+      UserId: null
     }
   }).then(response => ajoutmultiple(response,idplayer))
 }
 
 function ajoutmultiple(tab,idplayer){
+  console.log("coucou ici ")
   var taille = tab.length;
   for (var i = 0; i < taille; i++){
     var bla = {
-      user : idplayer
+      UserId : idplayer
     }
     console.log(tab[i].dataValues._id)
     Answer.update(bla,{
@@ -230,7 +245,7 @@ function ajoutmultiple(tab,idplayer){
 
 // Upserts the given Game in the DB at the specified ID
 export function upsert(req, res) {
-  req.body.user2 = req.user._id
+  req.body.User2Id = req.user._id
   /*if(req.body._id) {
     console.log("on passe ici")
     Reflect.deleteProperty(req.body, '_id');

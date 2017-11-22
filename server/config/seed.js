@@ -26,8 +26,12 @@ export default function seedDatabaseIfNeeded() {
     let Question = sqldb.Question;
     let Choice = sqldb.Choice;
     let Game = sqldb.Game;
+    let Answer = sqldb.Answer
     let Message = sqldb.Message;
+    let Badge = sqldb.Badge
 
+    Answer.destroy({where : {}})
+    .then(console.log("réponse détruire"))
     Message.destroy({where:{}})
     .then(() =>{
       let message = Message.bulkCreate([{
@@ -56,26 +60,7 @@ export default function seedDatabaseIfNeeded() {
     
     .catch(err => console.log('error populating message things', err));
 
-    Game.destroy({where:{}})
-    .then(() =>{
-      let game = Game.bulkCreate([{
 
-        user1 : 7,
-        concept : 1,
-        ended : false
-
-
-      }, {
-         user1 : 7,
-         user2 : 8,
-         concept : 1,
-         ended : false
-      }
-    ])
-    } )
-    .then(() => console.log('finished populating things'))
-    
-    .catch(err => console.log('error populating things', err));
 
     Concept.destroy({ where: {} })
 
@@ -271,15 +256,15 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 1,
 
-          owner: 3,
+          owner: 7,
 
-          question: "lequel de ces noms n'est pas celui d'un OS Linux ? ",
+          question : "lequel de ces noms n'est pas celui d'un OS Linux ? ",
 
           nbAppearance: 10,
 
           nbContestation: 2,
 
-          concept: 1,
+          ConceptId: 1,
 
           goodAnswer: "Captain",
 
@@ -291,13 +276,13 @@ export default function seedDatabaseIfNeeded() {
 
           owner: 7,
 
-          question: "Quelle est la premiere version de windows",
+          question : "Quelle est la premiere version de windows",
 
           nbAppearance: 10,
 
           nbContestation: 3,
 
-          concept: 1,
+          ConceptId: 1,
 
           goodAnswer: "Windows 1.0",
 
@@ -309,13 +294,13 @@ export default function seedDatabaseIfNeeded() {
 
           owner: 8,
 
-          question: "Date d'invention de la machine de Turring ?",
+          question : "Date d'invention de la machine de Turring ?",
 
           nbAppearance: 15,
 
           nbContestation: 3,
 
-          concept: 1,
+          ConceptId: 1,
 
           goodAnswer: "1936",
 
@@ -327,13 +312,13 @@ export default function seedDatabaseIfNeeded() {
 
           owner: 3,
 
-          question: "Qui est l'auteur du duo des chats ?",
+          question : "Qui est l'auteur du duo des chats ?",
 
           nbAppearance: 50,
 
           nbContestation: 2,
 
-          concept: 4,
+          ConceptId: 4,
 
           goodAnswer: "Rossini",
 
@@ -345,13 +330,13 @@ export default function seedDatabaseIfNeeded() {
 
           owner: 6,
 
-          question: "Qui a dessine la statue de la liberte",
+          question : "Qui a dessine la statue de la liberte",
 
           nbAppearance: 25,
 
           nbContestation: 10,
 
-          concept: 4,
+          ConceptId: 4,
 
           goodAnswer: "Auguste Bartholdi",
 
@@ -363,13 +348,13 @@ export default function seedDatabaseIfNeeded() {
 
           owner: 7,
 
-          question: "Quel est l'instrument de Chopin",
+          question : "Quel est l'instrument de Chopin",
 
           nbAppearance: 50,
 
           nbContestation: 2,
 
-          concept: 4,
+          ConceptId: 4,
 
           goodAnswer: "piano",
 
@@ -381,13 +366,13 @@ export default function seedDatabaseIfNeeded() {
 
           owner: 8,
 
-          question: "Qui est le peintre de la Joconde",
+          question : "Qui est le peintre de la Joconde",
 
           nbAppearance: 55,
 
           nbContestation: 15,
 
-          concept: 4,
+          ConceptId: 4,
 
           goodAnswer: "Leonard de vinci",
 
@@ -419,7 +404,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 1,
 
-          question: 1,
+          QuestionId : 1,
 
           statement: "Fedora"
 
@@ -431,7 +416,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 2,
 
-          question: 1,
+          QuestionId : 1,
 
           statement: "Captain"
 
@@ -443,7 +428,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 3,
 
-          question: 1,
+          QuestionId : 1,
 
           statement: "Ubuntu"
 
@@ -455,7 +440,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 4,
 
-          question: 1,
+          QuestionId : 1,
 
           statement: "Debian"
 
@@ -467,7 +452,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 5,
 
-          question: 2,
+          QuestionId : 2,
 
           statement: "Windows 1.0"
 
@@ -479,7 +464,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 6,
 
-          question: 2,
+          QuestionId : 2,
 
           statement: "Windows 3"
 
@@ -491,7 +476,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 7,
 
-          question: 2,
+          QuestionId : 2,
 
           statement: "Windows"
 
@@ -503,7 +488,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 8,
 
-          question: 2,
+          QuestionId : 2,
 
           statement: "Windows xp"
 
@@ -515,7 +500,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 9,
 
-          question: 3,
+          QuestionId : 3,
 
           statement: "1936"
 
@@ -527,7 +512,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 10,
 
-          question: 3,
+          QuestionId : 3,
 
           statement: "1943"
 
@@ -539,14 +524,14 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 11,
 
-          question: 3,
+          QuestionId : 3,
 
           statement: "2011"
 
         },
         {
           _id: 12,
-          question : 3,
+          QuestionId : 3,
           statement : "2000"
         },
 
@@ -556,7 +541,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 13,
 
-          question: 3,
+          QuestionId : 3,
 
           statement: "Carl Orff"
 
@@ -568,7 +553,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 14,
 
-          question: 4,
+          QuestionId : 4,
 
           statement: "Mozart"
 
@@ -580,7 +565,7 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 15,
 
-          question: 4,
+          QuestionId : 4,
 
           statement: "Rossini"
 
@@ -592,70 +577,70 @@ export default function seedDatabaseIfNeeded() {
 
           _id: 16,
 
-          question: 4,
+          QuestionId : 4,
 
           statement: "Beethoven"
 
         },
         {
           _id : 17,
-          question:5,
+          QuestionId :5,
           statement :"Gustave Eiffel "
         }
         ,
         {
           _id:18,
-          question:5,
+          QuestionId :5,
           statement :"Auguste Bartholdi"
         },
         {
           _id:19,
-          question:5,
+          QuestionId :5,
           statement :"Le Corbusier"
         },
         {
           _id:20,
-          question:5,
+          QuestionId :5,
           statement :"Ted Mosby"
         },
         {
          _id:21,
-         question:6,
+         QuestionId :6,
          statement: "piano"
         },
         {
           _id:22,
-          question:6,
+          QuestionId :6,
           statement: "flûte"
          },
          {
           _id:23,
-          question:6,
+          QuestionId :6,
           statement: "triangle"
          },
          {
           _id:24,
-          question:6,
+          QuestionId :6,
           statement: " violoncelle"
          },
          {
           _id:25,
-          question:7,
+          QuestionId :7,
           statement:"Leonardo Dicaprio"
          },
          {
           _id:26,
-          question:7,
+          QuestionId :7,
           statement:"Leonard de vinci"
          },
          {
           _id:27,
-          question:7,
+          QuestionId :7,
           statement:"Leonardo la tortue ninja"
          },
          {
           _id:28,
-          question:7,
+          QuestionId :7,
           statement:"Leonard Cohen"
          },
                 ]);
@@ -664,6 +649,66 @@ export default function seedDatabaseIfNeeded() {
 
       .then(() => console.log('finished populating things'))
 
+      .catch(err => console.log('error populating things', err));
+
+      
+      Badge.destroy({ where: {} })
+      
+            .then(() => {
+      
+              let badge = Badge.bulkCreate([{
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert Computeur science',      
+                _id: 1
+      
+              }, {
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert iphoneX',      
+                _id: 2
+              }, {
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert Judo',      
+                _id: 3
+      
+              }, {
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert Art',      
+                _id: 4     
+      
+      
+              }]);
+      
+            })
+      
+            .then(() => console.log('finished populating badges'))
+      
+            .catch(err => console.log('error populating badges', err));
+
+
+      Game.destroy({where:{}})
+      .then(() =>{
+        let game = Game.bulkCreate([{
+  
+          User1Id : 7,
+          //User2bisId:1,
+          ConceptId : 1,
+          ended : false
+  
+  
+        }, {
+           User1Id : 7,
+           User2Id : 8,
+           ConceptId : 1,
+           ended : false
+        }
+      ])
+      } )
+      .then(() => console.log('finished populating things'))
+      
       .catch(err => console.log('error populating things', err));
 
   }

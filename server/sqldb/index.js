@@ -14,6 +14,7 @@ var db = {
 };
 
 // Insert models below
+db.Badge = db.sequelize.import('../api/badge/badge.model');
 db.Answer = db.sequelize.import('../api/answer/answer.model');
 db.Choice = db.sequelize.import('../api/choice/choice.model');
 db.Concept = db.sequelize.import('../api/concept/concept.model');
@@ -23,5 +24,27 @@ db.Question = db.sequelize.import("../api/question/question.model")
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
 
+db.Concept.hasMany(db.Question)
+db.Question.belongsTo(db.Concept); 
+
+db.Question.hasMany(db.Choice)
+db.Choice.belongsTo(db.Question)
+
+db.Game.belongsTo(db.Concept)
+db.Concept.hasMany(db.Game)
+
+db.Game.belongsTo(db.User,{ as :"User1"}),
+db.Game.belongsTo(db.User,{ as :"User2"})
+
+db.Answer.belongsTo(db.User)
+db.Answer.belongsTo(db.Game)
+db.Answer.belongsTo(db.Question)
+
+//db.Game.belongsTo(db.User,{as : "userdeux"}),
+//db.User.hasMany(db.Game,{as : "seconduser"})
+//db.Game.belongsTo(db.User, {as: 'user1'});
+//db.Game.belongsTo(db.User, {as: 'user2Id'});
+
+//db.User.hasMany(db.Game),
 
 module.exports = db;
