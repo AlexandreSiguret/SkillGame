@@ -27,8 +27,7 @@ export class ListquestionController {
   }
   
   $onInit() {
-<<<<<<< HEAD
-=======
+
     this.$http.get('/api/questions/myquestion')
       .then(response => {
         this.awesomeListQuestion = response.data;
@@ -49,7 +48,7 @@ export class ListquestionController {
 
         console.log(this.questionTri)
       });
->>>>>>> bf3e48c530c37875ed313f790dcf1c73c7f42ddc
+
 
     this.$http.get('/api/concepts')
     .then(response => {
@@ -57,28 +56,7 @@ export class ListquestionController {
       //console.log(response.data)
       
       
-      this.$http.get('/api/questions/myquestion')
-      .then(response => {
-       this.awesomeListquestion = response.data;
-       //console.log(response.data)
 
-      for (var i=0; i<this.awesomeListquestion.length; i++){
-           // var numConcept = this.awesomeListquestion[i].concept['concept']['name'];
-           var numConcept = this.awesomeListquestion[i].concept
-           
-          if( this.reponseGlobal[numConcept] == undefined){
-            this.reponseGlobal[numConcept] = [];
-            this.reponseGlobal[numConcept].push(this.awesomeListquestion[i].question);
-            
-           }else {
-            this.reponseGlobal[numConcept].push(this.awesomeListquestion[i].question);
-           }
-         
-      }  
-      console.log("coucou")
-      console.log(this.reponseGlobal)
-
-    })
 
   })
       
