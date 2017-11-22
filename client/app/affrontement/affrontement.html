@@ -1,5 +1,4 @@
 <div id="sbleft_affront" class="sbleft">
-  <!-- <div ng-show="$ctrl.jChoice" class="container" style="width:180px">  -->
   <div class="container" style="width:180px">
       <div class="row">
         <div class="col-lg-12">
@@ -42,17 +41,10 @@
             </div>
             <div id="jouer-tableau">
               <table border=0 width="150">
-
                 <tr>
                   <td>Name:</td>
                   <td>{{$ctrl.userChoisi.name}}</td>
                 </tr>
-
-    <!--            <tr>
-                 <td>eMail:</td>
-                  <td>{{$ctrl.userChoisi.email}}</td>
-                </tr>    -->
-
                 <tr>
                   <td>Ranking:</td>
                   <td></td>
@@ -69,12 +61,9 @@
             </div>
             <div id="nav_jouerChoice" class="nav-affront">
               <ul> 
-     <!--             <li><button ng-click="$ctrl.affStatus('invitAccepte');$ctrl.submitMessage( 3 )" >Acepter invitation</button></li>
-                  <li><button ng-click="$ctrl.submitMessage(4)" >Refuser invitation</button></li>
-                  <li><button ng-click="$ctrl.submitMessage(2)" uib-tooltip="{{prop.id}}">Inviter au jeu</button></li>   -->
                   <li>
-                    <select [(ngModel)]="selectedValue">
-                    <option ng-repeat="c in $ctrl.listConcepts" ng-click = "$ctrl.choix_concept(c)" >{{c.name}}</option>
+                    <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue)">
+                    <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                     </select>
                   </li>
                   <li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>
