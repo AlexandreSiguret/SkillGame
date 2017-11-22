@@ -9,7 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
-  app.use('/yes', require('./api/badge'));
+  app.use('/api/badges', require('./api/badge'));
   app.use('/api/answers', require('./api/answer')); 
   app.use('/api/choices', require('./api/choice'));
   app.use('/api/concepts', require('./api/concept'));
@@ -18,6 +18,7 @@ export default function(app) {
   app.use('/api/questions',require("./api/question"));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
+
   
 
 

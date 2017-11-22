@@ -28,6 +28,7 @@ export default function seedDatabaseIfNeeded() {
     let Game = sqldb.Game;
     let Answer = sqldb.Answer
     let Message = sqldb.Message;
+    let Badge = sqldb.Badge
 
     Answer.destroy({where : {}})
     .then(console.log("réponse détruire"))
