@@ -228,10 +228,11 @@ function regularisation(idquizz,idplayer) {
 }
 
 function ajoutmultiple(tab,idplayer){
+  console.log("coucou ici ")
   var taille = tab.length;
   for (var i = 0; i < taille; i++){
     var bla = {
-      user : idplayer
+      UserId : idplayer
     }
     console.log(tab[i].dataValues._id)
     Answer.update(bla,{
