@@ -32,8 +32,8 @@ db.Choice.belongsTo(db.Question)
 db.Game.belongsTo(db.Concept)
 db.Concept.hasMany(db.Game)
 
-db.Game.belongsTo(db.User,{ as :"User1bis"}),
-db.Game.belongsTo(db.User,{ as :"User2bis"})
+db.Game.belongsTo(db.User,{ as :"User1"}),
+db.Game.belongsTo(db.User,{ as :"User2"})
 
 //db.Game.belongsTo(db.User,{as : "userdeux"}),
 //db.User.hasMany(db.Game,{as : "seconduser"})

@@ -95,7 +95,7 @@ export function concept(req,res){
 export function random(req,res){
    
 return  Question.findAll({ 
-    order :         Sequelize.fn( 'RANDOM' ) ,    
+    order :Sequelize.fn( 'RANDOM' ) ,    
     limit : 1
   })     
     .then(handleEntityNotFound(res))

@@ -79,14 +79,15 @@ export function index(req, res) {
   // include : [db.User]
   include: [{
     model: db.User,
-    as: 'User2bis',
+    as: 'User2',
     attributes : ["name"]
 },
 {
   model: db.User,
-  as: 'User1bis',
+  as: 'User1',
   attributes :  ["name"]
-}]
+}],
+attributes : { exclude : ["User1Id","User2Id"]}
   })
     .then(respondWithResult(res))
     .catch(handleError(res));

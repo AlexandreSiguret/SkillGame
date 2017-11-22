@@ -32,8 +32,6 @@ export class ListquestionController {
       .then(response => {
         this.awesomeListQuestion = response.data;
         
-        console.log("coucou toi ")
-        console.log(this.awesomeListQuestion[0]["Concept"]["name"])
         for(var i= 0; i< this.awesomeListQuestion.length;i++){
 
          if(this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]] == undefined){

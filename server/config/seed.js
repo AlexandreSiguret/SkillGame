@@ -652,15 +652,15 @@ export default function seedDatabaseIfNeeded() {
       .then(() =>{
         let game = Game.bulkCreate([{
   
-          User1bisId : 7,
+          User1Id : 7,
           //User2bisId:1,
-         // ConceptId : 1,
+          ConceptId : 1,
           ended : false
   
   
         }, {
-           User1bisId : 7,
-           User2bisId : 8,
+           User1Id : 7,
+           User2Id : 8,
            ConceptId : 1,
            ended : false
         }
