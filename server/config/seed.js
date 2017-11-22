@@ -26,8 +26,11 @@ export default function seedDatabaseIfNeeded() {
     let Question = sqldb.Question;
     let Choice = sqldb.Choice;
     let Game = sqldb.Game;
+    let Answer = sqldb.Answer
     let Message = sqldb.Message;
 
+    Answer.destroy({where : {}})
+    .then(console.log("réponse détruire"))
     Message.destroy({where:{}})
     .then(() =>{
       let message = Message.bulkCreate([{
