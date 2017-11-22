@@ -61,6 +61,7 @@ export class AffrontementController {
     this.conceptChoisi = c;
     this.clearAll();
     this.jChoisi = true;
+    console.log(this.conceptChoisi)
   }
 
   choix_user(user) {
@@ -73,21 +74,11 @@ export class AffrontementController {
 
     this.clearAll();
     switch(a){
-      case 'jChoice':
-        this.jChoice = true;
-      break;
-      case 'jChoisi':
-        this.jChoisi = true;
-      break;
-      case 'invitAccepte':
-        this.jAffront = true;
-      break;
-      case 'invitEnvoye':
-        this.jChoisi = true;
-      break;
-      case 'ferme':
-        this.jChoice = true;
-      break;
+      case 'jChoice':     this.jChoice = true; break;
+      case 'jChoisi':     this.jChoisi = true; break;
+      case 'invitAccepte':this.jAffront= true; break;
+      case 'invitEnvoye': this.jChoisi = true; break;
+      case 'ferme':       this.jChoice = true; break;
 
     }; //end switch
 
@@ -167,11 +158,11 @@ export class AffrontementController {
 
   /*********  Submit Game  ************ */
   submitGame() {
-       
+
       this.$http.post("/api/games", {
-        user1: this.getCurrentUser()._id,
-        user2: this.userChoisi._id,
-        concept: this.conceptChoisi.name,
+       
+        User2Id: this.userChoisi._id,
+        ConceptId: this.conceptChoisi._id,
       })
       .then(response => {
         this.idNewMessage = response.data._id;

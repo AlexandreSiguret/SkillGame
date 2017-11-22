@@ -32,6 +32,7 @@ export class QuestionController {
     $scope.counter = 30;
     $scope.stopped = false;
     var vm = this;
+    this.errormessage = ""
 
     this.all_questions = [{
       question: "Question 1 ?",
@@ -147,7 +148,7 @@ export class QuestionController {
             }
 
             Check_next() {
-
+              this.errormessage = "";
              var myEl = angular.element(document.querySelector('#next-question-button'));
              myEl.attr('disabled',"");
 
@@ -161,13 +162,16 @@ export class QuestionController {
            }
 
            report(){
-            alert('Question Reported !');
+          // alert('Question Reported !');
+          if(this.errormessage ==""){
+            this.errormessage = "the question has been reported"
             this.$http.get("/api/questions/"+this.awesomeQuestion[this.num]._id).then(response =>{
               this.$http.put("/api/questions/"+this.awesomeQuestion[this.num]._id,{ 
                 _id : this.awesomeQuestion[this.num]._id,
                 nbContestation : response.data.nbContestation + 1
               })
             })
+          }
           }
 
 

@@ -176,10 +176,6 @@ export function create(req, res) {
   req.body.User1Id = req.user._id
 
 
-  var new_game = {
-    user1: 1,
-    concept: 2,
-  }
 
   return Game.create(req.body)
     .then(response => {
