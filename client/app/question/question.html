@@ -1,80 +1,39 @@
-
-   <!-- <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="prop in $ctrl.proposition"> -->
-
-    <!--<div class="row">
-      <div class="col-lg-12">
-        <h1 class="page-header">la question est : {{$ctrl.question}}</h1>
-=======
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="page-header">la question est : {{$ctrl.question}}</h1>
-
-
-        <div style="width:500px; margin: 0 auto;">
-          <ul ng-repeat="prop in $ctrl.proposition">
-            <li><button ng-click="$ctrl.validation(prop)" uib-tooltip="{{prop.id}}">{{prop.pos}} </button></li>
-          </ul>
-        </div>
-      </div>
-
-      {{$ctrl.message}}
-    </div> -->
-
-
-
-          <!-- <li><button ng-click="$ctrl.validation(prop)" uib-tooltip="{{prop.id}}">{{prop.pos}} </button></li> -->
-          <!-- <input id="choices-0" type="radio" name="choices" value="choices-0">
-          <label for="choices-0">Correct</label>
-
-          <input id="choices-1" type="radio" name="choices" value="choices-1">
-          <label for="choices-1">Wrong 1</label>
-
-          <input id="choices-2" type="radio" name="choices" value="choices-2">
-          <label for="choices-2">Wrong 2</label>
-          
-          <input id="choices-3" type="radio" name="choices" value="choices-3">
-          <label for="choices-3">Wrong 3</label> -->
-          
-
 <div class="sbleft"></div>
-  <div class="container" style="margin-left: 210px">
-    <div class="container" style="margin-left:100px;">
-    <div class="cover">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-6-lg" id="quiz">
-          <h1>Passer le test !</h1>
-
-          <div class="counter">
-          <div id="countdown">
-             <span class="minutes">{{minutes}}<b>Minutes</b></span>
-             <span class="seconds">{{seconds}}<b>Seconds</b></span>
+<div class="container" style="margin-left: 90px">
+  <div class="container" style="margin-left:90px;">
+          <div class="col-6-lg" id="quiz">
+            
+            <center>
+            <h1>Passer le test !</h1>
+              <div class="counter">
+              <div id="countdown">
+               <span class="minutes">{{minutes}}<b> Minutes</b></span>
+               <span class="seconds">{{seconds}}<b> Seconds</b></span>
+             </div>
            </div>
-           </div>
-
-          
-
-          <h1 id="quiz-name"></h1>
-          <div id="question" ng-view>
+            
+            
+           <h1 id="quiz-name"></h1>
+           <div id="question" ng-view>
             <h2>{{$ctrl.awesomeQuestion[$ctrl.num].question}}</h2>
             <ul ng-repeat="choices in $ctrl.all_questions[$ctrl.num].choices">
+            <center>
               <input ng-click="$ctrl.validation(choices)" id="choices-{{choices.id}}" type="radio" name="choices" value="choices-{{choices.id}}">
               <label id="label-choices-{{choices.id}}" class="" for="choices-{{choices.id}}">{{choices.pos}}</label>
+            <center>
             </ul>
+            {{$ctrl.errormessage}}
           </div>
-          <!--<button ng-click="$ctrl.new_prev()" disabled class="btn" id="prev-question-button"><i class="fa fa-arrow-left fa-2x"></i></button>-->
-          <button ng-click="$ctrl.new_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
-          <!-- <button ng-click="$ctrl.submit()" class="btn" id="submit-button"><i class="fa fa-check fa-2x"></i></button> -->
-          <button ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
-
+          <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
+          <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
           <div id="quiz-results" style="display:none;">
             <p id="quiz-results-message">Bravos felicitations</p>
             <p id="quiz-results-score">Score {{$ctrl.resultats}}/5</p>
           </div>
-
           <br/>
         </div>
       </div>
+      </center>
     </div>
   </div>
-  </div>
+</div>

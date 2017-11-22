@@ -11,20 +11,20 @@ export class AffrontementController {
   affrontStatus = Function;
   listUsers = [];
   listMessages = [];
+  listGames = [];
   userChoisi = [];
+  conceptChoisi = [];
   currentUser = [];
   chat_message = '';
-  expediteur = '';
-  destinataire = '';
 
   /*@ngInject*/
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
     this.socket = socket;
     this.jChoice = true;
-    this.jeuChoice = false;
     this.jChoisi = false;
     this.jAffront = false;
+    this.cChoisi = false;
 
 
     this.getCurrentUser = Auth.getCurrentUserSync;
@@ -36,10 +36,17 @@ export class AffrontementController {
   } // end constructor
 
   $onInit() {
-    this.$http.get('/api/users')
+    this.$http.get('/api/users/notme')
     .then(response => {
       this.listUsers = response.data;
       this.socket.syncUpdates('user', this.listUsers);
+    });
+
+    this.$http.get('/api/concepts')
+    .then(response => {
+      this.listConcepts = response.data;
+      console.log(response.data)
+
     });
 
     this.$http.get('/api/messages')
@@ -50,52 +57,42 @@ export class AffrontementController {
 
   }
 
+  choix_concept(c) {
+    this.conceptChoisi = c;
+    this.clearAll();
+    this.jChoisi = true;
+    console.log(this.conceptChoisi)
+  }
+
   choix_user(user) {
     this.userChoisi = user;
-    this.jChoice = false;
+    this.clearAll();
     this.jChoisi = true;
-    console.log(this.jChoice,this.jChoisi);
   }
 
   affStatus(a){
-    console.log("ingresa parametro: "+a);
-    this.jChoice = false;
-    this.jeuChoice = false;
-    this.jChoisi = false;    
-    this.jAffront = false;
 
+    this.clearAll();
     switch(a){
-      case 'jChoice':
-        this.jChoice = true;
-      break;
-      case 'jeuChoice':
-      this.jeuChoice = true;
-      break;
-      case 'jChoisi':
-        this.jChoisi = true;
-        console.log(this.jChoisi);
-      break;
-      case 'invitAccepte':
-        this.jAffront = true;
-      break;
-      case 'invitEnvoye':
-        this.jChoisi = true;
-      break;
-      case 'message':
-        this.jChoisi = true;
-      break;
-      case 'ferme':
-        this.jChoice = true;
-      break;
+      case 'jChoice':     this.jChoice = true; break;
+      case 'jChoisi':     this.jChoisi = true; break;
+      case 'invitAccepte':this.jAffront= true; break;
+      case 'invitEnvoye': this.jChoisi = true; break;
+      case 'ferme':       this.jChoice = true; break;
 
     }; //end switch
 
-  }
+  }  //end affStatus
 
   addChatElement(){
     document.getElementById('affront_chat').style.visibility='visible';
   }
   
+  scrollElement(){
+    elem = document.getElementById('affront_chat');
+    if((elem.scrolHeight - elem.scrollTop) < 110){
+    }
+  }
 
   refreshChats(){
     var string='';
@@ -106,25 +103,16 @@ export class AffrontementController {
     });
     
     for(var mess in this.ListMessages) {
-      console.log(mess.message);
-    string += '<p>' + mess.expediteur+' : '+mess.message + '</p>';
+      
+        string += '<p>' + mess.expediteur+' : '+mess.message + '</p>';
     } 
-    console.log(string);
     var newEle = angular.element(string);
     var target = document.getElementById('affront-chat');
     angular.element(target).append(newEle);
     
   }  // end refreshChats
 
-  doSubmit(){
-    //console.log(k);
-     //if(k == 13){
-     // console.log("mensaje enviado");
-    // }
-     console.log("mensaje enviado");
-  }  // end doSubmit
   
-
   /*
   * msg_type = 1 :  menssage d'utilisateur
   * msg_type = 2 :  invitation a jouer
@@ -132,7 +120,7 @@ export class AffrontementController {
   * msg_type = 4 :  invitation refuse
   */
   submitMessage(t = 1) {
-    console.log("parametro enviado: "+t);
+    
     var myMessage = '';
     if(t==1)       myMessage = this.chat_message;
     else if(t==2)  myMessage = 'Invitation envoye';
@@ -149,11 +137,9 @@ export class AffrontementController {
       })
       .then(response => {
         this.idNewMessage = response.data._id;
-        console.log("message created: "+this.idNewMessage);
-      })
-      console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message+' '+t);
+      });
+      //console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message+' '+t);
       document.getElementById('input_aff_chat').value='';
-      
       document.getElementById('msgInfo').innerHTML = myMessage;
       setTimeout(function(){
         document.getElementById("msgInfo").innerHTML = "";
@@ -168,6 +154,33 @@ export class AffrontementController {
     
 
   } // end submit message
+
+
+  /*********  Submit Game  ************ */
+  submitGame() {
+
+      this.$http.post("/api/games", {
+       
+        User2Id: this.userChoisi._id,
+        ConceptId: this.conceptChoisi._id,
+      })
+      .then(response => {
+        this.idNewMessage = response.data._id;
+      });
+      console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
+      
+  } // end submit Game
+
+
+  clearAll(){
+    
+    this.chat_message = '';
+    this.jChoice = false;
+    this.jChoisi = false;
+    this.cChoisi = false
+    this.jAffront = false;
+
+  }
 
 
 }   // end class

@@ -10,6 +10,7 @@ export class ListquestionController {
   reponseGlobal = {};
   blabla = "génial";
   newThing = '';
+  questionTri = {};
   
 
   
@@ -18,6 +19,7 @@ export class ListquestionController {
     this.$http = $http;
     this.socket = socket;  
     
+    
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
@@ -25,6 +27,29 @@ export class ListquestionController {
   }
   
   $onInit() {
+<<<<<<< HEAD
+=======
+    this.$http.get('/api/questions/myquestion')
+      .then(response => {
+        this.awesomeListQuestion = response.data;
+        
+        for(var i= 0; i< this.awesomeListQuestion.length;i++){
+
+         if(this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]] == undefined){
+            this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]] = [];
+            this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]].push(this.awesomeListQuestion[i]["question"])
+          }
+        
+          else{
+            this.questionTri[this.awesomeListQuestion[i]["Concept"]["name"]].push(this.awesomeListQuestion[i]["question"])
+          }
+
+
+        }
+
+        console.log(this.questionTri)
+      });
+>>>>>>> bf3e48c530c37875ed313f790dcf1c73c7f42ddc
 
     this.$http.get('/api/concepts')
     .then(response => {

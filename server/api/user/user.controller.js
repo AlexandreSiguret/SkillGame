@@ -39,6 +39,23 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
+export function notme(req,res){
+  return User.findAll({
+    where :{
+      
+      _id: { $ne: req.user._id },
+    },
+    attributes : [
+      "_id",
+      "name",
+      "avatar"
+    ]
+  }).then( users =>{
+    res.status(200).json(users);
+  })
+  .catch(handleError(res))
+}
+
 /**
  * Creates a new user
  */

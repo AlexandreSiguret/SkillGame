@@ -24,13 +24,14 @@ export default function(sequelize, DataTypes) {
     nbAppearance : DataTypes.INTEGER,
     nbContestation : DataTypes.INTEGER,   
 
+    /* plus obligatoire remplacer par ConceptId
     concept: {
       type : DataTypes.INTEGER,   /*   
       references :{
         model : Concept,
         key : '_id',
-      }*/
-    },
+      }
+  },*/
     goodAnswer : DataTypes.STRING,    
   });
 }

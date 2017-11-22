@@ -3,3 +3,6 @@ navbar.navbar {
   text-align: center;
   border-top: 1px solid #E5E5E5;
 }
+.navbar-default .navbar-text {
+    color: #000;
+}

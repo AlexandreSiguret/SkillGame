@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Choice} from '../../sqldb';
+import db from "../../sqldb"
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,7 +67,12 @@ function handleError(res, statusCode) {
 
 // Gets a list of Choices
 export function index(req, res) {
-  return Choice.findAll()
+  return Choice.findAll({
+    include : [
+      {model :db.Question,
+      attributes : ["question"]}
+    ]}
+  )
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
