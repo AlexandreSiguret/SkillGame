@@ -32,6 +32,7 @@ export class AffrontementController {
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
       socket.unsyncUpdates('message');
+      socket.unsyncUpdates('concept');
     });
   } // end constructor
 
@@ -45,8 +46,7 @@ export class AffrontementController {
     this.$http.get('/api/concepts')
     .then(response => {
       this.listConcepts = response.data;
-      console.log(response.data)
-
+      this.socket.syncUpdates('concept', this.listConcepts);
     });
 
     this.$http.get('/api/messages')
@@ -58,16 +58,17 @@ export class AffrontementController {
   }
 
   choix_concept(c) {
-    this.conceptChoisi = c;
     this.clearAll();
+    this.conceptChoisi = c;
     this.jChoisi = true;
-    console.log(this.conceptChoisi)
+    //console.log(c);
   }
 
   choix_user(user) {
-    this.userChoisi = user;
     this.clearAll();
+    this.userChoisi = user;
     this.jChoisi = true;
+    //console.log(this.userChoisi);
   }
 
   affStatus(a){
@@ -158,7 +159,11 @@ export class AffrontementController {
 
   /*********  Submit Game  ************ */
   submitGame() {
+<<<<<<< HEAD
 
+=======
+       
+>>>>>>> 7e7cbcbcec596f2ecd07b329d745adf495736f2c
       this.$http.post("/api/games", {
        
         User2Id: this.userChoisi._id,
@@ -167,7 +172,7 @@ export class AffrontementController {
       .then(response => {
         this.idNewMessage = response.data._id;
       });
-      console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
+      //console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
       
   } // end submit Game
 
