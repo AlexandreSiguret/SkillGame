@@ -7,6 +7,7 @@ export class ListquestionController {
   socket;
   awesomeListQuestion = [];
   awesomeConcept = [];
+  reponseGlobal = {};
   blabla = "génial";
   newThing = '';
   
@@ -15,9 +16,7 @@ export class ListquestionController {
   /*@ngInject*/
   constructor($http, $scope, socket) {
     this.$http = $http;
-    this.socket = socket;
-    this.controleConcept = false;
-    
+    this.socket = socket;  
     
 
     $scope.$on('$destroy', function() {
@@ -26,24 +25,39 @@ export class ListquestionController {
   }
   
   $onInit() {
-    this.$http.get('/api/questions/myquestion')
-      .then(response => {
-        this.awesomeListQuestion = response.data;
-        console.log(response.data)
-        //console.log(this.controleQuestion)
-      });
 
     this.$http.get('/api/concepts')
-      .then(response => {
-        this.awesomeConcept = response.data;
-        console.log(response.data)
-        //console.log(this.controleQuestion)
-      });
-
-      }
-
+    .then(response => {
+      this.awesomeConcept = response.data;
+      //console.log(response.data)
       
+      
+      this.$http.get('/api/questions/myquestion')
+      .then(response => {
+       this.awesomeListquestion = response.data;
+       //console.log(response.data)
 
+      for (var i=0; i<this.awesomeListquestion.length; i++){
+           // var numConcept = this.awesomeListquestion[i].concept['concept']['name'];
+           var numConcept = this.awesomeListquestion[i].concept
+           
+          if( this.reponseGlobal[numConcept] == undefined){
+            this.reponseGlobal[numConcept] = [];
+            this.reponseGlobal[numConcept].push(this.awesomeListquestion[i].question);
+            
+           }else {
+            this.reponseGlobal[numConcept].push(this.awesomeListquestion[i].question);
+           }
+         
+      }  
+      console.log("coucou")
+      console.log(this.reponseGlobal)
+
+    })
+
+  })
+      
+      }
   }
 
 export default angular.module('skillGameApp.listquestion', [uiRouter])  

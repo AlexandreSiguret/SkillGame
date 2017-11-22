@@ -43,6 +43,16 @@ describe('Concept API Router:', function() {
         .should.have.been.calledOnce;
     });
   });
+  
+  /**
+ * @api {get} /concepts/:id Request Concept information
+ * @apiName GetConcept
+ * @apiGroup Concept
+ *
+ * @apiParam {Number} Concepts unique ID.
+ *
+ * @apiSuccess {String} name  name of the Concept.
+ */
 
   describe('GET /api/concepts/:id', function() {
     it('should route to concept.controller.show', function() {
