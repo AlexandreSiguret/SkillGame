@@ -650,6 +650,43 @@ export default function seedDatabaseIfNeeded() {
 
       .catch(err => console.log('error populating things', err));
 
+      
+      Badge.destroy({ where: {} })
+      
+            .then(() => {
+      
+              let badge = Badge.bulkCreate([{
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert Computeur science',      
+                _id: 1
+      
+              }, {
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert iphoneX',      
+                _id: 2
+              }, {
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert Judo',      
+                _id: 3
+      
+              }, {
+      
+                picture: 'gegqsdgrgrgrg',
+                description : 'expert Art',      
+                _id: 4     
+      
+      
+              }]);
+      
+            })
+      
+            .then(() => console.log('finished populating badges'))
+      
+            .catch(err => console.log('error populating badges', err));
+
 
       Game.destroy({where:{}})
       .then(() =>{
