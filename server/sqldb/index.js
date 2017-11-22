@@ -35,6 +35,10 @@ db.Concept.hasMany(db.Game)
 db.Game.belongsTo(db.User,{ as :"User1"}),
 db.Game.belongsTo(db.User,{ as :"User2"})
 
+db.Answer.belongsTo(db.User)
+db.Answer.belongsTo(db.Game)
+db.Answer.belongsTo(db.Question)
+
 //db.Game.belongsTo(db.User,{as : "userdeux"}),
 //db.User.hasMany(db.Game,{as : "seconduser"})
 //db.Game.belongsTo(db.User, {as: 'user1'});

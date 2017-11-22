@@ -14,13 +14,13 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-
+/* remplacer par les clefs étrangeres
     question: {
-      type : DataTypes.INTEGER,     /* 
+      type : DataTypes.INTEGER,     
       references :{
         model : Question,
         key : '_id',
-      }*/
+      }
     },
 
     choice: {
@@ -28,16 +28,16 @@ export default function(sequelize, DataTypes) {
       references :{
         model : Choice,
         key : '_id',
-      }*/
-    },    
+      }
+  },    */
     earnedPoint : DataTypes.INTEGER,
-
+/*
     user: {
-      type : DataTypes.INTEGER,      /*
+      type : DataTypes.INTEGER,      
       references :{
         model : User,
         key : '_id',
-      }*/
+      }
     },
     
     quizz: {
@@ -45,8 +45,8 @@ export default function(sequelize, DataTypes) {
       references :{
         model : Game,
         key : '_id',
-      }*/
-    },
+      }
+    },*/
   });
 }
 

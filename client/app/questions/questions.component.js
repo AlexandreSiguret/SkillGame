@@ -54,7 +54,7 @@ export class QuestionsController {
       this.freeAwesomeGames = response.data;
       if(response.data.length == 0){       
         this.$http.post("/api/games", {          
-          concept: this.currentConcept._id,
+          ConceptId: this.currentConcept._id,
           ended : false,
         })
       }
