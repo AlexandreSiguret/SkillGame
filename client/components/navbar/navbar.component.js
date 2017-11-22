@@ -15,10 +15,6 @@ export class NavbarComponent {
   {
     title: 'Jeu',
     state: 'jeu'
-  },
-  {
-    title: 'Autre Jeu',
-    state: 'jeu2'
   },{
     title : "Affrontement",
     state : "affrontement"
