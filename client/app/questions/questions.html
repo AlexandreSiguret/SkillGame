@@ -4,14 +4,13 @@
     <div class="container" style="width:180px">
       <div class="row">
         <div class="col-lg-12">
+        <br/>
       <ul ng-repeat="concept in $ctrl.awesomeConcept">
         <li><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
       </ul>
     </div>
-    <div class="container" style="margin-left: 210px">
-  <div class="container" style="margin-left:100px;">
-  
-    <h1> choissisez un théme </h1>
+  <div class="container" style="min-height: 400px; margin-left: 210px">
+    <h1>Choissisez un théme </h1>
     <div ng-if="$ctrl.choice == true">
       <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p>
       <br> 

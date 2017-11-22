@@ -1,18 +1,14 @@
 /***
  * Styles of the game
  ***/
-
-<<<<<<< HEAD
  /*@font-face {*/
     /*font-family: 'Krinkes'; /*a name to be used later*/
     /*src: url('../fonts/KrinkesDecorPERSONAL.ttf'), url('../fonts/KrinkesRegularPERSONAL.ttf'); /*URL to font*/
 /*}*/
-=======
  @font-face {
     font-family: 'Krinkes'; /*a name to be used later*/
  /* src: url('C:/Users/htsa/Documents/SkillGame/client/assets/fonts/jeu/KrinkesDecorPERSONAL.ttf'), url('C:/Users/htsa/Documents/SkillGame/client/assets/fonts/jeu/KrinkesRegularPERSONAL.ttf'); URL to font*/
 }
->>>>>>> 0e34629cca9384e17a91d8f99e2102e29d0c0550
 /*
 body{
     background-color:#999;
