@@ -11,10 +11,13 @@ export class NavbarComponent {
   {
     title: 'Questions',
     state: 'questions'
-  },
-  {
+  },{
     title: 'Jeu',
     state: 'jeu'
+  },
+  {
+    title: 'My Games',
+    state: 'game'
   },{
     title : "Affrontement",
     state : "affrontement"
