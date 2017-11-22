@@ -159,11 +159,7 @@ export class AffrontementController {
 
   /*********  Submit Game  ************ */
   submitGame() {
-<<<<<<< HEAD
 
-=======
-       
->>>>>>> 7e7cbcbcec596f2ecd07b329d745adf495736f2c
       this.$http.post("/api/games", {
        
         User2Id: this.userChoisi._id,
