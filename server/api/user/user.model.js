@@ -37,6 +37,7 @@ export default function(sequelize, DataTypes) {
       }
     },
     provider: DataTypes.STRING,
+    points: DataTypes.INTEGER,
     salt: DataTypes.STRING,
     avatar: DataTypes.STRING,
     facebook: DataTypes.JSON,

@@ -14,6 +14,7 @@ var db = {
 };
 
 // Insert models below
+db.Badge = db.sequelize.import('../api/badge/badge.model');
 db.Answer = db.sequelize.import('../api/answer/answer.model');
 db.Choice = db.sequelize.import('../api/choice/choice.model');
 db.Concept = db.sequelize.import('../api/concept/concept.model');
