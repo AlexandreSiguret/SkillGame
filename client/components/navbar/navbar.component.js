@@ -5,16 +5,19 @@ import angular from 'angular';
 
 export class NavbarComponent {
   menu = [{
-    title: 'SkillGame Home',
+    title: 'SkillGame',
     state: 'main'
   },
   {
     title: 'Questions',
     state: 'questions'
-  },
-  {
+  },{
     title: 'Jeu',
     state: 'jeu'
+  },
+  {
+    title: 'My Games',
+    state: 'game'
   },{
     title : "Affrontement",
     state : "affrontement"

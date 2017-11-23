@@ -1,10 +1,15 @@
-<div class="sbleft"></div>
-<div class="container" style="margin-left: 90px">
-  <div class="container" style="margin-left:90px;">
-          <div class="col-6-lg" id="quiz">
+<div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 sidebar">
+                <ul class="nav nav-stacked nav-pills">
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                </ul>
+            </div>
+
+          <div class="col-md-9 col-sm-8" id="quiz">
             
             <center>
-            <h1>Passer le test !</h1>
+            <h1 style="color: #166e70;">Passer le test !</h1>
               <div class="counter">
               <div id="countdown">
                <span class="minutes">{{minutes}}<b> Minutes</b></span>
@@ -22,6 +27,7 @@
               <label id="label-choices-{{choices.id}}" class="" for="choices-{{choices.id}}">{{choices.pos}}</label>
             <center>
             </ul>
+            {{$ctrl.errormessage}}
           </div>
           <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
           <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>

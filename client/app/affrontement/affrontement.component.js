@@ -159,11 +159,11 @@ export class AffrontementController {
 
   /*********  Submit Game  ************ */
   submitGame() {
-       
+
       this.$http.post("/api/games", {
-        user1: this.getCurrentUser()._id,
-        user2: this.userChoisi._id,
-        concept: this.conceptChoisi.name,
+       
+        User2Id: this.userChoisi._id,
+        ConceptId: this.conceptChoisi._id,
       })
       .then(response => {
         this.idNewMessage = response.data._id;

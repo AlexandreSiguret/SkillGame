@@ -7,30 +7,30 @@ body {
     padding: 0;
 }
 h1 {
-  color: #65a5b7;
+  color: #166e70;
 }
 .fa-3x {
   padding: 1rem;
-  color: #65a5b7;
+  color: #166e70;
 }
 .fa-3x:hover {
-  color: #4a8c9f;
+  color: #064d4f;
 }
 #quiz {
   min-width: 200px;
 }
 #quiz button {
   background: none;
-  color: #65a5b7;
+  color: #166e70;
   cursor: pointer;
 }
 #quiz button:hover {
-  color: #4a8c9f;
+  color: #064d4f;
 }
 #quiz button:disabled {
   opacity: 0.3;
   background: none;
-  color: #65a5b7;
+  color: #166e70;
   cursor: default;
 }
 #question {
@@ -48,7 +48,7 @@ h1 {
   display: block;
   margin: 4px;
   padding: 8px;
-  background: #65a5b7;
+  background: #166e70;
   color: #000;
   min-width: 100px;
   border-radius: 4px;
@@ -66,7 +66,7 @@ h1 {
   max-width : 700px; 
 }
 #question label:hover {
-  background: #4a8c9f;
+  background: #064d4f;
 }
 /*#question input[type=radio]:checked + label {
   background: #00ff00;
@@ -146,4 +146,4 @@ h1 {
   margin-right: 20px;
   text-align: center;
 }
-/*#question label.chicked { background: #4a8c9f; }*/
+/*#question label.chicked { background: #064d4f; }*/

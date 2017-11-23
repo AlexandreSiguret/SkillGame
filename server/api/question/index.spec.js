@@ -36,6 +36,31 @@ describe('Question API Router:', function() {
     questionIndex.should.equal(routerStub);
   });
 
+/**
+ * @api {get} /questions  Read data of Question 
+ * 
+ * @apiName GetQuestion
+ * @apiGroup Question
+ * @apiPermission none
+ *
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ * 
+ *@apiSuccess  {Number} id  The new Question-ID.
+ * 
+ * @apiError QuestionNotFound The <code>id</code> of the AQuestion was not found.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "QuestionNotFound"
+ *     }
+ */
+
   describe('GET /api/questions', function() {
     it('should route to question.controller.index', function() {
       routerStub.get
@@ -44,6 +69,32 @@ describe('Question API Router:', function() {
     });
   });
 
+  /**
+ * @api {get} /questions/:id Read data of Question by id
+ * 
+ * @apiName GetQuestion
+ * @apiGroup Question
+ * @apiPermission none
+ *
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ * 
+ *@apiSuccess  {Number} id  The new Question-ID.
+ * 
+ * @apiError QuestionNotFound The <code>id</code> of the Question was not found.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "QuestionNotFound"
+ *     }
+ */
+
+  
   describe('GET /api/questions/:id', function() {
     it('should route to question.controller.show', function() {
       routerStub.get
@@ -51,6 +102,32 @@ describe('Question API Router:', function() {
         .should.have.been.calledOnce;
     });
   });
+
+  /**
+ * @api {post} /questions  Create a new Question 
+ * 
+ * @apiName PostQuestion
+ * @apiGroup Question
+ * @apiPermission none
+ *
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ * 
+ *@apiSuccess  {Number} id  The new Question-ID.
+ * 
+ * @apiError QuestionNotFound Minimum of 5 characters required.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "QuestionNameTooShort"
+ *     }
+ */
+ 
 
   describe('POST /api/questions', function() {
     it('should route to question.controller.create', function() {
@@ -60,6 +137,30 @@ describe('Question API Router:', function() {
     });
   });
 
+  /**
+ * @api {put} /questions/:id  Change a Question 
+ * 
+ * @apiName PutQuestion
+ * @apiGroup Question
+ * @apiPermission none
+ *
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ *
+ * 
+ * @apiError QuestionNotFound Minimum of 5 characters required.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "QuestionNameTooShort"
+ *     }
+ */
+
   describe('PUT /api/questions/:id', function() {
     it('should route to question.controller.upsert', function() {
       routerStub.put
@@ -68,6 +169,30 @@ describe('Question API Router:', function() {
     });
   });
 
+/**
+ * @api {patch} /questions/:id  Change a Question 
+ * 
+ * @apiName PatchQuestion 
+ * @apiGroup Question 
+ * @apiPermission none
+ *
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ *
+ * 
+ * @apiError QuestionNotFound Minimum of 5 characters required.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "QuestionNameTooShort"
+ *     }
+ */
+
   describe('PATCH /api/questions/:id', function() {
     it('should route to question.controller.patch', function() {
       routerStub.patch
@@ -75,6 +200,24 @@ describe('Question API Router:', function() {
         .should.have.been.calledOnce;
     });
   });
+
+  /**
+ * @api {delete} /questions/:id  delete a Question 
+ * 
+ * @apiName DeleteQuestion
+ * @apiGroup Question
+ * @apiPermission none
+ *
+ *
+ * 
+ * @apiError QuestionNotFound The <code>id</code> of the Question was not found.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "QuestionNotFound"
+ *     }
+ */
 
   describe('DELETE /api/questions/:id', function() {
     it('should route to question.controller.destroy', function() {

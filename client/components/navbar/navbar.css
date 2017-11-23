@@ -1,8 +1,6 @@
-navbar.navbar {
-  background: rgb(35, 35, 196);
-  text-align: center;
-  border-top: 1px solid #E5E5E5;
-}
-.navbar-default .navbar-text {
-    color: #000;
+.navbar {
+    background: rgb(22, 110, 112);
+    height: 52px;
+    margin: 0px 0px 0px 0px;
+    border: 1px solid #999999;
 }

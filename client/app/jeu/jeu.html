@@ -1,8 +1,15 @@
 
-  <sidebarleft></sidebarleft>
-  <div class="container" style="min-height: 400px; margin-left: 210px">
-    
-        <h1 class="page-header">Mes parties en cours {{ $ctrl.getCurrentUser().name }}</h1>
+  <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-4 sidebar">
+                <ul class="nav nav-stacked nav-pills">
+                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                </ul>
+            </div>
+
+            <div class="col-md-9 col-sm-8">
+
+        <h1 class="page-header" style="color: #166e70;">Mes parties en cours {{ $ctrl.getCurrentUser().name }}</h1>
        
 
         <div class="board">
@@ -18,6 +25,10 @@
               </div>
           </div>
         </div>
-        
-  </div>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
   
