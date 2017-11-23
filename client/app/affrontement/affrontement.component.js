@@ -32,6 +32,7 @@ export class AffrontementController {
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
       socket.unsyncUpdates('message');
+      socket.unsyncUpdates('concept');
     });
   } // end constructor
 
@@ -45,8 +46,7 @@ export class AffrontementController {
     this.$http.get('/api/concepts')
     .then(response => {
       this.listConcepts = response.data;
-      console.log(response.data)
-
+      this.socket.syncUpdates('concept', this.listConcepts);
     });
 
     this.$http.get('/api/messages')
@@ -58,36 +58,28 @@ export class AffrontementController {
   }
 
   choix_concept(c) {
-    this.conceptChoisi = c;
     this.clearAll();
+    this.conceptChoisi = c;
     this.jChoisi = true;
+    //console.log(c);
   }
 
   choix_user(user) {
-    this.userChoisi = user;
     this.clearAll();
+    this.userChoisi = user;
     this.jChoisi = true;
+    //console.log(this.userChoisi);
   }
 
   affStatus(a){
 
     this.clearAll();
     switch(a){
-      case 'jChoice':
-        this.jChoice = true;
-      break;
-      case 'jChoisi':
-        this.jChoisi = true;
-      break;
-      case 'invitAccepte':
-        this.jAffront = true;
-      break;
-      case 'invitEnvoye':
-        this.jChoisi = true;
-      break;
-      case 'ferme':
-        this.jChoice = true;
-      break;
+      case 'jChoice':     this.jChoice = true; break;
+      case 'jChoisi':     this.jChoisi = true; break;
+      case 'invitAccepte':this.jAffront= true; break;
+      case 'invitEnvoye': this.jChoisi = true; break;
+      case 'ferme':       this.jChoice = true; break;
 
     }; //end switch
 
@@ -167,16 +159,16 @@ export class AffrontementController {
 
   /*********  Submit Game  ************ */
   submitGame() {
-       
+
       this.$http.post("/api/games", {
-        user1: this.getCurrentUser()._id,
-        user2: this.userChoisi._id,
-        concept: this.conceptChoisi.name,
+       
+        User2Id: this.userChoisi._id,
+        ConceptId: this.conceptChoisi._id,
       })
       .then(response => {
         this.idNewMessage = response.data._id;
       });
-      console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
+      //console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
       
   } // end submit Game
 

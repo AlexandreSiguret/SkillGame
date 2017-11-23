@@ -1,12 +1,9 @@
-<div>This is the game view. {{$ctrl.message}} ici {{gameCtrl.message}}</div>
 
 
 <h1> Mes parties en cours </h1>
+    <div ng-repeat="player in gameCtrl.openGame"> {{player.User1.name}} vs {{player.User2.name}} </div>
+    
 
-<ul>
-    <li ng-repeat="game in gameCtrl.openGame">
-        coucou
-    </li>
-</ul>
 
 <h1> Mes parties finies </h1>
+    <div ng-repeat="player in gameCtrl.openGame in gameCtrl.finishGame"> {{player.User1.name}}} vs {{player.User1.name}}} </div>

@@ -109,13 +109,28 @@ export function freeGame(req, res) {
 
 
 export function game(req, res) {
-  var userId = req.user._id;
+  
 
   return Game.findAll({
 
     where: {
-      user1: req.user._id
-    }
+      $or: {
+        user1Id: req.user._id,
+        User2Id :req.user._id
+      }
+     
+    },
+    
+    include: [{
+      model: db.User,
+      as: 'User2',
+      attributes : ["name"]
+  },
+  {
+    model: db.User,
+    as: 'User1',
+    attributes :  ["name"]
+  }]
   }).then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -161,10 +176,6 @@ export function create(req, res) {
   req.body.User1Id = req.user._id
 
 
-  var new_game = {
-    user1: 1,
-    concept: 2,
-  }
 
   return Game.create(req.body)
     .then(response => {

@@ -7,6 +7,7 @@ export class ListquestionController {
   socket;
   awesomeListQuestion = [];
   awesomeConcept = [];
+  reponseGlobal = {};
   blabla = "génial";
   newThing = '';
   questionTri = {};
@@ -16,9 +17,7 @@ export class ListquestionController {
   /*@ngInject*/
   constructor($http, $scope, socket) {
     this.$http = $http;
-    this.socket = socket;
-    this.controleConcept = false;
-    
+    this.socket = socket;  
     
     
 
@@ -28,6 +27,7 @@ export class ListquestionController {
   }
   
   $onInit() {
+
     this.$http.get('/api/questions/myquestion')
       .then(response => {
         this.awesomeListQuestion = response.data;
@@ -49,17 +49,18 @@ export class ListquestionController {
         console.log(this.questionTri)
       });
 
+
     this.$http.get('/api/concepts')
-      .then(response => {
-        this.awesomeConcept = response.data;
-        console.log(response.data)
-        //console.log(this.controleQuestion)
-      });
-
-      }
-
+    .then(response => {
+      this.awesomeConcept = response.data;
+      //console.log(response.data)
+      
       
 
+
+  })
+      
+      }
   }
 
 export default angular.module('skillGameApp.listquestion', [uiRouter])  
