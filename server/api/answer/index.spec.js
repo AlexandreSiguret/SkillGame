@@ -197,12 +197,12 @@ describe('Answer API Router:', function() {
  *
  *
  * 
- * @apiError ConceptNotFound The <code>id</code> of the Concept was not found.
+ * @apiError AnswerNotFound The <code>id</code> of the Answer was not found.
  * 
  *  @apiErrorExample {json} Error-Response(exemple):
  *     HTTP/1.1 404 Not Found
  *     {
- *       "error": "ConceptNotFound"
+ *       "error": "AnswerNotFound"
  *     }
  */
 

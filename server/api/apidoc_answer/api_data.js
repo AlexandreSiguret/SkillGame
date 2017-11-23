@@ -16,15 +16,15 @@ define({ "api": [
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "ConceptNotFound",
-            "description": "<p>The <code>id</code> of the Concept was not found.</p>"
+            "field": "AnswerNotFound",
+            "description": "<p>The <code>id</code> of the Answer was not found.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Error-Response(exemple):",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"ConceptNotFound\"\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n  \"error\": \"AnswerNotFound\"\n}",
           "type": "json"
         }
       ]

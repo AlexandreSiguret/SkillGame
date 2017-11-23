@@ -47,7 +47,7 @@ describe('Concept API Router:', function() {
  *
  *@apiSuccess  {Number} id  The new Concept-ID.
  * 
- * @apiError ConceptNotFound The <code>id</code> of the User was not found.
+ * @apiError ConceptNotFound The <code>id</code> of the Concept was not found.
  * 
  *  @apiErrorExample {json} Error-Response(exemple):
  *     HTTP/1.1 404 Not Found
