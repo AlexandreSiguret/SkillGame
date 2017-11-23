@@ -182,7 +182,7 @@ describe('Badge API Router:', function() {
 /**
  * @api {delete} /yes/:id  delete a Badge
  * 
- * @apiName DeleteBadge
+ * @apiName DeleteBadge          
  * @apiGroup Badge
  * @apiPermission none
  *
