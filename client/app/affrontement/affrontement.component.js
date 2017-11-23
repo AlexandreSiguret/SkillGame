@@ -114,7 +114,7 @@ export class AffrontementController {
   }  // end refreshChats
 
   
-  /*
+  /* 
   * msg_type = 1 :  menssage d'utilisateur
   * msg_type = 2 :  invitation a jouer
   * msg_type = 3 :  invitation accepte
@@ -174,7 +174,7 @@ export class AffrontementController {
 
 
   clearAll(){
-    
+
     this.chat_message = '';
     this.jChoice = false;
     this.jChoisi = false;
