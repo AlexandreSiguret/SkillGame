@@ -36,17 +36,29 @@ describe('Question API Router:', function() {
     questionIndex.should.equal(routerStub);
   });
 
-  /**
- * @api {get} /questions Read data of questions 
+/**
+ * @api {get} /questions  Read data of Question 
+ * 
+ * @apiName GetQuestion
+ * @apiGroup Question
+ * @apiPermission none
  *
- *
- * @apiSuccess {Number}  id            The questions-ID.
- * @apiSuccess {String} question  contains of the question.
- * @apiSuccess {Number} owner            The owner-ID of question.
- * @apiSuccess {Number} nbAppearance            number of appearances.
- * @apiSuccess {Number} nbContestation    number of protest.
- * @apiSuccess {Number} concept            The concept-ID.
- * @apiSuccess {String} goodAnswer  Good Answer.
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ * 
+ *@apiSuccess  {Number} id  The new Question-ID.
+ * 
+ * @apiError QuestionNotFound The <code>id</code> of the AQuestion was not found.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "QuestionNotFound"
+ *     }
  */
 
   describe('GET /api/questions', function() {
@@ -57,21 +69,32 @@ describe('Question API Router:', function() {
     });
   });
 
-   /**
- * @api {get} /questions Read data of questions 
+  /**
+ * @api {get} /questions/:id Read data of Question by id
+ * 
+ * @apiName GetQuestion
+ * @apiGroup Question
+ * @apiPermission none
  *
- * @apiParam {Number} id Users unique ID.
- *
- * @apiSuccess {Number}  id            The questions-ID.
- * @apiSuccess {String} question  contains of the question.
- * @apiSuccess {Number} owner            The owner-ID of question.
- * @apiSuccess {Number} nbAppearance            number of appearances.
- * @apiSuccess {Number} nbContestation    number of protest.
- * @apiSuccess {Number} concept            The concept-ID.
- * @apiSuccess {String} goodAnswer  Good Answer.
- *  
- * @apiError questionsNotFound   The <code>id</code> of the questions was not found.
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ * 
+ *@apiSuccess  {Number} id  The new Question-ID.
+ * 
+ * @apiError QuestionNotFound The <code>id</code> of the Question was not found.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "QuestionNotFound"
+ *     }
  */
+
+  
   describe('GET /api/questions/:id', function() {
     it('should route to question.controller.show', function() {
       routerStub.get
@@ -81,21 +104,30 @@ describe('Question API Router:', function() {
   });
 
   /**
- * @api {post} /user Create a new questions
- * @apiVersion 0.3.0
+ * @api {post} /questions  Create a new Question 
+ * 
  * @apiName PostQuestion
  * @apiGroup Question
  * @apiPermission none
  *
- * @apiDescription In this case "apiErrorStructure" is defined and used.
- * Define blocks with params that will be used in several functions, so you dont have to rewrite them.
- *
- * @apiParam {String} question Contains of the Question.
- *
- * @apiSuccess {Number} id         The new Questions-ID.
- *
- * @apiUse CreateQuestionsError
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ * 
+ *@apiSuccess  {Number} id  The new Question-ID.
+ * 
+ * @apiError QuestionNotFound Minimum of 5 characters required.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "QuestionNameTooShort"
+ *     }
  */
+ 
 
   describe('POST /api/questions', function() {
     it('should route to question.controller.create', function() {
@@ -106,17 +138,27 @@ describe('Question API Router:', function() {
   });
 
   /**
- * @api {put} /questions/:id Change a Questions
- * @apiVersion 0.3.0
- * @apiName PutQuestions
- * @apiGroup Questions
+ * @api {put} /questions/:id  Change a Question 
+ * 
+ * @apiName PutQuestion
+ * @apiGroup Question
  * @apiPermission none
  *
- * @apiDescription This function has same errors like POST /questions, but errors not defined again, they were included with "apiErrorStructure"
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
  *
- * @apiParam {String} question Contains of the Question.
- *
- * @apiUse CreateQuestionError
+ * 
+ * @apiError QuestionNotFound Minimum of 5 characters required.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "QuestionNameTooShort"
+ *     }
  */
 
   describe('PUT /api/questions/:id', function() {
@@ -127,6 +169,30 @@ describe('Question API Router:', function() {
     });
   });
 
+/**
+ * @api {patch} /questions/:id  Change a Question 
+ * 
+ * @apiName PatchQuestion 
+ * @apiGroup Question 
+ * @apiPermission none
+ *
+ * @apiParam {String} question  contains of the question.
+ * @apiParam {Number} owner            The owner-ID of question.
+ * @apiParam {Number} nbAppearance            number of appearances.
+ * @apiParam {Number} nbContestation    number of protest.
+ * @apiParam {Number} concept            The concept-ID.
+ * @apiParam {String} goodAnswer  Good Answer.
+ *
+ * 
+ * @apiError QuestionNotFound Minimum of 5 characters required.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 400 Bad Request
+ *     {
+ *       "error": "QuestionNameTooShort"
+ *     }
+ */
+
   describe('PATCH /api/questions/:id', function() {
     it('should route to question.controller.patch', function() {
       routerStub.patch
@@ -134,6 +200,24 @@ describe('Question API Router:', function() {
         .should.have.been.calledOnce;
     });
   });
+
+  /**
+ * @api {delete} /questions/:id  delete a Question 
+ * 
+ * @apiName DeleteQuestion
+ * @apiGroup Question
+ * @apiPermission none
+ *
+ *
+ * 
+ * @apiError QuestionNotFound The <code>id</code> of the Question was not found.
+ * 
+ *  @apiErrorExample {json} Error-Response(exemple):
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "QuestionNotFound"
+ *     }
+ */
 
   describe('DELETE /api/questions/:id', function() {
     it('should route to question.controller.destroy', function() {

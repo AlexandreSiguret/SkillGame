@@ -1,6 +1,8 @@
-#sidebarleft {
-  text-align: center;
-  padding: 30px 0;
-  border-top: 1px solid #E5E5E5;
-  min-height:420px;
+sidebarleft {
+    float: left;
+    width: 200px;
+    min-height: 500px;
+    margin: 0 0 0 0;
+    border: 1px solid #999999;
+    background: rgb(255, 255, 255);
 }

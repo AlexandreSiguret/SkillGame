@@ -20,6 +20,9 @@ body{
     border:5px solid #333;
 }
 */
+h1 {
+    color: #166e70;
+}
 .container > h1{
     font-family: "Krinkes";
     font-size: 60px;
@@ -61,4 +64,13 @@ body{
 
 .solution-check{
     background-color: #c1e2b3;
+}
+
+.page-header {
+    padding-bottom: 9px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;
+}
+h1 {
+    color: #166e70;
 }

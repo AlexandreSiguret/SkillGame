@@ -1,34 +1,61 @@
 
 
-    <div id="sbleft_affront" class="sbleft">
-    <div class="container" style="width:180px">
-      <div class="row">
-        <div class="col-lg-12">
-        <br/>
-      <ul ng-repeat="concept in $ctrl.awesomeConcept">
-        <li><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 col-sm-4 sidebar">
+      <ul class="nav nav-stacked nav-pills">
+        <li ng-repeat="concept in $ctrl.awesomeConcept"><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
       </ul>
     </div>
-  <div class="container" style="min-height: 400px; margin-left: 210px">
-    <h1>Choissisez un concept </h1>
-    <div ng-if="$ctrl.choice == true">
-      <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p>
-      <br> 
-      <button ng-click ="$ctrl.askQuestion()"> Soumettre une question </button>
-      <button ng-click ="$ctrl.lookForAGame()"> défier un joueur aléatoire </button>
-      <form ng-if="$ctrl.controleQuestion == true">
-        Intitulé de la question  <input type="text "ng-model="$ctrl.question">
-        <br>
-        Possibilité correcte <input type="text "ng-model="$ctrl.goodAnswer">
-        <br>
-        Possibilité fausse 1 <input type="text "ng-model="$ctrl.WrongAnswer1">
-        <br>
-        Possibilité fausse 2 <input type="text "ng-model="$ctrl.WrongAnswer2">
-        <br>
-        Possibilité fausse 3 <input type="text "ng-model="$ctrl.WrongAnswer3"> 
-        <button type="submit" class="btn btn-primary" ng-click="$ctrl.addQuestion()">Ajouter la question au concept </button>
-      </form>
-      <p> {{$ctrl.message}} </p>
+    <div class="col-md-9 col-sm-8">
+      <h1 style="color: #166e70;" class="page-header">Choissisez un théme </h1>
+      <div ng-if="$ctrl.choice == true">
+        <div ng-if="$ctrl.choice == true">
+          <!-- <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p> -->
+          <br> 
+          <center>
+            <button ng-click ="$ctrl.askQuestion()" type="button" class="btn btn-primary btn-md">Poser une question</button>
+            <button ng-click ="$ctrl.lookForAGame()" type="button" class="btn btn-primary btn-md">Défier un joueur aléatoire</button>
+          </center>
+
+          <br/>
+          
+          <form ng-if="$ctrl.controleQuestion == true">
+
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Intitulé de la question</label>
+              <textarea class="form-control" ng-model="$ctrl.question" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Possibilité correcte</label>
+              <input type="text" class="form-control" ng-model="$ctrl.goodAnswer">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Possibilité fausse 1</label>
+              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer1">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Possibilité fausse 2</label>
+              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer2">
+            </div>
+
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Possibilité fausse 3</label>
+              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer3">
+            </div>
+            <center>
+              <button type="submit" class="btn btn-primary" ng-click="$ctrl.addQuestion()">Ajouter la question au concept </button>
+            </center>
+          </form>
+          <p> {{$ctrl.message}} </p>
+        </div>
+
+
+      </div>
+      <!-- /.row -->
     </div>
 
  <!--
