@@ -1,10 +1,9 @@
-<<<<<<< HEAD
 <div class="container">
 
         <div class="row">
 
             <div class="col-lg-12">
-                <h1 class="page-header">Affrontement
+                <h1 style="color: #166e70;" class="page-header">Affrontement
                     <small> Plyaers !</small>
                 </h1>
                 <ol class="breadcrumb">
@@ -21,7 +20,7 @@
         <div class="row">
 
             <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers">
-                <img height="190" width="200" src="assets/images/{{user.avatar}}">
+                <img height="150" width="140" src="assets/images/{{user.avatar}}">
                 <h3>{{user.name}}
                 </h3>
                 <p>Ranking:</p>
@@ -35,15 +34,17 @@
                   </select>
               </div>
               <center>
-              <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button>
-              <button type="button" class="btn btn-primary btn-md" ng-click = "$ctrl.affStatus('ferme')" >Sortir</button>
+              <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier ce joueur</button>
+              <!-- <button type="button" class="btn btn-primary btn-md" ng-click = "$ctrl.affStatus('ferme')" >Sortir</button> -->
               </center>
               <br/><br/>
           </div>
 
         </div>
-=======
-<div id="sbleft_affront" class="sbleft">
+
+
+
+<!-- <div id="sbleft_affront" class="sbleft">
   <div class="container" style="width:180px">
       <div class="row">
         <div class="col-lg-12">
@@ -72,8 +73,8 @@
   <div ng-show="$ctlr.jeuChoice" class container style="width:180px">
 
   </div>
-</div>
-
+</div> -->
+<!-- 
 <div id="main_affront" style="margin-left: 220px">
 
   <div ng-show="$ctrl.jChoisi" >
@@ -113,9 +114,8 @@
                   </li>
                   <li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>
                   <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
->>>>>>> c753f5182311e53fd0b65cc0febf12c9e919fbca
+
                   <!-- <li><button ng-click = "" >Message </button></li> -->
 
-        <!-- Our Customers -->
 
-    </div>
+   <!--  </div> -->
