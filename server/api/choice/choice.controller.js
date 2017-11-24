@@ -13,6 +13,7 @@
 import jsonpatch from 'fast-json-patch';
 import {Choice} from '../../sqldb';
 import db from "../../sqldb"
+import Sequelize from 'sequelize';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -92,6 +93,7 @@ export function show(req, res) {
 export function question(req,res){
   console.log("on m appelle")
   return Choice.findAll({
+    order: Sequelize.fn('RANDOM'),
     where : {
       QuestionId : req.params.id
     }
