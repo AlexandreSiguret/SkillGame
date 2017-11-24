@@ -13,6 +13,7 @@
 import jsonpatch from 'fast-json-patch';
 import {Answer} from '../../sqldb';
 import db from "../../sqldb"
+import Sequelize from 'sequelize';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -72,6 +73,25 @@ export function index(req, res) {
   })
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+export function one(req,res){
+  console.log("coucou ici ")
+  return Answer.findAll({
+    order: Sequelize.fn('RANDOM'),
+    limit : 1 ,
+    include : {
+      model: db.Question,
+      attributes : ["_id","question"]
+    },
+    where : {
+      GameId : req.params.id,
+      UserId : req.user._id,      
+    },
+    attributes : ["_id"]
+  }
+  
+  ).then(respondWithResult(res))
 }
 
 // Gets a single Answer from the DB
