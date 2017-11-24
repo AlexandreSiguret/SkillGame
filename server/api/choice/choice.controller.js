@@ -89,6 +89,15 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+export function question(req,res){
+  console.log("on m appelle")
+  return Choice.findAll({
+    where : {
+      QuestionId : req.params.id
+    }
+  }).then(respondWithResult(res))
+}
+
 // Creates a new Choice in the DB
 export function create(req, res) {
   return Choice.create(req.body)
