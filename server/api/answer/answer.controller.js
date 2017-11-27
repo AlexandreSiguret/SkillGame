@@ -120,7 +120,7 @@ export function upsert(req, res) {
   }
 */
 
-console.log("genial bienvenu")
+
   return Answer.upsert(req.body, {
     
     where: {

@@ -653,6 +653,7 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
       
+
       Badge.destroy({ where: {} })
       
             .then(() => {
@@ -690,6 +691,42 @@ export default function seedDatabaseIfNeeded() {
             .catch(err => console.log('error populating badges', err));
 
 
+      Score.destroy({ where: {} })
+      
+            .then(() => {
+      
+              let score = Score.bulkCreate([{
+      
+                User1Id : 76,
+                ConceptId : 1,
+                score : 0
+      
+              }, {
+      
+                User1Id : 71,
+                ConceptId : 1,
+                score : 0
+              }, {
+      
+                User1Id : 711,
+                ConceptId : 1,
+                score : 0
+      
+              }, {
+      
+                User1Id : 7777,
+                ConceptId : 1,
+                score : 0
+      
+              }]);
+      
+            })
+      
+            .then(() => console.log('finished populating badges'))
+      
+            .catch(err => console.log('error populating badges', err));
+
+
       Game.destroy({where:{}})
       .then(() =>{
         let game = Game.bulkCreate([{
@@ -713,25 +750,7 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
 
-      Score.destroy({where:{}})
-      .then(() =>{
-        let score = Score.bulkCreate([{
-  
-          User1Id : 7,
-          ConceptId : 1,
-          score : 0
-  
-  
-        }, {
-           User1Id : 7,
-           ConceptId : 1,
-           score : 0
-        }
-      ])
-      } )
-      .then(() => console.log('finished populating scores'))
-      
-      .catch(err => console.log('error populating scores', err));
+     
 
   }
 
