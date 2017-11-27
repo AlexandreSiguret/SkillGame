@@ -21,6 +21,9 @@ export class NavbarComponent {
   },{
     title : "Affrontement",
     state : "affrontement"
+  },{
+    title : "Classement",
+    state : "classement"
   }
 ];
   isLoggedIn: Function;
