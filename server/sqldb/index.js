@@ -19,6 +19,7 @@ db.Answer = db.sequelize.import('../api/answer/answer.model');
 db.Choice = db.sequelize.import('../api/choice/choice.model');
 db.Concept = db.sequelize.import('../api/concept/concept.model');
 db.Game = db.sequelize.import('../api/game/game.model');
+db.Score = db.sequelize.import('../api/score/score.model');
 db.Message = db.sequelize.import('../api/message/message.model');
 db.Question = db.sequelize.import("../api/question/question.model")
 db.Thing = db.sequelize.import('../api/thing/thing.model');
@@ -35,6 +36,12 @@ db.Concept.hasMany(db.Game)
 
 db.Game.belongsTo(db.User,{ as :"User1"}),
 db.Game.belongsTo(db.User,{ as :"User2"})
+
+db.Score.belongsTo(db.Concept)
+db.Concept.hasMany(db.Score)
+
+db.Score.belongsTo(db.User)
+db.User.hasMany(db.Score)
 
 db.Answer.belongsTo(db.User)
 db.Answer.belongsTo(db.Game)

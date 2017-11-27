@@ -25,7 +25,7 @@ export class QuestionController {
     this.singleQuestion=[];
     this.idChoices = [];
 
-    this.$http.get('/api/answers/pickone/21')
+    this.$http.get('/api/answers/pickone/24')
     .then(response => {
       this.singleQuestion = response.data[0];
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
@@ -99,7 +99,7 @@ export class QuestionController {
     var myEl = angular.element(document.querySelector('#report-question-button'));
     myEl.attr('disabled',"");
 
-    this.$http.get('/api/answers/pickone/21')
+    this.$http.get('/api/answers/pickone/24')
     .then(response => {
       this.singleQuestion = response.data[0];
                 console.log(this.singleQuestion.Question._id)
@@ -112,12 +112,12 @@ export class QuestionController {
                   this.detailedQuestion = response.data;
 
                   for (var i = 0; i < 4; i++) {
-            this.idChoices[i]=this.questionChoices[i]._id;
+                    this.idChoices[i]=this.questionChoices[i]._id;
 
-            if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
-              this.detailedQuestion._id = this.questionChoices[i]._id;
-          }
-              });
+                    if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
+                      this.detailedQuestion._id = this.questionChoices[i]._id;
+                  }
+                      });
 
               });
 

@@ -2,6 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './listquestion.routes';
 
+
 export class ListquestionController {
   $http;
   socket;

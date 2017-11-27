@@ -174,9 +174,7 @@ function allcreation(tab, idquizz, iduser) {
 
 export function create(req, res) {
   req.body.User1Id = req.user._id
-
-
-
+  
   return Game.create(req.body)
     .then(response => {
       console.log("on essaye")
