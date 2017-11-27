@@ -79,6 +79,7 @@ export class ClassementController {
     this.clearAll();
     this.conceptChoisi = c;
     this.jChoisi = true;
+    this.getUserScore(c);
     console.log(c);
   }
 
