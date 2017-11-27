@@ -119,7 +119,8 @@ export function upsert(req, res) {
     Reflect.deleteProperty(req.body, '_id');
   }
 */
-console.log()
+
+console.log("genial bienvenu")
   return Answer.upsert(req.body, {
     
     where: {

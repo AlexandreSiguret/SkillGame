@@ -2,6 +2,8 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routing from './question.routes';
 
+
+
 export class QuestionController {
   $scope;
   $http;
@@ -33,6 +35,7 @@ export class QuestionController {
     $scope.stopped = false;
     var vm = this;
     this.errormessage = ""
+    
 
     this.all_questions = [{
       question: "Question 1 ?",
@@ -129,29 +132,23 @@ export class QuestionController {
 
                 if($scope.stopped != true)
                   {$scope.counter--;}
-                  
-                else{
 
-                  this.$http.get('/api/concepts')
-                  .then(response => {
-                    this.awesomeConcept = response.data;               
-                    
-              
-              
-                })
-                }
+                
 
                 $scope.minutes = Math.floor((($scope.counter / 60)));
                 $scope.seconds = Math.floor($scope.counter - ($scope.minutes * 60));
                 mytimeout = $timeout($scope.onTimeout,1000);
               }
               var mytimeout = $timeout($scope.onTimeout,1000);
+             
             }
 
 
             $onInit() {
-              this.$http.get('/api/answers/pickone/11')
+              this.$http.get('/api/answers/pickone/35')
+
               .then(response => {
+                
                 this.singleQuestion = response.data;
                 console.log("response.data")
                 console.log(response.data)
@@ -160,7 +157,15 @@ export class QuestionController {
             }
 
             Check_next() {
-              this.errormessage = "";
+             console.log(this.singleQuestion[0]._id)
+              this.$http.put('/api/answers/'+ this.singleQuestion[0]._id,{
+                _id :this.singleQuestion[0]._id,
+                earnedPoint : this.$scope.seconds,
+              })    
+             
+             
+
+            this.errormessage = "";
              var myEl = angular.element(document.querySelector('#next-question-button'));
              myEl.attr('disabled',"");
 
