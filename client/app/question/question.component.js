@@ -10,22 +10,25 @@ export class QuestionController {
   stopped;
   num = 0;
 
+
   
   /*@ngInject*/
-  constructor($http, $scope, socket, $timeout) {
+  constructor($http, $scope, socket, $timeout,$stateParams) {
     this.$timeout=$timeout;
     this.$scope=$scope;
+    this.$stateParams = $stateParams;
     this.$http = $http;
     this.socket = socket;
     $scope.counter = 30;
     $scope.stopped = false;
     var vm = this;
+    this.wrong = false;
     this.errormessage = ""
     this.questionChoices=[];
     this.singleQuestion=[];
     this.idChoices = [];
 
-    this.$http.get('/api/answers/pickone/6')
+    this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {
       this.singleQuestion = response.data[0];
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
@@ -57,14 +60,14 @@ export class QuestionController {
     $scope.onTimeout = function(){
 
       if($scope.counter == 0) {
-
-        var variable = '#label-choices-'+this.detailedQuestion._id;
+        
+        var variable = '#label-choices-'+vm.detailedQuestion._id;
         var myEl = angular.element( document.querySelector( variable ) );
         myEl.removeAttr('class');
         myEl.attr('class',"false");
 
-        for (var i = 0; i < idChoices.length; i++) {
-          var variable = '#choices-'+idChoices[i];
+        for (var i = 0; i < vm.idChoices.length; i++) {
+          var variable = '#choices-'+vm.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
           myEl.attr('disabled',"");
         }
@@ -99,12 +102,22 @@ export class QuestionController {
     var myEl = angular.element(document.querySelector('#report-question-button'));
     myEl.attr('disabled',"");
 
-    this.$http.put('/api/answers/'+ this.singleQuestion._id,{
-      _id :this.singleQuestion._id,
-      earnedPoint : this.$scope.seconds,
-    })  
+   if(this.wrong){
 
-    this.$http.get('/api/answers/pickone/6')
+      this.$http.put('/api/answers/'+ this.singleQuestion._id,{
+        _id :this.singleQuestion._id,
+        earnedPoint : 0
+      })
+    }
+    else{
+      this.$http.put('/api/answers/'+ this.singleQuestion._id,{
+        _id :this.singleQuestion._id,
+        earnedPoint : this.$scope.seconds
+      })  
+    }
+
+    this.wrong = false
+    this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {
       this.singleQuestion = response.data[0];
                 console.log(this.singleQuestion.Question._id)
@@ -163,7 +176,7 @@ export class QuestionController {
             }
           }
           else {
-
+            this.wrong = true;
             var variable = '#label-choices-'+this.detailedQuestion._id;
             var myEl = angular.element( document.querySelector( variable ) );
             myEl.removeAttr('class');
