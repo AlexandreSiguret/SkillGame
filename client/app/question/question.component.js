@@ -10,13 +10,13 @@ export class QuestionController {
   stopped;
   num = 0;
 
-  link:ng.IDirectiveLinkFn = (scope:ng.IScope, element:ng.IAugmentedJQuery, attr:ng.IAttributes) => {
+/*  link:ng.IDirectiveLinkFn = (scope:ng.IScope, element:ng.IAugmentedJQuery, attr:ng.IAttributes) => {
     this.$timeout(function () {
       console.log(this.counter);
       this.counter--;
     },1000);
   };
-  
+  */
 
   
   /*@ngInject*/
@@ -129,6 +129,17 @@ export class QuestionController {
 
                 if($scope.stopped != true)
                   {$scope.counter--;}
+                  
+                else{
+
+                  this.$http.get('/api/concepts')
+                  .then(response => {
+                    this.awesomeConcept = response.data;               
+                    
+              
+              
+                })
+                }
 
                 $scope.minutes = Math.floor((($scope.counter / 60)));
                 $scope.seconds = Math.floor($scope.counter - ($scope.minutes * 60));
@@ -139,12 +150,13 @@ export class QuestionController {
 
 
             $onInit() {
-              this.$http.get('/api/questions')
+              this.$http.get('/api/answers/pickone/11')
               .then(response => {
-                this.awesomeQuestion = response.data;
-                console.log(this.controleQuestion)
+                this.singleQuestion = response.data;
+                console.log("response.data")
                 console.log(response.data)
               });
+
             }
 
             Check_next() {
@@ -164,7 +176,9 @@ export class QuestionController {
            report(){
           // alert('Question Reported !');
           if(this.errormessage ==""){
-            this.errormessage = "the question has been reported"
+
+            this.errormessage = "the question :"+this.singleQuestion
+            /*this.errormessage = "the question has been reported"*/
             this.$http.get("/api/questions/"+this.awesomeQuestion[this.num]._id).then(response =>{
               this.$http.put("/api/questions/"+this.awesomeQuestion[this.num]._id,{ 
                 _id : this.awesomeQuestion[this.num]._id,
