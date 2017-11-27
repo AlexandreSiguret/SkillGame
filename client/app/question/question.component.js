@@ -21,8 +21,7 @@ export class QuestionController {
     this.socket = socket;
     $scope.counter = 30;
     $scope.stopped = false;
-    var vm = this;
-    this.wrong = false;
+    var vm = this;    
     this.errormessage = ""
     this.questionChoices=[];
     this.singleQuestion=[];
@@ -60,12 +59,16 @@ export class QuestionController {
     $scope.onTimeout = function(){
 
       if($scope.counter == 0) {
+
+        
         
         var variable = '#label-choices-'+vm.detailedQuestion._id;
         var myEl = angular.element( document.querySelector( variable ) );
         myEl.removeAttr('class');
         myEl.attr('class',"false");
 
+      
+        
         for (var i = 0; i < vm.idChoices.length; i++) {
           var variable = '#choices-'+vm.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
@@ -79,8 +82,9 @@ export class QuestionController {
 
           var myEl = angular.element(document.querySelector('#report-question-button'));
           myEl.removeAttr('disabled');
-        }
+        }       
 
+       
         $scope.stopped=true;
       }
 
@@ -100,23 +104,9 @@ export class QuestionController {
     myEl.attr('disabled',"");
 
     var myEl = angular.element(document.querySelector('#report-question-button'));
-    myEl.attr('disabled',"");
+    myEl.attr('disabled',"");  
 
-   if(this.wrong){
-
-      this.$http.put('/api/answers/'+ this.singleQuestion._id,{
-        _id :this.singleQuestion._id,
-        earnedPoint : 0
-      })
-    }
-    else{
-      this.$http.put('/api/answers/'+ this.singleQuestion._id,{
-        _id :this.singleQuestion._id,
-        earnedPoint : this.$scope.seconds
-      })  
-    }
-
-    this.wrong = false
+    
     this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {
       this.singleQuestion = response.data[0];
@@ -160,10 +150,17 @@ export class QuestionController {
           }
         }
 
+        
 
         validation(select){
 
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
+
+            this.$http.put('/api/answers/'+ this.singleQuestion._id,{
+              _id :this.singleQuestion._id,
+              earnedPoint : this.$scope.seconds
+            })
+
             var variable = '#label-choices-'+select._id;
             var myEl = angular.element( document.querySelector( variable ) );
             myEl.removeAttr('class');
@@ -176,7 +173,13 @@ export class QuestionController {
             }
           }
           else {
-            this.wrong = true;
+           
+
+            this.$http.put('/api/answers/'+ this.singleQuestion._id,{
+              _id :this.singleQuestion._id,
+              earnedPoint : 0
+            })
+
             var variable = '#label-choices-'+this.detailedQuestion._id;
             var myEl = angular.element( document.querySelector( variable ) );
             myEl.removeAttr('class');
