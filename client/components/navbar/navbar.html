@@ -11,6 +11,13 @@
     </div>
     <div uib-collapse="$ctrl.isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
+      <li>
+        <img src="assets/images/LogoDruid-blanc.png" height="50" widht="50" alt="I'm Yeoman Backer!">
+      </li>
+
+      <li>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </li>
         <!-- <li ng-show="$ctrl.isLoggedIn()" ng-repeat="item in $ctrl.menu" ui-sref-active="active">  Antonio: for debug -->
         <li  ng-repeat="item in $ctrl.menu" ui-sref-active="active">
             <a ui-sref="{{item.state}}">{{item.title}}</a>
