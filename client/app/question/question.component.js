@@ -129,6 +129,17 @@ export class QuestionController {
 
                 if($scope.stopped != true)
                   {$scope.counter--;}
+                  
+                else{
+
+                  this.$http.get('/api/concepts')
+                  .then(response => {
+                    this.awesomeConcept = response.data;               
+                    
+              
+              
+                })
+                }
 
                 $scope.minutes = Math.floor((($scope.counter / 60)));
                 $scope.seconds = Math.floor($scope.counter - ($scope.minutes * 60));
