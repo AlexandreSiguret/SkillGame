@@ -1,20 +1,39 @@
-<!--
+
 <div class="container">
 
         <div class="row">
 
-            <div class="col-lg-12">
-                <h1 style="color: #166e70;" class="page-header">Affrontement
-                    <small> Plyaers !</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Affrontement</li>
-                </ol>
+            <div class="col-md-3 col-sm-4 sidebar">
+              <ul class="nav nav-stacked nav-pills">
+                <li ng-repeat="concept in $ctrl.listConcepts"><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
+              </ul>
             </div>
 
-        </div>
+            <div class="row" style="margin-left:200px;">
+                <div ng-if="$ctrl.cChoisi" class="col-md-9 col-sm-8">
+                  <center> 
+                  <table border=0 width="350">
+                      <tr COLSPAN="3">
+                          <h1 style="color: #166e70;" class="page-header">Classement par {{ $ctrl.conceptChoisi.name }} </h1>
+                      </tr>
+                      <tr >
+                          <td width="100"><h2>Avatar</h2></td>
+                          <td width="100"><h2>Name</h2></td>
+                          <td width="100"><h2>Score</h2></td>
+                        </tr>
+                      <tr ng-repeat="s in $ctrl.listUsersScore">
+                        <td><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.avatar}}"></a></td>
+                        <td><a href="/affrontement" >{{s.name}}</a></td>
+                        <td>{{s.score}}</td>
+                      </tr>
+                    
+                    </table>
+                    </center>
+                </div>
+            </div>
+        
+
+        </div> <!-- end class row -->
 
         <!-- Team Member Profiles --
 
@@ -44,7 +63,7 @@
       
 -->
 
-
+<!--
 <div id="sbleft_affront" class="sbleft">
   <div class="container" style="width:180px">
       <div class="row">
@@ -109,10 +128,10 @@
                     <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                     </select>
                   </li>
-                  <!--<li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>-->
+                  <!--<li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>--
                   <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
 
-                  <!-- <li><button ng-click = "" >Message </button></li> -->
+                  <!-- <li><button ng-click = "" >Message </button></li> --
               </ul>
             </div>
 
@@ -133,7 +152,7 @@
                 </tr>
                
               </table>
-            </div>
+            </div>    -->
 
 
 

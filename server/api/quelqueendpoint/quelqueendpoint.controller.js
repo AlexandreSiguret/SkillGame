@@ -1,19 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/answers              ->  index
- * POST    /api/answers              ->  create
- * GET     /api/answers/:id          ->  show
- * PUT     /api/answers/:id          ->  upsert
- * PATCH   /api/answers/:id          ->  patch
- * DELETE  /api/answers/:id          ->  destroy
+ * GET     /api/quelqueendpoints              ->  index
+ * POST    /api/quelqueendpoints              ->  create
+ * GET     /api/quelqueendpoints/:id          ->  show
+ * PUT     /api/quelqueendpoints/:id          ->  upsert
+ * PATCH   /api/quelqueendpoints/:id          ->  patch
+ * DELETE  /api/quelqueendpoints/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Answer} from '../../sqldb';
-import db from "../../sqldb"
-import Sequelize from 'sequelize';
+import {Quelqueendpoint} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,37 +64,16 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Answers
+// Gets a list of Quelqueendpoints
 export function index(req, res) {
-  return Answer.findAll({
-    include :[db.Question]
-  })
+  return Quelqueendpoint.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-export function one(req,res){
-  console.log("coucou ici ")
-  return Answer.findAll({
-    order: Sequelize.fn('RANDOM'),
-    limit : 1 ,
-    include : {
-      model: db.Question,
-      attributes : ["_id","question"]
-    },
-    where : {
-      GameId : req.params.id,
-      UserId : req.user._id,      
-    },
-    attributes : ["_id"]
-  }
-  
-  ).then(respondWithResult(res))
-}
-
-// Gets a single Answer from the DB
+// Gets a single Quelqueendpoint from the DB
 export function show(req, res) {
-  return Answer.find({
+  return Quelqueendpoint.find({
     where: {
       _id: req.params.id
     }
@@ -106,23 +83,20 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new Answer in the DB
+// Creates a new Quelqueendpoint in the DB
 export function create(req, res) {
-  return Answer.create(req.body)
+  return Quelqueendpoint.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Upserts the given Answer in the DB at the specified ID
+// Upserts the given Quelqueendpoint in the DB at the specified ID
 export function upsert(req, res) {
-/*  if(req.body._id) {
+  if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-*/
 
-
-  return Answer.upsert(req.body, {
-    
+  return Quelqueendpoint.upsert(req.body, {
     where: {
       _id: req.params.id
     }
@@ -131,12 +105,12 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
-// Updates an existing Answer in the DB
+// Updates an existing Quelqueendpoint in the DB
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Answer.find({
+  return Quelqueendpoint.find({
     where: {
       _id: req.params.id
     }
@@ -147,9 +121,9 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a Answer from the DB
+// Deletes a Quelqueendpoint from the DB
 export function destroy(req, res) {
-  return Answer.find({
+  return Quelqueendpoint.find({
     where: {
       _id: req.params.id
     }

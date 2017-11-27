@@ -68,6 +68,7 @@ export class ClassementController {
    // this.$http.get("/api/score/"+this.conceptChoisi._id)
    // .then(response => {
     //  this.userScore = response.data;
+      this.cChoisi = true;
       this.listUsersScore = this.staticUsersScore;
     // });
     //console.log(this.userScore.name);
@@ -79,6 +80,7 @@ export class ClassementController {
     this.clearAll();
     this.conceptChoisi = c;
     this.jChoisi = true;
+    this.getUserScore(c);
     console.log(c);
   }
 
