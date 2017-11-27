@@ -22,8 +22,8 @@
                           <td width="100"><h2>Score</h2></td>
                         </tr>
                       <tr ng-repeat="s in $ctrl.listUsersScore">
-                        <td><img id="classementImg"  height="42" width="40" src="assets/images/{{s.avatar}}"></td>
-                        <td>{{s.name}}</td>
+                        <td><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.avatar}}"></a></td>
+                        <td><a href="/affrontement" >{{s.name}}</a></td>
                         <td>{{s.score}}</td>
                       </tr>
                     
