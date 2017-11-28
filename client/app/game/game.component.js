@@ -34,18 +34,6 @@ export class GameComponent {
       console.log("mes parties non finie mtn")
       console.log(this.openGame)
     })
-
-    this.$http.get('/api/users/4')
-    .then(response => {
-      this.listUsers = response.data;
-      console.log(this.listUsers);
-    });
-
-    this.$http.get('/api/concepts/2')
-    .then(response => {
-      this.listConcepts = response.data;
-      console.log(this.listConcepts);
-    });
   }
 }
 

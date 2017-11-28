@@ -26,9 +26,17 @@ function respondWithResult(res, statusCode) {
 
 // gets tree top score
 export function topthree(req,res){
-
+  
+  var cId = req.params.id;
   return Score.findAll({
-    order : [["score","DESC"]],
+    where: { 
+      ConceptId: cId,
+    },
+
+    order : [
+      ["score","DESC"], 
+      ["UserId","ASC"]
+    ],
     limit : 3
   })
     .then(handleEntityNotFound(res))

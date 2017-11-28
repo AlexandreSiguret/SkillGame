@@ -8,7 +8,7 @@ var controller = require('./score.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/topthree' ,controller.topthree);
+router.get('/topthree/:id' ,controller.topthree);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);
