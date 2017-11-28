@@ -124,13 +124,16 @@ export function game(req, res) {
     include: [{
       model: db.User,
       as: 'User2',
-      attributes : ["name"]
+      attributes : ["name","avatar"]
   },
   {
     model: db.User,
     as: 'User1',
-    attributes :  ["name"]
-  }]
+    attributes :  ["name","avatar"]
+  },{
+    model : db.Concept
+  }
+]
   }).then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
