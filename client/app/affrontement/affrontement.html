@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                 <!-- <label for="exampleFormControlSelect1">Example select</label> -->
-                  <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue)" class="form-control">
+                  <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue, user)" class="form-control">
                       <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                   </select>
               </div>
