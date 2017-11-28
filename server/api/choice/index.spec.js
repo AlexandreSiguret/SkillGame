@@ -56,26 +56,7 @@ describe('Choice API Router:', function() {
     });
   });
 
-  /**
- * @api {post} /choices  Create a new Choice 
- * 
- * @apiName PostChoice
- * @apiGroup Choice
- * @apiPermission none
- *
- * @apiParam {Number} QuestionId ID of question.
- * @apiParam {String} statement Statement.
- *
- *@apiSuccess  {Number} id  The new Choice-ID.
- * 
- * @apiError ChoiceNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "ChoiceNameTooShort"
- *     }
- */
+ 
 
   describe('POST /api/choices', function() {
     it('should route to choice.controller.create', function() {
@@ -85,26 +66,7 @@ describe('Choice API Router:', function() {
     });
   });
 
-  /**
- * @api {put} /choices/:id  Change a Choice 
- * 
- * @apiName PutChoice 
- * @apiGroup Choice 
- * @apiPermission none
- *
- * @apiParam {Number} QuestionId ID of question.
- * @apiParam {String} statement Statement.
- *
- * 
- * @apiError ChoiceNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "ChoiceNameTooShort"
- *     }
- */
-
+ 
   describe('PUT /api/choices/:id', function() {
     it('should route to choice.controller.upsert', function() {
       routerStub.put
@@ -114,25 +76,7 @@ describe('Choice API Router:', function() {
   });
 
 
-  /**
- * @api {patch} /choices/:id  Change a Choice 
- * 
- * @apiName PatchChoice
- * @apiGroup Choice
- * @apiPermission none
- *
- * @apiParam {Number} QuestionId ID of question.
- * @apiParam {String} statement Statement.
- *
- * 
- * @apiError ChoiceNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "ChoiceNameTooShort"
- *     }
- */
+
 
   describe('PATCH /api/choices/:id', function() {
     it('should route to choice.controller.patch', function() {
@@ -142,23 +86,7 @@ describe('Choice API Router:', function() {
     });
   });
 
-/**
- * @api {delete} /choices/:id  delete a Choice 
- * 
- * @apiName DeleteChoice
- * @apiGroup Choice
- * @apiPermission none
- *
- *
- * 
- * @apiError ChoiceNotFound The <code>id</code> of Choice was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "ChoiceNotFound"
- *     }
- */
+
 
   describe('DELETE /api/choices/:id', function() {
     it('should route to choice.controller.destroy', function() {
