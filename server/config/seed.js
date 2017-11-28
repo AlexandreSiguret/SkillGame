@@ -25,8 +25,8 @@ export default function seedDatabaseIfNeeded() {
     let Concept = sqldb.Concept;
     let Question = sqldb.Question;
     let Choice = sqldb.Choice;
-    let Game = sqldb.Score;
-    let Score = sqldb.Game;
+    let Game = sqldb.Game;
+    let Score = sqldb.Score;
     let Answer = sqldb.Answer
     let Message = sqldb.Message;
     let Badge = sqldb.Badge
@@ -730,7 +730,7 @@ export default function seedDatabaseIfNeeded() {
       Game.destroy({where:{}})
       .then(() =>{
         let game = Game.bulkCreate([{
-  
+          
           UserId : 7,
           //User2bisId:1,
           ConceptId : 1,
@@ -742,7 +742,24 @@ export default function seedDatabaseIfNeeded() {
            User2Id : 8,
            ConceptId : 1,
            ended : false
+        }, {
+          UserId : 4,
+          ConceptId : 1,
+          ended : true
+       }, {
+        UserId : 3,
+        ConceptId : 1,
+        ended : true
+     }, {
+      UserId : 5,
+      ConceptId : 1,
+      ended : false
+      }, {
+        UserId : 8,
+        ConceptId : 1,
+        ended : false
         }
+
       ])
       } )
       .then(() => console.log('finished populating things'))
@@ -750,6 +767,38 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
 
+<<<<<<< HEAD
+      Score.destroy({where:{}})
+      .then(() =>{
+        let score = Score.bulkCreate([{
+          
+          UserId : 4,
+          ConceptId : 1,
+          score : 2
+  
+  
+        },{
+
+           UserId : 3,
+           ConceptId : 1,
+           score : 1
+        }, {
+          
+          UserId : 5,
+          ConceptId : 1,
+          score : 3
+       },{
+        
+        UserId : 8,
+        ConceptId : 1,
+        score : 0
+     }
+      ]);
+      } )
+      .then(() => console.log('finished score'))
+      
+=======
+>>>>>>> cd7e65bcb692740d78eefed96cc824f9496f7f26
      
 
   }

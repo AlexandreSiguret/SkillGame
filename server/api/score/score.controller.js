@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Score} from '../../sqldb';
+import Sequelize from 'sequelize';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -21,6 +22,18 @@ function respondWithResult(res, statusCode) {
     }
     return null;
   };
+}
+
+// gets tree top score
+export function topthree(req,res){
+
+  return Score.findAll({
+    order : Sequelize.fn('MAX', Sequelize.col('score')),
+    limit : 3
+  })
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res))
 }
 
 function patchUpdates(patches) {
