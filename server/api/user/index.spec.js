@@ -45,29 +45,6 @@ describe('User API Router:', function() {
     userIndex.should.equal(routerStub);
   });
 
-  /**
- * @api {get} /users  Read data of User
- * 
- * @apiName GetUser
- * @apiGroup User
- * @apiPermission none
- *
- * @apiParam {String} provider provider .
- * @apiParam {String} name name of the User..
- * @apiParam {String} avatar Avatar of the User.
- * @apiParam {String} email Email of the User.
- * @apiParam {String} password Password of the User.
- * 
- *@apiSuccess  {Number} id  The new User-ID.
- * 
- * @apiError UserNotFound The <code>id</code> of the User was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "UserNotFound"
- *     }
- */
 
   describe('GET /api/users', function() {
     it('should verify admin role and route to user.controller.index', function() {
@@ -77,23 +54,7 @@ describe('User API Router:', function() {
     });
   });
 
-   /**
- * @api {delete} /users/:id  delete a User 
- * 
- * @apiName DeleteUser
- * @apiGroup User
- * @apiPermission none
- *
- *
- * 
- * @apiError UserNotFound The <code>id</code> of the User was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "UserNotFound"
- *     }
- */
+
 
   describe('DELETE /api/users/:id', function() {
     it('should verify admin role and route to user.controller.destroy', function() {
@@ -103,29 +64,6 @@ describe('User API Router:', function() {
     });
   });
 
-   /**
- * @api {get} /users/me Read data of User (me)
- * 
- * @apiName GetUser
- * @apiGroup User
- * @apiPermission none
- *
- * @apiParam {String} provider provider .
- * @apiParam {String} name name of the User..
- * @apiParam {String} avatar Avatar of the User.
- * @apiParam {String} email Email of the User.
- * @apiParam {String} password Password of the User.
- * 
- *@apiSuccess  {Number} id  The new User-ID.
- * 
- * @apiError UserNotFound The <code>id</code> of the User was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "UserNotFound"
- *     }
- */
   describe('GET /api/users/me', function() {
     it('should be authenticated and route to user.controller.me', function() {
       routerStub.get
@@ -134,28 +72,6 @@ describe('User API Router:', function() {
     });
   });
 
-   /**
- * @api {put} /users/:id/password  Change a User With password
- * 
- * @apiName PutUser
- * @apiGroup User
- * @apiPermission none
- *
- * @apiParam {String} provider provider .
- * @apiParam {String} name name of the User..
- * @apiParam {String} avatar Avatar of the User.
- * @apiParam {String} email Email of the User.
- * @apiParam {String} password Password of the User.
- *
- * 
- * @apiError UserNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "UserNameTooShort"
- *     }
- */
 
   describe('PUT /api/users/:id/password', function() {
     it('should be authenticated and route to user.controller.changePassword', function() {
@@ -165,30 +81,6 @@ describe('User API Router:', function() {
     });
   });
 
-  /**
- * @api {get} /users/:id Read data of User by id
- * 
- * @apiName GetUser
- * @apiGroup User
- * @apiPermission none
- *
- * @apiParam {String} provider provider .
- * @apiParam {String} name name of the User..
- * @apiParam {String} avatar Avatar of the User.
- * @apiParam {String} email Email of the User.
- * @apiParam {String} password Password of the User.
- * 
- *@apiSuccess  {Number} id  The new User-ID.
- * 
- * @apiError UserNotFound The <code>id</code> of the User was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "UserNotFound"
- *     }
- */
-
   describe('GET /api/users/:id', function() {
     it('should be authenticated and route to user.controller.show', function() {
       routerStub.get
@@ -197,29 +89,6 @@ describe('User API Router:', function() {
     });
   });
 
-   /**
- * @api {post} /users  Create a new User
- * 
- * @apiName PostUser
- * @apiGroup User
- * @apiPermission none
- *
- * @apiParam {String} provider provider .
- * @apiParam {String} name name of the User..
- * @apiParam {String} avatar Avatar of the User.
- * @apiParam {String} email Email of the User.
- * @apiParam {String} password Password of the User.
- *
- *@apiSuccess  {Number} id  The new User-ID.
- * 
- * @apiError UserNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "UserNameTooShort"
- *     }
- */
 
   describe('POST /api/users', function() {
     it('should route to user.controller.create', function() {

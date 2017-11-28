@@ -35,28 +35,7 @@ describe('Message API Router:', function() {
     messageIndex.should.equal(routerStub);
   });
 
-   /**
- * @api {get} /messages  Read data of Message
- * 
- * @apiName GetMessage
- * @apiGroup Message
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Message.
- * @apiParam {String} destinateur Destinateur of the Message.
- * @apiParam {Number} msg_type Type of the Message.
- * @apiParam {String} message Message.
- * 
- *@apiSuccess  {Number} id  The new Message-ID.
- * 
- * @apiError MessageNotFound The <code>id</code> of the Message was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "MessageNotFound"
- *     }
- */
+
 
   describe('GET /api/message', function() {
     it('should route to message.controller.index', function() {
@@ -66,28 +45,6 @@ describe('Message API Router:', function() {
     });
   });
 
-  /**
- * @api {get} /messages/:id Read data of Message by id
- * 
- * @apiName GetMessage
- * @apiGroup Message
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Message.
- * @apiParam {String} destinateur Destinateur of the Message.
- * @apiParam {Number} msg_type Type of the Message.
- * @apiParam {String} message Message .
- * 
- *@apiSuccess  {Number} id  The new Message-ID.
- * 
- * @apiError MessageNotFound The <code>id</code> of the Message was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "MessageNotFound"
- *     }
- */
 
   describe('GET /api/message/:id', function() {
     it('should route to message.controller.show', function() {
@@ -97,28 +54,6 @@ describe('Message API Router:', function() {
     });
   });
 
-   /**
- * @api {post} /messages  Create a new Message
- * 
- * @apiName PostMessage
- * @apiGroup Message
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Message.
- * @apiParam {String} destinateur Destinateur of the Message.
- * @apiParam {Number} msg_type Type of the Message.
- * @apiParam {String} message Message .
- *
- *@apiSuccess  {Number} id  The new Message-ID.
- * 
- * @apiError MessageNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "MessageNameTooShort"
- *     }
- */
 
   describe('POST /api/message', function() {
     it('should route to message.controller.create', function() {
@@ -128,27 +63,6 @@ describe('Message API Router:', function() {
     });
   });
 
-  /**
- * @api {put} /messages/:id  Change a Message 
- * 
- * @apiName PutMessage
- * @apiGroup Message
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Message.
- * @apiParam {String} destinateur Destinateur of the Message.
- * @apiParam {Number} msg_type Type of the Message.
- * @apiParam {String} message Message .
- *
- * 
- * @apiError MessageNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "MessageNameTooShort"
- *     }
- */
 
 
   describe('PUT /api/message/:id', function() {
@@ -159,23 +73,7 @@ describe('Message API Router:', function() {
     });
   });
 
-   /**
- * @api {delete} /messages/:id  delete a Message 
- * 
- * @apiName DeleteMessage
- * @apiGroup Message
- * @apiPermission none
- *
- *
- * 
- * @apiError MessageNotFound The <code>id</code> of the Message was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "MessageNotFound"
- *     }
- */
+ 
 
   describe('DELETE /api/message/:id', function() {
     it('should route to message.controller.destroy', function() {
