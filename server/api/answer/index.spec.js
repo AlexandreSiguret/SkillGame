@@ -36,28 +36,7 @@ describe('Answer API Router:', function() {
     answerIndex.should.equal(routerStub);
   });
 
-   /**
- * @api {get} /answers  Read data of Answer 
- * 
- * @apiName GetAnswer
- * @apiGroup Answer
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Answer.
- * @apiParam {String} destinateur Destinateur of the Answer.
- * @apiParam {Number} msg_type Type of the Answer.
- * @apiParam {String} message Message of the Answer.
- * 
- *@apiSuccess  {Number} id  The new Answer-ID.
- * 
- * @apiError AnswerNotFound The <code>id</code> of the Answer was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "AnswerNotFound"
- *     }
- */
+
 
   describe('GET /api/answers', function() {
     it('should route to answer.controller.index', function() {
@@ -67,28 +46,7 @@ describe('Answer API Router:', function() {
     });
   });
 
-  /**
- * @api {get} /answers/:id Read data of answers by id
- * 
- * @apiName GetAnswer
- * @apiGroup Answer
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Answer.
- * @apiParam {String} destinateur Destinateur of the Answer.
- * @apiParam {Number} msg_type Type of the Answer.
- * @apiParam {String} message Message of the Answer.
- * 
- *@apiSuccess  {Number} id  The new Answer-ID.
- * 
- * @apiError AnswerNotFound The <code>id</code> of the Answer was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "AnswerNotFound"
- *     }
- */
+  
 
   describe('GET /api/answers/:id', function() {
     it('should route to answer.controller.show', function() {
@@ -98,28 +56,7 @@ describe('Answer API Router:', function() {
     });
   });
 
-  /**
- * @api {post} /answers  Create a new Answer 
- * 
- * @apiName PostAnswer
- * @apiGroup Answer
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Answer.
- * @apiParam {String} destinateur Destinateur of the Answer.
- * @apiParam {Number} msg_type Type of the Answer.
- * @apiParam {String} message Message of the Answer.
- *
- *@apiSuccess  {Number} id  The new Answer-ID.
- * 
- * @apiError AnswerNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "AnswerNameTooShort"
- *     }
- */
+
 
   describe('POST /api/answers', function() {
     it('should route to answer.controller.create', function() {
@@ -129,27 +66,7 @@ describe('Answer API Router:', function() {
     });
   });
 
-  /**
- * @api {put} /answers/:id  Change a Answer 
- * 
- * @apiName PutAnswer
- * @apiGroup Answer
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Answer.
- * @apiParam {String} destinateur Destinateur of the Answer.
- * @apiParam {Number} msg_type Type of the Answer.
- * @apiParam {String} message Message of the Answer.
- *
- * 
- * @apiError AnswerNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "AnswerNameTooShort"
- *     }
- */
+ 
 
   describe('PUT /api/answers/:id', function() {
     it('should route to answer.controller.upsert', function() {
@@ -159,27 +76,7 @@ describe('Answer API Router:', function() {
     });
   });
 
-  /**
- * @api {patch} /answers/:id  Change a Answer 
- * 
- * @apiName PatchAnswer
- * @apiGroup Answer
- * @apiPermission none
- *
- * @apiParam {String} expediteur Expediteur of the Answer.
- * @apiParam {String} destinateur Destinateur of the Answer.
- * @apiParam {Number} msg_type Type of the Answer.
- * @apiParam {String} message Message of the Answer.
- *
- * 
- * @apiError AnswerNotFound Minimum of 5 characters required.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 400 Bad Request
- *     {
- *       "error": "AnswerNameTooShort"
- *     }
- */
+
   describe('PATCH /api/answers/:id', function() {
     it('should route to answer.controller.patch', function() {
       routerStub.patch
@@ -188,23 +85,7 @@ describe('Answer API Router:', function() {
     });
   });
 
-  /**
- * @api {delete} /answers/:id  delete a Answer 
- * 
- * @apiName DeleteAnswer
- * @apiGroup Answer
- * @apiPermission none
- *
- *
- * 
- * @apiError AnswerNotFound The <code>id</code> of the Answer was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "AnswerNotFound"
- *     }
- */
+ 
 
   describe('DELETE /api/answers/:id', function() {
     it('should route to answer.controller.destroy', function() {

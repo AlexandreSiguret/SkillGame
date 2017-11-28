@@ -46,7 +46,7 @@ export default function(sequelize, DataTypes) {
 
   }, {
 
-    /**
+    /*
      * Virtual Getters
      */
     getterMethods: {
@@ -67,7 +67,7 @@ export default function(sequelize, DataTypes) {
       }
     },
 
-    /**
+    /*
      * Pre-save hooks
      */
     hooks: {
@@ -96,11 +96,11 @@ export default function(sequelize, DataTypes) {
       }
     },
 
-    /**
+    /*
      * Instance Methods
      */
     instanceMethods: {
-      /**
+      /*
        * Authenticate - check if the passwords are the same
        *
        * @param {String} password
@@ -127,7 +127,7 @@ export default function(sequelize, DataTypes) {
         });
       },
 
-      /**
+      /*
        * Make salt
        *
        * @param {Number} [byteSize] - Optional salt byte size, default to 16
@@ -161,7 +161,7 @@ export default function(sequelize, DataTypes) {
         });
       },
 
-      /**
+      /*
        * Encrypt password
        *
        * @param {String} password
@@ -193,7 +193,7 @@ export default function(sequelize, DataTypes) {
           });
       },
 
-      /**
+      /*
        * Update password field
        *
        * @param {Function} fn

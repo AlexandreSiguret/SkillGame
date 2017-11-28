@@ -17,52 +17,49 @@
                 </div>
 
                 <div class="col-sm-3"> 
-                    <img height="150" width="140" src="assets/images/{{player.User1.avatar}}">
-                    <h3>{{player.User1.name}}
-                    </h3>
-                    <p>Ranking:</p>
-                    <p>Force:</p>
-                    <p>Points:</p>
+                <center>
+                    <img height="90" width="80" src="assets/images/{{player.User1.avatar}}">
+                    <h4>{{player.User1.name}}
+                    </h4>
+                </center>
+                <br><br>
                 </div>
 
                 <div class="col-sm-3">
                 <center>
-                    <img height="50" width="40" src="assets/images/vs.png">
+                    <img height="30" width="20" src="assets/images/vs.png"><br>
+                    <h4>{{player.Concept.name}}</h4>
+                    <button ng-click ="" type="button" class="btn btn-primary btn-md">Play This Game</button>
                 </center>
                 </div>
 
                 <div class="col-sm-3"> 
-                    <img height="150" width="140" src="assets/images/{{player.User2.avatar}}">
-                    <h3>{{player.User2.name}}
-                    </h3>
-                    <p>Ranking:</p>
-                    <p>Force:</p>
-                    <p>Points:</p>
+                <center>
+                    <img height="90" width="80" src="assets/images/{{player.User2.avatar}}">
+                    <h4>{{player.User2.name}}</h4>
+                    </center>
+                    <br><br>
                 </div>
 
             </div>
                 <!--   {{player.User1.name}} vs {{player.User2.name}}  -->
         </div>
 
-        <div class="col-md-3 col-sm-4 sidebar">
-            
+        <div class="col-md-3 col-sm-8 sidebar">
         </div>
 
         <div class="col-md-9 col-sm-8">
         <!-- <h1 >Mes parties en cours {{ $ctrl.getCurrentUser().name }}</h1> -->
             <h1 class="page-header" style="color: #166e70;"> Ended games </h1>
-            <div class="col-md-9 col-sm-8" ng-repeat="player in gameCtrl.openGame in gameCtrl.finishGame">
+            <div class="col-md-9 col-sm-8" ng-repeat="player in gameCtrl.finishGame">
 
                 <div class="col-sm-2">
                 </div>
 
                 <div class="col-sm-3"> 
                     <img height="150" width="140" src="assets/images/{{player.User1.avatar}}">
-                    <h3>{{player.User1.name}}
-                    </h3>
-                    <p>Ranking:</p>
-                    <p>Force:</p>
-                    <p>Points:</p>
+                    <h4>{{player.User1.name}}
+                    </h4>
                 </div>
 
                 <div class="col-sm-3">
@@ -71,11 +68,8 @@
 
                 <div class="col-sm-3"> 
                     <img height="150" width="140" src="assets/images/{{player.User2.avatar}}">
-                    <h3>{{player.User2.name}}
-                    </h3>
-                    <p>Ranking:</p>
-                    <p>Force:</p>
-                    <p>Points:</p>
+                    <h4>{{player.User2.name}}
+                    </h4>
                 </div>
 
             </div>

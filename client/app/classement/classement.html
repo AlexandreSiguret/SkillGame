@@ -1,15 +1,15 @@
 <div class="container">
-          <div class="row">
+    <div class="row">
               <div class="col-md-3 col-sm-4 sidebar">
                 <ul class="nav nav-stacked nav-pills">
                   <li ng-repeat="concept in $ctrl.listConcepts"><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
                 </ul>
               </div>
               <div class="row" style="margin-left:200px;">
-                  <div ng-if="$ctrl.cChoisi" class="col-md-9 col-sm-8">
-                    <center>
+                <div ng-if="$ctrl.cChoisi" class="col-md-9 col-sm-8">
+                  <center>
                     <table border=0 width="350">
-                        <tr COLSPAN="3">
+                        <tr colspan="3">
                             <h1 style="color: #166e70;" class="page-header">Ranking for {{ $ctrl.conceptChoisi.name }} </h1>
                         </tr>
                         <tr >
@@ -22,10 +22,10 @@
                           <td><a href="/affrontement" >{{s.name}}</a></td>
                           <td>{{s.score}}</td>
                         </tr>
-              </table>
-            </center>
-          </div>
-      </div>
+                    </table>
+                  </center>
+                </div>
+              </div>
     </div> <!-- end class row -->
   </div> <!-- end class container -->
 

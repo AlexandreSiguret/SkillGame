@@ -708,8 +708,12 @@ export default function seedDatabaseIfNeeded() {
            User2Id : 8,
            ConceptId : 1,
            ended : false
+
         }]);
       })
+
+     
+
       .then(() => console.log('finished populating things'))
       
       .catch(err => console.log('error populating things', err));

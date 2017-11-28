@@ -5,6 +5,7 @@ var controller = require('./badge.controller');
 
 var router = express.Router();
 
+
 router.get('/', controller.index);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
