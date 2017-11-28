@@ -1,140 +1,32 @@
-<!--
 <div class="container">
-
-        <div class="row">
-
-            <div class="col-lg-12">
-                <h1 style="color: #166e70;" class="page-header">Affrontement
-                    <small> Plyaers !</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Affrontement</li>
-                </ol>
-            </div>
-
-        </div>
-
-        <!-- Team Member Profiles --
-
-        <div class="row">
-
-            <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers">
-                <img height="150" width="140" src="assets/images/{{user.avatar}}">
-                <h3>{{user.name}}</h3>
-                <p>Ranking:</p>
-                <p>Force:</p>
-                <p>Points:</p>
-
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Example select</label>
-                    <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue)" class="form-control">
-                      <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
-                  </select>
+    <div class="row">
+              <div class="col-md-3 col-sm-4 sidebar">
+                <ul class="nav nav-stacked nav-pills">
+                  <li ng-repeat="concept in $ctrl.listConcepts"><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
+                </ul>
               </div>
-              <center>
-              <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier ce joueur</button>
-              <!-- <button type="button" class="btn btn-primary btn-md" ng-click = "$ctrl.affStatus('ferme')" >Sortir</button> --
-              </center>
-              <br/><br/>
-          </div>
+              <div class="row" style="margin-left:200px;">
+                <div ng-if="$ctrl.cChoisi" class="col-md-9 col-sm-8">
+                  <center>
+                    <table border=0 width="350">
+                        <tr colspan="3">
+                            <h1 style="color: #166e70;" class="page-header">Ranking for {{ $ctrl.conceptChoisi.name }} </h1>
+                        </tr>
+                        <tr >
+                            <td width="100"><h2>Avatar</h2></td>
+                            <td width="100"><h2>Name</h2></td>
+                            <td width="100"><h2>Score</h2></td>
+                          </tr>
+                        <tr ng-repeat="s in $ctrl.listUsersScore">
+                          <td><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.avatar}}"></a></td>
+                          <td><a href="/affrontement" >{{s.name}}</a></td>
+                          <td>{{s.score}}</td>
+                        </tr>
+                    </table>
+                  </center>
+                </div>
+              </div>
+    </div> <!-- end class row -->
+  </div> <!-- end class container -->
 
-        </div>
-      
--->
-
-
-<div id="sbleft_affront" class="sbleft">
-  <div class="container" style="width:180px">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1 class="page-header">Jouers :</h1>
-          <div class="nav-affront-v">
-            <ul >
-                <li ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers">
-                  <a href="#" ng-click = "$ctrl.choix_user(user)" alt="{{user.name}}" >
-                    <img src="assets/images/{{user.avatar}}">
-                    {{user.name}}
-                  </a>
-                </li>
-            </ul>  
-          </div>
-
-        </div>
-      </div> 
-    
-    </br>
-  </div>
-
-  <div ng-show="$ctlr.jeuChoice" class container style="width:180px">
-
-  </div>
-</div> 
-
-<div id="main_classement" style="margin-left: 220px">
-
-  <div ng-show="$ctrl.jChoisi" >
-    
-    <h1 class="page-header"></h1>
-    <div id="">
-            <div id="jouer-image" >
-              <img src="assets/images/{{$ctrl.userChoisi.avatar}}" style="width:190px; height:200px" alt="{{$ctrl.userChoisi.name}}"> 
-              <p>{{$ctrl.userChoisi.name}}</p>
-            </div>
-            <div id="jouer-tableau">
-              <table border=0 width="150">
-                <tr>
-                  <td>Name:</td>
-                  <td>{{$ctrl.userChoisi.name}}</td>
-                </tr>
-                <tr>
-                  <td>Ranking:</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Force:</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Points:</td>
-                  <td></td>
-                </tr>
-              </table>
-            </div>
-            <div id="nav_jouerChoice" class="nav-affront">
-              <ul> 
-                  <li>
-                    <select ng-model="selectedValue" ng-click="$ctrl.getUserScore(selectedValue)">
-                    <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
-                    </select>
-                  </li>
-                  <!--<li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>-->
-                  <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
-
-                  <!-- <li><button ng-click = "" >Message </button></li> -->
-              </ul>
-            </div>
-
-            <div id="classement">
-              <table border=0 width="150">
-                <tr>
-                  Classement par {{ $ctrl.conceptChoisi.name }}
-                </tr>
-                <tr >
-                    <td >Avatar</td>
-                    <td>Name</td>
-                    <td>Score</td>
-                  </tr>
-                <tr ng-repeat="s in $ctrl.listUsersScore">
-                  <td><img id="classementImg" style"width:20px; height:22px;" src="assets/images/{{s.avatar}}"></td>
-                  <td>{{s.name}}</td>
-                  <td>{{s.score}}</td>
-                </tr>
-               
-              </table>
-            </div>
-
-
-
-</div>
+  

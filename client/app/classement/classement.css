@@ -7,34 +7,10 @@
     background: rgb(203, 203, 243);
   }
 
-  .nav-affront {font: bold 11px Verdana;line-height:25px;width:100%; margin:10px 0 10px 0;}
-  .nav-affront ul { width:100%; text-align:center; list-style: none;  list-style-type: none;} 
-  .nav-affront ul li {position: relative;display: inline;border-top-width:thin; list-style: none;}
-  .nav-affront ul li a {display: block;background: #999999;padding: 4px 10px;margin: 0 1px 0 1px;border-right: 0px solid #778;border-top-width:thin;color: white;text-decoration: none;}
-  .nav-affront ul li a:link,
-  .nav-affront ul li a:visited,
-  .nav-affront ul li a:link {color: black;}
-  .nav-affront ul li a:hover {color: white;text-decoration: underline;}
   
-  .nav-affront-v {font: bold 11px Verdana;line-height:25px;width:100%; margin:2px 0 ;}
-  .nav-affront-v ul { width:100%; text-align:left; list-style-type: none;} 
-  .nav-affront-v ul li {position: relative;}
-  .nav-affront-v ul li a {display: block;padding: 2px 0px;color: black;}
-  .nav-affront-v ul li a:link,
-  .nav-affront-v ul li a:visited,
-  .nav-affront-v ul li a:link {color: black;}
-  .nav-affront-v ul li a:hover {color: rgb(100, 6, 124);text-decoration: underline;}
-
-
-  #jouer-image {width:200px;margin: 0 auto; text-align: center }
-  #jouer-tableau {width:200px;margin: 0 auto; }
-
-  
-  #sbleft_affront img {margin-right: 3px; width:20px; height:22px;} 
+  #classementImg {margin: 5px; width:40px; height:42px;} 
   #classement img {margin-right: 3px; width:20px; height:22px;}  
-  #main_classement img {margin: 10px 10px; width:75px; height:80px; padding:5px 5px; border: solid 1px  #546489;}
-  
-  
+    
   .jouer_table {width:120px;font-size:70%; }
   .clearfloat, .clearleft{ clear:both;height:0;font-size: 1px;line-height: 0px;}
 

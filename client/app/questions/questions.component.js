@@ -5,6 +5,7 @@ import routing from './questions.routes';
 export class QuestionsController {
   $http;
   socket;
+  allConceptId=[];
   awesomeConcept = [];
   newConcept = '';
   currentConcept = [];
@@ -32,12 +33,27 @@ export class QuestionsController {
     this.$http.get('/api/concepts')
       .then(response => {
         this.awesomeConcept = response.data;
-
-        console.log(this.controleQuestion)
+        for (var i = 0; i < this.awesomeConcept.length; i++) {
+          this.allConceptId[i]=this.awesomeConcept[i]._id
+        }
+        console.log(this.allConceptId)
       });
   }
 
   choix_concept(concept) {
+
+    for (var i = 0; i < this.allConceptId.length; i++) {
+
+      var variable = '#concept-'+this.allConceptId[i];
+      var myEl = angular.element( document.querySelector( variable ) );
+      myEl.removeAttr('class');
+    }
+
+    var variable = '#concept-'+concept._id;
+    var myEl = angular.element( document.querySelector( variable ) );
+    myEl.attr('class',"active");
+
+
     this.currentConcept = concept;
     this.choice = true;
     console.log(this.controleQuestion)

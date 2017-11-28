@@ -57,9 +57,11 @@ export class AffrontementController {
 
   }
 
-  choix_concept(c) {
+  choix_concept(c, u) {
     this.clearAll();
     this.conceptChoisi = c;
+    this.userChoisi = u;
+    this.cChoisi = true;
     this.jChoisi = true;
     //console.log(c);
   }
@@ -158,20 +160,24 @@ export class AffrontementController {
 
 
   /*********  Submit Game  ************ */
-  submitGame() {
-
-      this.$http.post("/api/games", {
-       
+  submitGame(u) {
+    
+    if(this.userChoisi._id == u._id){
+      
+      this.$http.post("/api/games", { 
         User2Id: this.userChoisi._id,
         ConceptId: this.conceptChoisi._id,
       })
       .then(response => {
         this.idNewMessage = response.data._id;
       });
-      //console.log(this.getCurrentUser()._id+' '+this.userChoisi._id+' '+this.conceptChoisi.name);
+      
+      console.log('Currentuser: '+this.getCurrentUser()._id+', User Choisi: '+this.userChoisi._id+', ConceptChoisi: '+this.conceptChoisi.name);
+    }else{
+      console.log("Select a concept please!");
+    } 
       
   } // end submit Game
-
 
   clearAll(){
 

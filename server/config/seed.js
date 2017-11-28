@@ -26,6 +26,7 @@ export default function seedDatabaseIfNeeded() {
     let Question = sqldb.Question;
     let Choice = sqldb.Choice;
     let Game = sqldb.Game;
+    let Score = sqldb.Score;
     let Answer = sqldb.Answer
     let Message = sqldb.Message;
     let Badge = sqldb.Badge
@@ -652,6 +653,7 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
       
+
       Badge.destroy({ where: {} })
       
             .then(() => {
@@ -689,28 +691,77 @@ export default function seedDatabaseIfNeeded() {
             .catch(err => console.log('error populating badges', err));
 
 
+     
+
       Game.destroy({where:{}})
       .then(() =>{
         let game = Game.bulkCreate([{
-  
-          User1Id : 7,
+          
+          UserId : 7,
           //User2bisId:1,
           ConceptId : 1,
           ended : false
   
   
         }, {
-           User1Id : 7,
+           UserId : 7,
            User2Id : 8,
            ConceptId : 1,
            ended : false
+        }, {
+          UserId : 4,
+          ConceptId : 1,
+          ended : true
+       }, {
+        UserId : 3,
+        ConceptId : 1,
+        ended : true
+     }, {
+      UserId : 5,
+      ConceptId : 1,
+      ended : false
+      }, {
+        UserId : 8,
+        ConceptId : 1,
+        ended : false
         }
+
       ])
       } )
       .then(() => console.log('finished populating things'))
       
       .catch(err => console.log('error populating things', err));
 
+
+      Score.destroy({where:{}})
+      .then(() =>{
+        let score = Score.bulkCreate([{
+          
+          UserId : 4,
+          ConceptId : 1,
+          score : 2
+  
+  
+        },{
+
+           UserId : 3,
+           ConceptId : 1,
+           score : 1
+        }, {
+          
+          UserId : 5,
+          ConceptId : 1,
+          score : 3
+       },{
+        
+        UserId : 8,
+        ConceptId : 1,
+        score : 0
+     }
+      ]);
+      } )
+      .then(() => console.log('finished score'))
+      
   }
 
 }

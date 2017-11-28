@@ -14,6 +14,7 @@ export default function(app) {
   app.use('/api/choices', require('./api/choice'));
   app.use('/api/concepts', require('./api/concept'));
   app.use('/api/games', require('./api/game'));
+  app.use('/api/scores', require('./api/score'));
   app.use('/api/messages', require('./api/message'));
   app.use('/api/questions',require("./api/question"));
   app.use('/api/things', require('./api/thing'));
