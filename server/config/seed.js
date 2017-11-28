@@ -653,6 +653,7 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
       
+
       Badge.destroy({ where: {} })
       
             .then(() => {
@@ -680,6 +681,42 @@ export default function seedDatabaseIfNeeded() {
                 description : 'expert Art',      
                 _id: 4     
       
+      
+              }]);
+      
+            })
+      
+            .then(() => console.log('finished populating badges'))
+      
+            .catch(err => console.log('error populating badges', err));
+
+
+      Score.destroy({ where: {} })
+      
+            .then(() => {
+      
+              let score = Score.bulkCreate([{
+      
+                User1Id : 76,
+                ConceptId : 1,
+                score : 0
+      
+              }, {
+      
+                User1Id : 71,
+                ConceptId : 1,
+                score : 0
+              }, {
+      
+                User1Id : 711,
+                ConceptId : 1,
+                score : 0
+      
+              }, {
+      
+                User1Id : 7777,
+                ConceptId : 1,
+                score : 0
       
               }]);
       
@@ -730,6 +767,7 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
 
+<<<<<<< HEAD
       Score.destroy({where:{}})
       .then(() =>{
         let score = Score.bulkCreate([{
@@ -759,6 +797,8 @@ export default function seedDatabaseIfNeeded() {
       } )
       .then(() => console.log('finished score'))
       
+=======
+>>>>>>> cd7e65bcb692740d78eefed96cc824f9496f7f26
      
 
   }

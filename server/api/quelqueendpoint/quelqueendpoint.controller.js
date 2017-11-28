@@ -1,18 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/scores              ->  index
- * POST    /api/scores              ->  create
- * GET     /api/scores/:id          ->  show
- * PUT     /api/scores/:id          ->  upsert
- * PATCH   /api/scores/:id          ->  patch
- * DELETE  /api/scores/:id          ->  destroy
+ * GET     /api/quelqueendpoints              ->  index
+ * POST    /api/quelqueendpoints              ->  create
+ * GET     /api/quelqueendpoints/:id          ->  show
+ * PUT     /api/quelqueendpoints/:id          ->  upsert
+ * PATCH   /api/quelqueendpoints/:id          ->  patch
+ * DELETE  /api/quelqueendpoints/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Score} from '../../sqldb';
-import Sequelize from 'sequelize';
+import {Quelqueendpoint} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -22,18 +21,6 @@ function respondWithResult(res, statusCode) {
     }
     return null;
   };
-}
-
-// gets tree top score
-export function topthree(req,res){
-
-  return Score.findAll({
-    order : Sequelize.fn('MAX', Sequelize.col('score')),
-    limit : 3
-  })
-    .then(handleEntityNotFound(res))
-    .then(respondWithResult(res))
-    .catch(handleError(res))
 }
 
 function patchUpdates(patches) {
@@ -77,16 +64,16 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Scores
+// Gets a list of Quelqueendpoints
 export function index(req, res) {
-  return Score.findAll()
+  return Quelqueendpoint.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Score from the DB
+// Gets a single Quelqueendpoint from the DB
 export function show(req, res) {
-  return Score.find({
+  return Quelqueendpoint.find({
     where: {
       _id: req.params.id
     }
@@ -96,20 +83,20 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new Score in the DB
+// Creates a new Quelqueendpoint in the DB
 export function create(req, res) {
-  return Score.create(req.body)
+  return Quelqueendpoint.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Upserts the given Score in the DB at the specified ID
+// Upserts the given Quelqueendpoint in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
 
-  return Score.upsert(req.body, {
+  return Quelqueendpoint.upsert(req.body, {
     where: {
       _id: req.params.id
     }
@@ -118,12 +105,12 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
-// Updates an existing Score in the DB
+// Updates an existing Quelqueendpoint in the DB
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Score.find({
+  return Quelqueendpoint.find({
     where: {
       _id: req.params.id
     }
@@ -134,9 +121,9 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a Score from the DB
+// Deletes a Quelqueendpoint from the DB
 export function destroy(req, res) {
-  return Score.find({
+  return Quelqueendpoint.find({
     where: {
       _id: req.params.id
     }
