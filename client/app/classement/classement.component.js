@@ -4,43 +4,24 @@ import routing from './classement.routes';
 
 export class ClassementController {
   $http;
-  socket;
- 
-  getCurrentUser: Function;
-  userChoiced = Function;
-  listUsersScore = [];
-  userChoisi = [];
-  conceptChoisi = [];
-  currentUser = [];
+  socket; 
   
-  staticUsersScore = [
-    { _id: 3, name: "Alexandre", avatar: "alexandre.jpg", score: 35},
-    { _id: 6, name: "Yassine", avatar: "yassine.jpg", score: 29 },
-    { _id: 7, name: "HTSA", avatar: "htsa.jpg", score: 27 }
-  ];
-
+  threeAwesomePlayers;
 
   /*@ngInject*/
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
     this.socket = socket;
-    this.cChoisi = false;
-    this.getCurrentUser = Auth.getCurrentUserSync;
+    this.cChoisi = false;    
  
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
       socket.unsyncUpdates('concept');
       socket.unsyncUpdates('score');
     });
-  } // end constructor
+  } 
 
-  $onInit() {
-    this.$http.get('/api/users/notme')
-    .then(response => {
-      this.listUsers = response.data;
-      this.socket.syncUpdates('user', this.listUsers);
-      console.log(this.listUsers);
-    });
+  $onInit() {    
 
     this.$http.get('/api/concepts')
     .then(response => {
@@ -51,40 +32,21 @@ export class ClassementController {
 
   }
 
-  /* *
-   * *  Get Scores of user concepts  **
-   * */
-  getUserScore(c) {
-    this.conceptChoisi = c;
-   // this.$http.get("/api/score/"+this.conceptChoisi._id)
-   // .then(response => {
-    //  this.userScore = response.data;
-      this.listUsersScore = this.staticUsersScore;
-      this.cChoisi = true;
-    // });
-    //console.log(this.userScore.name);
-          
-  } // end getUserScore
-
-
   choix_concept(c) {
-    this.clearAll();
+    
     this.conceptChoisi = c;
-    this.jChoisi = true;
-    this.getUserScore(c);
+    this.jChoisi = true;    
+    this.cChoisi = true;
     console.log(c);
-  }
+    this.$http.get("/api/scores/topthree/"+c._id)
+    .then(response =>{
+      this.threeAwesomePlayers = response.data;
+      console.log(this.threeAwesomePlayers)
+    })
+    
+  }  
 
-  clearAll(){
-    this.chat_message = '';
-    this.jChoice = false;
-    this.jChoisi = false;
-    this.cChoisi = false
-    this.jAffront = false;
-  }
-
-
-}   // end class
+}   
 
 
 export default angular.module('skillGameApp.classement', [uiRouter])
