@@ -697,37 +697,19 @@ export default function seedDatabaseIfNeeded() {
       .then(() =>{
         let game = Game.bulkCreate([{
           
-          UserId : 7,
+          User1Id : 7,
           //User2bisId:1,
           ConceptId : 1,
           ended : false
   
   
         }, {
-           UserId : 7,
+           User1Id : 7,
            User2Id : 8,
            ConceptId : 1,
            ended : false
-        }, {
-          UserId : 4,
-          ConceptId : 1,
-          ended : true
-       }, {
-        UserId : 3,
-        ConceptId : 1,
-        ended : true
-     }, {
-      UserId : 5,
-      ConceptId : 1,
-      ended : false
-      }, {
-        UserId : 8,
-        ConceptId : 1,
-        ended : false
-        }
-
-      ])
-      } )
+        }]);
+      })
       .then(() => console.log('finished populating things'))
       
       .catch(err => console.log('error populating things', err));
@@ -739,27 +721,39 @@ export default function seedDatabaseIfNeeded() {
           
           UserId : 4,
           ConceptId : 1,
-          score : 2
+          score : 5
   
   
         },{
 
            UserId : 3,
            ConceptId : 1,
-           score : 1
+           score : 5
         }, {
           
           UserId : 5,
           ConceptId : 1,
-          score : 3
+          score : 5
        },{
         
-        UserId : 8,
+        UserId : 1,
         ConceptId : 1,
-        score : 0
-     }
+        score : 5
+     }, {
+      
+      UserId : 8,
+      ConceptId : 1,
+      score : 5
+    },
+
+    {
+      
+      UserId : 2,
+      ConceptId : 2,
+      score : 7
+    }
       ]);
-      } )
+      })
       .then(() => console.log('finished score'))
       
   }
