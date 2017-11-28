@@ -691,7 +691,6 @@ export default function seedDatabaseIfNeeded() {
             .catch(err => console.log('error populating badges', err));
 
 
-     
 
       Game.destroy({where:{}})
       .then(() =>{
@@ -733,6 +732,7 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
 
+
       Score.destroy({where:{}})
       .then(() =>{
         let score = Score.bulkCreate([{
@@ -762,7 +762,7 @@ export default function seedDatabaseIfNeeded() {
       } )
       .then(() => console.log('finished score'))
       
-     
+
 
   }
 
