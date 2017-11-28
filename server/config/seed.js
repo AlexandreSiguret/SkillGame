@@ -707,7 +707,7 @@ export default function seedDatabaseIfNeeded() {
            User1Id : 7,
            User2Id : 8,
            ConceptId : 1,
-           ended : false
+           ended : true
 
         }]);
       })
