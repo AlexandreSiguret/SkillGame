@@ -13,8 +13,12 @@ export class GameComponent {
     this.finishGame = []
     this.openGame = []
     this.message = 'Hello';
+    this.listUsers = [];
+    this.listConcepts = [];
+
   }
   $onInit(){
+
     this.$http.get("/api/games/mygame")
     .then(response =>{
       this.myAwesomeGame = response.data
@@ -29,12 +33,20 @@ export class GameComponent {
       console.log(this.finishGame)
       console.log("mes parties non finie mtn")
       console.log(this.openGame)
-    }
+    })
 
-  )
-  
+    this.$http.get('/api/users/4')
+    .then(response => {
+      this.listUsers = response.data;
+      console.log(this.listUsers);
+    });
+
+    this.$http.get('/api/concepts/2')
+    .then(response => {
+      this.listConcepts = response.data;
+      console.log(this.listConcepts);
+    });
   }
-  
 }
 
 
