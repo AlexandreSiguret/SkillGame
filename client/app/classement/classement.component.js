@@ -8,10 +8,7 @@ export class ClassementController {
  
   getCurrentUser: Function;
   userChoiced = Function;
-  affrontStatus = Function;
-  listUsers = [];
   listUsersScore = [];
-  listGames = [];
   userChoisi = [];
   conceptChoisi = [];
   currentUser = [];
@@ -27,15 +24,11 @@ export class ClassementController {
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
     this.socket = socket;
-    this.jChoice = true;
-    this.jChoisi = false;
-    this.jAffront = false;
     this.cChoisi = false;
     this.getCurrentUser = Auth.getCurrentUserSync;
  
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
-      //socket.unsyncUpdates('message');
       socket.unsyncUpdates('concept');
       socket.unsyncUpdates('score');
     });
@@ -59,17 +52,15 @@ export class ClassementController {
   }
 
   /* *
-   * *
    * *  Get Scores of user concepts  **
-   * *
    * */
   getUserScore(c) {
     this.conceptChoisi = c;
    // this.$http.get("/api/score/"+this.conceptChoisi._id)
    // .then(response => {
     //  this.userScore = response.data;
-      this.cChoisi = true;
       this.listUsersScore = this.staticUsersScore;
+      this.cChoisi = true;
     // });
     //console.log(this.userScore.name);
           
@@ -84,27 +75,6 @@ export class ClassementController {
     console.log(c);
   }
 
-  choix_user(user) {
-    this.clearAll();
-    this.userChoisi = user;
-    this.jChoisi = true;
-    console.log(this.userChoisi);
-  }
-
-  affStatus(a){
-    this.clearAll();
-    switch(a){
-      case 'jChoice':     this.jChoice = true; break;
-      case 'jChoisi':     this.jChoisi = true; break;
-      case 'invitAccepte':this.jAffront= true; break;
-      case 'invitEnvoye': this.jChoisi = true; break;
-      case 'ferme':       this.jChoice = true; break;
-
-    }; //end switch
-
-  }  //end affStatus
-
-
   clearAll(){
     this.chat_message = '';
     this.jChoice = false;
@@ -115,8 +85,6 @@ export class ClassementController {
 
 
 }   // end class
-
-
 
 
 export default angular.module('skillGameApp.classement', [uiRouter])
