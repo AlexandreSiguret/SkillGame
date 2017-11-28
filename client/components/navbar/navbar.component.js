@@ -12,17 +12,17 @@ export class NavbarComponent {
     title: 'Questions',
     state: 'questions'
   },{
-    title: 'Jeu',
+    title: 'Play',
     state: 'jeu'
   },
   {
     title: 'My Games',
     state: 'game'
   },{
-    title : "Affrontement",
+    title : "Battle",
     state : "affrontement"
   },{
-    title : "Classement",
+    title : "Ranking",
     state : "classement"
   }
 ];
