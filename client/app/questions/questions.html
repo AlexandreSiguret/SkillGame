@@ -8,14 +8,14 @@
       </ul>
     </div>
     <div class="col-md-9 col-sm-8">
-      <h1 style="color: #166e70;" class="page-header">Choissisez un concept </h1>
+      <h1 style="color: #166e70;" class="page-header">Pick a concept </h1>
       <div ng-if="$ctrl.choice == true">
         <div ng-if="$ctrl.choice == true">
           <!-- <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p> -->
           <br> 
           <center>
-            <button ng-click ="$ctrl.askQuestion()" type="button" class="btn btn-primary btn-md">Soumettre une question</button>
-            <button ng-click ="$ctrl.lookForAGame()" type="button" class="btn btn-primary btn-md">Défier un joueur aléatoire</button>
+            <button ng-click ="$ctrl.askQuestion()" type="button" class="btn btn-primary btn-md">Submit a question</button>
+            <button ng-click ="$ctrl.lookForAGame()" type="button" class="btn btn-primary btn-md">Battle a random player</button>
           </center>
 
           <br/>
@@ -23,31 +23,31 @@
           <form ng-if="$ctrl.controleQuestion == true">
 
             <div class="form-group">
-              <label for="exampleFormControlTextarea1">Question </label>
+              <label for="exampleFormControlTextarea1">Question</label>
               <textarea class="form-control" ng-model="$ctrl.question" rows="3"></textarea>
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1">Réponse correcte</label>
+              <label for="exampleFormControlInput1">Right answer</label>
               <input type="text" class="form-control" ng-model="$ctrl.goodAnswer">
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1">Réponse fausse 1</label>
+              <label for="exampleFormControlInput1">Wrong answer 1</label>
               <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer1">
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1">Réponse fausse 2</label>
+              <label for="exampleFormControlInput1">Wrong answer 2</label>
               <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer2">
             </div>
 
             <div class="form-group">
-              <label for="exampleFormControlInput1">Réponse fausse 3</label>
+              <label for="exampleFormControlInput1">Wrong answer 3</label>
               <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer3">
             </div>
             <center>
-              <button type="submit" class="btn btn-primary" ng-click="$ctrl.addQuestion()">Ajouter la question au concept </button>
+              <button type="submit" class="btn btn-primary" ng-click="$ctrl.addQuestion()">Add the question</button>
             </center>
           </form>
           <p> {{$ctrl.message}} </p>

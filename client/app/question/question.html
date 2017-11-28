@@ -50,7 +50,7 @@
     <div class="col-md-9 col-sm-8" id="quiz">
       
       <center>
-      <h1 style="color: #166e70;">Passer le test !</h1>
+      <h1 style="color: #166e70;">Answer the test !</h1>
         <div class="counter">
         <div id="countdown">
          <span class="minutes">{{minutes}}<b> Minutes</b></span>
@@ -73,7 +73,7 @@
     <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
     <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
     <div id="quiz-results" style="display:none;">
-      <p id="quiz-results-message">Bravos felicitations</p>
+      <p id="quiz-results-message">Congratulations</p>
       <p id="quiz-results-score">Score {{$ctrl.resultats}}/5</p>
     </div>
     <br/>
