@@ -42,19 +42,7 @@ describe('Badge API Router:', function() {
  * @apiName GetBadge
  * @apiGroup Badge
  * @apiPermission none
- *
- * @apiParam {String} picture Picture of badge.
- * @apiParam {String} description Description of badge.
- * 
- *@apiSuccess  {Number} id  The new Badge-ID.
- * 
- * @apiError BadgeNotFound The <code>id</code> of the Badge was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "BadgeNotFound"
- *     }
+
  */
 
   describe('GET /yes', function() {

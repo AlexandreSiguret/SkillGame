@@ -39,6 +39,7 @@ db.Game.belongsTo(db.User,{ as :"User2"})
 db.Answer.belongsTo(db.User)
 db.Answer.belongsTo(db.Game)
 db.Answer.belongsTo(db.Question)
+db.Answer.belongsTo(db.Choice)
 
 //db.Game.belongsTo(db.User,{as : "userdeux"}),
 //db.User.hasMany(db.Game,{as : "seconduser"})
