@@ -21,20 +21,19 @@
 
             <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers">
                 <img height="150" width="140" src="assets/images/{{user.avatar}}">
-                <h3>{{user.name}}
-                </h3>
+                <h3>{{user.name}}</h3>
                 <p>Ranking:</p>
                 <p>Force:</p>
                 <p>Points:</p>
 
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Example select</label>
-                    <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue)" class="form-control">
+                <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+                  <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue)" class="form-control">
                       <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                   </select>
               </div>
               <center>
-              <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier ce joueur</button>
+              <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame(user);" >Défier ce joueur</button>
               <!-- <button type="button" class="btn btn-primary btn-md" ng-click = "$ctrl.affStatus('ferme')" >Sortir</button> -->
               </center>
               <br/><br/>
