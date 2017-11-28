@@ -28,12 +28,11 @@ function respondWithResult(res, statusCode) {
 export function topthree(req,res){
 
   return Score.findAll({
-    order : Sequelize.fn('MAX', Sequelize.col('score')),
-    limit : 3
+    order : [["score","DESC"]]
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
-    .catch(handleError(res))
+    .catch(handleError(res));
 }
 
 function patchUpdates(patches) {
