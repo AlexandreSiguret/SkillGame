@@ -28,7 +28,8 @@ function respondWithResult(res, statusCode) {
 export function topthree(req,res){
 
   return Score.findAll({
-    order : [["score","DESC"]]
+    order : [["score","DESC"]],
+    limit : 3
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
