@@ -36,26 +36,7 @@ describe('Choice API Router:', function() {
     choiceIndex.should.equal(routerStub);
   });
 
-  /**
- * @api {get} /choices  Read data of Choice 
- * 
- * @apiName GetChoice
- * @apiGroup Choice
- * @apiPermission none
- *
- * @apiParam {Number} QuestionId ID of question.
- * @apiParam {String} statement Statement.
- * 
- *@apiSuccess  {Number} id  The new Choice-ID.
- * 
- * @apiError ChoiceNotFound The <code>id</code> of the Choice was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "ChoiceNotFound"
- *     }
- */
+
 
   describe('GET /api/choices', function() {
     it('should route to choice.controller.index', function() {
@@ -65,26 +46,7 @@ describe('Choice API Router:', function() {
     });
   });
 
-  /**
- * @api {get} /choices/:id Read data of Choice by id
- * 
- * @apiName GetChoice
- * @apiGroup Choice
- * @apiPermission none
- *
- * @apiParam {Number} QuestionId ID of question.
- * @apiParam {String} statement Statement.
- * 
- *@apiSuccess  {Number} id  The new Choice-ID.
- * 
- * @apiError ChoiceNotFound The <code>id</code> of the Choice was not found.
- * 
- *  @apiErrorExample {json} Error-Response(exemple):
- *     HTTP/1.1 404 Not Found
- *     {
- *       "error": "ChoiceNotFound"
- *     }
- */
+
 
   describe('GET /api/choices/:id', function() {
     it('should route to choice.controller.show', function() {

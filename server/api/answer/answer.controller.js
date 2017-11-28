@@ -131,6 +131,18 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
+export function myanswer(req,res){
+  var a = []
+  console.log("on essaye de l'appeler")
+  return Question.find({
+    where : {
+      QuestionId : req.params.id}
+  }).then(succes =>{
+    a.genial = succes
+    console.log(a)
+  })
+}
+
 // Updates an existing Answer in the DB
 export function patch(req, res) {
   if(req.body._id) {
