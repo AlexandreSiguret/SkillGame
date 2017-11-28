@@ -83,12 +83,6 @@ export class QuestionsController {
           _id : this.freeAwesomeGames[0]._id
         })
       }
-
-      
-      
-
-      
-      
       console.log(this.freeAwesomeGames)
 
     });
