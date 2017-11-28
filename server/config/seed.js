@@ -691,10 +691,7 @@ export default function seedDatabaseIfNeeded() {
             .catch(err => console.log('error populating badges', err));
 
 
-<<<<<<< HEAD
      
-=======
->>>>>>> 883803e53320e76a12b8850c305d95975f7141f0
 
       Game.destroy({where:{}})
       .then(() =>{
@@ -736,10 +733,6 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 883803e53320e76a12b8850c305d95975f7141f0
       Score.destroy({where:{}})
       .then(() =>{
         let score = Score.bulkCreate([{
@@ -769,12 +762,6 @@ export default function seedDatabaseIfNeeded() {
       } )
       .then(() => console.log('finished score'))
       
-<<<<<<< HEAD
-     
-=======
-
->>>>>>> 883803e53320e76a12b8850c305d95975f7141f0
-
   }
 
 }
