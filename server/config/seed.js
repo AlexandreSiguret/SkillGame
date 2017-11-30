@@ -95,7 +95,7 @@ export default function seedDatabaseIfNeeded() {
           name: 'Biology',
           _id:6
         },{
-          name: 'Bids',
+          name: 'Birds',
           _id:7
         },{
           name: 'Earth',

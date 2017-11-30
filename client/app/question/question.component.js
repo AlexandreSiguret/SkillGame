@@ -26,7 +26,6 @@ export class QuestionController {
     this.questionChoices=[];
     this.singleQuestion=[];
     this.idChoices = [];
-    this.valeur = false;
 
     this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {

@@ -1,58 +1,52 @@
 <div class="container">
   <div class="row">
-      <div class="col-md-3 col-sm-4 sidebar">
-          <ul class="nav nav-stacked nav-pills">
-              <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-          </ul>
-      </div>
+    <div class="col-md-3 col-sm-4 sidebar">
+      <ul class="nav nav-stacked nav-pills">
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+      </ul>
+    </div>
 
     <div class="col-md-9 col-sm-8" id="quiz">
-      
+
       <center>
-      <h1 style="color: #166e70;">Answer the test !</h1>
+        <h1 style="color: #166e70;">Answer the test !</h1>
         <div class="counter">
-        <div id="countdown">
-         <span class="minutes">{{minutes}}<b> Minutes</b></span>
-         <span class="seconds">{{seconds}}<b> Seconds</b></span>
+          <div id="countdown">
+           <span class="minutes">{{minutes}}<b> Minutes</b></span>
+           <span class="seconds">{{seconds}}<b> Seconds</b></span>
+         </div>
        </div>
-     </div>
-      
-      
-     <h1 id="quiz-name"></h1>
-     <div id="question" ng-view>
-      <h2>{{$ctrl.singleQuestion.Question.question}}</h2>
-      <ul ng-repeat="choices in $ctrl.questionChoices">
-      <center>
-        <input ng-click="$ctrl.validation(choices)" id="choices-{{choices._id}}" type="radio" name="choices" value="choices-{{choices._id}}">
-        <label id="label-choices-{{choices._id}}" class="" for="choices-{{choices._id}}">{{choices.statement}}</label>
-      <center>
-      </ul>
-      {{$ctrl.errormessage}}
-    </div>
-    
-    <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
-    <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button> <br> <br>
-    <br>
 
-    <!-- 
-    <div id="quiz-results" class="col-md-9 col-sm-8" ng-if="$ctrl.valeur == true">
-      <cent<p id="quiz-results-message">Congratulations</p>
-    </div> -->
 
-    <br/>
-  </div>
-  <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">
-    <center>
-      <h1 style="color: #166e70;">End of test !</h1>
-    </center>
-    <center>
-      <div class="alert alert-success">
-        <strong>Success!</strong> you successfully passed your test.
+       <h1 id="quiz-name"></h1>
+       <div id="question" ng-view>
+        <h2>{{$ctrl.singleQuestion.Question.question}}</h2>
+        <ul ng-repeat="choices in $ctrl.questionChoices">
+          <center>
+            <input ng-click="$ctrl.validation(choices)" id="choices-{{choices._id}}" type="radio" name="choices" value="choices-{{choices._id}}">
+            <label id="label-choices-{{choices._id}}" class="" for="choices-{{choices._id}}">{{choices.statement}}
+            </label>
+            <center>
+            </ul>
+            {{$ctrl.errormessage}}
+          </div>
+
+          <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
+          <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button> <br> <br>
+          <br><br/>
+        </div>
+
+        <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">
+          <center>
+            <h1 style="color: #166e70;">End of test !</h1>
+          </center>
+          <center>
+            <div class="alert alert-success">
+              <strong>Success!</strong> you successfully passed your test.
+            </div>
+          </center>
+        </div>
+
+
       </div>
-    </center>
     </div>
-</div>
-</center>
-</div>
-</div>
-</div>
