@@ -15,7 +15,7 @@
            <span class="minutes">{{minutes}}<b> Minutes</b></span>
            <span class="seconds">{{seconds}}<b> Seconds</b></span>
          </div>
-        </div>
+       </div>
 
 
        <h1 id="quiz-name"></h1>
@@ -26,25 +26,27 @@
             <input ng-click="$ctrl.validation(choices)" id="choices-{{choices._id}}" type="radio" name="choices" value="choices-{{choices._id}}">
             <label id="label-choices-{{choices._id}}" class="" for="choices-{{choices._id}}">{{choices.statement}}
             </label>
-          <center>
-        </ul>
+            <center>
+            </ul>
             {{$ctrl.errormessage}}
-        </div>
+          </div>
 
           <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
           <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button> <br> <br>
           <br><br/>
-  </div>
+        </div>
 
-  <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">
-    <center>
-      <h1 style="color: #166e70;">End of test !</h1>
-    </center>
-    <center>
-      <div class="alert alert-success">
-        <strong>Success!</strong> you successfully passed your test.
+        <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">
+          <center>
+            <h1 style="color: #166e70;">End of test !</h1>
+          </center>
+          <center>
+            <div class="alert alert-success">
+              <strong>Success!</strong> you successfully passed your test.
+            </div>
+          </center>
+        </div>
+
+
       </div>
-    </center>
-  </div>
-</div>
-</div>
+    </div>
