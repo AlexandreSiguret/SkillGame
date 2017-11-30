@@ -1536,7 +1536,7 @@ export default function seedDatabaseIfNeeded() {
           _id: 131,
           QuestionId :33,
           statement:"Europe"
-         }/*,{ 
+         },{ 
           _id:132,
           QuestionId :34,
           statement:"Jack Nicklaus"
@@ -1987,7 +1987,7 @@ export default function seedDatabaseIfNeeded() {
           statement:"Maria Carolina"
          }
 
-        */]);
+        ]);
 
       })
 
