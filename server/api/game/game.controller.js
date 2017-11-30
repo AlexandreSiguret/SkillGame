@@ -172,60 +172,35 @@ function allcreation(tab, idquizz, iduser) {
     Answer.create(creation2)
 
   }
+  return
 
 }
 
 export function create(req, res) {
   req.body.User1Id = req.user._id
+  var test = res 
+  
   
   return Game.create(req.body)
-    .then(response => {
+  
+    .then( function(){
       console.log("on essaye")
       Question.findAll({
         order: Sequelize.fn('RANDOM'),
         limit: 2
-      }).then(succes => allcreation(succes, response.dataValues._id, req.user._id))
-        .then(respondWithResult(res))
-        .catch(handleError(res));
-    })
+      })
+    }).then(respondWithResult(res,201))
+    /* .then(succes =>{
+      allcreation(succes, response.dataValues._id, req.user._id)
+      }
+    )
+*/
+    
+    .then(respondWithResult(res,201))
+    .then(console.log("les promesses s'enchainent et ne se ressemblent pas"))
+    .catch(handleError(res))
 
-  /*
-  .then(response =>{
-    console.log(response.dataValues);
-    var new_answer = {
-      question : 1,
-      choice : 2,
-      earnedPoint : 15,
-      user : req.user._id,
-      quizz :response.dataValues.concept
-    };
-    
-    Answer.create(new_answer)}
-  )   */ .then(respondWithResult(res, 201))
-    /*
-    
-      return Game.create(req.body)
-      .then(() =>{
-        Question.findAll({ 
-          order :         Sequelize.fn( 'RANDOM' ) ,    
-          limit : 1
-        }).then(res2 =>{     
-          var new_answer = {
-            question : res2[0].dataValues._id ,    
-            earnedPoint : 15,
-            user : req.body.user1,
-            quizz : req.body._id
-          }
-          Answer.create(new_answer)
-        })  
-    
-      }   
-        
-      )    
-      .then(respondWithResult(res, 201))
-    
-     */
-    .catch(handleError(res));
+
 }
 
 function regularisation(idquizz,idplayer) {
