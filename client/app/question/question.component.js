@@ -27,7 +27,8 @@ export class QuestionController {
     this.singleQuestion=[];
     this.idChoices = [];
     this.num = 0;
-   
+    this.concept;
+    this.currentScore = 0;
 
           
 
@@ -92,6 +93,12 @@ export class QuestionController {
     this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
     .then(response => {
       this.singleQuestion = response.data[0];
+	  
+	  this.$http.get("/api/questions/"+response.data[0].Question._id)
+      .then(response => {
+        this.concept = response.data.ConceptId;        
+      });
+	  
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
       .then(response => {
         this.questionChoices = response.data;
@@ -156,6 +163,27 @@ export class QuestionController {
               earnedPoint : this.$scope.seconds
             })
 
+			this.$http.get("/api/scores/"+this.concept) 
+            .then(response => {         
+             
+              
+              if(response.data.length == 0){                 
+                this.$http.post('/api/scores',{
+                  score :  this.$scope.seconds,              
+                  ConceptId : this.concept
+                }) 
+                     
+              }
+              else{
+                this.currentScore = response.data.score;
+                this.$http.put('/api/scores/'+ response.data._id,{
+                  score : this.currentScore + this.$scope.seconds,
+                  ConceptId : this.concept
+                }) 
+              }
+          })
+            
+			
             var variable = '#label-choices-'+select._id;
             var myEl = angular.element( document.querySelector( variable ) );
             myEl.removeAttr('class');
@@ -225,4 +253,4 @@ export class QuestionController {
         template: require('./question.html'),
         controller: QuestionController
       })
-      .name;
+.name;
