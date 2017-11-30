@@ -31,6 +31,7 @@ import QuestionComponent from './question/question.component';
 import Questions from './questions/questions.component';
 import ListQuestions from './listquestion/listquestion.component';
 import JeuComponent from './jeu/jeu.component';
+import Jeuchrono from './jeuchrono/jeuchrono.component';
 import Affrontement from './affrontement/affrontement.component';
 import Classement from './classement/classement.component';
 import GameComponent from './game/game.component';
@@ -39,7 +40,7 @@ import './app.css';
 angular.module('skillGameApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
   socket, util, JeuComponent, header, sidebarleft, Questions, Affrontement, Classement, ListQuestions,
-  GameComponent
+  GameComponent, Jeuchrono
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
