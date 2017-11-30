@@ -95,7 +95,7 @@ export default function seedDatabaseIfNeeded() {
           name: 'Biology',
           _id:6
         },{
-          name: 'Bids',
+          name: 'Birds',
           _id:7
         },{
           name: 'Earth',
@@ -862,7 +862,6 @@ export default function seedDatabaseIfNeeded() {
           ConceptId:16,
           goodAnswer:"Marie Antoinette"
         }
-
         ]);
 
       })
@@ -1506,7 +1505,7 @@ export default function seedDatabaseIfNeeded() {
           QuestionId :31,
           statement:"Lacrosse"
          },{ 
-          _id:124,
+          _id:1000,
           QuestionId :32,
           statement:"Frensh"
          },{
@@ -1986,7 +1985,7 @@ export default function seedDatabaseIfNeeded() {
           _id: 243,
           QuestionId :61,
           statement:"Maria Carolina"
-         },
+         }
 
         ]);
 
