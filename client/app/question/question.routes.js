@@ -3,7 +3,7 @@ export default function routes($stateProvider) {
   'ngInject';
 
   $stateProvider.state('question', {
-    url: '/question/:concept_id',
+    url: '/question/:game_id',
     template: '<question></question>'
   });
 }

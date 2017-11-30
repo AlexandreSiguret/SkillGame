@@ -28,7 +28,7 @@ export class QuestionController {
     this.idChoices = [];
    
 
-    this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
+    this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
     .then(response => {
       this.singleQuestion = response.data[0];
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
@@ -114,7 +114,7 @@ export class QuestionController {
     myEl.attr('disabled',"");  
 
     
-    this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
+    this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
     .then(response => {
       this.singleQuestion = response.data[0];
                 console.log(this.singleQuestion.Question._id)
