@@ -8,7 +8,6 @@ export class QuestionController {
   $timeout
   socket;
   stopped;
-  vm
   num = 0;
 
 
@@ -224,7 +223,7 @@ export class QuestionController {
               myEl.removeAttr('style');
               myE2.attr('style',"display: inline;");
 
-            //this.valeur=true;/*alert('Test Terminer !! Redirection vers la page ..... !!');*/
+           
 
           }, 2000);
           }
