@@ -119,13 +119,14 @@ export function create(req, res) {
 
 // Upserts the given Score in the DB at the specified ID
 export function upsert(req, res) {
-  if(req.body._id) {
+  /*if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
-  }
+  }*/
 
   return Score.upsert(req.body, {
-    where: {
-      _id: req.params.id
+    where: {      
+      UserId : req.user.id,
+      ConceptId : req.params.ConceptId      
     }
   })
     .then(respondWithResult(res))
