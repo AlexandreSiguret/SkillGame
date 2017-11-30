@@ -52,6 +52,7 @@
 @import 'jeu/jeu.css';
 @import 'listquestion/listquestion.css';
 @import 'main/main.css';
+@import 'messenger/messenger.css';
 @import 'question/question.css';
 @import 'questions/questions.css';
 @import '../components/footer/footer.css';

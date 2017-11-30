@@ -2,6 +2,7 @@
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/messages              ->  index
  * POST    /api/messages              ->  create
+ * GET     /api/messages/:email       ->  message
  * GET     /api/messages/:id          ->  show
  * DELETE  /api/messages/:id          ->  destroy
  */
@@ -53,21 +54,20 @@ export function index(req, res) {
 }
 
 export function message(req, res) {
-  var userId = req.user._id;
+  var exped = req.params.email;
 
   return Message.findAll({
-
     where: {
-      expediteur: req.user._id
-    }
-  }).then(handleEntityNotFound(res))
+    expediteur: exped
+     }
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Get a Message from the DB
 export function show(req, res) {
-  return Message.find({
+  return Message.findAll({
     where: {
       _id: req.params.id
     }

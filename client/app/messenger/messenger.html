@@ -1,1 +1,28 @@
-<div>This is the messenger view.</div>
+<div class="container">
+    
+    <div class="row">
+            <div class="col-md-3 col-sm-4 sidebar">
+                <ul class="nav nav-stacked nav-pills">
+                    <li ng-repeat="user in messengerCtrl.listUsers">
+                        <a href="#" ng-click = "messengerCtrl.choix_user(user)" >
+                            <img height="22" width="20" src="assets/images/{{user.avatar}}" />
+                            {{user.name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    
+        <div class="row" style="margin-left:300px;">
+            <div class="col-md-9 col-sm-8">
+                    <ul ng-if="messengerCtrl.jChoisi">
+                        <li ng-repeat="message in messengerCtrl.listMessages">
+                                <p>{{message.expediteur}}</p>
+                                <p>{{message.message}}</p></p>
+                        </li>
+                    </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>
