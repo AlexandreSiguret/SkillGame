@@ -29,14 +29,28 @@
       </ul>
       {{$ctrl.errormessage}}
     </div>
+    
     <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
-    <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
-    <div id="quiz-results" style="display:none;">
-      <p id="quiz-results-message">Congratulations</p>
-      <p id="quiz-results-score">Score {{$ctrl.resultats}}/5</p>
-    </div>
+    <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button> <br> <br>
+    <br>
+
+    <!-- 
+    <div id="quiz-results" class="col-md-9 col-sm-8" ng-if="$ctrl.valeur == true">
+      <cent<p id="quiz-results-message">Congratulations</p>
+    </div> -->
+
     <br/>
   </div>
+  <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">
+    <center>
+      <h1 style="color: #166e70;">End of test !</h1>
+    </center>
+    <center>
+      <div class="alert alert-success">
+        <strong>Success!</strong> you successfully passed your test.
+      </div>
+    </center>
+    </div>
 </div>
 </center>
 </div>
