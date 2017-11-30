@@ -862,7 +862,6 @@ export default function seedDatabaseIfNeeded() {
           ConceptId:16,
           goodAnswer:"Marie Antoinette"
         }
-
         ]);
 
       })
