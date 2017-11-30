@@ -124,11 +124,12 @@ export function upsert(req, res) {
   /*if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }*/
-
+  req.body.UserId = req.user._id 
   return Score.upsert(req.body, {
-    where: {      
-      UserId : req.user._id,
-      ConceptId : req.params.id      
+    
+    where: {  
+      _id: req.params.id,      
+         
     }
   })
     .then(respondWithResult(res))
