@@ -102,7 +102,8 @@ export function index(req, res) {
 export function show(req, res) {
   return Score.find({
     where: {
-      _id: req.params.id
+      UserId : req.user._id,
+      ConceptId : req.params.id 
     }
   })
     .then(handleEntityNotFound(res))
@@ -112,6 +113,7 @@ export function show(req, res) {
 
 // Creates a new Score in the DB
 export function create(req, res) {
+  req.body.UserId = req.user._id 
   return Score.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));

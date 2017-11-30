@@ -26,12 +26,9 @@ export class QuestionController {
     this.questionChoices=[];
     this.singleQuestion=[];
     this.idChoices = [];
-<<<<<<< HEAD
     this.valeur = false;
-    this.c;
-=======
-   
->>>>>>> 3b9a29bc06d73a50d88f6eded4c39302d6b1f814
+    this.concept;
+    this.currentScore = 0;
 
     this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {
@@ -40,7 +37,7 @@ export class QuestionController {
      
       this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
-        this.c = response.data.ConceptId;        
+        this.concept = response.data.ConceptId;        
       });
 
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
@@ -182,10 +179,21 @@ export class QuestionController {
               earnedPoint : this.$scope.seconds
             })
             
-           console.log('/api/scores/'+ this.c)
-           /* this.$http.put('/api/scores/'+ this.c,{
-              score : score + this.$scope.seconds
-            })*/
+            this.$http.get("/api/scores/"+this.concept) 
+            .then(response => {
+              
+              this.currentScore = response.data.score;
+              this.$http.put('/api/scores/'+ this.concept,{
+                score : this.currentScore + this.$scope.seconds
+              })        
+            })
+            .catch( 
+              this.$http.post('/api/scores',{
+                score :  this.$scope.seconds,
+                ConceptId : this.concept
+            }))
+            
+          
 
             var variable = '#label-choices-'+select._id;
             var myEl = angular.element( document.querySelector( variable ) );
