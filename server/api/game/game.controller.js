@@ -177,13 +177,17 @@ function allcreation(tab, idquizz, iduser) {
 
 export function create(req, res) {
   req.body.User1Id = req.user._id
-  
+  console.log(req.body)
+  console.log("serieux ?")
   return Game.create(req.body)
     .then(response => {
-      console.log("on essaye")
+      console.log("on essaye de passer par la")
       Question.findAll({
         order: Sequelize.fn('RANDOM'),
-        limit: 2
+        limit: 2,
+        where : {
+          ConceptID : req.body.ConceptId
+        }
       }).then(succes => allcreation(succes, response.dataValues._id, req.user._id))
         .then(respondWithResult(res))
         .catch(handleError(res));
