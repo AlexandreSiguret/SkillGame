@@ -26,8 +26,12 @@ export class QuestionController {
     this.questionChoices=[];
     this.singleQuestion=[];
     this.idChoices = [];
+<<<<<<< HEAD
     this.valeur = false;
     this.c;
+=======
+   
+>>>>>>> 3b9a29bc06d73a50d88f6eded4c39302d6b1f814
 
     this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {
@@ -155,12 +159,12 @@ export class QuestionController {
   report(){
           // alert('Question Reported !');
           if(this.errormessage ==""){
-
-            this.errormessage = "the question :"+this.singleQuestion
-            /*this.errormessage = "the question has been reported"*/
-            this.$http.get("/api/questions/"+this.awesomeQuestion[this.num]._id).then(response =>{
-              this.$http.put("/api/questions/"+this.awesomeQuestion[this.num]._id,{ 
-                _id : this.awesomeQuestion[this.num]._id,
+            
+           
+            this.errormessage = "the question has been reported"
+            this.$http.get("/api/questions/"+this.singleQuestion.Question._id).then(response =>{
+              this.$http.put("/api/questions/"+this.singleQuestion.Question._id,{ 
+                _id : this.singleQuestion.Question._id,
                 nbContestation : response.data.nbContestation + 1
               })
             })
