@@ -125,8 +125,8 @@ export function upsert(req, res) {
 
   return Score.upsert(req.body, {
     where: {      
-      UserId : req.user.id,
-      ConceptId : req.params.ConceptId      
+      UserId : req.user._id,
+      ConceptId : req.params.id      
     }
   })
     .then(respondWithResult(res))

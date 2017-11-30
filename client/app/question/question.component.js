@@ -26,10 +26,19 @@ export class QuestionController {
     this.questionChoices=[];
     this.singleQuestion=[];
     this.idChoices = [];
+    this.valeur = false;
+    this.c;
 
     this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {
       this.singleQuestion = response.data[0];
+
+     
+      this.$http.get("/api/questions/"+response.data[0].Question._id)
+      .then(response => {
+        this.c = response.data.ConceptId;        
+      });
+
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
       .then(response => {
         this.questionChoices = response.data;
@@ -92,6 +101,8 @@ export class QuestionController {
           _id :vm.singleQuestion._id,
           earnedPoint : 0
         })
+
+        
       }
 
       if($scope.stopped != true)
@@ -166,6 +177,11 @@ export class QuestionController {
               _id :this.singleQuestion._id,
               earnedPoint : this.$scope.seconds
             })
+            
+           console.log('/api/scores/'+ this.c)
+           /* this.$http.put('/api/scores/'+ this.c,{
+              score : score + this.$scope.seconds
+            })*/
 
             var variable = '#label-choices-'+select._id;
             var myEl = angular.element( document.querySelector( variable ) );
@@ -185,6 +201,7 @@ export class QuestionController {
               _id :this.singleQuestion._id,
               earnedPoint : 0
             })
+            
 
             var variable = '#label-choices-'+this.detailedQuestion._id;
             var myEl = angular.element( document.querySelector( variable ) );
