@@ -8,6 +8,7 @@ export class QuestionController {
   $timeout
   socket;
   stopped;
+  vm
   num = 0;
 
 
@@ -26,6 +27,7 @@ export class QuestionController {
     this.questionChoices=[];
     this.singleQuestion=[];
     this.idChoices = [];
+    this.valeur = false;
 
     this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
     .then(response => {
@@ -211,7 +213,20 @@ export class QuestionController {
             myEl.removeAttr('disabled');
           }
           else {
-            this.$timeout(function() { alert('Test Terminer !! Redirection vers la page ..... !!');}, 2000);
+            this.$timeout(function() { 
+
+              var variable2 = '#quiz';
+              var myE2 = angular.element( document.querySelector( variable2 ) );
+              myE2.attr('style',"display: none;");
+
+              var variable2 = '#quiz-resulats';
+              var myE2 = angular.element( document.querySelector( variable2 ) );
+              myEl.removeAttr('style');
+              myE2.attr('style',"display: inline;");
+
+            //this.valeur=true;/*alert('Test Terminer !! Redirection vers la page ..... !!');*/
+
+          }, 2000);
           }
           this.$scope.stopped=true;
         }
