@@ -111,6 +111,7 @@ export class QuestionController {
       });
     });
   }
+  
 
   Check_next() {
     this.errormessage = "";
@@ -120,28 +121,8 @@ export class QuestionController {
     var myEl = angular.element(document.querySelector('#report-question-button'));
     myEl.attr('disabled',"");  
 
-    
-    this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
-    .then(response => {
-      this.singleQuestion = response.data[0];
-                console.log(this.singleQuestion.Question._id)
-                this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
-                .then(response => {
-                  this.questionChoices = response.data;
-              });
-                this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
-                .then(response => {
-                  this.detailedQuestion = response.data;
+    this.call_question()
 
-                  for (var i = 0; i < 4; i++) {
-                    this.idChoices[i]=this.questionChoices[i]._id;
-
-                    if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
-                      this.detailedQuestion._id = this.questionChoices[i]._id;
-                  }
-                      });
-
-              });
 
     this.num++;
     this.$scope.counter = 30;
