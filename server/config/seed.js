@@ -862,7 +862,6 @@ export default function seedDatabaseIfNeeded() {
           ConceptId:16,
           goodAnswer:"Marie Antoinette"
         }
-
         ]);
 
       })
@@ -1506,7 +1505,7 @@ export default function seedDatabaseIfNeeded() {
           QuestionId :31,
           statement:"Lacrosse"
          },{ 
-          _id:124,
+          _id:1000,
           QuestionId :32,
           statement:"Frensh"
          },{
@@ -1537,7 +1536,7 @@ export default function seedDatabaseIfNeeded() {
           _id: 131,
           QuestionId :33,
           statement:"Europe"
-         },{ 
+         }/*,{ 
           _id:132,
           QuestionId :34,
           statement:"Jack Nicklaus"
@@ -1986,9 +1985,9 @@ export default function seedDatabaseIfNeeded() {
           _id: 243,
           QuestionId :61,
           statement:"Maria Carolina"
-         },
+         }
 
-        ]);
+        */]);
 
       })
 
