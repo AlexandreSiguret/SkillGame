@@ -20,9 +20,10 @@ export class QuestionsController {
   message = ""
 
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, $window) {
     this.$http = $http;
     this.socket = socket;
+    this.$window=$window;
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('concept');
@@ -64,7 +65,8 @@ export class QuestionsController {
     this.controleQuestion = true
   }
 
-  lookForAGame() {   
+  lookForAGame() {
+
     this.$http.get('/api/games/freeGame/'+ this.currentConcept._id)
     .then(response => {
       this.freeAwesomeGames = response.data;
@@ -83,16 +85,11 @@ export class QuestionsController {
           _id : this.freeAwesomeGames[0]._id
         })
       }
-
-      
-      
-
-      
-      
       console.log(this.freeAwesomeGames)
 
     });
 
+    //this.$window.location.href = '/game';
 
   }
 

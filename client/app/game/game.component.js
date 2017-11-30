@@ -7,8 +7,9 @@ import routes from './game.routes';
 
 export class GameComponent {
   /*@ngInject*/
-  constructor($http, $scope, socket) {
+  constructor($http, $scope, socket, $window) {
     this.$http = $http;
+    this.$window = $window;
     this.socket = socket;
     this.finishGame = []
     this.openGame = []
@@ -30,11 +31,40 @@ export class GameComponent {
           this.openGame.push(this.myAwesomeGame[i])
         }
       }
-      console.log(this.finishGame)
-      console.log("mes parties non finie mtn")
-      console.log(this.openGame)
+      console.log(this.finishGame);
+      console.log("mes parties non finie mtn");
+      console.log(this.openGame);
+
+      for (var i = 0; i < this.openGame.length; i++) {
+
+        if (this.openGame[i].User1 == null) {
+            this.openGame[i].User2 = [];
+            this.openGame[i].User1.name = "Unknown";
+            this.openGame[i].User1.avatar = 'inconnu.png' //src=""
+          }
+
+        if(this.openGame[i].User2 == null) {
+          this.openGame[i].User2 = [];
+          this.openGame[i].User2.name = "Unknown";
+          this.openGame[i].User2.avatar = 'inconnu.png' //src=""
+        }
+
+      }
+
     })
   }
+
+  playAGame(player) {
+    
+/*    console.log("Hellooo Player");
+    console.log(player.Concept._id);
+    console.log(player._id);
+*/
+    this.$window.location.href = '/question/'+player._id;
+
+  }
+
+
 }
 
 

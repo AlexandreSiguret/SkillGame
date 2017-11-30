@@ -13,6 +13,7 @@
 import jsonpatch from 'fast-json-patch';
 import {Score} from '../../sqldb';
 import Sequelize from 'sequelize';
+import db from "../../sqldb";
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -32,12 +33,17 @@ export function topthree(req,res){
     where: { 
       ConceptId: cId,
     },
-
     order : [
       ["score","DESC"], 
       ["UserId","ASC"]
     ],
-    limit : 3
+    limit : 3,
+
+    include: [{
+      model: db.User,      
+      attributes : ["name","avatar"]
+  }]
+
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

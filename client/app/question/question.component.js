@@ -84,8 +84,14 @@ export class QuestionController {
           myEl.removeAttr('disabled');
         }       
 
+        
        
         $scope.stopped=true;
+
+        vm.$http.put('/api/answers/'+ vm.singleQuestion._id,{
+          _id :vm.singleQuestion._id,
+          earnedPoint : 0
+        })
       }
 
       if($scope.stopped != true)

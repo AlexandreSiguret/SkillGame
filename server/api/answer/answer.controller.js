@@ -86,7 +86,8 @@ export function one(req,res){
     },
     where : {
       GameId : req.params.id,
-      UserId : req.user._id,      
+      UserId : req.user._id, 
+      earnedPoint : null    
     },
     attributes : ["_id"]
   }

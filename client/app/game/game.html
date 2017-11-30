@@ -1,10 +1,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-4 sidebar">
+        <div class="col-md-3 col-sm-16 sidebar">
             <ul class="nav nav-stacked nav-pills">
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
             </ul>
+        </div>
+        <div class="col-md-3 col-sm-16 sidebar">
+        </div>
+        <div class="col-md-3 col-sm-16 sidebar">
+        </div>
+        <div class="col-md-3 col-sm-16 sidebar">
         </div>
 
         <div class="col-md-9 col-sm-8">
@@ -29,7 +35,7 @@
                 <center>
                     <img height="30" width="20" src="assets/images/vs.png"><br>
                     <h4>{{player.Concept.name}}</h4>
-                    <button ng-click ="" type="button" class="btn btn-primary btn-md">Play This Game</button>
+                    <button ng-click ="gameCtrl.playAGame(player)" type="button" class="btn btn-primary btn-md">Play This Game</button>
                 </center>
                 </div>
 
@@ -45,7 +51,7 @@
                 <!--   {{player.User1.name}} vs {{player.User2.name}}  -->
         </div>
 
-        <div class="col-md-3 col-sm-8 sidebar">
+        <div class="col-md-3 col-sm-16   sidebar">
         </div>
 
         <div class="col-md-9 col-sm-8">

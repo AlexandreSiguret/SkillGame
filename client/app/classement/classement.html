@@ -17,9 +17,9 @@
                             <td width="100"><h2>Name</h2></td>
                             <td width="100"><h2>Score</h2></td>
                           </tr>
-                        <tr ng-repeat="s in $ctrl.listUsersScore">
-                          <td><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.avatar}}"></a></td>
-                          <td><a href="/affrontement" >{{s.name}}</a></td>
+                        <tr ng-repeat="s in $ctrl.threeAwesomePlayers">
+                          <td><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></td>
+                          <td><a href="/affrontement" >{{s.User.name}}</a></td>
                           <td>{{s.score}}</td>
                         </tr>
                     </table>
