@@ -8,8 +8,7 @@ export class QuestionController {
   $timeout
   socket;
   stopped;
-  vm
-  num = 0;
+  
 
 
   
@@ -22,34 +21,14 @@ export class QuestionController {
     this.socket = socket;
     $scope.counter = 30;
     $scope.stopped = false;
-    var vm = this;    
+       
     this.errormessage = ""
     this.questionChoices=[];
     this.singleQuestion=[];
     this.idChoices = [];
-    this.valeur = false;
-
-    this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
-    .then(response => {
-      this.singleQuestion = response.data[0];
-      this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
-      .then(response => {
-        this.questionChoices = response.data;
-      });
-
-      this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
-      .then(response => {
-        this.detailedQuestion = response.data;
-
-          for (var i = 0; i < 4; i++) {
-            vm.idChoices[i]=vm.questionChoices[i]._id;
-
-            if (vm.questionChoices[i].statement == vm.detailedQuestion.goodAnswer)
-              vm.detailedQuestion._id = vm.questionChoices[i]._id;
-          }
-
-      });
-    });
+    this.num = 0;
+    this.concept;
+    this.currentScore = 0;
 
           
 
@@ -64,20 +43,20 @@ export class QuestionController {
 
         
         
-        var variable = '#label-choices-'+vm.detailedQuestion._id;
+        var variable = '#label-choices-'+this.detailedQuestion._id;
         var myEl = angular.element( document.querySelector( variable ) );
         myEl.removeAttr('class');
         myEl.attr('class',"false");
 
       
         
-        for (var i = 0; i < vm.idChoices.length; i++) {
-          var variable = '#choices-'+vm.idChoices[i];
+        for (var i = 0; i < this.idChoices.length; i++) {
+          var variable = '#choices-'+this.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
           myEl.attr('disabled',"");
         }
 
-        if(vm.num < 1)
+        if(this.num < 1)
         {
           var myEl = angular.element(document.querySelector('#next-question-button'));
           myEl.removeAttr('disabled');
@@ -90,8 +69,8 @@ export class QuestionController {
        
         $scope.stopped=true;
 
-        vm.$http.put('/api/answers/'+ vm.singleQuestion._id,{
-          _id :vm.singleQuestion._id,
+        this.$http.put('/api/answers/'+ this.singleQuestion._id,{
+          _id :this.singleQuestion._id,
           earnedPoint : 0
         })
       }
@@ -106,6 +85,41 @@ export class QuestionController {
     var mytimeout = $timeout($scope.onTimeout,1000);
   }
 
+  $onInit() {
+    this.call_question()
+  }
+
+  call_question() {
+    this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
+    .then(response => {
+      this.singleQuestion = response.data[0];
+	  
+	  this.$http.get("/api/questions/"+response.data[0].Question._id)
+      .then(response => {
+        this.concept = response.data.ConceptId;        
+      });
+	  
+      this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
+      .then(response => {
+        this.questionChoices = response.data;
+      });
+
+      this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
+      .then(response => {
+        this.detailedQuestion = response.data;
+
+          for (var i = 0; i < 4; i++) {
+            this.idChoices[i]=this.questionChoices[i]._id;
+
+            if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
+              this.detailedQuestion._id = this.questionChoices[i]._id;
+          }
+
+      });
+    });
+  }
+  
+
   Check_next() {
     this.errormessage = "";
     var myEl = angular.element(document.querySelector('#next-question-button'));
@@ -114,28 +128,8 @@ export class QuestionController {
     var myEl = angular.element(document.querySelector('#report-question-button'));
     myEl.attr('disabled',"");  
 
-    
-    this.$http.get('/api/answers/pickone/'+this.$stateParams.concept_id)
-    .then(response => {
-      this.singleQuestion = response.data[0];
-                console.log(this.singleQuestion.Question._id)
-                this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
-                .then(response => {
-                  this.questionChoices = response.data;
-              });
-                this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
-                .then(response => {
-                  this.detailedQuestion = response.data;
+    this.call_question()
 
-                  for (var i = 0; i < 4; i++) {
-                    this.idChoices[i]=this.questionChoices[i]._id;
-
-                    if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
-                      this.detailedQuestion._id = this.questionChoices[i]._id;
-                  }
-                      });
-
-              });
 
     this.num++;
     this.$scope.counter = 30;
@@ -146,12 +140,12 @@ export class QuestionController {
   report(){
           // alert('Question Reported !');
           if(this.errormessage ==""){
-
-            this.errormessage = "the question :"+this.singleQuestion
-            /*this.errormessage = "the question has been reported"*/
-            this.$http.get("/api/questions/"+this.awesomeQuestion[this.num]._id).then(response =>{
-              this.$http.put("/api/questions/"+this.awesomeQuestion[this.num]._id,{ 
-                _id : this.awesomeQuestion[this.num]._id,
+            
+           
+            this.errormessage = "the question has been reported"
+            this.$http.get("/api/questions/"+this.singleQuestion.Question._id).then(response =>{
+              this.$http.put("/api/questions/"+this.singleQuestion.Question._id,{ 
+                _id : this.singleQuestion.Question._id,
                 nbContestation : response.data.nbContestation + 1
               })
             })
@@ -161,14 +155,38 @@ export class QuestionController {
         
 
         validation(select){
-
+          console.log("on appele validation")
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
 
             this.$http.put('/api/answers/'+ this.singleQuestion._id,{
               _id :this.singleQuestion._id,
               earnedPoint : this.$scope.seconds
             })
-
+            console.log("on va appeler score")
+			this.$http.get("/api/scores/"+this.concept) 
+            .then(response => {                      
+                            
+              console.log("reussi")
+                     
+             
+              
+                this.currentScore = response.data.score;
+                this.$http.put('/api/scores/'+ response.data._id,{
+                  score : this.currentScore + this.$scope.seconds,
+                  ConceptId : this.concept,
+                  _id :response.data._id
+                }) 
+              
+          },response =>
+          {console.log("echec")
+            this.$http.post('/api/scores',{
+            score :  this.$scope.seconds,              
+            ConceptId : this.concept
+          }
+        )
+      console.log("on s'active") })
+            
+			
             var variable = '#label-choices-'+select._id;
             var myEl = angular.element( document.querySelector( variable ) );
             myEl.removeAttr('class');
@@ -238,4 +256,4 @@ export class QuestionController {
         template: require('./question.html'),
         controller: QuestionController
       })
-      .name;
+.name;
