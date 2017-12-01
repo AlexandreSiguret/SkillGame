@@ -24,27 +24,27 @@
 
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Question</label>
-              <textarea class="form-control" ng-model="$ctrl.question" rows="3"></textarea>
+              <textarea class="form-control" ng-model="$ctrl.question" rows="3" placeholder="what is the most used operating system on computers?"></textarea>
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1">Right answer</label>
-              <input type="text" class="form-control" ng-model="$ctrl.goodAnswer">
+              <input type="text" class="form-control" ng-model="$ctrl.goodAnswer" placeholder="Microsot Windows">
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1">Wrong answer 1</label>
-              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer1">
+              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer1" placeholder="Mac OS X">
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1">Wrong answer 2</label>
-              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer2">
+              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer2" placeholder="Linux">
             </div>
 
             <div class="form-group">
               <label for="exampleFormControlInput1">Wrong answer 3</label>
-              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer3">
+              <input type="text" class="form-control" ng-model="$ctrl.WrongAnswer3" placeholder="Andoid">
             </div>
             <center>
               <button type="submit" class="btn btn-primary" ng-click="$ctrl.addQuestion()">Add the question</button>
