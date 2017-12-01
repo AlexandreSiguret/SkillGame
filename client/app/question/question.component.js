@@ -155,33 +155,36 @@ export class QuestionController {
         
 
         validation(select){
-
+          console.log("on appele validation")
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
 
             this.$http.put('/api/answers/'+ this.singleQuestion._id,{
               _id :this.singleQuestion._id,
               earnedPoint : this.$scope.seconds
             })
-
+            console.log("on va appeler score")
 			this.$http.get("/api/scores/"+this.concept) 
-            .then(response => {         
+            .then(response => {                      
+                            
+              console.log("reussi")
+                     
              
               
-              if(response.data.length == 0){                 
-                this.$http.post('/api/scores',{
-                  score :  this.$scope.seconds,              
-                  ConceptId : this.concept
-                }) 
-                     
-              }
-              else{
                 this.currentScore = response.data.score;
                 this.$http.put('/api/scores/'+ response.data._id,{
                   score : this.currentScore + this.$scope.seconds,
-                  ConceptId : this.concept
+                  ConceptId : this.concept,
+                  _id :response.data._id
                 }) 
-              }
-          })
+              
+          },response =>
+          {console.log("echec")
+            this.$http.post('/api/scores',{
+            score :  this.$scope.seconds,              
+            ConceptId : this.concept
+          }
+        )
+      console.log("on s'active") })
             
 			
             var variable = '#label-choices-'+select._id;
