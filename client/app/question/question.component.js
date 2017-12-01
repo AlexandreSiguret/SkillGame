@@ -27,7 +27,8 @@ export class QuestionController {
     this.singleQuestion=[];
     this.idChoices = [];
     this.num = 0;
-   
+    this.concept;
+    this.currentScore = 0;
 
           
 
@@ -92,6 +93,12 @@ export class QuestionController {
     this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
     .then(response => {
       this.singleQuestion = response.data[0];
+	  
+	  this.$http.get("/api/questions/"+response.data[0].Question._id)
+      .then(response => {
+        this.concept = response.data.ConceptId;        
+      });
+	  
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
       .then(response => {
         this.questionChoices = response.data;
@@ -111,6 +118,7 @@ export class QuestionController {
       });
     });
   }
+  
 
   Check_next() {
     this.errormessage = "";
@@ -120,28 +128,8 @@ export class QuestionController {
     var myEl = angular.element(document.querySelector('#report-question-button'));
     myEl.attr('disabled',"");  
 
-    
-    this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
-    .then(response => {
-      this.singleQuestion = response.data[0];
-                console.log(this.singleQuestion.Question._id)
-                this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
-                .then(response => {
-                  this.questionChoices = response.data;
-              });
-                this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
-                .then(response => {
-                  this.detailedQuestion = response.data;
+    this.call_question()
 
-                  for (var i = 0; i < 4; i++) {
-                    this.idChoices[i]=this.questionChoices[i]._id;
-
-                    if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
-                      this.detailedQuestion._id = this.questionChoices[i]._id;
-                  }
-                      });
-
-              });
 
     this.num++;
     this.$scope.counter = 30;
@@ -167,14 +155,38 @@ export class QuestionController {
         
 
         validation(select){
-
+          console.log("on appele validation")
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
 
             this.$http.put('/api/answers/'+ this.singleQuestion._id,{
               _id :this.singleQuestion._id,
               earnedPoint : this.$scope.seconds
             })
-
+            console.log("on va appeler score")
+			this.$http.get("/api/scores/"+this.concept) 
+            .then(response => {                      
+                            
+              console.log("reussi")
+                     
+             
+              
+                this.currentScore = response.data.score;
+                this.$http.put('/api/scores/'+ response.data._id,{
+                  score : this.currentScore + this.$scope.seconds,
+                  ConceptId : this.concept,
+                  _id :response.data._id
+                }) 
+              
+          },response =>
+          {console.log("echec")
+            this.$http.post('/api/scores',{
+            score :  this.$scope.seconds,              
+            ConceptId : this.concept
+          }
+        )
+      console.log("on s'active") })
+            
+			
             var variable = '#label-choices-'+select._id;
             var myEl = angular.element( document.querySelector( variable ) );
             myEl.removeAttr('class');
@@ -244,4 +256,4 @@ export class QuestionController {
         template: require('./question.html'),
         controller: QuestionController
       })
-      .name;
+.name;

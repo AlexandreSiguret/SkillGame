@@ -2,6 +2,7 @@
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/messages              ->  index
  * POST    /api/messages              ->  create
+ * GET     /api/messages/:email       ->  message
  * GET     /api/messages/:id          ->  show
  * DELETE  /api/messages/:id          ->  destroy
  */
@@ -37,7 +38,7 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Messages
+// Gets a list of All Messages
 export function index(req, res) {
   return Message.findAll({
         attributes: [
@@ -52,22 +53,41 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-export function message(req, res) {
-  var userId = req.user._id;
+// Get a list of my messages
+export function messages(req, res) {
+  var exped = req.params.email1;
+  var dest  = req.params.email2;
 
   return Message.findAll({
-
-    where: {
-      expediteur: req.user._id
-    }
-  }).then(handleEntityNotFound(res))
+    where: Sequelize.or(
+      Sequelize.and(
+        {expediteur: exped},
+        {destinataire: dest} 
+      ),
+      Sequelize.and(
+        {expediteur: dest},
+        {destinataire: exped}
+      )
+    ),
+    order: [
+      [ 'date','ASC'],
+    ],
+    attributes: [
+      '_id',
+      'expediteur',
+      'destinataire',
+      'msg_type',
+      'message',
+      'date'
+    ]
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Get a Message from the DB
 export function show(req, res) {
-  return Message.find({
+  return Message.findAll({
     where: {
       _id: req.params.id
     }

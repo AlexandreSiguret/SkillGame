@@ -29,7 +29,9 @@ export default function(sequelize, DataTypes) {
     },
     message: {
         type : DataTypes.STRING, 
-      }
+    },
+    date: DataTypes.INTEGER,
+    
     
   });
 }

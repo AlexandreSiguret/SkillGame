@@ -48,6 +48,7 @@ export function notme(req,res){
     attributes : [
       "_id",
       "name",
+      'email',
       "avatar"
     ]
   }).then( users =>{

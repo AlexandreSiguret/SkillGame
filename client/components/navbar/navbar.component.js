@@ -7,28 +7,24 @@ export class NavbarComponent {
   menu = [{
     title: 'SkillGame',
     state: 'main'
-  },
-  {
+  },{
     title: 'Questions',
     state: 'questions'
   },{
     title: 'Play',
     state: 'jeu'
-  },
-  {
+  },{
     title: 'My Games',
     state: 'game'
   },{
     title : "Battle",
     state : "affrontement"
   },{
-    title : "Ranking",
-    state : "classement"
-
-  }, {
     title : "Play_clock",
     state : "jeuchrono"
-
+  },{
+    title : "Ranking",
+    state : "classement"
   },{
     title : "Messenger",
     state : "messenger"
