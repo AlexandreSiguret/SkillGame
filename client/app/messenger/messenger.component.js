@@ -33,7 +33,6 @@ export class MessengerComponent {
     .then(response => {
       this.listUsers = response.data;
       this.socket.syncUpdates('user', this.listUsers);
-      console.log(this.listUsers);
     });
 
   }
@@ -43,7 +42,6 @@ export class MessengerComponent {
     this.userChoisi = user;
     this.getUserMessages(this.userChoisi._id);
     this.jChoisi = true;
-    console.log(this.userChoisi);
   }
 
   getUserMessages(_id){
@@ -51,10 +49,25 @@ export class MessengerComponent {
     .then(response => {
       this.listMessages = response.data;
       this.socket.syncUpdates('message', this.listMessages);
-      console.log(this.listMessages);
     });
+  }
 
-
+  refreshChats(){
+    var string='';
+    this.$http.get('/api/messages')
+    .then(response => {
+      this.listMessages = response.data;
+      this.socket.syncUpdates('message', this.listMessages);
+    });
+    
+    for(var mess in this.ListMessages) {
+      
+        string += '<p>' + mess.expediteur+' : '+mess.message + '</p>';
+    } 
+    var newEle = angular.element(string);
+    var target = document.getElementById('affront-chat');
+    angular.element(target).append(newEle);
+    
   }
 
   /* 
