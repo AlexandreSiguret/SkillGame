@@ -14,34 +14,45 @@ export class JeuchronoComponent {
 
 
 
+
   /*@ngInject*/
   constructor($http, $scope, socket, $timeout, $stateParams) {
-    this.$timeout = $timeout;
-    this.$scope = $scope;
+    this.$timeout=$timeout;
+    this.$scope=$scope;
     this.$stateParams = $stateParams;
     this.$http = $http;
     this.socket = socket;
     $scope.counter = 30;
     $scope.stopped = false;
-    var vm = this;
-    this.errormessage= ""
+    
+    this.errormessage = ""
     this.questionChoices=[];
-    this.singleQuestion= [];
+    this.singleQuestion=[];
     this.idChoices = [];
+    this.num = 0;
+    this.concept;
+    this.currentScore = 0;
 
-    this.$http.get('/api/answers/pickone/'+this.$stateParams.concepts)
-    .then(response =>{
-      this.singleQuestion = response.data[0];
-      this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
-      .then(response => {
-        this.questionChoices = response.data;
-        console.log("ooooooooooooooooooo");
-        console.log(response.data);
-      });
-    });
+
+    $scope.$on('$destroy', function() {
+      socket.unsyncUpdates('question');
+    })
+
+    $scope.onTimeout = function(){
+
+      if($scope.counter == 0){
+
+        var variable = '#label-choices-'+this.detailedQuestion._id;
+      }
+
+    }
+
+
 
   }
-}
+
+ 
+      }
 
 export default angular.module('skillGameApp.jeuchrono', [uiRouter])
   .config(routes)

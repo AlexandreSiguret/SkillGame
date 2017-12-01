@@ -30,7 +30,7 @@ export class QuestionController {
     this.concept;
     this.currentScore = 0;
 
-          
+    
 
 
     $scope.$on('$destroy', function() {
