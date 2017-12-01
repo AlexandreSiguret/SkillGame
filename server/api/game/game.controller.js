@@ -153,9 +153,11 @@ export function show(req, res) {
 
 
 // Creates a new Game in the DB
-function allcreation(tab, idquizz, iduser) {
-  var taille = tab.length;
+function allcreation(tab, donne, iduser) {
 
+
+  var taille = tab.length;
+  var idquizz = donne._id
   for (var i = 0; i < taille; i++) {
 
     var creation1 = {
@@ -163,9 +165,19 @@ function allcreation(tab, idquizz, iduser) {
       UserId: iduser,
       GameId: idquizz
     }
+
+    if(donne.User2Id != undefined){
     var creation2 = {
       QuestionId: tab[i].dataValues._id,
-      GameId: idquizz
+      GameId: idquizz,
+      UserId : donne.User2Id
+    }}
+
+    else{
+      var creation2 = {
+        QuestionId: tab[i].dataValues._id,
+        GameId: idquizz
+      }
     }
 
     Answer.create(creation1)
@@ -188,47 +200,13 @@ export function create(req, res) {
         where : {
           ConceptID : req.body.ConceptId
         }
-      }).then(succes => allcreation(succes, response.dataValues._id, req.user._id))
-        .then(respondWithResult(res))
+      }).then(succes => allcreation(succes, response.dataValues, req.user._id))
+        .then(respondWithResult(response,201))
         .catch(handleError(res));
     })
 
-  /*
-  .then(response =>{
-    console.log(response.dataValues);
-    var new_answer = {
-      question : 1,
-      choice : 2,
-      earnedPoint : 15,
-      user : req.user._id,
-      quizz :response.dataValues.concept
-    };
-    
-    Answer.create(new_answer)}
-  )   */ .then(respondWithResult(res, 201))
-    /*
-    
-      return Game.create(req.body)
-      .then(() =>{
-        Question.findAll({ 
-          order :         Sequelize.fn( 'RANDOM' ) ,    
-          limit : 1
-        }).then(res2 =>{     
-          var new_answer = {
-            question : res2[0].dataValues._id ,    
-            earnedPoint : 15,
-            user : req.body.user1,
-            quizz : req.body._id
-          }
-          Answer.create(new_answer)
-        })  
-    
-      }   
-        
-      )    
-      .then(respondWithResult(res, 201))
-    
-     */
+ .then(respondWithResult(response, 201))
+  
     .catch(handleError(res));
 }
 
