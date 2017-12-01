@@ -7,7 +7,7 @@ var controller = require('./message.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get("/mymessage",auth.isAuthenticated(),controller.message);
+router.get('/mymessages/:email1/:email2',auth.isAuthenticated(),controller.messages);
 router.get('/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.delete('/:id', controller.destroy);

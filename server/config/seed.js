@@ -40,21 +40,87 @@ export default function seedDatabaseIfNeeded() {
         expediteur : "antonio@antonio.com",
         destinataire : "htsa@htsa.com",
         msg_type : 1,
+        date : 1256,
         message : 'Salut',
         _id: 1
       }, {
          expediteur : "htsa@htsa.com",
          destinataire : "antonio@antonio.com",
          msg_type : 1,
+         date : 1258,
          message : 'Salut cava?',
          _id: 2
       }, {
         expediteur : "antonio@antonio.com",
         destinataire : "htsa@htsa.com",
         msg_type : 1,
+        date : 1280,
         message : 'Cava bien ..... !',
         _id: 3
-     }
+     }, {
+      expediteur : "antonio@antonio.com",
+      destinataire : "yassine@yassine.com",
+      msg_type : 1,
+      date : 1256,
+      message : 'Salut',
+      _id: 4
+    }, {
+       expediteur : "yassine@yassine.com",
+       destinataire : "antonio@antonio.com",
+       msg_type : 1,
+       date : 1258,
+       message : 'Salut cava?',
+       _id: 5
+    }, {
+      expediteur : "antonio@antonio.com",
+      destinataire : "yassine@yassine.com",
+      msg_type : 1,
+      date : 1280,
+      message : 'Cava bien ..... !',
+      _id: 6
+     },{
+      expediteur : "antonio@antonio.com",
+      destinataire : "mohamed@mohamed.com",
+      msg_type : 1,
+      date : 1256,
+      message : 'Salut',
+      _id: 7
+    }, {
+       expediteur : "mohamed@mohamed.com",
+       destinataire : "antonio@antonio.com",
+       msg_type : 1,
+       date : 1258,
+       message : 'Salut cava?',
+       _id: 8
+    }, {
+      expediteur : "antonio@antonio.com",
+      destinataire : "mohamed@mohamed.com",
+      msg_type : 1,
+      date : 1280,
+      message : 'Cava bien ..... !',
+      _id: 9
+    },{
+      expediteur : "antonio@antonio.com",
+      destinataire : "alexandre@alexandre.com",
+      msg_type : 1,
+      date : 1256,
+      message : 'Salut',
+      _id: 10
+    }, {
+       expediteur : "alexandre@alexandre.com",
+       destinataire : "antonio@antonio.com",
+       msg_type : 1,
+       date : 1258,
+       message : 'Salut cava?',
+       _id: 11
+    }, {
+      expediteur : "antonio@antonio.com",
+      destinataire : "alexandre@alexandre.com",
+      msg_type : 1,
+      date : 1280,
+      message : 'Cava bien ..... !',
+      _id: 12
+   }
     ])
     } )
     .then(() => console.log('finished populating message things'))
