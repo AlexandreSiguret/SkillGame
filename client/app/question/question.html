@@ -31,9 +31,11 @@
             {{$ctrl.errormessage}}
           </div>
 
-          <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
-          <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button> <br> <br>
-          <br><br/>
+         <button title="Report this question" disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
+         <button title="Next" disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
+         <br> <br>
+         
+         <br><br/>
         </div>
 
         <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">

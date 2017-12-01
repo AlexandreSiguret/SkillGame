@@ -163,7 +163,7 @@ export class QuestionController {
               earnedPoint : this.$scope.seconds
             })
             console.log("on va appeler score")
-			this.$http.get("/api/scores/"+this.concept) 
+		      	this.$http.get("/api/scores/"+this.concept) 
             .then(response => {                      
                             
               console.log("reussi")
