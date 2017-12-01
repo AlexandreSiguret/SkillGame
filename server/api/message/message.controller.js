@@ -38,7 +38,7 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Messages
+// Gets a list of All Messages
 export function index(req, res) {
   return Message.findAll({
         attributes: [
@@ -53,13 +53,33 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-export function message(req, res) {
-  var exped = req.params.email;
+// Get a list of my messages
+export function messages(req, res) {
+  var exped = req.params.email1;
+  var dest  = req.params.email2;
 
   return Message.findAll({
-    where: {
-    expediteur: exped
-     }
+    where: Sequelize.or(
+      Sequelize.and(
+        {expediteur: exped},
+        {destinataire: dest} 
+      ),
+      Sequelize.and(
+        {expediteur: dest},
+        {destinataire: exped}
+      )
+    ),
+    order: [
+      [ 'date','ASC'],
+    ],
+    attributes: [
+      '_id',
+      'expediteur',
+      'destinataire',
+      'msg_type',
+      'message',
+      'date'
+    ]
   })
     .then(respondWithResult(res))
     .catch(handleError(res));

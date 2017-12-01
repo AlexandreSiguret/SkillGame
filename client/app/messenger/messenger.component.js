@@ -13,7 +13,7 @@ export class MessengerComponent {
   currentUser = [];
   chat_message = '';
   jChoisi = false;
-
+  
   /*@ngInject*/
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
@@ -36,27 +36,22 @@ export class MessengerComponent {
       console.log(this.listUsers);
     });
 
-    this.$http.get('/api/messages')
-    .then(response => {
-      this.listMessages = response.data;
-      this.socket.syncUpdates('message', this.listMessages);
-    });
-
   }
 
   choix_user(user) {
     //this.clearAll();
     this.userChoisi = user;
-    //getUserMessages(this.userChoisi._id);
+    this.getUserMessages(this.userChoisi._id);
     this.jChoisi = true;
     console.log(this.userChoisi);
   }
 
   getUserMessages(_id){
-    this.$http.get('/api/messages/'+_id)
+    this.$http.get('/api/messages/mymessages/'+this.getCurrentUser().email+'/'+this.userChoisi.email)
     .then(response => {
       this.listMessages = response.data;
       this.socket.syncUpdates('message', this.listMessages);
+      console.log(this.listMessages);
     });
 
 
@@ -81,24 +76,26 @@ export class MessengerComponent {
       this.$http.post("/api/messages", {
         expediteur: this.getCurrentUser().email,
         destinataire: this.userChoisi.email,
+        date: new Date(),
         msg_type: t,
         message: myMessage
       })
       .then(response => {
         this.idNewMessage = response.data._id;
       });
-      console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message+' '+t);
-      document.getElementById('input_aff_chat').value='';
-      document.getElementById('msgInfo').innerHTML = myMessage;
+      
+      console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message);
+      document.getElementById('input_chat').value='';
+  /*    document.getElementById('msgInfo').innerHTML = myMessage;
       setTimeout(function(){
         document.getElementById("msgInfo").innerHTML = "";
       }, 6000);
-      myMessage = '';
+      myMessage = '';  */
       this.chat_message = '';
       
     }
     else {
-      this.logMessage="on ne peut pas envoyer un message vide"
+      console.log("on ne peut pas envoyer un message vide");
     }
     
   }

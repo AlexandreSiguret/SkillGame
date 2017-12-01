@@ -14,13 +14,32 @@
     
         <div class="row" style="margin-left:300px;">
             <div class="col-md-9 col-sm-8">
-                    <ul ng-if="messengerCtrl.jChoisi">
-                        <li ng-repeat="message in messengerCtrl.listMessages">
-                                <p>{{message.expediteur}}</p>
-                                <p>{{message.message}}</p></p>
-                        </li>
-                    </ul>
+                    <div id="chat_container" ng-if="messengerCtrl.jChoisi">
+                        <div id="messag_container">
+                            <div class="messag" ng-repeat="message in messengerCtrl.listMessages">
+                                    <p1 >{{message.expediteur}} , {{message.date}}</p1>
+                                    <p>{{message.message}}</p>
+                            </div>
+                        </div>
+                        <div id="nav_chat" class="nav-chat">
+                            <ul>      
+                                <li>
+                                    <input id="input_chat"
+                                        type="text" size="56" height="50px" value="Chat"
+                                        onclick="if(this.value=='Chat') this.value=''; "
+                                        onblur="if(this.value=='') this.value='Chat'; "
+                                        ng-keyup="$event.keyCode == 13 ? messengerCtrl.submitMessage(1) : null"
+                                        ng-model="messengerCtrl.chat_message"
+                                    />
+                                </li> 
+                                <li><button ng-click = "messengerCtrl.submitMessage()" class="btn btn-primary btn-md">Submit</button></li>
+                                <li><button ng-click = "messengerCtrl.jChoisi = false" class="btn btn-primary btn-md">Sortir</button></li>
+                            </ul>
+                        </div>
+
+                    </div>
             </div>
+
         </div>
 
     </div>
