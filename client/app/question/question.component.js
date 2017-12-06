@@ -261,9 +261,12 @@ export class QuestionController {
           else {
             this.$timeout(function() { 
 
-              var variable2 = '#quiz';
-              var myE2 = angular.element( document.querySelector( variable2 ) );
-              myE2.attr('style',"display: none;");
+              //var variable2 = '#quiz';
+              //var myE2 = angular.element( document.querySelector( variable2 ) );
+              //myE2.attr('style',"display: none;");
+              
+            var myEl = angular.element(document.querySelector('#report-question-button'));
+            myEl.removeAttr('disabled');
 
               var variable2 = '#quiz-resulats';
               var myE2 = angular.element( document.querySelector( variable2 ) );
