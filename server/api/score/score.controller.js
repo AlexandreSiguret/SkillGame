@@ -93,7 +93,9 @@ function handleError(res, statusCode) {
 
 // Gets a list of Scores
 export function index(req, res) {
-  return Score.findAll()
+  return Score.findAll({
+    attributes: [[Sequelize.fn('SUM', Sequelize.col('score')), 'total'],"_id","UserId"],
+    group: 'UserId'})
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
