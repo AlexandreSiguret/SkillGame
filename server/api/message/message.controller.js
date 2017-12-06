@@ -46,7 +46,8 @@ export function index(req, res) {
           'expediteur',
           'destinataire',
           'msg_type',
-          'message'
+          'message',
+          'date'
         ]
       })
     .then(respondWithResult(res))
