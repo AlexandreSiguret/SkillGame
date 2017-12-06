@@ -44,11 +44,13 @@
           </center>
           <center>
             <div class="alert alert-success">
-              <strong>Success!</strong> you successfully passed your test.
+              <strong>Success!</strong> you successfully passed your test.       
             </div>
+            <div style="display:inline-block;"  ng-repeat="badge in $ctrl.listAwards">
+              <img height="42" width="40" src="assets/images/{{badge.BadgeId}}.jpg" />
+            </div>           
           </center>
         </div>
-
 
       </div>
     </div>

@@ -89,6 +89,22 @@ export function concept(req,res){
   .catch(handleError(res));
 }
 
+//gets a Question for a concept (Take question)
+
+export function takequest(req, res){
+  console.log("ma route");
+  return Question.findAll({
+    where: {
+      ConceptId : req.params.id
+    }
+  }) 
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
+}
+
+
+
  
 //gets a random Question for a concept
 

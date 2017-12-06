@@ -116,6 +116,8 @@ router.get('/random/:id',controller.random);
  */
 router.get('/:id', controller.show);
 
+router.get('/takequest/:id', controller.takequest);
+
  /**
  * @api {post} /questions  Create a new Question 
  * 

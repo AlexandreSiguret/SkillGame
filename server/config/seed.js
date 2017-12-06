@@ -27,16 +27,18 @@ export default function seedDatabaseIfNeeded() {
     let Choice = sqldb.Choice;
     let Game = sqldb.Game;
     let Score = sqldb.Score;
+    let Alonescore = sqldb.Alonescore;
     let Answer = sqldb.Answer
     let Message = sqldb.Message;
-    let Badge = sqldb.Badge
+    let Badge = sqldb.Badge;
+    let Award = sqldb.Award;
+    
 
-    Answer.destroy({where : {}})
-    .then(console.log("réponse détruire"))
-    Message.destroy({where:{}})
-    .then(() =>{
-      let message = Message.bulkCreate([{
+    Answer.destroy({where : {} })
+    .then(console.log("réponse détruire"));
 
+    Message.destroy({where:{} })
+    .then(() => Message.bulkCreate([{
         expediteur : "antonio@antonio.com",
         destinataire : "htsa@htsa.com",
         msg_type : 1,
@@ -57,76 +59,103 @@ export default function seedDatabaseIfNeeded() {
         date : 1280,
         message : 'Cava bien ..... !',
         _id: 3
-     }, {
-      expediteur : "antonio@antonio.com",
-      destinataire : "yassine@yassine.com",
-      msg_type : 1,
-      date : 1256,
-      message : 'Salut',
-      _id: 4
-    }, {
-       expediteur : "yassine@yassine.com",
-       destinataire : "antonio@antonio.com",
-       msg_type : 1,
-       date : 1258,
-       message : 'Salut cava?',
-       _id: 5
-    }, {
-      expediteur : "antonio@antonio.com",
-      destinataire : "yassine@yassine.com",
-      msg_type : 1,
-      date : 1280,
-      message : 'Cava bien ..... !',
-      _id: 6
-     },{
-      expediteur : "antonio@antonio.com",
-      destinataire : "mohamed@mohamed.com",
-      msg_type : 1,
-      date : 1256,
-      message : 'Salut',
-      _id: 7
-    }, {
-       expediteur : "mohamed@mohamed.com",
-       destinataire : "antonio@antonio.com",
-       msg_type : 1,
-       date : 1258,
-       message : 'Salut cava?',
-       _id: 8
-    }, {
-      expediteur : "antonio@antonio.com",
-      destinataire : "mohamed@mohamed.com",
-      msg_type : 1,
-      date : 1280,
-      message : 'Cava bien ..... !',
-      _id: 9
-    },{
-      expediteur : "antonio@antonio.com",
-      destinataire : "alexandre@alexandre.com",
-      msg_type : 1,
-      date : 1256,
-      message : 'Salut',
-      _id: 10
-    }, {
-       expediteur : "alexandre@alexandre.com",
-       destinataire : "antonio@antonio.com",
-       msg_type : 1,
-       date : 1258,
-       message : 'Salut cava?',
-       _id: 11
-    }, {
-      expediteur : "antonio@antonio.com",
-      destinataire : "alexandre@alexandre.com",
-      msg_type : 1,
-      date : 1280,
-      message : 'Cava bien ..... !',
-      _id: 12
-   }
-    ])
-    } )
+      }, {
+        expediteur : "antonio@antonio.com",
+        destinataire : "yassine@yassine.com",
+        msg_type : 1,
+        date : 1256,
+        message : 'Salut',
+        _id: 4
+      }, {
+        expediteur : "yassine@yassine.com",
+        destinataire : "antonio@antonio.com",
+        msg_type : 1,
+        date : 1258,
+        message : 'Salut cava?',
+        _id: 5
+      }, {
+        expediteur : "antonio@antonio.com",
+        destinataire : "yassine@yassine.com",
+        msg_type : 1,
+        date : 1280,
+        message : 'Cava bien ..... !',
+        _id: 6
+      },{
+        expediteur : "antonio@antonio.com",
+        destinataire : "mohamed@mohamed.com",
+        msg_type : 1,
+        date : 1256,
+        message : 'Salut',
+        _id: 7
+      }, {
+        expediteur : "mohamed@mohamed.com",
+        destinataire : "antonio@antonio.com",
+        msg_type : 1,
+        date : 1258,
+        message : 'Salut cava?',
+        _id: 8
+      }, {
+        expediteur : "antonio@antonio.com",
+        destinataire : "mohamed@mohamed.com",
+        msg_type : 1,
+        date : 1280,
+        message : 'Cava bien ..... !',
+        _id: 9
+      },{
+        expediteur : "antonio@antonio.com",
+        destinataire : "alexandre@alexandre.com",
+        msg_type : 1,
+        date : 1256,
+        message : 'Salut',
+        _id: 10
+      }, {
+        expediteur : "alexandre@alexandre.com",
+        destinataire : "antonio@antonio.com",
+        msg_type : 1,
+        date : 1258,
+        message : 'Salut cava?',
+        _id: 11
+      }, {
+        expediteur : "antonio@antonio.com",
+        destinataire : "alexandre@alexandre.com",
+        msg_type : 1,
+        date : 1280,
+        message : 'Cava bien ..... !',
+        _id: 12
+      }
+    
+    ]))
     .then(() => console.log('finished populating message things'))
     
     .catch(err => console.log('error populating message things', err));
 
+
+    Award.destroy({ where: {} })
+    
+          .then(() => {
+            let award = Award.bulkCreate([{
+            _id: 1,
+            UserId : 5,
+            ConceptId : 1,
+            BadgeId : 3,
+            date : 4589152637,        
+            }, {
+            _id: 2,
+            UserId : 5,
+            ConceptId : 2,
+            BadgeId : 2,
+            date : 458915264038,
+            }, {
+            _id: 3,
+            UserId : 5,
+            ConceptId : 4,
+            BadgeId : 1,
+            date : 4589152639,
+            }
+          ])
+          })
+          .then(() => console.log('finished populating awards'))
+          .catch(err => console.log('error populating awards', err));
 
 
     Concept.destroy({ where: {} })
@@ -2068,30 +2097,20 @@ export default function seedDatabaseIfNeeded() {
             .then(() => {
       
               let badge = Badge.bulkCreate([{
-      
-                picture: 'gegqsdgrgrgrg',
-                description : 'expert Computeur science',      
-                _id: 1
-      
+                _id: 1,
+                picture: 'oro.jpg',
+                description : 'Stellar, oro medal',  
               }, {
-      
-                picture: 'gegqsdgrgrgrg',
-                description : 'expert iphoneX',      
-                _id: 2
+                _id: 2,
+                picture: 'plata.jpg',
+                description : 'expert, plata medal',
               }, {
+                _id: 3,
+                picture: 'bronce.jpg',
+                description : 'beginner, bronze medal',
+              }
       
-                picture: 'gegqsdgrgrgrg',
-                description : 'expert Judo',      
-                _id: 3
-      
-              }, {
-      
-                picture: 'gegqsdgrgrgrg',
-                description : 'expert Art',      
-                _id: 4     
-      
-      
-              }]);
+              ]);
       
             })
       
@@ -2157,22 +2176,42 @@ export default function seedDatabaseIfNeeded() {
         UserId : 1,
         ConceptId : 1,
         score : 5
-     }, {
-      
-      UserId : 8,
-      ConceptId : 1,
-      score : 5
-    },
+        }, {
+          
+          UserId : 8,
+          ConceptId : 1,
+          score : 5
+        },
 
-    {
-      
-      UserId : 2,
-      ConceptId : 2,
-      score : 7
-    }
+        {
+          
+          UserId : 2,
+          ConceptId : 2,
+          score : 7
+        }
       ]);
       })
-      .then(() => console.log('finished score'))
+      .then(() => console.log('finished score'));
+
+
+      Alonescore.destroy({where:{}})
+      .then(() =>{
+        let alonescore = Alonescore.bulkCreate([{
+          
+          UserId : 4,
+          ConceptId : 1,
+          alonescore : 5
+  
+  
+        },{
+
+           UserId : 3,
+           ConceptId : 1,
+           alonescore : 5
+        }
+      ]);
+      })
+      .then(() => console.log('finished alonescore'))
       
   }
 
