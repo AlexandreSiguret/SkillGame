@@ -27,12 +27,8 @@ export default function seedDatabaseIfNeeded() {
     let Choice = sqldb.Choice;
     let Game = sqldb.Game;
     let Score = sqldb.Score;
-<<<<<<< HEAD
     let Alonescore = sqldb.Alonescore;
     let Answer = sqldb.Answer
-=======
-    let Answer = sqldb.Answer;
->>>>>>> eb86567d793a6593fab15a9daa46b85efac3e46d
     let Message = sqldb.Message;
     let Badge = sqldb.Badge;
     let Award = sqldb.Award;
