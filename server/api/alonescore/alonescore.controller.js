@@ -1,19 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/answers              ->  index
- * POST    /api/answers              ->  create
- * GET     /api/answers/:id          ->  show
- * PUT     /api/answers/:id          ->  upsert
- * PATCH   /api/answers/:id          ->  patch
- * DELETE  /api/answers/:id          ->  destroy
+ * GET     /api/alonescores              ->  index
+ * POST    /api/alonescores              ->  create
+ * GET     /api/alonescores/:id          ->  show
+ * PUT     /api/alonescores/:id          ->  upsert
+ * PATCH   /api/alonescores/:id          ->  patch
+ * DELETE  /api/alonescores/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import {Answer} from '../../sqldb';
-import db from "../../sqldb"
-import Sequelize from 'sequelize';
+import {Alonescore} from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -66,60 +64,19 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Answers
+// Gets a list of Alonescores
 export function index(req, res) {
-  return Answer.findAll({
-    include :[db.Question]
-  })
+  return Alonescore.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-export function one(req,res){
-  console.log("coucou ici ")
-  return Answer.findAll({
-    order: Sequelize.fn('RANDOM'),
-    limit : 1 ,
-    include : {
-      model: db.Question,
-      attributes : ["_id","question"]
-    },
-    where : {
-      GameId : req.params.id,
-      UserId : req.user._id, 
-      earnedPoint : null    
-    },
-    attributes : ["_id"]
-  }
-  
-  ).then(respondWithResult(res))
-}
-
-export function all(req,res){
-  console.log("coucou ici ")
-  return Answer.findAll({
-    order: Sequelize.fn('RANDOM'),
-    limit : 1 ,
-    include : {
-      model: db.Question,
-      attributes : ["_id","question"]
-    },
-    where : {
-      GameId : req.params.id,
-      //UserId : req.user._id, 
-      earnedPoint : null    
-    },
-    attributes : ["_id"]
-  }
-  
-  ).then(respondWithResult(res))
-}
-
-// Gets a single Answer from the DB
+// Gets a single Alonescore from the DB
 export function show(req, res) {
-  return Answer.find({
+  return Alonescore.find({
     where: {
-      _id: req.params.id
+      UserId : req.user._id,
+      ConceptId : req.params.id
     }
   })
     .then(handleEntityNotFound(res))
@@ -127,23 +84,21 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
-// Creates a new Answer in the DB
+// Creates a new Alonescore in the DB
 export function create(req, res) {
-  return Answer.create(req.body)
+  req.body.UserId = req.user._id
+  return Alonescore.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Upserts the given Answer in the DB at the specified ID
+// Upserts the given Alonescore in the DB at the specified ID
 export function upsert(req, res) {
-/*  if(req.body._id) {
+  /*if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
-  }
-*/
-
-
-  return Answer.upsert(req.body, {
-    
+  }*/
+  req.body.UserId = req.user._id
+  return Alonescore.upsert(req.body, {
     where: {
       _id: req.params.id
     }
@@ -152,24 +107,12 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
-export function myanswer(req,res){
-  var a = []
-  console.log("on essaye de l'appeler")
-  return Question.find({
-    where : {
-      QuestionId : req.params.id}
-  }).then(succes =>{
-    a.genial = succes
-    console.log(a)
-  })
-}
-
-// Updates an existing Answer in the DB
+// Updates an existing Alonescore in the DB
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
-  return Answer.find({
+  return Alonescore.find({
     where: {
       _id: req.params.id
     }
@@ -180,9 +123,9 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
-// Deletes a Answer from the DB
+// Deletes a Alonescore from the DB
 export function destroy(req, res) {
-  return Answer.find({
+  return Alonescore.find({
     where: {
       _id: req.params.id
     }

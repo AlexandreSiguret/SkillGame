@@ -19,7 +19,7 @@ export class QuestionController {
     this.$stateParams = $stateParams;
     this.$http = $http;
     this.socket = socket;
-    $scope.counter = 30;
+    $scope.counter = 90;
     $scope.stopped = false;
        
     this.errormessage = ""
@@ -90,18 +90,27 @@ export class QuestionController {
   }
 
   call_question() {
+
+    console.log("oooooooooooooooooooo");
+    console.log(this.$stateParams.game_id);
     this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
     .then(response => {
       this.singleQuestion = response.data[0];
+      console.log("1111--question---oooooooooooooooooo");
+      console.log(this.singleQuestion);
 	  
 	  this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
-        this.concept = response.data.ConceptId;        
+        this.concept = response.data.ConceptId; 
+        console.log("222--concept--oooooooooooooooooo");
+        console.log(this.concept);       
       });
 	  
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
       .then(response => {
         this.questionChoices = response.data;
+        console.log("333--choice--oooooooooooooooooo");
+        console.log(this.questionChoices); 
       });
 
       this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
@@ -143,10 +152,10 @@ export class QuestionController {
             
            
             this.errormessage = "the question has been reported"
-            this.$http.get("/api/questions/"+this.singleQuestion.Question._id).then(response =>{
+            this.$http.get("/api/questions/"+this.singleQuestion.Question._id).then(response =>{ 
               this.$http.put("/api/questions/"+this.singleQuestion.Question._id,{ 
                 _id : this.singleQuestion.Question._id,
-                nbContestation : response.data.nbContestation + 1
+                nbContestation : response.data.nbContestation + 1 
               })
             })
           }

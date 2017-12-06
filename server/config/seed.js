@@ -27,6 +27,7 @@ export default function seedDatabaseIfNeeded() {
     let Choice = sqldb.Choice;
     let Game = sqldb.Game;
     let Score = sqldb.Score;
+    let Alonescore = sqldb.Alonescore;
     let Answer = sqldb.Answer
     let Message = sqldb.Message;
     let Badge = sqldb.Badge
@@ -2167,7 +2168,27 @@ export default function seedDatabaseIfNeeded() {
     }
       ]);
       })
-      .then(() => console.log('finished score'))
+      .then(() => console.log('finished score'));
+
+
+      Alonescore.destroy({where:{}})
+      .then(() =>{
+        let alonescore = Alonescore.bulkCreate([{
+          
+          UserId : 4,
+          ConceptId : 1,
+          alonescore : 5
+  
+  
+        },{
+
+           UserId : 3,
+           ConceptId : 1,
+           alonescore : 5
+        }
+      ]);
+      })
+      .then(() => console.log('finished alonescore'))
       
   }
 

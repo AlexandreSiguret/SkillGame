@@ -58,6 +58,9 @@ export class QuestionsController {
     this.currentConcept = concept;
     this.choice = true;
     console.log(this.controleQuestion)
+
+   // console.log(" Je suis this.currentConcept._id");
+   // console.log(this.currentConcept._id);
   }
 
   askQuestion() {

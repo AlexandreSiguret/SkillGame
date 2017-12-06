@@ -62,6 +62,8 @@ export class GameComponent {
 */
     this.$window.location.href = '/question/'+player._id;
 
+    //console.log(player._id);
+
   }
 
 

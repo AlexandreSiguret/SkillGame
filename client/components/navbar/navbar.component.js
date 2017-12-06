@@ -20,7 +20,7 @@ export class NavbarComponent {
     title : "Battle",
     state : "affrontement"
   },{
-    title : "Play_clock",
+    title : "Play alone",
     state : "jeuchrono"
   },{
     title : "Ranking",

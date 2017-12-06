@@ -9,6 +9,7 @@ import path from 'path';
 
 export default function(app) {
   // Insert routes below
+  app.use('/api/alonescores', require('./api/alonescore'));
   app.use('/api/badges', require('./api/badge'));
   app.use('/api/answers', require('./api/answer')); 
   app.use('/api/choices', require('./api/choice'));
