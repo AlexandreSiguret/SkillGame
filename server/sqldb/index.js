@@ -14,7 +14,11 @@ var db = {
 };
 
 // Insert models below
+
+db.Alonescore = db.sequelize.import('../api/alonescore/alonescore.model');
+
 db.Award = db.sequelize.import('../api/award/award.model');
+
 db.Badge = db.sequelize.import('../api/badge/badge.model');
 db.Answer = db.sequelize.import('../api/answer/answer.model');
 db.Choice = db.sequelize.import('../api/choice/choice.model');
@@ -41,8 +45,14 @@ db.Game.belongsTo(db.User,{ as :"User2"})
 db.Score.belongsTo(db.Concept)
 db.Concept.hasMany(db.Score)
 
+db.Alonescore.belongsTo(db.Concept)
+db.Concept.hasMany(db.Alonescore)
+
 db.Score.belongsTo(db.User)
 db.User.hasMany(db.Score)
+
+db.Alonescore.belongsTo(db.User)
+db.User.hasMany(db.Alonescore)
 
 db.Answer.belongsTo(db.User)
 db.Answer.belongsTo(db.Game)

@@ -7,7 +7,7 @@ describe('Component: GameComponent', function() {
   var GameComponent;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function($componentController) {
+  beforeEach(inject(function($componentController) {    
     GameComponent = $componentController('game', {});
   }));
 
