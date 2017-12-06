@@ -19,11 +19,18 @@ export class QuestionsController {
   idNewQuestion = ""
   message = ""
 
+
   /*@ngInject*/
   constructor($http, $scope, socket, $window) {
     this.$http = $http;
     this.socket = socket;
     this.$window=$window;
+    
+
+
+   $scope.cloud = [],
+
+  this.$scope = $scope
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('concept');
@@ -34,11 +41,16 @@ export class QuestionsController {
     this.$http.get('/api/concepts')
       .then(response => {
         this.awesomeConcept = response.data;
+        this.$scope.cloud = []
         for (var i = 0; i < this.awesomeConcept.length; i++) {
-          this.allConceptId[i]=this.awesomeConcept[i]._id
+         var a = { text :  this.awesomeConcept[i].name, weight: i , /*link : "http://localhost:3000/messenger",*/ test : "coucou" }
+         this.$scope.cloud.push(a)
         }
-        console.log(this.allConceptId)
       });
+  }
+
+  test(arg){
+    console.log(arg)
   }
 
   choix_concept(concept) {
