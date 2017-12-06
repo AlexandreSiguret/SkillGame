@@ -6,10 +6,10 @@
         <li>
           <div class="form-group">
             <label>Search:</label>
-            <input type="text" class="form-control">
+            <input ng-model="searchText" type="text" class="form-control">
           </div>
         <li>
-        <li ng-repeat="concept in $ctrl.awesomeConcept  | filter:searchText"  >
+        <li ng-repeat="concept in $ctrl.awesomeConcept  | filter:{ name : searchText}"  >
           <a href="#" ng-click = "$ctrl.choix_concept(concept)" ng-style = "concept == $ctrl.currentConcept && {'color': '#fff' , 'background-color': '#166e70'}">{{concept.name}} </a>
         </li>
       </ul>

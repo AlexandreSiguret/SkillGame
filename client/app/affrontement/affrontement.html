@@ -11,7 +11,6 @@
                     </li>
                     <li class="active">Battle</li>
 
-                    
                     <center>
                     <li align="right"><span class="glyphicon glyphicon-search"></span>   <label>    <input class="form-control" ng-model="searchText"/></label><li>
                     </center>
@@ -24,7 +23,7 @@
 
         <div class="row">
 
-            <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers | filter:searchText">
+            <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers | filter: { name : searchText}">
                 <img height="150" width="140" src="assets/images/{{user.avatar}}">
                 <h3>{{user.name}}</h3>
                 <p>Ranking:</p>
