@@ -1,14 +1,23 @@
 <div class="container">
   <div class="row">
+
     <div class="col-md-3 col-sm-4 sidebar">
       <ul class="nav nav-stacked nav-pills">
-        <li ng-repeat="concept in $ctrl.awesomeConcept" id="concept-{{concept._id}}">
-          <a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a>
+        <li>
+          <div class="form-group">
+            <label>Search:</label>
+            <input type="text" class="form-control">
+          </div>
+        <li>
+        <li ng-repeat="concept in $ctrl.awesomeConcept  | filter:searchText"  >
+          <a href="#" ng-click = "$ctrl.choix_concept(concept)" ng-style = "concept == $ctrl.currentConcept && {'color': '#fff' , 'background-color': '#166e70'}">{{concept.name}} </a>
         </li>
       </ul>
     </div>
+
+
     <div class="col-md-9 col-sm-8">
-      <h1 style="color: #166e70;" class="page-header">Pick a concept </h1>
+      <h1 style="color: #166e70;" class="page-header">Pick a concept  </br> </h1>
       <div ng-if="$ctrl.choice == true">
         <div ng-if="$ctrl.choice == true">
           <!-- <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p> -->

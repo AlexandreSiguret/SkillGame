@@ -42,7 +42,8 @@ export class QuestionsController {
   }
 
   choix_concept(concept) {
-
+/*
+    
     for (var i = 0; i < this.allConceptId.length; i++) {
 
       var variable = '#concept-'+this.allConceptId[i];
@@ -54,6 +55,9 @@ export class QuestionsController {
     var myEl = angular.element( document.querySelector( variable ) );
     myEl.attr('class',"active");
 
+
+    color: #fff;
+    background-color: #166e70*/
 
     this.currentConcept = concept;
     this.choice = true;
