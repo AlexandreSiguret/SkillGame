@@ -8,12 +8,10 @@ export class QuestionController {
   $timeout
   socket;
   stopped;
-  
-
-
+  getCurrentUser : Function;
   
   /*@ngInject*/
-  constructor($http, $scope, socket, $timeout,$stateParams) {
+  constructor($http, $scope, socket, $timeout,$stateParams, Auth) {
     this.$timeout=$timeout;
     this.$scope=$scope;
     this.$stateParams = $stateParams;
@@ -29,7 +27,8 @@ export class QuestionController {
     this.num = 0;
     this.concept;
     this.currentScore = 0;
-
+    this.getCurrentUser = Auth.getCurrentUserSync;
+    this.listAwards = [];
     
 
 
@@ -152,6 +151,23 @@ export class QuestionController {
           }
         }
 
+        getUserAwards(){
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id)
+          .then(response => {
+            this.listAwards = response.data;
+            this.socket.syncUpdates('award', this.listAwards);
+            console.log(this.listAwards);
+          });
+        }
+
+        putUserAward(){
+          this.$http.post("/api/awards", {
+            UserId : this.getCurrentUser()._id,
+            ConceptId : this.concept,
+            BadgeId : 3,
+            date: new Date(),
+          })
+        }
         
 
         validation(select){
@@ -164,27 +180,30 @@ export class QuestionController {
             })
             console.log("on va appeler score")
 		      	this.$http.get("/api/scores/"+this.concept) 
-            .then(response => {                      
-                            
-              console.log("reussi")
-                     
-             
+            .then(response => {
+              this.putUserAward();
+              this.getUserAwards();                                
+              console.log("reussi") 
+              .then(response => {
+                this.idNewScore = response.data._id;
+              });
+              this.currentScore = response.data.score;              
+              this.$http.put('/api/scores/'+ response.data._id,{
+                score : this.currentScore + this.$scope.seconds,
+                ConceptId : this.concept,
+                _id :response.data._id
+              });
+
               
-                this.currentScore = response.data.score;
-                this.$http.put('/api/scores/'+ response.data._id,{
-                  score : this.currentScore + this.$scope.seconds,
-                  ConceptId : this.concept,
-                  _id :response.data._id
-                }) 
-              
-          },response =>
-          {console.log("echec")
-            this.$http.post('/api/scores',{
-            score :  this.$scope.seconds,              
-            ConceptId : this.concept
-          }
-        )
-      console.log("on s'active") })
+            },response => {
+                console.log("echec")
+                this.$http.post('/api/scores',{
+                score :  this.$scope.seconds,              
+                ConceptId : this.concept
+                })
+              console.log("on s'active")
+              }
+            )
             
 			
             var variable = '#label-choices-'+select._id;
