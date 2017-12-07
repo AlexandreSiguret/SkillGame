@@ -25,13 +25,13 @@
           <!-- <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p> -->
           <br> 
           <center>
-            <button ng-click ="$ctrl.askQuestion()" type="button" class="btn btn-primary btn-md">Submit a question</button>
+           
             <button ng-click ="$ctrl.lookForAGame()" type="button" class="btn btn-primary btn-md">Battle a random player</button>
           </center>
 
           <br/>
           
-          <form ng-if="$ctrl.controleQuestion == true">
+          <form ng-if="$ctrl.choice == true">
 
             <div class="form-group">
               <label for="exampleFormControlTextarea1">Question</label>

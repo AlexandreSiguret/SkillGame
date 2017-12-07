@@ -8,20 +8,14 @@ export class NavbarComponent {
     title: 'SkillGame',
     state: 'main'
   },{
-    title: 'Questions',
+    title: 'Contribute',
     state: 'questions'
-  },{
-    title: 'Play',
-    state: 'jeu'
   },{
     title: 'My Games',
     state: 'game'
   },{
     title : "Battle",
     state : "affrontement"
-  },{
-    title : "Play alone",
-    state : "jeuchrono"
   },{
     title : "Ranking",
     state : "classement"

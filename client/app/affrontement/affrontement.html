@@ -22,6 +22,7 @@
         <!-- Team Member Profiles -->
 
         <div class="row">
+          <!--
 
             <div class="col-sm-3" >
                 <center>
@@ -34,7 +35,7 @@
                   </select>
                 </div>
                 
-                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.Random();" >Challenge Randomly</button>
+                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.lookForAGame();" >Challenge Randomly</button>
                 </center>
                 <br/><br/>
             </div>
@@ -50,11 +51,11 @@
                   </select>
                 </div>
                 
-                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.againstTime();" > Versus the time </button>
+                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.againstTime();" > Versus the time  {{c.name}}</button>
                 </center>
                 <br/><br/>
             </div>
-
+          -->
 
             <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers | filter: { name : searchText}">
                 <center>
@@ -66,7 +67,7 @@
                   </select>
                 </div>
                 
-                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame(user);" >Challenge this player</button>
+                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame(user);" >Challenge this player {{selectedValue }}</button>
                   <!-- <button type="button" class="btn btn-primary btn-md" ng-click = "$ctrl.affStatus('ferme')" >Sortir</button> -->
 
                 </center>

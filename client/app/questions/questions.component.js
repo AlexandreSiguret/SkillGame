@@ -7,6 +7,7 @@ export class QuestionsController {
   socket;
   allConceptId=[];
   awesomeConcept = [];
+  awesomeConceptId = {}
   newConcept = '';
   currentConcept = [];
   choice = false;
@@ -21,10 +22,11 @@ export class QuestionsController {
 
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $window) {
+  constructor($http, $scope, socket, $window,$stateParams) {
     this.$http = $http;
     this.socket = socket;
     this.$window=$window;
+    this.$stateParams = $stateParams;
     
 
 
@@ -42,16 +44,36 @@ export class QuestionsController {
       .then(response => {
         this.awesomeConcept = response.data;
         this.$scope.cloud = []
-        for (var i = 0; i < this.awesomeConcept.length; i++) {
-         var a = { text :  this.awesomeConcept[i].name, weight: i , /*link : "http://localhost:3000/messenger",*/ test : "coucou" }
+        for (var i = 0; i < response.data.length; i++) {
+         var a = { text :  response.data[i].name, weight: i , link : "http://localhost:3000/questions/"+ response.data[i]._id}
          this.$scope.cloud.push(a)
+          this.awesomeConceptId[response.data[i]._id] = {name :response.data[i].name }
+          console.log(this.awesomeConceptId[response.data[i]._id])
+          console.log(response.data[i].name )
+        
         }
-      });
+
+        if(this.awesomeConceptId[this.$stateParams.id] != undefined){
+          console.log("on est definie")
+          
+          this.currentConcept = {"_id" : this.$stateParams.id,name : this.awesomeConceptId[this.$stateParams.id]["name"] }
+          console.log(this.currentConcept)
+          this.choice = true;
+        }
+        else{
+          console.log('ce n"est pas définie')
+        }
+        
+       
+      }
+      
+    )
+
+      
+      ;
   }
 
-  test(arg){
-    console.log(arg)
-  }
+
 
   choix_concept(concept) {
 /*
@@ -72,8 +94,9 @@ export class QuestionsController {
     background-color: #166e70*/
 
     this.currentConcept = concept;
+    console.log(this.currentConcept)
     this.choice = true;
-    console.log(this.controleQuestion)
+   // console.log(this.controleQuestion)
 
    // console.log(" Je suis this.currentConcept._id");
    // console.log(this.currentConcept._id);
