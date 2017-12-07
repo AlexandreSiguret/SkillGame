@@ -104,48 +104,15 @@ export class JeuchronoController {
   }
 
   $onInit() {
-    this.$http.get('/api/concepts')
-    .then(response => {
-      this.awesomeConcept = response.data;
-      for (var i = 0; i < this.awesomeConcept.length; i++) {
-        this.allConceptId[i]=this.awesomeConcept[i]._id
-      }
-      console.log(this.allConceptId)
-    });
-
     this.call_question()
   }
 
-  choix_concept(concept) {
-    
-        for (var i = 0; i < this.allConceptId.length; i++) {
-    
-          var variable = '#concept-'+this.allConceptId[i];
-          var myEl = angular.element( document.querySelector( variable ) ); 
-          myEl.removeAttr('class');
-        }
-    
-        var variable = '#concept-'+concept._id;
-        var myEl = angular.element( document.querySelector( variable ) );
-        myEl.attr('class',"active");
-    
-    
-        this.currentConcept = concept;
-        this.choice = true;
-        //console.log(this.controleQuestion) 
-
-      // this.$scope.counter = 99;
-       this.call_question()
-      
-      }
-
-
   call_question() {
 
-        console.log(" currentConcept");
-       console.log(this.currentConcept._id);
+        console.log(" $stateParams.ConceptId ");
+       console.log(this.$stateParams.ConceptId);
 
-       this.$http.get('/api/questions/takequest/'+this.currentConcept._id)
+       this.$http.get('/api/questions/takequest/'+this.$stateParams.ConceptId)
        .then(response => {
          this.singleQuestionAfter = response.data.length;
          console.log(this.singleQuestionAfter);

@@ -16,9 +16,10 @@ export class AffrontementController {
   currentUser = []; 
 
   /*@ngInject*/
-  constructor($http, $scope, socket, Auth) {
+  constructor($http, $scope, socket, Auth, $location ) { 
     this.$http = $http;
     this.socket = socket;
+    this.$location = $location;
     this.jChoice = true;
     this.jChoisi = false;
     this.cChoisi = false;
@@ -44,6 +45,23 @@ export class AffrontementController {
       this.listConcepts = response.data;
       this.socket.syncUpdates('concept', this.listConcepts);
     });
+
+  }
+
+  againstTime(idconcept){
+    if (idconcept == undefined){
+      console.log("please choose a concept");
+    } 
+    else{
+      console.log("concept trouvé");
+      console.log(idconcept);
+
+      console.log(" redirect");
+      
+      this.$location.path('/jeuchrono/'+idconcept);
+      this.$location.replace();
+
+    }
 
   }
 
@@ -74,7 +92,7 @@ export class AffrontementController {
           console.log(this.freeAwesomeGames)
             });
     
-        //this.$window.location.href = '/game';
+        // this.$window.location.href = '/game';
           }
       }
 
@@ -105,7 +123,7 @@ export class AffrontementController {
         ConceptId: conceptid,
       })
       .then(response => {
-        this.idNewMessage = response.data._id;
+        this.idNewMessage = response.data._id; 
       });
       
       console.log('Currentuser: '+this.getCurrentUser().name+', User Choisi: '+this.userChoisi.name+', ConceptChoisi: '+this.conceptChoisi.name);
