@@ -22,20 +22,20 @@
         <!-- Team Member Profiles -->
 
         <div class="row">
-          <!--
+          
 
             <div class="col-sm-3" >
                 <center>
                 <img height="150" width="140" src="assets/images/anonyme.png">
                 <h3> Aleatoire</h3>
                 <div class="form-group">
-                  <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue, user)" class="form-control">
+                  <select ng-model="selectedValueA"  class="form-control">
                       <option value="">Select concept</option>
                       <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                   </select>
                 </div>
                 
-                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.lookForAGame();" >Challenge Randomly</button>
+                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.lookForAGame(selectedValueA._id);" >Challenge Randomly </button>
                 </center>
                 <br/><br/>
             </div>
@@ -45,29 +45,30 @@
                 <img height="150" width="140" src="assets/images/anonyme.png">
                 <h3> Time </h3>
                 <div class="form-group">
-                  <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue, user)" class="form-control">
+                  <select ng-model="selectedValueT"  class="form-control">
                       <option value="">Select concept</option>
-                      <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
+                      <option ng-repeat="c in $ctrl.listConcepts" ng-value="c"> {{c.name}}</option>
                   </select>
                 </div>
                 
-                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.againstTime();" > Versus the time  {{c.name}}</button>
+                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.againstTime(selectedValueT._id);" > Versus the time  </button>
                 </center>
                 <br/><br/>
             </div>
-          -->
+          
 
             <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers | filter: { name : searchText}">
                 <center>
               <img height="150" width="140" src="assets/images/{{user.avatar}}">
                 <h3>{{user.name}}</h3>
                 <div class="form-group">
-                  <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue, user)" class="form-control">
+                  <select ng-model="selectedValue" class="form-control">
+                      <option value="">Select concept</option>
                       <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                   </select>
                 </div>
                 
-                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame(user);" >Challenge this player {{selectedValue }}</button>
+                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame(user._id,selectedValue._id);" >Challenge this player </button>
                   <!-- <button type="button" class="btn btn-primary btn-md" ng-click = "$ctrl.affStatus('ferme')" >Sortir</button> -->
 
                 </center>

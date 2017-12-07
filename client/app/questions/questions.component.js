@@ -102,38 +102,9 @@ export class QuestionsController {
    // console.log(this.currentConcept._id);
   }
 
-  askQuestion() {
-    console.log(this.controleQuestion)
-    this.controleQuestion = true
-  }
 
-  lookForAGame() {
 
-    this.$http.get('/api/games/freeGame/'+ this.currentConcept._id)
-    .then(response => {
-      this.freeAwesomeGames = response.data;
-      if(response.data.length == 0){       
-        this.$http.post("/api/games", {          
-          ConceptId: this.currentConcept._id,
-          ended : false,
-        })
-      }
-      else{
-        console.log(this.freeAwesomeGames)
-        this.$http.put("/api/games/" + this.freeAwesomeGames[0]._id, {
-         /* user1 : this.freeAwesomeGames[0].user1,
-          concept: this.freeAwesomeGames[0].concept,
-          ended : this.freeAwesomeGames[0].ended*/
-          _id : this.freeAwesomeGames[0]._id
-        })
-      }
-      console.log(this.freeAwesomeGames)
 
-    });
-
-    //this.$window.location.href = '/game';
-
-  }
 
   addQuestion() {
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {

@@ -47,14 +47,18 @@ export class AffrontementController {
 
   }
 
-  lookForAGame() {    
-    console.log("au petit bonheur la chance")
-        this.$http.get('/api/games/freeGame/'+ this.currentConcept._id)
+  lookForAGame(idconcept) {   
+
+  if (idconcept == undefined){
+    console.log("please choose a concept")
+  }
+  else{
+        this.$http.get('/api/games/freeGame/'+ idconcept)
         .then(response => {
           this.freeAwesomeGames = response.data;
           if(response.data.length == 0){       
             this.$http.post("/api/games", {          
-              ConceptId: this.currentConcept._id,
+              ConceptId: idconcept,
               ended : false,
             })
           }
@@ -71,7 +75,7 @@ export class AffrontementController {
             });
     
         //this.$window.location.href = '/game';
-    
+          }
       }
 
   choix_concept(c, u) {
@@ -92,13 +96,13 @@ export class AffrontementController {
 
 
   /*********  Submit Game  ************ */
-  submitGame(u) {
+  submitGame(userid, conceptid) {
     
-    if(this.userChoisi._id == u._id){
+    if(conceptid != undefined){
       
       this.$http.post("/api/games", { 
-        User2Id: this.userChoisi._id,
-        ConceptId: this.conceptChoisi._id,
+        User2Id: userid,
+        ConceptId: conceptid,
       })
       .then(response => {
         this.idNewMessage = response.data._id;
