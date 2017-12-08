@@ -80,10 +80,9 @@ export class AffrontementController {
         ConceptId: conceptid,
       })
       .then(response => {
-        this.idNewMessage = response.data._id;
+        this.$window.location.href = '/question/'+ response.data._id;
       });
-      this.$window.location.href = '/game';
-      console.log('Currentuser: '+this.getCurrentUser().name+', User Choisi: '+userid+', Concept Choisi: '+conceptid);
+      
     }else{
       console.log("Select a concept please!");
     } 
