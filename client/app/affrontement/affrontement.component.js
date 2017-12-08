@@ -78,21 +78,8 @@ export class AffrontementController {
           }
       }
 
-  choix_concept(c, u) {
-    this.clearAll();
-    this.conceptChoisi = c;
-    this.userChoisi = u;
-    this.cChoisi = true;
-    this.jChoisi = true;
-  }
 
-  affStatus(a){
-    this.clearAll();
-    switch(a){
-      case 'jChoice':     this.jChoice = true; break;
-      case 'jChoisi':     this.jChoisi = true; break;
-    }; 
-  } 
+ 
 
 
   /*********  Submit Game  ************ */
@@ -114,17 +101,6 @@ export class AffrontementController {
     } 
       
   } // end submit Game
-
-  clearAll(){
-
-    this.chat_message = '';
-    this.jChoice = false;
-    this.jChoisi = false;
-    this.cChoisi = false
-    this.jAffront = false;
-
-  }
-
 
 } 
 

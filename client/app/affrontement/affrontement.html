@@ -57,7 +57,7 @@
             </div>
           
 
-            <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers | filter: { name : searchText}">
+            <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers | filter: {name : searchText}">
                 <center>
               <img height="150" width="140" src="assets/images/{{user.avatar}}">
                 <h3>{{user.name}}</h3>
