@@ -153,9 +153,9 @@ export function show(req, res) {
 
 
 // Creates a new Game in the DB
-function allcreation(tab, donne, iduser) {
+function allcreation(tab, donne, iduser,res) {
 
-
+console.log("all creation")
   var taille = tab.length;
   var idquizz = donne._id
   for (var i = 0; i < taille; i++) {
@@ -184,14 +184,15 @@ function allcreation(tab, donne, iduser) {
     Answer.create(creation2)
 
   }
-
+  return
 }
 
 export function create(req, res) {
   req.body.User1Id = req.user._id
   console.log(req.body)
   console.log("serieux ?")
-  return Game.create(req.body)
+  var a = Game.create(req.body)
+  return (a) 
     .then(response => {
       console.log("on essaye de passer par la")
       Question.findAll({
@@ -200,15 +201,15 @@ export function create(req, res) {
         where : {
           ConceptID : req.body.ConceptId
         }
-      }).then(succes => allcreation(succes, response.dataValues, req.user._id))
-        .then(respondWithResult(response,201))
-        .catch(handleError(res));
-    })
-
- .then(respondWithResult(response, 201))
-  
-    .catch(handleError(res));
+      })
+      .then(succes => allcreation(succes, response.dataValues, req.user._id))
+     
+      return response
+      
+    }).then(respondWithResult(res, 201))
+   
 }
+
 
 function regularisation(idquizz,idplayer) {
   console.log("coucou toi")

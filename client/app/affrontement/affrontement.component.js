@@ -5,24 +5,23 @@ import routing from './affrontement.routes';
 export class AffrontementController {
   $http;
   socket;
- 
   getCurrentUser: Function;
-  userChoiced = Function;
-  affrontStatus = Function;
   listUsers = [];
   listGames = [];
-  userChoisi = [];
-  conceptChoisi = [];
-  currentUser = []; 
-
+  
   /*@ngInject*/
+
   constructor($http, $scope, socket, Auth, $location ) { 
+
+
     this.$http = $http;
+    this.$window = $window;
     this.socket = socket;
     this.$location = $location;
     this.jChoice = true;
     this.jChoisi = false;
     this.cChoisi = false;
+
 
 
     this.getCurrentUser = Auth.getCurrentUserSync;
@@ -31,7 +30,7 @@ export class AffrontementController {
       socket.unsyncUpdates('user');
       socket.unsyncUpdates('concept');
     });
-  } // end constructor
+  }
 
   $onInit() {
     this.$http.get('/api/users/notme')
@@ -96,22 +95,6 @@ export class AffrontementController {
           }
       }
 
-  choix_concept(c, u) {
-    this.clearAll();
-    this.conceptChoisi = c;
-    this.userChoisi = u;
-    this.cChoisi = true;
-    this.jChoisi = true;
-  }
-
-  affStatus(a){
-    this.clearAll();
-    switch(a){
-      case 'jChoice':     this.jChoice = true; break;
-      case 'jChoisi':     this.jChoisi = true; break;
-    }; 
-  } 
-
 
   /*********  Submit Game  ************ */
   submitGame(userid, conceptid) {
@@ -124,29 +107,16 @@ export class AffrontementController {
       })
       .then(response => {
         this.idNewMessage = response.data._id; 
+        this.$window.location.href = '/question/'+ response.data._id;
       });
       
-      console.log('Currentuser: '+this.getCurrentUser().name+', User Choisi: '+this.userChoisi.name+', ConceptChoisi: '+this.conceptChoisi.name);
     }else{
       console.log("Select a concept please!");
     } 
       
   } // end submit Game
 
-  clearAll(){
-
-    this.chat_message = '';
-    this.jChoice = false;
-    this.jChoisi = false;
-    this.cChoisi = false
-    this.jAffront = false;
-
-  }
-
-
 } 
-
-
 
 
 export default angular.module('skillGameApp.affrontement', [uiRouter])
