@@ -40,14 +40,10 @@ export class JeuchronoController {
     this.num = 0;
     this.concept;
     this.currentScore = 0;
-   // this.Mygame_id = [];
-   this.myIndice = 0;
-   this.fini = "Le test est fini";
-   this.earnedPoint = 0;
+    this.myIndice = 0;
+    this.fini = "Le test est fini";
+    this.earnedPoint = 0;
   
-
-    
-
 
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
@@ -57,15 +53,11 @@ export class JeuchronoController {
 
       if($scope.counter == 0) {
 
-        
-        
         var variable = '#label-choices-'+this.detailedQuestion._id;
         var myEl = angular.element( document.querySelector( variable ) );
         myEl.removeAttr('class');
         myEl.attr('class',"false");
-
-      
-        
+ 
         for (var i = 0; i < this.idChoices.length; i++) {
           var variable = '#choices-'+this.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
@@ -74,6 +66,8 @@ export class JeuchronoController {
 
         if(this.num < this.singleQuestionAfter)
         {
+          // console.log("je rentré fois");
+         // console.log(this.num);
           var myEl = angular.element(document.querySelector('#next-question-button'));
           myEl.removeAttr('disabled');
 
@@ -109,9 +103,6 @@ export class JeuchronoController {
 
   call_question() {
 
-        console.log(" $stateParams.ConceptId ");
-       console.log(this.$stateParams.ConceptId);
-
        this.$http.get('/api/questions/takequest/'+this.$stateParams.ConceptId)
        .then(response => {
          this.singleQuestionAfter = response.data.length;
@@ -146,41 +137,36 @@ export class JeuchronoController {
              }
    
          });
-       });
-
-     
-
-   
+       }); 
   }
 
  
     
-  
-
   Check_next() {
     this.myIndice++;
-
-    this.errormessage = "";
-    var myEl = angular.element(document.querySelector('#next-question-button'));
-    myEl.attr('enabled',"");
-
-    var myEl = angular.element(document.querySelector('#report-question-button'));
-    myEl.attr('enabled',"");  
-
-    this.call_question()
-
     this.num++;
+
+  
+
+     if ( this.num < this.singleQuestionAfter){
+     this.call_question()
+     } else {
+      this.errormessage = "";
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.attr('disabled',"");
+  
+      var myEl = angular.element(document.querySelector('#report-question-button'));
+      myEl.attr('disabled',"");  
+    } 
+    
     this.$scope.counter--;
     this.$scope.stopped=false;
-
-
   }
 
   report(){
           // alert('Question Reported !');
           if(this.errormessage ==""){
-            
-           
+               
             this.errormessage = "the question has been reported"
             this.$http.get("/api/questions/"+this.singleQuestion._id).then(response =>{
               this.$http.put("/api/questions/"+this.singleQuestion._id,{ 
@@ -238,6 +224,9 @@ export class JeuchronoController {
           }
 
           if(this.num < this.singleQuestionAfter) {
+          //  console.log("je rentré fois");
+           // console.log(this.num); 
+
             var myEl = angular.element(document.querySelector('#next-question-button'));
             myEl.removeAttr('disabled');
             var myEl = angular.element(document.querySelector('#report-question-button'));
@@ -255,7 +244,6 @@ export class JeuchronoController {
               myEl.removeAttr('style');
               myE2.attr('style',"display: inline;");
 
-
               //console.log("on va appeler score")
 
               //this.$http.put('/api/alonescores/'+ this.concept,{
@@ -268,9 +256,7 @@ export class JeuchronoController {
           }, 2000);
           }
          // this.$scope.stopped=true;
-
-
-         
+   
         }
 
   }
