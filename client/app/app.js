@@ -23,6 +23,7 @@ import navbar from '../components/navbar/navbar.component';
 import header from '../components/header/header.component';
 import footer from '../components/footer/footer.component';
 import sidebarleft from '../components/sidebarleft/sidebarleft.component';
+import awardstable from '../app/components/awardstable/awardstable.component';
 import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
@@ -36,14 +37,15 @@ import Affrontement from './affrontement/affrontement.component';
 import Classement from './classement/classement.component';
 import GameComponent from './game/game.component';
 import MessengerComponent from './messenger/messenger.component';
-require('angular-tag-cloud')
+//require('angular-tag-cloud')
 
 import './app.css';
 
 angular.module('skillGameApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
-  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, awardstable, footer, main, constants,
   socket, util, JeuComponent, header, sidebarleft, Questions, Affrontement, Classement, ListQuestions,
-  GameComponent, Jeuchrono, GameComponent, MessengerComponent,"ngTagCloud"
+  GameComponent, Jeuchrono, GameComponent, MessengerComponent,
+  //"ngTagCloud"
 
 ])
   .config(routeConfig)

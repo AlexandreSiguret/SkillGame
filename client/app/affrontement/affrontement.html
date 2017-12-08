@@ -7,14 +7,11 @@
                     <small> Players !</small>
                 </h1>
                 <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
+                    <li><a href="index.html">Home</a></li>
                     <li class="active">Battle</li>
-
                     <center>
-                    <li align="right"><span class="glyphicon glyphicon-search"></span>   <label>    <input class="form-control" ng-model="searchText"/></label><li>
+                      <li align="right"><span class="glyphicon glyphicon-search"></span>   <label>    <input class="form-control" ng-model="searchText"/></label><li>
                     </center>
-                   
                 </ol>
             </div>
         </div>
@@ -25,7 +22,7 @@
           
 
             <div class="col-sm-3" >
-                <center>
+              <center>
                 <img height="150" width="140" src="assets/images/anonyme.png">
                 <h3> Aleatoire</h3>
                 <div class="form-group">
@@ -34,14 +31,13 @@
                       <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                   </select>
                 </div>
-                
                   <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.lookForAGame(selectedValueA._id);" >Challenge Randomly </button>
-                </center>
-                <br/><br/>
+              </center>
+              <br/><br/>
             </div>
 
             <div class="col-sm-3" >
-                <center>
+              <center>
                 <img height="150" width="140" src="assets/images/anonyme.png">
                 <h3> Time </h3>
                 <div class="form-group">
@@ -50,16 +46,15 @@
                       <option ng-repeat="c in $ctrl.listConcepts" ng-value="c"> {{c.name}}</option>
                   </select>
                 </div>
-                
                   <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.againstTime(selectedValueT._id);" > Versus the time  </button>
-                </center>
-                <br/><br/>
+              </center>
+              <br/><br/>
             </div>
           
 
             <div class="col-sm-3" ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers | filter: { name : searchText}">
-                <center>
-              <img height="150" width="140" src="assets/images/{{user.avatar}}">
+              <center>
+                <img height="150" width="140" src="assets/images/{{user.avatar}}">
                 <h3>{{user.name}}</h3>
                 <div class="form-group">
                   <select ng-model="selectedValue" class="form-control">
@@ -67,90 +62,10 @@
                       <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
                   </select>
                 </div>
-                
-                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame(user._id,selectedValue._id);" >Challenge this player </button>
-                  <!-- <button type="button" class="btn btn-primary btn-md" ng-click = "$ctrl.affStatus('ferme')" >Sortir</button> -->
-
-                </center>
-                <br/><br/>
+                  <button type="button" class="btn btn-primary btn-md" ng-click="$ctrl.submitGame(user._id,selectedValue._id);" >Challenge this player</button>
+              </center>
+              <br/><br/>
             </div>
 
         </div>
 </div>
-
-
-<!-- <div id="sbleft_affront" class="sbleft">
-  <div class="container" style="width:180px">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1 class="page-header">Jouers :</h1>
-          <div class="nav-affront-v">
-            <ul >
-                <li ng-if="user.name != 'Admin' " ng-repeat="user in $ctrl.listUsers">
-                  <a ng-if="$ctrl.getCurrentUser().name != user.name" href="#" ng-click = "$ctrl.choix_user(user)" alt="{{user.name}}" >
-                    <img src="assets/images/{{user.avatar}}">
-                    {{user.name}}
-                  </a>
-                  <a ng-if="$ctrl.getCurrentUser().name == user.name" alt="{{user.name}}" >
-                      <img src="assets/images/{{user.avatar}}">
-                      {{user.name}}
-                  </a>
-                </li>
-            </ul>  
-          </div>
-
-        </div>
-      </div> 
-    
-    </br>
-  </div>
-
-  <div ng-show="$ctlr.jeuChoice" class container style="width:180px">
-
-  </div>
-</div> -->
-<!-- 
-<div id="main_affront" style="margin-left: 220px">
-
-  <div ng-show="$ctrl.jChoisi" >
-    
-    <h1 class="page-header"></h1>
-    <div id="">
-            <div id="jouer-image" >
-              <img src="assets/images/{{$ctrl.userChoisi.avatar}}" style="width:190px; height:200px" alt="{{$ctrl.userChoisi.name}}"> 
-              <p>{{$ctrl.userChoisi.name}}</p>
-            </div>
-            <div id="jouer-tableau">
-              <table border=0 width="150">
-                <tr>
-                  <td>Name:</td>
-                  <td>{{$ctrl.userChoisi.name}}</td>
-                </tr>
-                <tr>
-                  <td>Ranking:</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Force:</td>
-                  <td></td>
-                </tr>
-                <tr>
-                  <td>Points:</td>
-                  <td></td>
-                </tr>
-              </table>
-            </div>
-            <div id="nav_jouerChoice" class="nav-affront">
-              <ul> 
-                  <li>
-                    <select ng-model="selectedValue" ng-click="$ctrl.choix_concept(selectedValue)">
-                    <option ng-repeat="c in $ctrl.listConcepts" ng-value="c">{{c.name}}</option>
-                    </select>
-                  </li>
-                  <li><button ng-click="$ctrl.submitGame();$ctrl.affStatus('invitAccepte')" >Défier</button></li>
-                  <li><button ng-click = "$ctrl.affStatus('ferme')" >Sortir</button></li>
-
-                  <!-- <li><button ng-click = "" >Message </button></li> -->
-
-
-   <!--  </div> -->
