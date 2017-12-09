@@ -95,7 +95,17 @@ function handleError(res, statusCode) {
 export function index(req, res) {
   return Score.findAll({
     attributes: [[Sequelize.fn('SUM', Sequelize.col('score')), 'total'],"_id","UserId"],
-    group: 'UserId'})
+    group: 'UserId',
+    order : [
+      [ Sequelize.col('total'),"DESC"]
+ //     ["UserId","ASC"]
+    ],
+    limit : 3,
+    include: [{
+          model: db.User,      
+          attributes : ["name","avatar"]
+      }]
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
