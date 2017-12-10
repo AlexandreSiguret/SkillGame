@@ -121,6 +121,10 @@ export function patch(req, res) {
     .catch(handleError(res));
 }
 
+//**********************//
+
+//**********************//
+
 // Deletes a Thing from the DB
 export function destroy(req, res) {
   return Thing.find({
