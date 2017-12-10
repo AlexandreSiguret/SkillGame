@@ -1,10 +1,11 @@
 'use strict';
 
 import angular from 'angular';
-// import ngAnimate from 'angular-animate';
+import ngFileUpload from 'ng-file-upload';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+//import ngFileUpload from '../assets/js/ng-file-upload.js';
 
 import 'angular-socket-io';
 
@@ -37,11 +38,12 @@ import Affrontement from './affrontement/affrontement.component';
 import Classement from './classement/classement.component';
 import GameComponent from './game/game.component';
 import MessengerComponent from './messenger/messenger.component';
+//import fileUpload from '../../node_modules/ng-file-upload/dist/ng-file-upload.min'
 //require('angular-tag-cloud')
 
 import './app.css';
 
-angular.module('skillGameApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
+angular.module('skillGameApp', [ngCookies, ngFileUpload, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, awardstable, footer, main, constants,
   socket, util, JeuComponent, header, sidebarleft, Questions, Affrontement, Classement, ListQuestions,
   GameComponent, Jeuchrono, GameComponent, MessengerComponent,

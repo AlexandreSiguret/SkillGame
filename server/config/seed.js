@@ -2138,6 +2138,14 @@ export default function seedDatabaseIfNeeded() {
           UserId: 4,
           ConceptId: 1,
           score: 5
+          
+
+  
+        },{
+
+           UserId : 3,
+           ConceptId : 1,
+           score : 5
         }, {
           UserId: 4,
           ConceptId: 2,

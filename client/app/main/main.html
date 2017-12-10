@@ -1,47 +1,31 @@
 
-<div class="container">
-  
-  <div class="row">
 
-            <div class="col-lg-12">
-                <h1 style="color: #166e70;" class="page-header">Home
-                </h1>
-                <ol class="breadcrumb">
-                    <li class="active"><a href="index.html">Home</a>
-                    </li>
-                </ol>
-            </div>
 
-    <p class="lead"></p>
-  </div>
-</div>
 
-    <center>
-  <div class="container">
-    <div>
-      <img src="assets/images/skillTree_.png" height="400" widht="400" alt="I'm Yeoman Backer!">
-    </div>
-  </div>
-  </center>
 
-    <div class="section">
+    
         <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4">
-                    <h3><i class="fa fa-check-circle"></i> Documentation</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In accumsan, nulla quis feugiat posuere, tortor lacus tincidunt tellus, vitae dictum dolor lorem vitae ante. Sed nisl est, maximus a elit malesuada, malesuada porta quam. Integer et nibh lacus...</p>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <h3><i class="fa fa-pencil"></i> Help me &amp; Edit</h3>
-                    <p>Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec vitae consectetur mi, fringilla bibendum lectus...</p>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <h3><i class="fa fa-folder-open"></i> Contact Us</h3>
-                    <p>Sed nec mollis nisl. Cras at nunc dui. Proin condimentum metus eget quam consectetur, accumsan bibendum ligula bibendum. Phasellus dictum metus non risus pellentesque pellentesque...</p>
-                </div>
-            </div>
+           <h1> Welcolme to skill games</h1>
             <!-- /.row -->
+
+            <table border=0 width="450">
+                    <tr colspan="4">
+                        <caption> global ranking </caption>
+                    </tr>
+                    <tr >
+                        <td width="100"><h2>Avatar</h2></td>
+                        <td width="100"><h2>Name</h2></td>
+                        <td width="100"><h2>Score</h2></td>
+                        
+                      </tr>
+                    <tr ng-repeat="s in $ctrl.classement">
+                      <td><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></td>
+                      <td>{{s.User.name}}</a></td>
+                      <td>{{s.total}}</td>
+                    
+                    </tr>
+                </table>
 
         </div>
         <!-- /.container -->
-    </div>
+  

@@ -97,10 +97,11 @@ export function upsert(req, res) {
   /*if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }*/
-  req.body.UserId = req.user._id
-  return Alonescore.upsert(req.body, {
+  // req.body.UserId = req.user._id
+  return Alonescore.upsert(req.body, { 
     where: {
-      _id: req.params.id
+      ConceptId : req.params.id,
+      // UserId : req.user._id
     }
   })
     .then(respondWithResult(res))

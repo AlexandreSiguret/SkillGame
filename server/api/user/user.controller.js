@@ -180,6 +180,40 @@ export function changePassword(req, res) {
     });
 }
 
+export function uploadFiles(req,res){
+  
+  console.log("Charger Fichier Function");
+  
+var storage = multer.diskStorage({
+    destination: config.storage,
+    filename: function (request, file, callback) {
+      callback(null, file.originalname)
+      console.log("on essaye");
+      console.log(file.originalname)
+    }
+  });
+  // Définition d'un seul parametre
+  var upload = multer({storage: storage}).single('file');
+  upload(req, res, function(err) {
+    if(err) {
+      console.log(err);
+      return;
+    }
+    // Retourne le path
+    // TODO retourner le bon path, pour l'instant uniquement le nom du fichier
+    // et le path est adpater coté client
+    res.end("fin");
+  })
+
+}
+
+/**
+ * Change a users Avatar
+ */
+export function changeAvatar(req, res) {
+    console.log("change Avatar function")
+}
+
 /**
  * Get my info
  */

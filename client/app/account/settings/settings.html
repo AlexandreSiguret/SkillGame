@@ -1,13 +1,32 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
+      <h1 style="color: #166e70;">Change Avatar</h1>
+    </div>
+
+    <div class="col-sm-12">
+    <center>
+    <br><br>
+          <form class="cadre">
+
+            <div class="form-group">
+              <input type="file" ngf-select ng-model="vm.file" class="form-control-file" accept="image/*" ngf-max-size="2MB" name="file">
+            </div>
+            <br>
+            <div class="form-group">
+                <button  type="submit" class="btn btn-lg btn-primary" ng-click="vm.addFile()">Add file</button>
+            </div>
+            </p>
+          </form>
+          <br>
+          </center>
+    </div>
+
+    <div class="col-sm-12">
       <h1 style="color: #166e70;">Change Password</h1>
     </div>
     <div class="col-sm-12">
       <form class="form" name="form" ng-submit="vm.changePassword(form)" novalidate>
-
-        
-
         <div class="form-group">
           <label>Current Password</label>
 
