@@ -15,7 +15,6 @@ export class AffrontementController {
 
 
     this.$http = $http;
-    this.$window = $window;
     this.socket = socket;
     this.$location = $location;
     this.jChoice = true;
@@ -107,7 +106,7 @@ export class AffrontementController {
       })
       .then(response => {
         this.idNewMessage = response.data._id; 
-        this.$window.location.href = '/question/'+ response.data._id;
+       // this.$window.location.href = '/question/'+ response.data._id;
       });
       
     }else{
