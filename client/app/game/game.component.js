@@ -60,7 +60,7 @@ export class GameComponent {
     console.log(player.Concept._id);
     console.log(player._id);
 */
-    this.$window.location.href = '/question/'+player._id;
+    this.$window.location.href = '/question/'+player._id; 
 
     //console.log(player._id);
 
