@@ -134,6 +134,24 @@ export function changePassword(req, res) {
 }
 
 /**
+ * Change a users Avatar
+ */
+export function changeAvatar(req, res) {
+  var userId = req.user._id;
+
+  return User.find({
+    where: {
+      _id: userId
+    }
+  })
+    .then(user => {
+    console.log("change Avatar function")
+    //res.status(200).json(users);
+  })
+  .catch(handleError(res))
+}
+
+/**
  * Get my info
  */
 export function me(req, res, next) {

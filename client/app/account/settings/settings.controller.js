@@ -21,9 +21,47 @@ export default class SettingsController {
   Auth;
 
   /*@ngInject*/
-  constructor(Auth) {
+  constructor(Auth, Upload) {
     this.Auth = Auth;
+    this.Upload = Upload;
   }
+
+  addFile(){ 
+    console.log("Hello");
+    console.log(this.file);
+
+    if(/jpg$/.test(this.file.name)){
+      this.nameFile = this.file.name;
+      this.Upload.upload({
+        url :'api/users/upload',
+        data : {file : this.file}
+      }).then(this.ChargerFichier());
+    }
+    else if(/png$/.test(this.file.name)) {
+      this.nameFile = this.file.name;
+      this.Upload.upload({
+        url :'api/users/',
+        data : {file : this.file}
+      }).then(this.ChargerFichier());
+    } else {
+      alert("ce n'est pas un fichier json");
+    }
+}
+
+ChargerFichier(){
+  if (!/jpg$/.test(this.nameFile)){
+    this.nameFile = this.nameFile + ".jpg";
+  } else if (!/png$/.test(this.nameFile)) {
+    this.nameFile = this.nameFile + ".png";
+  }
+   /*this.$http.get('./storage/'+this.nameFile)
+      .then(response => {
+      this.awesomeStudent = response.data.etudiants;
+      this.awesomeChoice = response.data.Choix;
+      this.onglet="valide";
+  });*/
+}
+
 
   changePassword(form) {
     this.submitted = true;

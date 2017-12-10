@@ -1,6 +1,8 @@
 import angular from 'angular';
+//import fileUpload from '../../node_modules/ng-file-upload/dist/ng-file-upload.min'
 import uiRouter from 'angular-ui-router';
 import routing from './questions.routes';
+//var app = angular.module('fileUpload', ['ngFileUpload']);
 
 export class QuestionsController {
   $http;
@@ -27,7 +29,6 @@ export class QuestionsController {
     this.socket = socket;
     this.$window=$window;
     this.$stateParams = $stateParams;
-    
 
 
    $scope.cloud = [],
@@ -73,6 +74,28 @@ export class QuestionsController {
       ;
   }
 
+  /*uploadPic(file) {
+    file.upload = Upload.upload({
+      url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+      data: {
+        username: $scope.username,
+        file: file
+      },
+    });
+
+    file.upload.then(function(response) {
+      $timeout(function() {
+        file.result = response.data;
+      });
+    }, function(response) {
+      if (response.status > 0)
+        $scope.errorMsg = response.status + ': ' + response.data;
+    }, function(evt) {
+      // Math.min is to fix IE which reports 200% sometimes
+      file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+    });
+  }
+*/
 
 
   choix_concept(concept) {
