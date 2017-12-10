@@ -13,7 +13,7 @@
 import jsonpatch from 'fast-json-patch';
 import {Score} from '../../sqldb';
 import Sequelize from 'sequelize';
-import db from "../../sqldb";
+import db from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -33,17 +33,17 @@ export function topthree(req,res){
     where: { 
       ConceptId: cId,
     },
-    order : [
-      ["score","DESC"], 
-      ["UserId","ASC"]
+    order: [
+      ['score','DESC'], 
+      ['UserId','ASC']
     ],
-    limit : 3,
+    limit: 3,
 
     include: [{
       model: db.User,      
-      attributes : ["name","avatar"]
-  }]
-
+      attributes: ['name','avatar']
+    }]
+  
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
@@ -94,7 +94,7 @@ function handleError(res, statusCode) {
 // Gets a list of Scores
 export function index(req, res) {
   return Score.findAll({
-    attributes: [[Sequelize.fn('SUM', Sequelize.col('score')), 'total'],"_id","UserId"],
+    attributes: [[Sequelize.fn('SUM', Sequelize.col('score')), 'total'], '_id','UserId'],
     group: 'UserId'})
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -104,8 +104,8 @@ export function index(req, res) {
 export function show(req, res) {
   return Score.find({
     where: {
-      UserId : req.user._id,
-      ConceptId : req.params.id 
+      UserId: req.user._id,
+      ConceptId: req.params.id 
     }
   })
     .then(handleEntityNotFound(res))
@@ -128,10 +128,10 @@ export function upsert(req, res) {
   }*/
   req.body.UserId = req.user._id 
   return Score.upsert(req.body, {
-    
+
     where: {  
       _id: req.params.id,      
-         
+
     }
   })
     .then(respondWithResult(res))

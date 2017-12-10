@@ -5,14 +5,17 @@ import routing from './classement.routes';
 export class ClassementController {
   $http;
   socket; 
-  
+  listPlayers;
   threeAwesomePlayers;
+  listAwards;
 
   /*@ngInject*/
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
     this.socket = socket;
-    this.cChoisi = false;    
+    this.cChoisi = false;
+    this.listPlayers = [];
+    this.listAwards = [];    
  
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
@@ -28,7 +31,21 @@ export class ClassementController {
       this.listConcepts = response.data;
       this.socket.syncUpdates('concept', this.listConcepts);
     });
-     
+    this.$http.get("/api/users/ranked  ")
+    .then(response =>{
+      this.listPlayersRanked = response.data;
+      console.log(this.listPlayersRanked)
+    });
+    this.$http.get("/api/users")
+    .then(response =>{
+      this.listPlayers = response.data;
+      console.log(this.listPlayers)
+    });
+    this.$http.get("/api/badges")
+    .then(response =>{
+      this.listBadges = response.data;
+      console.log(this.listBadges)
+    });
 
   }
 
@@ -42,9 +59,19 @@ export class ClassementController {
     .then(response =>{
       this.threeAwesomePlayers = response.data;
       console.log(this.threeAwesomePlayers)
-    })
-    
-  }  
+    });
+
+  } 
+
+  getAwards(usr,cpt,bdg) {
+  //  if(typeof usr !== 'undefined') usr._id = 0;
+    console.log(usr._id+'/'+cpt._id+'/'+bdg._id);
+    this.$http.get('/api/awards/'+usr._id+'/'+cpt._id+'/'+bdg._id)
+    .then(response =>{
+      this.listAwards = response.data;
+      console.log(this.listAwards)
+    });
+  }
 
 }   
 

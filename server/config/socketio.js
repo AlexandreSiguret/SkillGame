@@ -16,6 +16,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/award/award.socket').register(socket);
   require('../api/alonescore/alonescore.socket').register(socket);
   require('../api/badge/badge.socket').register(socket);
   require('../api/answer/answer.socket').register(socket);

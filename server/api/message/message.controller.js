@@ -9,22 +9,14 @@
 
 'use strict';
 
-//import jsonpatch from 'fast-json-patch';
 import { Message } from '../../sqldb';
-import config from '../../config/environment';
 import Sequelize from 'sequelize';
-import { Question } from '../../sqldb';
-import { Answer } from "../../sqldb";
-
-
-
-const Op = Sequelize.Op;
 
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
-  return function (entity) {
-    if (entity) {
+  return function(entity) {
+    if(entity) {
       return res.status(statusCode).json(entity);
     }
     return null;
@@ -40,16 +32,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of All Messages
 export function index(req, res) {
-  return Message.findAll({
-        attributes: [
-          '_id',
-          'expediteur',
-          'destinataire',
-          'msg_type',
-          'message',
-          'date'
-        ]
-      })
+  return Message.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -57,7 +40,7 @@ export function index(req, res) {
 // Get a list of my messages
 export function messages(req, res) {
   var exped = req.params.email1;
-  var dest  = req.params.email2;
+  var dest = req.params.email2;
 
   return Message.findAll({
     where: Sequelize.or(
@@ -93,7 +76,6 @@ export function show(req, res) {
       _id: req.params.id
     }
   })
-    .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
