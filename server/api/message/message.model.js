@@ -1,7 +1,5 @@
 'use strict';
 
-import User from "../user/user.model";
-
 export default function(sequelize, DataTypes) {
   return sequelize.define('Message', {
     _id: {
@@ -16,22 +14,18 @@ export default function(sequelize, DataTypes) {
         isEmail: true
       }
     },
-
     destinataire: {
       type: DataTypes.STRING,
       validate: {
         isEmail: true
       }
     },
-
     msg_type: {
-      type : DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
     },
     message: {
-        type : DataTypes.STRING, 
+        type: DataTypes.STRING,
     },
     date: DataTypes.INTEGER,
-    
-    
   });
 }

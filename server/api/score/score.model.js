@@ -7,7 +7,6 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
-  
     score: DataTypes.INTEGER,
   });
 }

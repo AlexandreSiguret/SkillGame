@@ -129,33 +129,15 @@ export default function seedDatabaseIfNeeded() {
     
     .catch(err => console.log('error populating message things', err));
 
+    Award.destroy({where:{}})
+    .then(() =>{
+      let award = Award.bulkCreate([{        
+        
+      }
+    ]);
+    })
+    .then(() => console.log('finished award'));
 
-    Award.destroy({ where: {} })
-    
-          .then(() => {
-            let award = Award.bulkCreate([{
-            _id: 1,
-            UserId : 5,
-            ConceptId : 1,
-            BadgeId : 3,
-            date : 4589152637,        
-            }, {
-            _id: 2,
-            UserId : 5,
-            ConceptId : 2,
-            BadgeId : 2,
-            date : 458915264038,
-            }, {
-            _id: 3,
-            UserId : 5,
-            ConceptId : 4,
-            BadgeId : 1,
-            date : 4589152639,
-            }
-          ])
-          })
-          .then(() => console.log('finished populating awards'))
-          .catch(err => console.log('error populating awards', err));
 
 
     Concept.destroy({ where: {} })
@@ -2098,16 +2080,19 @@ export default function seedDatabaseIfNeeded() {
       
               let badge = Badge.bulkCreate([{
                 _id: 1,
+                name: 'Gold Medal',
                 picture: 'oro.jpg',
-                description : 'Stellar, oro medal',  
+                description: 'Stellar, oro medal',  
               }, {
                 _id: 2,
                 picture: 'plata.jpg',
-                description : 'expert, plata medal',
+                name: 'Silver Medal',
+                description: 'expert, plata medal',
               }, {
                 _id: 3,
                 picture: 'bronce.jpg',
-                description : 'beginner, bronze medal',
+                name: 'Bronze Medal',
+                description: 'beginner, bronze medal',
               }
       
               ]);
@@ -2147,14 +2132,14 @@ export default function seedDatabaseIfNeeded() {
       .catch(err => console.log('error populating things', err));
 
 
-      Score.destroy({where:{}})
+      Score.destroy({ where:{} })
       .then(() =>{
         let score = Score.bulkCreate([{
+          UserId: 4,
+          ConceptId: 1,
+          score: 5
           
-          UserId : 4,
-          ConceptId : 1,
-          score : 5
-  
+
   
         },{
 
@@ -2162,27 +2147,29 @@ export default function seedDatabaseIfNeeded() {
            ConceptId : 1,
            score : 5
         }, {
-          
-          UserId : 5,
-          ConceptId : 1,
-          score : 5
-       },{
-        
-        UserId : 1,
-        ConceptId : 1,
-        score : 5
+          UserId: 4,
+          ConceptId: 2,
+          score: 7
         }, {
-          
-          UserId : 8,
-          ConceptId : 1,
-          score : 5
-        },
-
-        {
-          
-          UserId : 2,
-          ConceptId : 2,
-          score : 7
+           UserId: 3,
+           ConceptId: 1,
+           score: 5
+        }, {
+          UserId: 5,
+          ConceptId: 1,
+          score: 5
+       }, {
+          UserId: 1,
+          ConceptId: 1,
+          score: 5
+        }, {
+          UserId: 8,
+          ConceptId: 1,
+          score: 5
+        }, {  
+          UserId: 2,
+          ConceptId: 2,
+          score: 7
         }
       ]);
       })
@@ -2192,14 +2179,10 @@ export default function seedDatabaseIfNeeded() {
       Alonescore.destroy({where:{}})
       .then(() =>{
         let alonescore = Alonescore.bulkCreate([{
-          
           UserId : 4,
           ConceptId : 1,
           alonescore : 5
-  
-  
         },{
-
            UserId : 3,
            ConceptId : 1,
            alonescore : 5

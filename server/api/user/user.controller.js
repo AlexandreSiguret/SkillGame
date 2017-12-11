@@ -2,6 +2,8 @@
 
 import {User} from '../../sqldb';
 import config from '../../config/environment';
+import Sequelize from 'sequelize';
+import db from '../../sqldb';
 import jwt from 'jsonwebtoken';
 
 function validationError(res, statusCode) {
@@ -31,7 +33,7 @@ export function index(req, res) {
       'role',
       'provider',
       'avatar'
-    ]
+    ],
   })
     .then(users => {
       res.status(200).json(users);
@@ -39,17 +41,62 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-export function notme(req,res){
+export function ranked(req, res) {
   return User.findAll({
-    where :{
-      
+    attributes: [
+      '_id',
+      'name',
+      'avatar',
+    ],
+    include: [{
+        model: db.Award,
+        attributes: [
+          '_id',
+          'BadgeId',
+          'date'
+        ],
+      }, {
+        model: db.Score,
+        attributes: [
+          '_id',
+          'score',
+//          [Sequelize.fn('SUM', Sequelize.col('score') ), 'total'],
+        ],
+      }
+    ],
+    order: [
+        ['_id','ASC']
+    ],
+  //  group: ['User._id'],
+    limit: 10
+  })
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(handleError(res));
+}
+/*
+include: [
+  { model: models.Image, as: 'IdeaHeaderImages', order: [['Image.updated_at','ASC']] }
+]
+order: [
+  [ db, { model: db.Score, as: 'total' }, 'created_at', 'asc' ]
+],
+order: [
+  [ models.Community, { model: models.Image, as: 'CommunityLogoImages' }, 'created_at', 'asc' ]
+],
+*/
+
+export function notme(req, res){
+  return User.findAll({
+    where: {
       _id: { $ne: req.user._id },
     },
-    attributes : [
-      "_id",
-      "name",
+    attributes: [
+      '_id',
+      'name',
       'email',
-      "avatar"
+      'avatar'
     ]
   }).then( users =>{
     res.status(200).json(users);
