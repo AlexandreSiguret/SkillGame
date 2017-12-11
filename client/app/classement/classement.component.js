@@ -12,8 +12,11 @@ export class ClassementController {
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
     this.socket = socket;
-    this.cChoisi = false;    
- 
+    this.cChoisi = false;
+    this.showme = true;
+    this.showus = true;
+
+
     $scope.$on('$destroy', function() {
       socket.unsyncUpdates('user');
       socket.unsyncUpdates('concept');
@@ -45,6 +48,22 @@ export class ClassementController {
     })
     
   }  
+
+  showButtonHandler() {
+
+    if(this.showme == true) {
+      this.showme = false;
+    } else {
+      this.showme = true;
+    }
+
+    if(this.showus == true) {
+      this.showus = false;
+    } else {
+      this.showus = true;
+    }
+    
+  }
 
 }   
 
