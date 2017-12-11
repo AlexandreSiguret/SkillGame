@@ -1,8 +1,3 @@
-//'use strict';
-//const angular = require('angular');
-
-//const uiRouter = require('angular-ui-router');
-
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import routes from './jeuchrono.routes';
@@ -13,12 +8,10 @@ export class JeuchronoController {
   $timeout;
   socket;
   stopped;
-  getCurrentUser: Function; 
-  allConceptId = [];
-  awesomeConcept = [];
-  newConcept = '';
-  currentConcept = [];
+  getCurrentUser: Function;
   choice = false;
+  awesomeAllQuestion = [];
+  singleQuestion = [];
 
 
 
@@ -30,23 +23,18 @@ export class JeuchronoController {
     this.$stateParams = $stateParams;
     this.$http = $http;
     this.socket = socket;
-    $scope.counter = 99;  
+    $scope.counter = 99;
     $scope.stopped = false;
 
     this.errormessage = ""
-    this.messageTime = ""
     this.questionChoices = [];
-    this.singleQuestion = [];
-    this.singleQuestionAfter = 0;
     this.idChoices = [];
     this.num = 0;
-    this.concept;
     this.currentScore = 0;
     this.myIndice = 0;
     this.fini = "Le test est fini";
     this.earnedPoint = 0;
     this.getCurrentUser = Auth.getCurrentUserSync;
-    // this.controlTime = false;
 
 
     $scope.$on('$destroy', function () {
@@ -55,70 +43,13 @@ export class JeuchronoController {
 
     $scope.onTimeout = function () {
 
-      if ($scope.counter == 0) { 
-         
-        //this.controlTime = true;
-        //console.log(this.controlTime);
+      if ($scope.counter == 0) {
+
         console.log("je rentre bien dans la function $scope.onTimeout à près que le time soit fini");
         var variable2 = '#quiz';
         var myE2 = angular.element(document.querySelector(variable2)); 
         myE2.attr('style', "display: none;");
 
-      /*   var variable2 = '#quiz-resulats';
-        var myE2 = angular.element(document.querySelector(variable2));
-        myEl.removeAttr('style');
-        myE2.attr('style', "display: inline;");  */
-
-       /*  var variable = '#label-choices-' + this.detailedQuestion._id;
-        var myEl = angular.element(document.querySelector(variable));
-        myEl.removeAttr('class');
-        myEl.attr('class', "false");
- */
-       // for (var i = 0; i < this.idChoices.length; i++) {
-          //var variable = '#choices-' + this.idChoices[i];
-          //var myEl = angular.element(document.querySelector(variable));
-          //myEl.attr('disabled', "");
-
-
-
-          
-
-          /* var myEl = angular.element(document.querySelector('#next-question-button'));
-          myEl.removeAttr('disabled');
-
-          var myEl = angular.element(document.querySelector('#report-question-button'));
-          myEl.removeAttr('disabled');
- */
-
-          // console.log(" score final");
-
-          /* this.$http.put('/api/alonescores/'+ this.concept,{ 
-             ConceptId : this.concept,
-             alonescore : this.earnedPoint,  
-             UserId : this.getCurrentUser()._id
-         }); */
-
-       // }
-/* 
-        if (this.num < this.singleQuestionAfter) {
-          console.log("je rentre bien ici àprès validation");
-          var myEl = angular.element(document.querySelector('#next-question-button'));
-          myEl.removeAttr('disabled');
-
-          var myEl = angular.element(document.querySelector('#report-question-button'));
-          myEl.removeAttr('disabled');
-        } */
-
-
-
-        // $scope.stopped=true;
-
-        //   this.$http.put('/api/alonescores/'+ this.concept,{ 
-        //     ConceptId : this.concept,
-        //     alonescore : this.earnedPoint  
-        //   })
-
-        // console.log(" Après ajout du score");   
       }
 
       if ($scope.stopped != true) { $scope.counter--; }
@@ -127,49 +58,38 @@ export class JeuchronoController {
       $scope.seconds = Math.floor($scope.counter - ($scope.minutes * 60));
       mytimeout = $timeout($scope.onTimeout, 1000);
     }
-    var mytimeout = $timeout($scope.onTimeout, 1000); 
+    var mytimeout = $timeout($scope.onTimeout, 1000);
   }
 
   $onInit() {
-    this.call_question()
+    this.$http.get('/api/questions/takequest/' + this.$stateParams.ConceptId)
+      .then(response => {
+        this.awesomeAllQuestion = response.data;
+        console.log("mes question_id recupérer du random");
+        console.log(this.awesomeAllQuestion);
+        this.call_question()
+      });
+
   }
 
   call_question() {
-
-    this.$http.get('/api/questions/takequest/' + this.$stateParams.ConceptId)
+    console.log("mon 1er tableau recupérer dans call_question");
+    console.log(this.awesomeAllQuestion[this.myIndice]);
+    console.log("ma 1ère question_ID recupérer dans call_question");
+    console.log(this.awesomeAllQuestion[this.myIndice]._id);
+    this.$http.get("/api/choices/question/" + this.awesomeAllQuestion[this.myIndice]._id)
       .then(response => {
-        this.singleQuestionAfter = response.data.length;
-        console.log(this.singleQuestionAfter);
-        this.singleQuestion = response.data[this.myIndice];
-        console.log("1111--question---oooooooooooooooooo");
-        console.log(this.singleQuestion.question);
+        this.questionChoices = response.data;
+        console.log("333--choice--oooooooooooooooooo");
+        console.log(this.questionChoices);
 
-        this.$http.get("/api/questions/" + this.singleQuestion._id)
-          .then(response => {
-            this.concept = response.data.ConceptId;
-            console.log("222--concept--oooooooooooooooooo");
-            console.log(this.concept);
-          });
+        this.detailedQuestion = this.awesomeAllQuestion[this.myIndice];
 
-        this.$http.get("/api/choices/question/" + this.singleQuestion._id)
-          .then(response => {
-            this.questionChoices = response.data;
-            console.log("333--choice--oooooooooooooooooo");
-            console.log(this.questionChoices);
-          });
-
-        this.$http.get("/api/questions/" + this.singleQuestion._id)
-          .then(response => {
-            this.detailedQuestion = response.data;
-
-            for (var i = 0; i < 4; i++) {
-              this.idChoices[i] = this.questionChoices[i]._id;
-
-              if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
-                this.detailedQuestion._id = this.questionChoices[i]._id;
-            }
-
-          });
+        for (var i = 0; i < 4; i++) {
+          this.idChoices[i] = this.questionChoices[i]._id;
+          if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
+            this.detailedQuestion._id = this.questionChoices[i]._id;
+        }
       });
   }
 
@@ -179,7 +99,7 @@ export class JeuchronoController {
     this.myIndice++;
     this.num++;
 
-    if (this.num < this.singleQuestionAfter) {
+    if (this.num < this.awesomeAllQuestion.length) {
       this.call_question()
     } else {
       this.errormessage = "";
@@ -193,44 +113,24 @@ export class JeuchronoController {
       var variable2 = '#quiz';
       var myE2 = angular.element(document.querySelector(variable2));
       myE2.attr('style', "display: none;");
-  
+
       var variable2 = '#quiz-resulats';
       var myE2 = angular.element(document.querySelector(variable2));
       myEl.removeAttr('style');
       myE2.attr('style', "display: inline;");
 
       this.game_finish() 
-  /*     var variable2 = '#quiz';
-      var myE2 = angular.element(document.querySelector(variable2));
-      myE2.attr('style', "display: none;");
-
-      var variable2 = '#quiz-resulats';
-      var myE2 = angular.element(document.querySelector(variable2));
-      myEl.removeAttr('style');
-      myE2.attr('style', "display: inline;");
-
-      console.log(" score final bien inséré");
-
-      this.$http.put('/api/alonescores/' + this.concept, {
-        ConceptId: this.concept,
-        alonescore: this.earnedPoint,
-        UserId: this.getCurrentUser()._id
-      }); */
-
-    }
-    // if (this.$scope.counter != 0){
-      this.$scope.counter--;
-    //}
-    
+    }   
+    this.$scope.counter--;
     this.$scope.stopped = false;
   }
 
-  game_finish() { 
+  game_finish() {
 
     console.log(" score final bien inséré");
 
-    this.$http.put('/api/alonescores/' + this.concept, {
-      ConceptId: this.concept,
+    this.$http.put('/api/alonescores/' + this.$stateParams.ConceptId, {
+      ConceptId: this.$stateParams.ConceptId,
       alonescore: this.earnedPoint,
       UserId: this.getCurrentUser()._id
     });
@@ -241,9 +141,9 @@ export class JeuchronoController {
     if (this.errormessage == "") {
 
       this.errormessage = "the question has been reported"
-      this.$http.get("/api/questions/" + this.singleQuestion._id).then(response => {
-        this.$http.put("/api/questions/" + this.singleQuestion._id, {
-          _id: this.singleQuestion._id,
+      this.$http.get("/api/questions/" +this.awesomeAllQuestion[this.myIndice]._id).then(response => { 
+        this.$http.put("/api/questions/" + this.awesomeAllQuestion[this.myIndice]._id, {
+          _id: this.awesomeAllQuestion[this.myIndice]._id, 
           nbContestation: response.data.nbContestation + 1
         })
       })
@@ -296,9 +196,7 @@ export class JeuchronoController {
 
     }
 
-    if (this.num < this.singleQuestionAfter) {
-      //  console.log("je rentré fois");
-      // console.log(this.num); 
+    if (this.num < this.awesomeAllQuestion.length) {
 
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.removeAttr('disabled');
@@ -306,34 +204,25 @@ export class JeuchronoController {
       myEl.removeAttr('disabled');
     }
     else {
-      this.$timeout(function () { 
+      this.$timeout(function () {
 
-        var variable2 = '#quiz';
-        var myE2 = angular.element(document.querySelector(variable2));
-        myE2.attr('style', "display: none;");
+        // var variable2 = '#quiz';
+        //  var myE2 = angular.element(document.querySelector(variable2));
+        //  myE2.attr('style', "display: none;");
 
         var variable2 = '#quiz-resulats';
         var myE2 = angular.element(document.querySelector(variable2));
         myEl.removeAttr('style');
         myE2.attr('style', "display: inline;");
-
-        // console.log("on va appeler score")
-
-        //this.$http.put('/api/alonescores/'+ this.concept,{
-        //  ConceptId : this.concept,
-        //  alonescore : this.earnedPoint  
-        // })
-
         //this.valeur=true;/*alert('Test Terminer !! Redirection vers la page ..... !!');*/
 
-      }, 2000);     
+      }, 2000);
     }
-    // this.$scope.stopped=true;
+    // this.$scope.stopped=true; 
 
   }
 
-}
-
+}  
 
 export default angular.module('skillGameApp.jeuchrono', [uiRouter])
   .config(routes)
