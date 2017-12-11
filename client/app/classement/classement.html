@@ -35,8 +35,24 @@
               <td><center><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></center></td>
               <td><center><a href="/affrontement" >{{s.User.name}}</a></td>
               <td><center>{{s.score}}</center></td>
-              <td><center>{{ awardstableComponent.getUserAwards(s.User._id) }}</center></td>
-            </tr>
+              <td><center>{{ awardstableComponent.getUserAwards(s.User._id) }}</center></td>   
+            </tr> 
+            <br/><br/>
+            <thead class="thead-default">
+              <tr>
+                <td width="100"><center><h2>Avatar</h2></center></td>
+                <td width="100"><center><h2>Name</h2></center></td>
+                <td width="100"><center><h2>ScoreAlone</h2></center></td>
+                <td width="100"><center><h2></h2></center></td>
+              </tr>
+              </thead>
+              <tr ng-repeat="s in $ctrl.threeAwesomeAlonePlayers">
+                <td><center><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></center></td>
+                <td><center><a href="/affrontement" >{{s.User.name}}</a></td>
+                <td><center>{{s.alonescore}}</center></td>
+                <td><center>{{ awardstableComponent.getUserAwards(s.User._id) }}</center></td>   
+              </tr>
+
           </center> 
           <br/><br/>
         </div>

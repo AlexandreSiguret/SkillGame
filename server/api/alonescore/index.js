@@ -8,6 +8,7 @@ var controller = require('./alonescore.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/three/:id', auth.isAuthenticated(),controller.three);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.upsert);

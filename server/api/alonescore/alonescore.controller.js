@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Alonescore} from '../../sqldb';
+import db from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -21,6 +22,28 @@ function respondWithResult(res, statusCode) {
     }
     return null;
   };
+}
+
+// gets three top of alonescore
+export function three(req,res){
+  return Alonescore.findAll({
+    where: {
+      ConceptId: req.params.id,
+    },
+    order: [
+      ['alonescore','DESC'],
+      ['UserId','ASC']
+    ],
+    limit: 3,
+
+    include: [{
+      model: db.User,
+      attributes: ['name','avatar'] 
+    }]
+  })
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 function patchUpdates(patches) {

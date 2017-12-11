@@ -42,8 +42,7 @@ export function topthree(req,res){
     include: [{
       model: db.User,      
       attributes: ['name','avatar']
-    }]
-  
+    }] 
   })
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

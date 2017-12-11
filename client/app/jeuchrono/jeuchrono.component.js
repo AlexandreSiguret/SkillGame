@@ -30,9 +30,7 @@ export class JeuchronoController {
     this.questionChoices = [];
     this.idChoices = [];
     this.num = 0;
-    this.currentScore = 0;
     this.myIndice = 0;
-    this.fini = "Le test est fini";
     this.earnedPoint = 0;
     this.getCurrentUser = Auth.getCurrentUserSync;
 
@@ -44,12 +42,9 @@ export class JeuchronoController {
     $scope.onTimeout = function () {
 
       if ($scope.counter == 0) {
-
-        console.log("je rentre bien dans la function $scope.onTimeout à près que le time soit fini");
         var variable2 = '#quiz';
-        var myE2 = angular.element(document.querySelector(variable2)); 
+        var myE2 = angular.element(document.querySelector(variable2));
         myE2.attr('style', "display: none;");
-
       }
 
       if ($scope.stopped != true) { $scope.counter--; }
@@ -65,23 +60,15 @@ export class JeuchronoController {
     this.$http.get('/api/questions/takequest/' + this.$stateParams.ConceptId)
       .then(response => {
         this.awesomeAllQuestion = response.data;
-        console.log("mes question_id recupérer du random");
-        console.log(this.awesomeAllQuestion);
         this.call_question()
       });
 
   }
 
   call_question() {
-    console.log("mon 1er tableau recupérer dans call_question");
-    console.log(this.awesomeAllQuestion[this.myIndice]);
-    console.log("ma 1ère question_ID recupérer dans call_question");
-    console.log(this.awesomeAllQuestion[this.myIndice]._id);
     this.$http.get("/api/choices/question/" + this.awesomeAllQuestion[this.myIndice]._id)
       .then(response => {
         this.questionChoices = response.data;
-        console.log("333--choice--oooooooooooooooooo");
-        console.log(this.questionChoices);
 
         this.detailedQuestion = this.awesomeAllQuestion[this.myIndice];
 
@@ -119,8 +106,8 @@ export class JeuchronoController {
       myEl.removeAttr('style');
       myE2.attr('style', "display: inline;");
 
-      this.game_finish() 
-    }   
+      this.game_finish()
+    }
     this.$scope.counter--;
     this.$scope.stopped = false;
   }
@@ -141,9 +128,9 @@ export class JeuchronoController {
     if (this.errormessage == "") {
 
       this.errormessage = "the question has been reported"
-      this.$http.get("/api/questions/" +this.awesomeAllQuestion[this.myIndice]._id).then(response => { 
+      this.$http.get("/api/questions/" + this.awesomeAllQuestion[this.myIndice]._id).then(response => {
         this.$http.put("/api/questions/" + this.awesomeAllQuestion[this.myIndice]._id, {
-          _id: this.awesomeAllQuestion[this.myIndice]._id, 
+          _id: this.awesomeAllQuestion[this.myIndice]._id,
           nbContestation: response.data.nbContestation + 1
         })
       })
@@ -156,9 +143,6 @@ export class JeuchronoController {
     console.log("on appele validation")
     if (this.detailedQuestion.goodAnswer == select.statement) {
       this.earnedPoint++;
-
-      console.log("Je gagne point");
-      console.log(this.earnedPoint);
 
       var variable = '#label-choices-' + select._id;
       var myEl = angular.element(document.querySelector(variable));
@@ -174,9 +158,6 @@ export class JeuchronoController {
     else {
 
       this.earnedPoint;
-
-      console.log("Je gagne pas de point");
-      console.log(this.earnedPoint);
 
       var variable = '#label-choices-' + this.detailedQuestion._id;
       var myEl = angular.element(document.querySelector(variable));
@@ -200,29 +181,22 @@ export class JeuchronoController {
 
       var myEl = angular.element(document.querySelector('#next-question-button'));
       myEl.removeAttr('disabled');
-      var myEl = angular.element(document.querySelector('#report-question-button'));
+      var myEl = angular.element(document.querySelector('#report-question-button'));  
       myEl.removeAttr('disabled');
     }
     else {
       this.$timeout(function () {
 
-        // var variable2 = '#quiz';
-        //  var myE2 = angular.element(document.querySelector(variable2));
-        //  myE2.attr('style', "display: none;");
-
         var variable2 = '#quiz-resulats';
         var myE2 = angular.element(document.querySelector(variable2));
         myEl.removeAttr('style');
         myE2.attr('style', "display: inline;");
-        //this.valeur=true;/*alert('Test Terminer !! Redirection vers la page ..... !!');*/
 
       }, 2000);
     }
-    // this.$scope.stopped=true; 
 
   }
-
-}  
+}
 
 export default angular.module('skillGameApp.jeuchrono', [uiRouter])
   .config(routes)
