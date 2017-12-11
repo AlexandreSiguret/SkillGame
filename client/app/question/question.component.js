@@ -171,7 +171,7 @@ export class QuestionController {
             ConceptId : this.concept,
             BadgeId : 3,
             date: new Date(),
-          })
+          });
         }
         
 

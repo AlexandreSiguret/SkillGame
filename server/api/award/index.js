@@ -8,6 +8,7 @@ var controller = require('./award.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
+router.get('/:uId',auth.isAuthenticated(),controller.userAwards);
 router.get('/:uId/:cId/:bId',auth.isAuthenticated(),controller.awards);
 router.get('/by/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);

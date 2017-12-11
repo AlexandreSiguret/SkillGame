@@ -80,6 +80,35 @@ export function awards(req, res) {
     .catch(handleError(res));
 }
 
+// Get a list of awards by userId
+export function userAwards(req, res) {
+   
+  return Award.findAll({
+    attributes: [
+      '_id',
+      'UserId',
+      'ConceptId',
+      'BadgeId',
+      'date'
+    ], 
+    where : [{
+      UserId : req.params.uId
+    }],
+    order : [ [ 'date','DESC'] ],
+    include: [{
+      model: db.User,      
+    }, {
+      model: db.Concept,
+    }, {
+      model: db.Badge,
+    }] 
+
+  })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+
 // Get a award  by id from the DB
 export function show(req, res) {
   return Award.findAll({
