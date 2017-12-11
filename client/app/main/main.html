@@ -5,7 +5,7 @@
 
     
         <div class="container">
-           <h1> Welcolme to skill games</h1>
+           <h1> Welcome to skill game</h1>
             <!-- /.row -->
 
             <table border=0 width="450">
@@ -19,7 +19,7 @@
                         
                       </tr>
                     <tr ng-repeat="s in $ctrl.classement">
-                      <td><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></td>
+                      <td><img id="classementImg"  height="{{s.total}}" width="{{s.total}}" src="assets/images/{{s.User.avatar}}"></a></td>
                       <td>{{s.User.name}}</a></td>
                       <td>{{s.total}}</td>
                     

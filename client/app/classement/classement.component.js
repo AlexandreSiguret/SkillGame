@@ -13,7 +13,7 @@ export class ClassementController {
   constructor($http, $scope, socket, Auth) {
     this.$http = $http;
     this.socket = socket;
-    this.cChoisi = false;
+    this.cChoisi = true;
     this.showme = true;
     this.showus = true;
     this.listPlayers = [];
