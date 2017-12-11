@@ -14,6 +14,8 @@ export class ClassementController {
     this.$http = $http;
     this.socket = socket;
     this.cChoisi = false;
+    this.showme = true;
+    this.showus = true;
     this.listPlayers = [];
     this.listAwards = [];    
  
@@ -71,6 +73,22 @@ export class ClassementController {
       this.listAwards = response.data;
       console.log(this.listAwards)
     });
+  }
+
+  showButtonHandler() {
+
+    if(this.showme == true) {
+      this.showme = false;
+    } else {
+      this.showme = true;
+    }
+
+    if(this.showus == true) {
+      this.showus = false;
+    } else {
+      this.showus = true;
+    }
+    
   }
 
 }   

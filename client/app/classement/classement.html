@@ -1,34 +1,48 @@
 <div class="container">
-    <div class="row">
-              <div class="col-md-3 col-sm-4 sidebar">
-                <ul class="nav nav-stacked nav-pills">
-                  <li ng-repeat="concept in $ctrl.listConcepts"><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
-                </ul>
-              </div>
-              <div class="row" style="margin-left:200px;">
-                <div ng-if="$ctrl.cChoisi" class="col-md-9 col-sm-8">
-                 <center>
-                    <table border=0 width="550">
-                        <tr colspan="3">
-                            <h1 style="color: #166e70;" class="page-header">Ranking for {{ $ctrl.conceptChoisi.name }} </h1>
-                        </tr>
-                        <tr >
-                            <td width="100"><h2>Avatar</h2></td>
-                            <td width="100"><h2>Name</h2></td>
-                            <td width="100"><h2>Score</h2></td>
-                          </tr>
-                        <tr ng-repeat="s in $ctrl.threeAwesomePlayers">
-                          <td><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></td>
-                          <td><a href="/affrontement" >{{s.User.name}}</a></td>
-                          <td>{{s.score}}</td>
-                        </tr>
-                    </table> 
-                  </center> 
-                  <br/><br/>
-                </div>
-                <br/><br />
-                <br/><br />
-                <div class="col-md-9 col-sm-8" style="margin-bottom:50px;">
+
+  <div class="row">
+    <div class="col-md-3 col-sm-4 sidebar">
+      <ul class="nav nav-stacked nav-pills">
+        <li>
+          <div class="form-group">
+            <label>Search:</label>
+            <input ng-model="searchText" type="text" class="form-control">
+          </div>
+        </li>
+
+        <li ng-repeat="concept in $ctrl.listConcepts | filter:{ name : searchText}"><a href="#" ng-click = "$ctrl.choix_concept(concept)" >{{concept.name}}</a></li>
+      </ul>
+    </div>
+    <div class="row" style="margin-left:200px;">
+      <div ng-if="$ctrl.cChoisi" class="col-md-9 col-sm-8">
+       <center>
+        <tr colspan="3">
+          <h1 style="color: #166e70;" class="page-header">Ranking for {{ $ctrl.conceptChoisi.name }} </h1>
+        </tr>
+        <button type="button" ng-show="$ctrl.showus" class="btn btn-primary btn-md" ng-click="$ctrl.showButtonHandler()">Ranking by Total points</button>
+
+        <button ng-style="" ng-hide="$ctrl.showus" type="button" class="btn btn-primary btn-md" ng-click="$ctrl.showButtonHandler()">Ranking by Quizz points</button>
+        <table class="table" ng-show="$ctrl.showme">
+          <thead class="thead-default">
+            <tr>
+              <td width="100"><center><h2>Avatar</h2></center></td>
+              <td width="100"><center><h2>Name</h2></center></td>
+              <td width="100"><center><h2>Score</h2></center></td>
+              <td width="100"><center><h2>Awards</h2></center></td>
+            </tr>
+            </thead>
+            <tr ng-repeat="s in $ctrl.threeAwesomePlayers">
+              <td><center><a href="/affrontement" ><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></center></td>
+              <td><center><a href="/affrontement" >{{s.User.name}}</a></td>
+              <td><center>{{s.score}}</center></td>
+              <td><center>{{ awardstableComponent.getUserAwards(s.User._id) }}</center></td>
+            </tr>
+          </center> 
+          <br/><br/>
+        </div>
+        <!-- Antonio's CODE Dont Delete -->
+
+                <!-- <div class="col-md-9 col-sm-8" style="margin-bottom:50px;">
                     <center>
                       <div id="selectBar" class="form-group" style="width:100%;">
                           <select ng-model="selectedUser" class="form-control" style="width:200px; display:inline-block;" >
@@ -67,7 +81,6 @@
                             <td align="center"><img height="42" width="40" src="assets/images/{{aw.Badge.picture}}" /></td> 
                           </tr>
                       </table>
-                      
                     </center>
                 </div>
                   <br/><br />
@@ -102,10 +115,9 @@
                               </td>
                           </tr>
                       </table>
-                      
                   </center>
-                </div>
-                
+                </div> -->        
+
               </div>
-    </div>
-</div>
+            </div>
+          </div>
