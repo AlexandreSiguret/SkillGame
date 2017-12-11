@@ -94,6 +94,7 @@ export function concept(req,res){
 export function takequest(req, res){
   console.log("ma route");
   return Question.findAll({
+    order: Sequelize.fn('RANDOM'),
     where: {
       ConceptId : req.params.id
     }
