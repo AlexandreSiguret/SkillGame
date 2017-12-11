@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
 
-    <div class="col-md-3 col-sm-4 sidebar">
+    <div ng-hide="$ctrl.showme" class="col-md-3 col-sm-4 sidebar">
       <ul class="nav nav-stacked nav-pills">
         <li>
           <div class="form-group">
@@ -16,10 +16,18 @@
     </div>
 
     <div class="col-md-9 col-sm-8">
-      <h1 style="color: #166e70;" class="page-header">Pick a concept  </br> </h1>
+      <h1 style="color: #166e70;" class="page-header">The chosen concept :  {{$ctrl.currentConcept.name}} </br> </h1>
+      <br>
+      <center>
 
-      <ng-tag-cloud class="custom-1" cloud-width="750" cloud-height="250" cloud-data="cloud" ng-click = "$ctrl.test(cloud)"></ng-tag-cloud>
+       <button type="button" ng-show="$ctrl.showus" class="btn btn-primary btn-md" ng-click="$ctrl.showButtonHandler()">Choose Concept by Bar Side</button>
 
+       <button type="button" ng-hide="$ctrl.showus" class="btn btn-primary btn-md" ng-click="$ctrl.showButtonHandler()">Choose Concept by Cloud Tag</button>
+
+       </center>
+       <br>
+      <ng-tag-cloud ng-show="$ctrl.showme" class="custom-1" cloud-width="750" cloud-height="250" cloud-data="cloud" ng-click = "$ctrl.test(cloud)"></ng-tag-cloud>
+      <br>
       <div ng-if="$ctrl.choice == true">
         <div ng-if="$ctrl.choice == true">
           <!-- <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p> -->

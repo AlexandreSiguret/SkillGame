@@ -27,6 +27,8 @@ export class QuestionsController {
     this.socket = socket;
     this.$window=$window;
     this.$stateParams = $stateParams;
+    this.showme = true;
+    this.showus = true;
     
 
 
@@ -150,6 +152,23 @@ export class QuestionsController {
     console.log(this.message)
   }
 
+
+  showButtonHandler() {
+
+    if(this.showme == true) {
+      this.showme = false;
+    } else {
+      this.showme = true;
+    }
+
+    if(this.showus == true) {
+      this.showus = false;
+    } else {
+      this.showus = true;
+    }
+    
+  }
+  
 
 }
 
