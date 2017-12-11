@@ -186,12 +186,12 @@ export class QuestionController {
             console.log("on va appeler score")
 		      	this.$http.get("/api/scores/"+this.concept) 
             .then(response => {
-              this.putUserAward();
+             /* this.putUserAward();
               this.getUserAwards();                                
               console.log("reussi") 
               .then(response => {
                 this.idNewScore = response.data._id;
-              });
+              });*/
               this.currentScore = response.data.score;              
               this.$http.put('/api/scores/'+ response.data._id,{
                 score : this.currentScore + this.$scope.seconds,
