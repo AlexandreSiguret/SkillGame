@@ -27,6 +27,14 @@ export class QuestionsController {
     this.socket = socket;
     this.$window=$window;
 
+    this.$stateParams = $stateParams;
+
+
+   $scope.cloud = [],
+
+  this.$scope = $scope
+
+
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('concept');
     });
@@ -39,9 +47,12 @@ export class QuestionsController {
         for (var i = 0; i < this.awesomeConcept.length; i++) {
           this.allConceptId[i]=this.awesomeConcept[i]._id
         }
+        
         console.log(this.allConceptId)
       });
   }
+
+
 
   choix_concept(concept) {
 

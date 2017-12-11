@@ -34,8 +34,8 @@ export default function seedDatabaseIfNeeded() {
     let Award = sqldb.Award;
     
 
-    Answer.destroy({where : {} })
-    .then(console.log("réponse détruire"));
+   // Answer.destroy({where : {} })
+  //  .then(console.log("réponse détruire"));
 
     Message.destroy({where:{} })
     .then(() => Message.bulkCreate([{
@@ -109,7 +109,7 @@ export default function seedDatabaseIfNeeded() {
         message : 'Salut',
         _id: 10
       }, {
-        expediteur : "alexandre@alexandre.com",
+        expediteur : "alexandre@alexandre.com",    
         destinataire : "antonio@antonio.com",
         msg_type : 1,
         date : 1258,
