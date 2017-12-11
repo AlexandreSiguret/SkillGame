@@ -8,7 +8,8 @@ export default function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
+    name: DataTypes.STRING,
     picture: DataTypes.STRING,
-    description: DataTypes.STRING    
+    description: DataTypes.STRING
   });
 }

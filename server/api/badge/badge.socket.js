@@ -1,5 +1,5 @@
 /**
- * Broadcast updates to client when the model changes
+ *  * Broadcast updates to client when the model changes
  */
 
 'use strict';

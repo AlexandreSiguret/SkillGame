@@ -37,7 +37,7 @@ export default class SettingsController {
         data : {file : this.file}
       }).then(this.ChargerFichier());
     }
-    else if(/png$/.test(this.file.name)) {
+    else if(/PNG$/.test(this.file.name)) {
       this.nameFile = this.file.name;
       this.Upload.upload({
         url :'api/users/upload',
