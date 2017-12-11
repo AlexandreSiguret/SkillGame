@@ -1,28 +1,29 @@
 <div class="container">
     <div class="row">
-    <br><br><br>
-           <h1  style="color: #166e70;"> Welcolme to skill games</h1>
-            <!-- /.row -->
-
-              <table border=0 width="450">
-                    <tr colspan="4">
-                        <caption> global ranking </caption>
-                    </tr>
-                    <tr >
-                        <td width="100"><h2>Avatar</h2></td>
-                        <td width="100"><h2>Name</h2></td>
-                        <td width="100"><h2>Score</h2></td>
+    <br>
+           <h1 class="page-header" style="color: #166e70;"> Welcome to skill game 
+              <small> global ranking </small>
+           </h1>
+           <center>
+            <div class="container">
+                  <table class="table">
+                        <thead class="thead-default">
+                        <tr>
+                          <td width="100"><center><h2>Avatar</h2></center></td>
+                          <td width="100"><center><h2>Name</h2></center></td>
+                          <td width="100"><center><h2>Score</h2></center></td>
+                          <td width="100"><center><h2></h2></center></td>
+                        </tr>
+                        </thead>
+                        <tr ng-repeat="s in $ctrl.classement">
+                          <td><center><img id="classementImg"  height="{{s.total}}" width="{{s.total}}" src="assets/images/{{s.User.avatar}}"></a></center></td>
+                          <td><center>{{s.User.name}}</a></center></td>
+                          <td><center>{{s.total}}</center></td>
                         
-                      </tr>
-                    <tr ng-repeat="s in $ctrl.classement">
-                      <td><img id="classementImg"  height="42" width="40" src="assets/images/{{s.User.avatar}}"></a></td>
-                      <td>{{s.User.name}}</a></td>
-                      <td>{{s.total}}</td>
-                    
-                    </tr>
-                </table>
-
-            </div>
+                        </tr>
+                    </table>
+                </div>
+            </center>
 
         </div>
         <!-- /.container -->
