@@ -10,7 +10,7 @@
           </div>
         <li>
         <li ng-repeat="concept in $ctrl.awesomeConcept  | filter:{ name : searchText}"  >
-          <a href="#" ng-click = "$ctrl.choix_concept(concept)" ng-style = "concept == $ctrl.currentConcept && {'color': '#fff' , 'background-color': '#166e70'}">{{concept.name}} </a>
+          <a href="#" ng-click = "$ctrl.choix_concept(concept)" ng-style = "concept.name == $ctrl.currentConcept.name && {'color': '#fff' , 'background-color': '#166e70'}">{{concept.name}} </a>
         </li>
       </ul>
     </div>
@@ -32,10 +32,7 @@
         <div ng-if="$ctrl.choice == true">
           <!-- <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p> -->
           <br> 
-          <center>
-           
-            <button ng-click ="$ctrl.lookForAGame()" type="button" class="btn btn-primary btn-md">Battle a random player</button>
-          </center>
+
 
           <br/>
           

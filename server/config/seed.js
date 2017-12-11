@@ -2152,7 +2152,7 @@ export default function seedDatabaseIfNeeded() {
           score: 7
         }, {
            UserId: 3,
-           ConceptId: 1,
+           ConceptId: 5,
            score: 5
         }, {
           UserId: 5,
