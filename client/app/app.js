@@ -39,7 +39,7 @@ import Classement from './classement/classement.component';
 import GameComponent from './game/game.component';
 import MessengerComponent from './messenger/messenger.component';
 //import fileUpload from '../../node_modules/ng-file-upload/dist/ng-file-upload.min'
-//require('angular-tag-cloud')
+require('angular-tag-cloud')
 
 import './app.css';
 
@@ -47,7 +47,7 @@ angular.module('skillGameApp', [ngCookies, ngFileUpload, ngResource, ngSanitize,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, awardstable, footer, main, constants,
   socket, util, JeuComponent, header, sidebarleft, Questions, Affrontement, Classement, ListQuestions,
   GameComponent, Jeuchrono, GameComponent, MessengerComponent,
-  //"ngTagCloud"
+  "ngTagCloud"
 
 ])
   .config(routeConfig)

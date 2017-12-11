@@ -11,7 +11,7 @@ export class AffrontementController {
   
   /*@ngInject*/
 
-  constructor($http, $scope, socket, Auth, $location ) { 
+  constructor($http, $scope, socket, Auth, $location,$window ) { 
 
 
     this.$http = $http;
@@ -20,6 +20,7 @@ export class AffrontementController {
     this.jChoice = true;
     this.jChoisi = false;
     this.cChoisi = false;
+    this.$window = $window
 
 
 
@@ -106,7 +107,8 @@ export class AffrontementController {
       })
       .then(response => {
         this.idNewMessage = response.data._id; 
-       // this.$window.location.href = '/question/'+ response.data._id;
+        
+        this.$window.location.href = '/question/'+ response.data._id;
       });
       
     }else{
