@@ -27,38 +27,40 @@ export default class SettingsController {
   }
 
   addFile(){ 
-    console.log("Hello");
+    console.log("Add File Function");
     console.log(this.file);
 
     if(/jpg$/.test(this.file.name)){
       this.nameFile = this.file.name;
       this.Upload.upload({
-        url :'api/users/upload',
+        url :'api/users/upload',/* https://angular-file-upload-cors-srv.appspot.com/upload */
         data : {file : this.file}
       }).then(this.ChargerFichier());
     }
     else if(/png$/.test(this.file.name)) {
       this.nameFile = this.file.name;
       this.Upload.upload({
-        url :'api/users/',
+        url :'api/users/upload',
         data : {file : this.file}
       }).then(this.ChargerFichier());
     } else {
-      alert("ce n'est pas un fichier json");
+      alert("ce n'est pas un fichier Image");
     }
 }
 
 ChargerFichier(){
+
+console.log("Charge File Function");
   if (!/jpg$/.test(this.nameFile)){
     this.nameFile = this.nameFile + ".jpg";
   } else if (!/png$/.test(this.nameFile)) {
     this.nameFile = this.nameFile + ".png";
   }
-   /*this.$http.get('./storage/'+this.nameFile)
+   /*this.$http.get('/../assets/images/'+this.nameFile)
       .then(response => {
-      this.awesomeStudent = response.data.etudiants;
-      this.awesomeChoice = response.data.Choix;
-      this.onglet="valide";
+      //this.awesomeStudent = response.data.etudiants;
+      //this.awesomeChoice = response.data.Choix;
+      //this.onglet="valide";
   });*/
 }
 

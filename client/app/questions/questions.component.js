@@ -26,12 +26,14 @@ export class QuestionsController {
     this.$http = $http;
     this.socket = socket;
     this.$window=$window;
+
     this.$stateParams = $stateParams;
 
 
    $scope.cloud = [],
 
   this.$scope = $scope
+
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('concept');
@@ -48,6 +50,7 @@ export class QuestionsController {
         console.log(this.allConceptId)
       });
   }
+
 
   /*uploadPic(file) {
     file.upload = Upload.upload({

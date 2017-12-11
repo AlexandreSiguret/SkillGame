@@ -11,14 +11,10 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Award} from '../../sqldb';
-import Badge from '../../sqldb';
-import Concept from '../../sqldb';
-import User from '../../sqldb';
 import config from '../../config/environment';
 import Sequelize from 'sequelize';
 import db from '../../sqldb';
 
-const Op = Sequelize.Op;
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -39,35 +35,45 @@ function handleError(res, statusCode) {
 
 // Gets a list of All awards
 export function index(req, res) {
-  return Award.findAll({
-        attributes: [
-          '_id',
-          'UserId',
-          'ConceptId',
-          'BadgeId',
-          'date'
-        ]
-      })
+  var exped = req.params.uId;
+  var dest = req.params.cId;
+  return Award.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
 // Get a list of my awards
 export function awards(req, res) {
-
+  var userID = req.params.uId;
+  var conceptID = req.params.cId;
+  var badgeID = req.params.bId;
+  
   return Award.findAll({
-    where : {
-      UserId : req.params.id
-    },
-    order : [ [ 'date','ASC'] ],
+
     attributes: [
+//      [Sequelize.fn('COUNT', Sequelize.col('Award._id') ), 'count'],
       '_id',
       'UserId',
       'ConceptId',
       'BadgeId',
       'date'
-    ]
-    
+    ], 
+    where : [{
+      UserId : req.params.uId
+    }, {
+      ConceptId: req.params.cId
+    }, {
+      BadgeId: req.params.bId
+    }],
+//    group: [ 'UserId', 'ConceptId', 'BadgeId'],
+    order : [ [ 'date','ASC'] ],
+    include: [{
+      model: db.User,      
+    }, {
+      model: db.Concept,
+    }, {
+      model: db.Badge,
+    }] 
 
   })
     .then(respondWithResult(res))

@@ -2,6 +2,8 @@
 
 import {User} from '../../sqldb';
 import config from '../../config/environment';
+import Sequelize from 'sequelize';
+import db from '../../sqldb';
 import jwt from 'jsonwebtoken';
 
 function validationError(res, statusCode) {
@@ -31,7 +33,7 @@ export function index(req, res) {
       'role',
       'provider',
       'avatar'
-    ]
+    ],
   })
     .then(users => {
       res.status(200).json(users);
@@ -39,17 +41,62 @@ export function index(req, res) {
     .catch(handleError(res));
 }
 
-export function notme(req,res){
+export function ranked(req, res) {
   return User.findAll({
-    where :{
-      
+    attributes: [
+      '_id',
+      'name',
+      'avatar',
+    ],
+    include: [{
+        model: db.Award,
+        attributes: [
+          '_id',
+          'BadgeId',
+          'date'
+        ],
+      }, {
+        model: db.Score,
+        attributes: [
+          '_id',
+          'score',
+//          [Sequelize.fn('SUM', Sequelize.col('score') ), 'total'],
+        ],
+      }
+    ],
+    order: [
+        ['_id','ASC']
+    ],
+  //  group: ['User._id'],
+    limit: 10
+  })
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(handleError(res));
+}
+/*
+include: [
+  { model: models.Image, as: 'IdeaHeaderImages', order: [['Image.updated_at','ASC']] }
+]
+order: [
+  [ db, { model: db.Score, as: 'total' }, 'created_at', 'asc' ]
+],
+order: [
+  [ models.Community, { model: models.Image, as: 'CommunityLogoImages' }, 'created_at', 'asc' ]
+],
+*/
+
+export function notme(req, res){
+  return User.findAll({
+    where: {
       _id: { $ne: req.user._id },
     },
-    attributes : [
-      "_id",
-      "name",
+    attributes: [
+      '_id',
+      'name',
       'email',
-      "avatar"
+      'avatar'
     ]
   }).then( users =>{
     res.status(200).json(users);
@@ -133,22 +180,38 @@ export function changePassword(req, res) {
     });
 }
 
+export function uploadFiles(req,res){
+  
+  console.log("Charger Fichier Function");
+  
+var storage = multer.diskStorage({
+    destination: config.storage,
+    filename: function (request, file, callback) {
+      callback(null, file.originalname)
+      console.log("on essaye");
+      console.log(file.originalname)
+    }
+  });
+  // Définition d'un seul parametre
+  var upload = multer({storage: storage}).single('file');
+  upload(req, res, function(err) {
+    if(err) {
+      console.log(err);
+      return;
+    }
+    // Retourne le path
+    // TODO retourner le bon path, pour l'instant uniquement le nom du fichier
+    // et le path est adpater coté client
+    res.end("fin");
+  })
+
+}
+
 /**
  * Change a users Avatar
  */
 export function changeAvatar(req, res) {
-  var userId = req.user._id;
-
-  return User.find({
-    where: {
-      _id: userId
-    }
-  })
-    .then(user => {
     console.log("change Avatar function")
-    //res.status(200).json(users);
-  })
-  .catch(handleError(res))
 }
 
 /**

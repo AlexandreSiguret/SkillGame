@@ -37,7 +37,7 @@ describe('Award API Router:', function() {
 
 
 
-  describe('GET /api/award', function() {
+  describe('GET /api/awards', function() {
     it('should route to award.controller.index', function() {
       routerStub.get
         .withArgs('/', 'awardCtrl.index')
@@ -46,16 +46,16 @@ describe('Award API Router:', function() {
   });
 
 
-  describe('GET /api/award/:id', function() {
-    it('should route to award.controller.show', function() {
+  describe('GET /api/awards/:id', function() {
+    it('should route to award.controller.awards', function() {
       routerStub.get
-        .withArgs('/:id', 'awardCtrl.show')
+        .withArgs('/:id', 'awardCtrl.awards')
         .should.have.been.calledOnce;
     });
   });
 
 
-  describe('POST /api/award', function() {
+  describe('POST /api/awards', function() {
     it('should route to award.controller.create', function() {
       routerStub.post
         .withArgs('/', 'awardCtrl.create')
@@ -65,7 +65,7 @@ describe('Award API Router:', function() {
 
 
 
-  describe('PUT /api/award/:id', function() {
+  describe('PUT /api/awards/:id', function() {
     it('should route to award.controller.upsert', function() {
       routerStub.put
         .withArgs('/:id', 'awardCtrl.upsert')
@@ -75,7 +75,7 @@ describe('Award API Router:', function() {
 
  
 
-  describe('DELETE /api/award/:id', function() {
+  describe('DELETE /api/awards/:id', function() {
     it('should route to award.controller.destroy', function() {
       routerStub.delete
         .withArgs('/:id', 'awardCtrl.destroy')
