@@ -1,14 +1,13 @@
 import angular from 'angular';
-//import fileUpload from '../../node_modules/ng-file-upload/dist/ng-file-upload.min'
 import uiRouter from 'angular-ui-router';
 import routing from './questions.routes';
-//var app = angular.module('fileUpload', ['ngFileUpload']);
 
 export class QuestionsController {
   $http;
   socket;
   allConceptId=[];
   awesomeConcept = [];
+  awesomeConceptId = {}
   newConcept = '';
   currentConcept = [];
   choice = false;
@@ -21,19 +20,21 @@ export class QuestionsController {
   idNewQuestion = ""
   message = ""
 
+
   /*@ngInject*/
-  constructor($http, $scope, socket, $window) {
+  constructor($http, $scope, socket, $window,$stateParams) {
     this.$http = $http;
     this.socket = socket;
     this.$window=$window;
-
     this.$stateParams = $stateParams;
+    this.showme = true;
+    this.showus = true;
+    
 
 
    $scope.cloud = [],
 
   this.$scope = $scope
-
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('concept');
@@ -44,67 +45,64 @@ export class QuestionsController {
     this.$http.get('/api/concepts')
       .then(response => {
         this.awesomeConcept = response.data;
-        for (var i = 0; i < this.awesomeConcept.length; i++) {
-          this.allConceptId[i]=this.awesomeConcept[i]._id
+        this.$scope.cloud = []
+        for (var i = 0; i < response.data.length; i++) {
+         var a = { text :  response.data[i].name, weight: i , link : "http://localhost:3000/questions/"+ response.data[i]._id}
+         this.$scope.cloud.push(a)
+          this.awesomeConceptId[response.data[i]._id] = {name :response.data[i].name }
+          console.log(this.awesomeConceptId[response.data[i]._id])
+          console.log(response.data[i].name )
+        
+        }
+
+        if(this.awesomeConceptId[this.$stateParams.id] != undefined){
+          console.log("on est definie")
+          
+          this.currentConcept = {"_id" : this.$stateParams.id,name : this.awesomeConceptId[this.$stateParams.id]["name"] }
+          console.log(this.currentConcept)
+          this.choice = true;
+        }
+        else{
+          console.log('ce n"est pas définie')
         }
         
-        console.log(this.allConceptId)
-      });
+       
+      }
+      
+    )
+
+      
+      ;
   }
 
 
 
   choix_concept(concept) {
-
+/*
+    
     for (var i = 0; i < this.allConceptId.length; i++) {
-
       var variable = '#concept-'+this.allConceptId[i];
       var myEl = angular.element( document.querySelector( variable ) );
       myEl.removeAttr('class');
     }
-
     var variable = '#concept-'+concept._id;
     var myEl = angular.element( document.querySelector( variable ) );
     myEl.attr('class',"active");
-
+    color: #fff;
+    background-color: #166e70*/
 
     this.currentConcept = concept;
+    console.log(this.currentConcept)
     this.choice = true;
-    console.log(this.controleQuestion)
+   // console.log(this.controleQuestion)
+
+   // console.log(" Je suis this.currentConcept._id");
+   // console.log(this.currentConcept._id);
   }
 
-  askQuestion() {
-    console.log(this.controleQuestion)
-    this.controleQuestion = true
-  }
 
-  lookForAGame() {
 
-    this.$http.get('/api/games/freeGame/'+ this.currentConcept._id)
-    .then(response => {
-      this.freeAwesomeGames = response.data;
-      if(response.data.length == 0){       
-        this.$http.post("/api/games", {          
-          ConceptId: this.currentConcept._id,
-          ended : false,
-        })
-      }
-      else{
-        console.log(this.freeAwesomeGames)
-        this.$http.put("/api/games/" + this.freeAwesomeGames[0]._id, {
-         /* user1 : this.freeAwesomeGames[0].user1,
-          concept: this.freeAwesomeGames[0].concept,
-          ended : this.freeAwesomeGames[0].ended*/
-          _id : this.freeAwesomeGames[0]._id
-        })
-      }
-      console.log(this.freeAwesomeGames)
 
-    });
-
-    //this.$window.location.href = '/game';
-
-  }
 
   addQuestion() {
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {
@@ -155,6 +153,23 @@ export class QuestionsController {
   }
 
 
+  showButtonHandler() {
+
+    if(this.showme == true) {
+      this.showme = false;
+    } else {
+      this.showme = true;
+    }
+
+    if(this.showus == true) {
+      this.showus = false;
+    } else {
+      this.showus = true;
+    }
+    
+  }
+  
+
 }
 
 
@@ -164,4 +179,4 @@ export default angular.module('skillGameApp.questions', [uiRouter])
     template: require('./questions.html'),
     controller: QuestionsController
   })
-  .name;
+.name;

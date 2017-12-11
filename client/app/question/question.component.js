@@ -17,7 +17,7 @@ export class QuestionController {
     this.$stateParams = $stateParams;
     this.$http = $http;
     this.socket = socket;
-    $scope.counter = 90;
+    $scope.counter = 30;
     $scope.stopped = false;
        
     this.errormessage = ""
@@ -132,7 +132,7 @@ export class QuestionController {
     var myEl = angular.element(document.querySelector('#report-question-button'));
     myEl.attr('disabled',"");  
 
-    this.call_question()
+    this.call_question() 
 
 
     this.num++;
@@ -186,12 +186,12 @@ export class QuestionController {
             console.log("on va appeler score")
 		      	this.$http.get("/api/scores/"+this.concept) 
             .then(response => {
-              this.putUserAward();
+             /* this.putUserAward();
               this.getUserAwards();                                
               console.log("reussi") 
               .then(response => {
                 this.idNewScore = response.data._id;
-              });
+              });*/
               this.currentScore = response.data.score;              
               this.$http.put('/api/scores/'+ response.data._id,{
                 score : this.currentScore + this.$scope.seconds,
@@ -218,14 +218,14 @@ export class QuestionController {
 
             for (var i = 0; i < this.idChoices.length; i++) {
               var variable = '#choices-'+this.idChoices[i];
-              var myEl = angular.element( document.querySelector( variable ) );
+              var myEl = angular.element( document.querySelector( variable ) ); 
               myEl.attr('disabled',"");
             }
           }
           else {
            
 
-            this.$http.put('/api/answers/'+ this.singleQuestion._id,{
+            this.$http.put('/api/answers/'+ this.singleQuestion._id,{ 
               _id :this.singleQuestion._id,
               earnedPoint : 0
             })
@@ -255,7 +255,7 @@ export class QuestionController {
             myEl.removeAttr('disabled');
           }
           else {
-            this.$timeout(function() { 
+            this.$timeout(function() {  
 
               //var variable2 = '#quiz';
               //var myE2 = angular.element( document.querySelector( variable2 ) );
