@@ -29,7 +29,7 @@ export class QuestionController {
     this.currentScore = 0;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.listAwards = [];
-    
+    this.detailAwards = [];
 
 
     $scope.$on('$destroy', function() {
@@ -161,20 +161,43 @@ export class QuestionController {
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
-            console.log(this.listAwards);
+            console.log(this.listAwards._id);
           });
+          
         }
 
-        putUserAward(){
-          this.$http.post("/api/awards", {
-            UserId : this.getCurrentUser()._id,
-            ConceptId : this.concept,
-            BadgeId : 3,
-            date: new Date(),
+       existUserBadge(uId,cId,bId){
+          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
+          .then(response => {
+            this.detailAwards = response.data;
+            console.log(response.status, response.data.length);
           });
+          if(this.detailAwards.length === 0) return false;
+          else if(this.detailAwards[0]._id > 0) return true;
+          else return false;
         }
         
-
+        putUserAward(){
+          var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, 3 );
+      //    console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.concept+'/'+ 3 );
+          if(!aa){
+              this.$http.post("/api/awards", {
+                UserId : this.getCurrentUser()._id,
+                ConceptId : this.concept,
+                BadgeId : 3,
+                badgeCount : 1,
+                date: new Date(),
+              });
+              
+            }else{
+              this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
+                badgeCount : this.detailAwards[0].badgeCount + 1,
+                _id: this.detailAwards[0]._id
+              });
+            }
+          }
+        
+        // ajout modal winning award
         validation(select){
           console.log("on appele validation")
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
