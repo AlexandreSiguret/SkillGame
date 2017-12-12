@@ -103,7 +103,7 @@ export default function seedDatabaseIfNeeded() {
         _id: 9
       },{
         expediteur : "antonio@antonio.com",
-        destinataire : "alexandre@alexandre.com",
+        destinataire : "alexandre@alexandre.com", 
         msg_type : 1,
         date : 1256,
         message : 'Salut',
@@ -2267,14 +2267,18 @@ export default function seedDatabaseIfNeeded() {
       Alonescore.destroy({where:{}})
       .then(() =>{
         let alonescore = Alonescore.bulkCreate([{
-          UserId : 4,
+          UserId : 5,
           ConceptId : 1,
-          alonescore : 5
+          alonescore : 3
         },{
-           UserId : 3,
+           UserId : 4,
            ConceptId : 1,
            alonescore : 5
-        }
+        },{
+          UserId : 1,
+          ConceptId : 1,
+          alonescore : 4
+       }
       ]);
       })
       .then(() => console.log('finished alonescore'))

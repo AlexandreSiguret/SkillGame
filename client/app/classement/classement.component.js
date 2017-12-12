@@ -7,6 +7,7 @@ export class ClassementController {
   socket; 
   listPlayers;
   threeAwesomePlayers;
+  threeAwesomeAlonePlayers;
   listAwards;
 
   /*@ngInject*/
@@ -63,6 +64,11 @@ export class ClassementController {
       console.log(this.threeAwesomePlayers)
     });
 
+    this.$http.get("/api/alonescores/three/"+c._id)
+    .then(response =>{
+      this.threeAwesomeAlonePlayers = response.data;
+      console.log(this.threeAwesomeAlonePlayers) 
+    });
   } 
 
   getAwards(usr,cpt,bdg) {

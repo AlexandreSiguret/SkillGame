@@ -19,6 +19,7 @@ export class QuestionsController {
   WrongAnswer3 = ""
   idNewQuestion = ""
   message = ""
+ 
 
 
   /*@ngInject*/
@@ -42,29 +43,25 @@ export class QuestionsController {
   }
 
   $onInit() {
+   
     this.$http.get('/api/concepts')
       .then(response => {
         this.awesomeConcept = response.data;
         this.$scope.cloud = []
         for (var i = 0; i < response.data.length; i++) {
-         var a = { text :  response.data[i].name, weight: i , link : "http://localhost:3000/questions/"+ response.data[i]._id}
+         var a = { text :  response.data[i].name, weight: i , link :"http://"+ this.$window.location.host + "/questions/"+ response.data[i]._id}
          this.$scope.cloud.push(a)
-          this.awesomeConceptId[response.data[i]._id] = {name :response.data[i].name }
-          console.log(this.awesomeConceptId[response.data[i]._id])
-          console.log(response.data[i].name )
-        
+          this.awesomeConceptId[response.data[i]._id] = {name :response.data[i].name }      
         }
 
         if(this.awesomeConceptId[this.$stateParams.id] != undefined){
-          console.log("on est definie")
+         
           
           this.currentConcept = {"_id" : this.$stateParams.id,name : this.awesomeConceptId[this.$stateParams.id]["name"] }
-          console.log(this.currentConcept)
+        
           this.choice = true;
         }
-        else{
-          console.log('ce n"est pas définie')
-        }
+
         
        
       }
