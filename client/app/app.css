@@ -47,6 +47,7 @@
 /* inject:css */
 @import 'admin/admin.css';
 @import 'affrontement/affrontement.css';
+@import 'badges/badges.css';
 @import 'classement/classement.css';
 @import 'game/game.css';
 @import 'jeu/jeu.css';

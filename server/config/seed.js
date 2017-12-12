@@ -131,8 +131,16 @@ export default function seedDatabaseIfNeeded() {
 
     Award.destroy({where:{}})
     .then(() =>{
-      let award = Award.bulkCreate([{        
-        
+      let award = Award.bulkCreate([{
+        UserId: 5,
+        ConceptId: 1,
+        BadgeId: 3,
+        date: 123456789
+      },{
+        UserId: 5,
+        ConceptId: 1,
+        BadgeId: 2,
+        date: 123456789
       }
     ]);
     })
@@ -2082,17 +2090,97 @@ export default function seedDatabaseIfNeeded() {
                 _id: 1,
                 name: 'Gold Medal',
                 picture: 'oro.jpg',
-                description: 'Stellar, oro medal',  
+                description: 'Stellar, Gold Medal',  
               }, {
                 _id: 2,
                 picture: 'plata.jpg',
                 name: 'Silver Medal',
-                description: 'expert, plata medal',
+                description: 'expert, Silver Medal',
               }, {
                 _id: 3,
                 picture: 'bronce.jpg',
                 name: 'Bronze Medal',
-                description: 'beginner, bronze medal',
+                description: 'beginner, Bronze Medal',
+              }, {
+                _id: 4,
+                picture: 'compSciences.jpg',
+                name: 'Master Computer Sciences',
+                description: 'Master on Computer Sciences subject',
+              }, {
+                _id: 5,
+                picture: 'iphoneX.jpg',
+                name: 'IphoneX',
+                description: 'Expert on the IphoneX subject',
+              }, {
+                _id: 6,
+                picture: 'judo.jpg',
+                name: 'Master Computer Sciences',
+                description: 'Expert on the Judo subject',
+              }, {
+                _id: 7,
+                picture: 'art.jpg',
+                name: 'Master Art',
+                description: 'Expert on the art subject',
+              }, {
+                _id: 8,
+                picture: 'animal.jpg',
+                name: 'Master Animal Subject',
+                description: 'Expert on the animal subject',
+              }, {
+                _id: 9,
+                picture: 'biology.jpg',
+                name: 'Biology Subject',
+                description: 'Expert on the Biology subject',
+              }, {
+                _id: 10,
+                picture: 'birds.jpg',
+                name: 'Birds Subject',
+                description: 'Expert on the birds subject',
+              }, {
+                _id: 11,
+                picture: 'earth.jpg',
+                name: 'Earth Subject',
+                description: 'Expert on the Earth subject',
+              }, {
+                _id: 12,
+                picture: 'computer.jpg',
+                name: 'Computer Subject',
+                description: 'Expert on the computer subject',
+              }, {
+                _id: 13,
+                picture: 'world.jpg',
+                name: 'World Subject',
+                description: 'Expert on the world subject',
+              }, {
+                _id: 14,
+                picture: 'sport.jpg',
+                name: 'Sport Subject',
+                description: 'Expert on the sport subject',
+              }, {
+                _id: 15,
+                picture: 'space.jpg',
+                name: 'Space Subject',
+                description: 'Expert on the space subject',
+              }, {
+                _id: 16,
+                picture: 'science.jpg',
+                name: 'Science Subject',
+                description: 'Expert on the science subject',
+              }, {
+                _id: 17,
+                picture: 'music.jpg',
+                name: 'Music Subject',
+                description: 'Expert on the music subject',
+              }, {
+                _id: 18,
+                picture: 'harryPotter.jpg',
+                name: 'Harry Potter Subject',
+                description: 'Expert on the Harry Potter subject',
+              }, {
+                _id: 19,
+                picture: 'france.jpg',
+                name: 'France Subject',
+                description: 'Expert on the France subject',
               }
       
               ]);

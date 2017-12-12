@@ -9,3 +9,30 @@
 <div class="modal-footer">
   <button ng-repeat="button in modal.buttons" ng-class="button.classes" ng-click="button.click($event)" ng-bind="button.text" class="btn"></button>
 </div>
+
+
+<!--
+
+   <md-dialog aria-label="List dialog">
+      <md-dialog-content>
+          <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
+          <div style="float:left;">
+                <img style="width:80px; height:82px;" src="assets/images/{{$ctrl.listAwards[0].User.avatar}}" />
+          </div>
+        <md-list>
+            <table border=0 width="300"> 
+          <md-list-item ng-repeat="badge in $ctrl.listAwards">
+              <tr >
+                  <td width="150" align="center" >{{badge.Concept.name}}</td>
+                  <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
+                  <td width="100" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
+              </tr>
+          </md-list-item>
+        </md-list>
+      </md-dialog-content>
+      <md-dialog-actions>
+        <md-button ng-click="closeDialog()" class="md-primary">Close Dialog</md-button>
+      </md-dialog-actions>
+    </md-dialog>
+
+-->

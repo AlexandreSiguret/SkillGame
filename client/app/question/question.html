@@ -8,15 +8,29 @@
 
     <div class="col-md-9 col-sm-8" id="quiz">
 
-    <div id="quiz-resulats" style="display: none;">
+        <div id="quiz-resulats" style="display: none;">
           <center>
             <h1 style="color: #166e70;">End of test !</h1>
           </center>
           <center>
             <div class="alert alert-success">
               <strong>Success!</strong> you successfully passed your test.
-
             </div>
+          </center>
+          <center>
+              <div style="width:400px;">
+                <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
+                <div style="float:left;">
+                      <img style="width:80px; height:82px;" src="assets/images/{{$ctrl.listAwards[0].User.avatar}}" />
+                </div>
+                <table border=0 width="300">               
+                    <tr ng-repeat="badge in $ctrl.listAwards">
+                      <td width="150" align="center" >{{badge.Concept.name}}</td>
+                      <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
+                      <td width="100" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
+                    </tr>
+                </table>
+              </div> 
           </center>
         </div>
               
@@ -24,21 +38,20 @@
         <h1 style="color: #166e70;">Answer the test !</h1>
         <div class="counter">
           <div id="countdown">
-           <span class="minutes">{{minutes}}<b> Minutes</b></span>
-           <span class="seconds">{{seconds}}<b> Seconds</b></span>
-         </div>
-       </div>
+              <span class="minutes">{{minutes}}<b> Minutes</b></span>
+              <span class="seconds">{{seconds}}<b> Seconds</b></span>
+          </div>
+        </div>
 
-
-       <h1 id="quiz-name"></h1>
-       <div id="question" ng-view>
-        <h2>{{$ctrl.singleQuestion.Question.question}}</h2>
-        <ul ng-repeat="choices in $ctrl.questionChoices">
-          <center>
-            <input ng-click="$ctrl.validation(choices)" id="choices-{{choices._id}}" type="radio" name="choices" value="choices-{{choices._id}}">
-            <label id="label-choices-{{choices._id}}" class="" for="choices-{{choices._id}}">{{choices.statement}}
-            </label>
-            <center>
+          <h1 id="quiz-name"></h1>
+          <div id="question" ng-view>
+            <h2>{{$ctrl.singleQuestion.Question.question}}</h2>
+            <ul ng-repeat="choices in $ctrl.questionChoices">
+              <center>
+                <input ng-click="$ctrl.validation(choices)" id="choices-{{choices._id}}" type="radio" name="choices" value="choices-{{choices._id}}">
+                <label id="label-choices-{{choices._id}}" class="" for="choices-{{choices._id}}">{{choices.statement}}
+                </label>
+              <center>
             </ul>
             {{$ctrl.errormessage}}
           </div>
@@ -46,24 +59,37 @@
          <button title="Report this question" disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
          <button title="Next" disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
          <br> <br>
-         
+      </center> 
          <br><br/>
         </div>
 
-        <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">
-          <center>
-            <h1 style="color: #166e70;">End of test !</h1>
-          </center>
-          <center>
-            <div class="alert alert-success">
-              <strong>Success!</strong> you successfully passed your test.       
-            </div>
-            <div style="display:inline-block;"  ng-repeat="badge in $ctrl.listAwards">
-              <img height="42" width="40" src="assets/images/{{badge.BadgeId}}.jpg" />
-            </div>           
-          </center>
-        </div>
+<!--          <div class="col-md-9 col-sm-8" id="quiz-resulats" style="display: none;">
+            <center>
+              <h1 style="color: #166e70;">End of test !</h1>
+            </center>
+            <center>
+              <div class="alert alert-success">
+                <strong>Success!</strong> you successfully passed your test.       
+              </div>         
+            </center>
 
+            <center>
+                <div style="width:400px;">
+                  <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
+                  <div style="float:left;">
+                        <img style="width:80px; height:82px;" src="assets/images/{{$ctrl.listAwards[0].User.avatar}}" />
+                  </div>
+                  <table border=0 width="300">               
+                      <tr ng-repeat="badge in $ctrl.listAwards">
+                        <td width="150" align="center" >{{badge.Concept.name}}</td>
+                        <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
+                        <td width="100" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
+                      </tr>
+                  </table>
+                </div> 
+            </center>
+          </div>
+  -->
 
-      </div>
-    </div>
+  </div>
+</div>

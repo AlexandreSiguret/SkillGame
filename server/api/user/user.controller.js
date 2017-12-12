@@ -75,17 +75,6 @@ export function ranked(req, res) {
     })
     .catch(handleError(res));
 }
-/*
-include: [
-  { model: models.Image, as: 'IdeaHeaderImages', order: [['Image.updated_at','ASC']] }
-]
-order: [
-  [ db, { model: db.Score, as: 'total' }, 'created_at', 'asc' ]
-],
-order: [
-  [ models.Community, { model: models.Image, as: 'CommunityLogoImages' }, 'created_at', 'asc' ]
-],
-*/
 
 export function notme(req, res){
   return User.findAll({

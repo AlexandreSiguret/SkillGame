@@ -35,8 +35,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of All awards
 export function index(req, res) {
-  var exped = req.params.uId;
-  var dest = req.params.cId;
+
   return Award.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -44,9 +43,6 @@ export function index(req, res) {
 
 // Get a list of my awards
 export function awards(req, res) {
-  var userID = req.params.uId;
-  var conceptID = req.params.cId;
-  var badgeID = req.params.bId;
   
   return Award.findAll({
 
@@ -79,6 +75,35 @@ export function awards(req, res) {
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
+
+// Get a list of awards by userId
+export function userAwards(req, res) {
+   
+  return Award.findAll({
+    attributes: [
+      '_id',
+      'UserId',
+      'ConceptId',
+      'BadgeId',
+      'date'
+    ], 
+    where : [{
+      UserId : req.params.id
+    }],
+    order : [ [ 'date','DESC'] ],
+    include: [{
+      model: db.User,      
+    }, {
+      model: db.Concept,
+    }, {
+      model: db.Badge,
+    }] 
+
+  })
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 
 // Get a award  by id from the DB
 export function show(req, res) {
