@@ -22,6 +22,9 @@ export class NavbarComponent {
   },{
     title : "Messenger",
     state : "messenger"
+  },{
+    title : "Badges",
+    state : "badges"
 
   }
 ];

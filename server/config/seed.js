@@ -131,8 +131,16 @@ export default function seedDatabaseIfNeeded() {
 
     Award.destroy({where:{}})
     .then(() =>{
-      let award = Award.bulkCreate([{        
-        
+      let award = Award.bulkCreate([{
+        UserId: 5,
+        ConceptId: 1,
+        BadgeId: 3,
+        date: 123456789
+      },{
+        UserId: 5,
+        ConceptId: 1,
+        BadgeId: 2,
+        date: 123456789
       }
     ]);
     })

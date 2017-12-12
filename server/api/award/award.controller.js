@@ -35,8 +35,7 @@ function handleError(res, statusCode) {
 
 // Gets a list of All awards
 export function index(req, res) {
-  var exped = req.params.uId;
-  var dest = req.params.cId;
+
   return Award.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
@@ -44,9 +43,6 @@ export function index(req, res) {
 
 // Get a list of my awards
 export function awards(req, res) {
-  var userID = req.params.uId;
-  var conceptID = req.params.cId;
-  var badgeID = req.params.bId;
   
   return Award.findAll({
 
@@ -92,7 +88,7 @@ export function userAwards(req, res) {
       'date'
     ], 
     where : [{
-      UserId : req.params.uId
+      UserId : req.params.id
     }],
     order : [ [ 'date','DESC'] ],
     include: [{
