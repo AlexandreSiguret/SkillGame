@@ -15,7 +15,7 @@ import {Score} from '../../sqldb';
 import Sequelize from 'sequelize';
 import db from '../../sqldb';
 
-function respondWithResult(res, statusCode) {
+function respondWithResult(res, statusCode) { 
   statusCode = statusCode || 200;
   return function(entity) {
     if(entity) {
@@ -26,7 +26,7 @@ function respondWithResult(res, statusCode) {
 }
 
 // gets tree top score
-export function topthree(req,res){
+export function topthree(req,res){ 
   
   var cId = req.params.id;
   return Score.findAll({
@@ -83,7 +83,7 @@ function handleEntityNotFound(res) {
   };
 }
 
-function handleError(res, statusCode) {
+function handleError(res, statusCode) { 
   statusCode = statusCode || 500;
   return function(err) {
     res.status(statusCode).send(err);
@@ -91,7 +91,7 @@ function handleError(res, statusCode) {
 }
 
 // Gets a list of Scores
-export function index(req, res) {
+export function index(req, res) {   
   return Score.findAll({
     attributes: [[Sequelize.fn('SUM', Sequelize.col('score')), 'total'],"_id","UserId"],
     group: 'UserId',

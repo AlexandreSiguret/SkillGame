@@ -12,6 +12,7 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Alonescore} from '../../sqldb';
+import Sequelize from 'sequelize';
 import db from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
@@ -25,17 +26,17 @@ function respondWithResult(res, statusCode) {
 }
 
 // gets three top of alonescore
-export function three(req,res){
+export function three(req,res){ 
   return Alonescore.findAll({
     where: {
       ConceptId: req.params.id,
     },
     order: [
       ['alonescore','DESC'],
-      ['UserId','ASC']
+      [Sequelize.fn('max' , Sequelize.col('UserId')), 'DESC']
     ],
+    group: 'UserId',
     limit: 3,
-
     include: [{
       model: db.User,
       attributes: ['name','avatar'] 
