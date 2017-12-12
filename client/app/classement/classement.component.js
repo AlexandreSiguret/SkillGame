@@ -89,7 +89,7 @@ export class ClassementController {
       this.showme = true;
     }
 
-    if(this.showus == true) {
+    if(this.showus == true) {     
       this.showus = false;
     } else {
       this.showus = true;
