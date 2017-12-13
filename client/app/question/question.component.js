@@ -9,9 +9,10 @@ export class QuestionController {
   socket;
   stopped;
   getCurrentUser : Function;
+
   
   /*@ngInject*/
-  constructor($http, $scope, socket, $timeout,$stateParams, Auth) {
+  constructor($http, $scope, socket, $timeout,$stateParams, Auth,$rootScope,dialogs) {
     this.$timeout=$timeout;
     this.$scope=$scope;
     this.$stateParams = $stateParams;
@@ -19,7 +20,6 @@ export class QuestionController {
     this.socket = socket;
     $scope.counter = 30;
     $scope.stopped = false;
-       
     this.errormessage = ""
     this.questionChoices=[];
     this.singleQuestion=[];
@@ -29,7 +29,13 @@ export class QuestionController {
     this.currentScore = 0;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.listAwards = [];
+    this.correctanswernumber=0;
     
+    $scope.launch = function() {
+          dialogs.notify('Congrats','U won the Bronze Medal');
+          //this.$scope.launch();
+    }; // end launch
+    this.detailAwards = [];
 
 
     $scope.$on('$destroy', function() {
@@ -85,16 +91,16 @@ export class QuestionController {
   }
 
   $onInit() {
-    this.call_question()
+    this.call_question();
   }
 
   call_question() {
-
 
     this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
     .then(response => {
       this.singleQuestion = response.data[0];
 
+    /* Concept Ilimination */
 	  
 	  this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
@@ -108,6 +114,7 @@ export class QuestionController {
 
       });
 
+      /* !!! !!! */
       this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
       .then(response => {
         this.detailedQuestion = response.data;
@@ -161,23 +168,48 @@ export class QuestionController {
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
-            console.log(this.listAwards);
+            console.log(this.listAwards._id);
           });
+          
         }
 
-        putUserAward(){
-          this.$http.post("/api/awards", {
-            UserId : this.getCurrentUser()._id,
-            ConceptId : this.concept,
-            BadgeId : 3,
-            date: new Date(),
+       existUserBadge(uId,cId,bId){
+          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
+          .then(response => {
+            this.detailAwards = response.data;
+            console.log(response.status, response.data.length);
           });
+          if(this.detailAwards.length === 0) return false;
+          else if(this.detailAwards[0]._id > 0) return true;
+          else return false;
         }
         
-
+        putUserAward(){
+          var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, 3 );
+      //    console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.concept+'/'+ 3 );
+          if(!aa){
+              this.$http.post("/api/awards", {
+                UserId : this.getCurrentUser()._id,
+                ConceptId : this.concept,
+                BadgeId : 3,
+                badgeCount : 1,
+                date: new Date(),
+              });
+              
+            }else{
+              this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
+                badgeCount : this.detailAwards[0].badgeCount + 1,
+                _id: this.detailAwards[0]._id
+              });
+            }
+          }
+        
+        // ajout modal winning award
         validation(select){
           console.log("on appele validation")
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
+
+            this.correctanswernumber++;
 
             this.$http.put('/api/answers/'+ this.singleQuestion._id,{
               _id :this.singleQuestion._id,
@@ -187,7 +219,7 @@ export class QuestionController {
 		      	this.$http.get("/api/scores/"+this.concept) 
             .then(response => {
               this.putUserAward();
-              this.getUserAwards();                                
+              this.getUserAwards();                             
               console.log("reussi") 
               .then(response => {
                 this.idNewScore = response.data._id;
@@ -255,6 +287,12 @@ export class QuestionController {
             myEl.removeAttr('disabled');
           }
           else {
+            /* Badge && Award Winner */
+            if (this.correctanswernumber == 2)
+            {
+              this.$scope.launch();
+            }
+            
             this.$timeout(function() {  
 
               //var variable2 = '#quiz';
@@ -269,6 +307,9 @@ export class QuestionController {
               myEl.removeAttr('style');
               myE2.attr('style',"display: inline;");
 
+              //vm.$scope.launch();
+
+              //alert('Hello');
             //this.valeur=true;/*alert('Test Terminer !! Redirection vers la page ..... !!');*/
 
           }, 2000);

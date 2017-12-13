@@ -11,12 +11,19 @@ export class BadgesComponent {
   getCurrentUser: Function;
 
   /*@ngInject*/
-  constructor($http, $scope, socket, Auth, $location,$window) {
+  constructor($http,$scope,socket,Auth,$location,$window,$rootScope,$timeout,dialogs) {
     this.$http = $http;
+    this.$scope=$scope;
     this.socket = socket;
     this.listBadges = [];
     this.listAwards = [];
     this.listPlayers = [];
+
+    $scope.launch = function() {
+          dialogs.notify();
+          //this.$scope.launch();
+
+    }; // end launch
     
     this.getCurrentUser = Auth.getCurrentUserSync;
 
@@ -25,6 +32,10 @@ export class BadgesComponent {
       socket.unsyncUpdates('award');
       socket.unsyncUpdates('badge');
     });
+  }
+
+  install() {
+    dialogs.wait('Creating User','Please wait while we attempt to create user "Michael Conroy."<br><br>This should only take a moment.',50);
   }
 
   $onInit() {    
@@ -45,11 +56,7 @@ export class BadgesComponent {
           this.listBadges = response.data;
           console.log(this.listBadges)
         });
-
     }
-
-
-
 
 
 

@@ -52,6 +52,7 @@ export function awards(req, res) {
       'UserId',
       'ConceptId',
       'BadgeId',
+      'badgeCount',
       'date'
     ], 
     where : [{
@@ -85,6 +86,7 @@ export function userAwards(req, res) {
       'UserId',
       'ConceptId',
       'BadgeId',
+      'badgeCount',
       'date'
     ], 
     where : [{
@@ -115,6 +117,39 @@ export function show(req, res) {
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
+
+// Updates an existing award in the DB
+export function patch(req, res) {
+  if (req.body._id) {
+    Reflect.deleteProperty(req.body, '_id');
+  }
+  return Award.find({
+    where: {
+      _id: req.params.id
+    }
+  })
+    .then(handleEntityNotFound(res))
+    .then(patchUpdates(req.body))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Upserts the given Award in the DB at the specified ID
+export function upsert(req, res) {
+  req.body.UserId = req.user._id 
+  /*if(req.body._id) {
+    console.log("on passe ici")
+    Reflect.deleteProperty(req.body, '_id');
+  }*/
+  return Award.upsert(req.body, {
+    where: {
+      _id: req.params.id
+    }
+  }).then(regularisation(req.params.id,req.user._id))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 
 /**
  * Creates a new award
