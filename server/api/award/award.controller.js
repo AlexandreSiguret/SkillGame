@@ -136,11 +136,8 @@ export function patch(req, res) {
 
 // Upserts the given Award in the DB at the specified ID
 export function upsert(req, res) {
-  req.body.UserId = req.user._id 
-  /*if(req.body._id) {
-    console.log("on passe ici")
-    Reflect.deleteProperty(req.body, '_id');
-  }*/
+ // req.body.UserId = req.user._id 
+  
   return Award.upsert(req.body, {
     where: {
       _id: req.params.id

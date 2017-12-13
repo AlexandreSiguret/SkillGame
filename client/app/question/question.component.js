@@ -179,14 +179,20 @@ export class QuestionController {
             this.detailAwards = response.data;
             console.log(response.status, response.data.length);
           });
-          if(this.detailAwards.length === 0) return false;
-          else if(this.detailAwards[0]._id > 0) return true;
-          else return false;
+          if(this.detailAwards.length === 0) {
+            console.log("logitud 0 ?");
+            return false;
+          }
+          else if(this.detailAwards[0]._id > 0){
+            console.log(this.detailAwards[0]._id);
+            return true;
+          }
+
         }
         
         putUserAward(){
           var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, 3 );
-      //    console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.concept+'/'+ 3 );
+          console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.concept+'/'+ 3 );
           if(!aa){
               this.$http.post("/api/awards", {
                 UserId : this.getCurrentUser()._id,
@@ -217,9 +223,7 @@ export class QuestionController {
             })
             console.log("on va appeler score")
 		      	this.$http.get("/api/scores/"+this.concept) 
-            .then(response => {
-              this.putUserAward();
-              this.getUserAwards();                             
+            .then(response => {                             
               console.log("reussi") 
               .then(response => {
                 this.idNewScore = response.data._id;
@@ -291,6 +295,8 @@ export class QuestionController {
             if (this.correctanswernumber == 2)
             {
               this.$scope.launch();
+              this.putUserAward();
+              this.getUserAwards();
             }
             
             this.$timeout(function() {  

@@ -16,4 +16,27 @@
 
 /* Ease Display */
 
+#bdg-container{	width: 60%;	margin:0 auto; border-top: 1px solid #4a8c9f;}
+.tbl-bdg {
+	float:left;
+	width: 120px;
+	height: 140px;
+	margin:10px 10px;
+	border: 1px solid #4a8c9f;
+	-moz-border-radius: 8px 8px 8px 8px;
+	-webkit-border-radius: 8px 8px 8px 8px;	
+  }
+
+.tbl-bdg > h4 { display:inline-block; margin:5px; padding-left:5px; font: bold 11px Verdana; color: #4a8c9f;}
+.tbl-bdg > p { display:inline-block; margin:5px; padding-left:5px; font: bold 10px Verdana; color: #666666;}
+.badgeImg { width:60px;	margin: 0 auto;	margin-top:5px; }
 .pad { padding: 25px; }
+
+.clearfloat, .clearleft{ 
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+	
+}
+
