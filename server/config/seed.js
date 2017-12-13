@@ -128,7 +128,7 @@ export default function seedDatabaseIfNeeded() {
     .then(() => console.log('finished populating message things'))
     
     .catch(err => console.log('error populating message things', err));
-
+/*
     Award.destroy({where:{}})
     .then(() =>{
       let award = Award.bulkCreate([{
@@ -141,7 +141,7 @@ export default function seedDatabaseIfNeeded() {
     ]);
     })
     .then(() => console.log('finished award'));
-
+*/
 
 
     Concept.destroy({ where: {} })
