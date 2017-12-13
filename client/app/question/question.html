@@ -15,20 +15,15 @@
             <strong>Success!</strong> you successfully passed your test.
           </div>
         </center>
+
         <center>
-          <div style="width:400px;">
-            <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
-            <div style="float:left;">
-              <img style="width:80px; height:82px;" src="assets/images/{{$ctrl.listAwards[0].User.avatar}}" />
-            </div>
-            <table border=0 width="300">               
-              <tr ng-repeat="badge in $ctrl.listAwards">
-                <td width="150" align="center" >{{badge.Concept.name}}</td>
-                <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
-                <td width="100" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
-              </tr>
-            </table>
-          </div> 
+          <div class="alert alert-success">
+            <strong>Perfect score 2/2 : You Won !</strong>
+            <center>
+            <img height="90" width="90" src="assets/images/badge/space.png">
+            </center>
+            <h3 style="color: #000000;">Space Badge</h3>
+          </div>
         </center>
       </div>
 
