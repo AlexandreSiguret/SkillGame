@@ -149,25 +149,16 @@ export default function seedDatabaseIfNeeded() {
       .then(() => {
 
         let concept = Concept.bulkCreate([{
-
-          name: 'Computer sciences',
-
-          _id: 1
-
-        }, {
-
-          name: 'Iphone X',
-
-          _id: 2
-
-        }, {
-
-          name: 'Judo',
-
-          _id: 3
-
-        }, {
           name: 'Art',
+          _id: 1
+        }, {
+          name: 'Iphone X',
+          _id: 2
+        }, {
+          name: 'Judo',
+          _id: 3
+        }, {
+          name: 'France',
           _id: 4
         },{
           name: 'Animal',
@@ -203,7 +194,7 @@ export default function seedDatabaseIfNeeded() {
           name: 'Harry Potter',
           _id:15
         },{
-          name: 'France',
+          name: 'Computer sciences',
           _id:16
         }
         ]);
@@ -2082,7 +2073,8 @@ export default function seedDatabaseIfNeeded() {
       
             .then(() => {
       
-              let badge = Badge.bulkCreate([{
+              let badge = Badge.bulkCreate([
+              /*{
                 _id: 1,
                 name: 'Gold Medal',
                 picture: 'oro.jpg',
@@ -2097,86 +2089,101 @@ export default function seedDatabaseIfNeeded() {
                 picture: 'bronce.jpg',
                 name: 'Bronze Medal',
                 description: 'Beginner Level',
+              }, */{
+                _id: 1,
+                picture: 'badge/art.png',
+                name: 'Art',
+                description: 'Art',
+              }, {
+                _id: 2,
+                picture: 'badge/iphonex.png',
+                name: 'IphoneX',
+                description: 'IphoneX',
+              }, {
+                _id: 3,
+                picture: 'badge/judo.png',
+                name: 'Judo',
+                description: 'Judo',
               }, {
                 _id: 4,
-                picture: 'compSciences.jpg',
-                name: 'Computer Sciences',
-                description: 'Computer Sciences Subject',
+                picture: 'badge/france.png',
+                name: 'France',
+                description: 'France',
               }, {
                 _id: 5,
-                picture: 'iphoneX.jpg',
-                name: 'IphoneX',
-                description: 'IphoneX subject',
+                picture: 'badge/animal.png',
+                name: 'Animal',
+                description: 'Animal',
               }, {
                 _id: 6,
-                picture: 'judo.jpg',
-                name: 'Judo',
-                description: 'Judo Subject',
+                picture: 'badge/biology.png',
+                name: 'Biology',
+                description: 'Biology',
               }, {
                 _id: 7,
-                picture: 'art.jpg',
-                name: 'Art',
-                description: 'Art Subject',
+                picture: 'badge/birds.png',
+                name: 'Birds',
+                description: 'Birds',
               }, {
                 _id: 8,
-                picture: 'animal.jpg',
-                name: 'Animal',
-                description: 'Animal Subject',
+                picture: 'badge/earth.png',
+                name: 'Earth',
+                description: 'Earth',
               }, {
                 _id: 9,
-                picture: 'biology.jpg',
-                name: 'Biology',
-                description: 'Biology Subject',
+                picture: 'badge/computer.png',
+                name: 'Computer',
+                description: 'Computer',
               }, {
                 _id: 10,
-                picture: 'birds.jpg',
-                name: 'Birds',
-                description: 'Birds Subject',
+                picture: 'badge/world.png',
+                name: 'World',
+                description: 'Around the World',
               }, {
                 _id: 11,
-                picture: 'earth.jpg',
-                name: 'Earth',
-                description: 'Earth Subject',
+                picture: 'badge/sport.png',
+                name: 'Sport',
+                description: 'Sport',
               }, {
                 _id: 12,
-                picture: 'computer.jpg',
-                name: 'Computer',
-                description: 'Computer Subject',
+                picture: 'badge/space.png',
+                name: 'Space',
+                description: 'Space',
               }, {
                 _id: 13,
-                picture: 'world.jpg',
-                name: 'World',
-                description: 'World Subject',
+                picture: 'badge/science.png',
+                name: 'Science',
+                description: 'Science',
               }, {
                 _id: 14,
-                picture: 'sport.jpg',
-                name: 'Sport',
-                description: 'Sport Subject',
+                picture: 'badge/music.png',
+                name: 'Music',
+                description: 'Music',
               }, {
                 _id: 15,
-                picture: 'space.jpg',
-                name: 'Space',
-                description: 'Space Subject',
+                picture: 'badge/harrypotter.png',
+                name: 'Harry Potter',
+                description: 'Harry Potter',
               }, {
                 _id: 16,
-                picture: 'science.jpg',
-                name: 'Science',
-                description: 'Science Subject',
+                picture: 'badge/computerscience.png',
+                name: 'Computer Science',
+                description: 'Computer Science',
+              } , {
+                _id: 20,
+                picture: 'badge/question.png',
+                name: 'Question Contribution',
+                description: 'Quest Contribution',
               }, {
-                _id: 17,
-                picture: 'music.jpg',
-                name: 'Music',
-                description: 'Music Subject',
+                _id: 21,
+                picture: 'badge/time.png',
+                name: 'Time Clock Quiz',
+                description: 'Time Clock',
               }, {
-                _id: 18,
-                picture: 'harryPotter.jpg',
-                name: 'Harry Potter',
-                description: 'Harry Potter Subject',
-              }, {
-                _id: 19,
-                picture: 'france.jpg',
-                name: 'France',
-                description: 'France Subject',
+                _id: 22,
+                picture: 'badge/777.png',
+                name: 'Random Quiz',
+                description: 'Random Quiz',
               }
       
               ]);

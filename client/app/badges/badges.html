@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <div class="col-md-9 col-sm-8" style="min-height:400px;">            
     <center>
       <div style="width:600px;">
@@ -16,16 +16,56 @@
       </div> 
     </center>
   </div>
-</div>
-    <div class="clearfloat"></div>
+</div> -->
 
-    <div id="bdg-container">
-      <div class="tbl-bdg" ng-repeat="bdg in badgesCtrl.listBadges">
-        <div class="badgeImg">
-          <img height="62" width="60" src="assets/images/{{bdg.picture}}" />
-        </div>
-          <h4>{{bdg.name}}</h4>
-          <p>{{bdg.description}}</p>
-      </div>
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-11">
+    <h1 style="color: #166e70;" class="page-header"> Awards
+      </h1>
     </div>
+
+    <div class="col-sm-2" ng-repeat="badge in badgesCtrl.listAwards">
+      <center>
+        <img height="90" width="90" src="assets/images/{{badge.Badge.picture}}">
+        <img height="20" width="90" src="assets/images/star/2.png">
+        <h3>{{badge.Concept.name}}</h3>
+      </center>
+    </div>
+
   </div>
+
+
+
+
+
+
+  <div class="row">
+
+    <div class="col-lg-11">
+      <h1 style="color: #166e70;" class="page-header"> Awards To Win
+      </h1>
+    </div>
+
+    <div class="col-sm-2" ng-repeat="bdg in badgesCtrl.listBadges">
+      <center>
+        <img height="90" width="90" src="assets/images/{{bdg.picture}}">
+        <h3>{{bdg.name}}</h3>
+      </center>
+    </div>
+
+  </div>
+</div>
+
+
+    <!-- <div id="bdg-container">
+      <div class="tbl-bdg" >
+        <div class="badgeImg">
+          <img height="62" width="60" src="assets/images/{{}}" />
+        </div>
+          <h4></h4>
+          <p></p>
+      </div>
+    </div> -->
