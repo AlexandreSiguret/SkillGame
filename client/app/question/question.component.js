@@ -20,8 +20,6 @@ export class QuestionController {
     this.socket = socket;
     $scope.counter = 30;
     $scope.stopped = false;
-    var vm = this;
-       
     this.errormessage = ""
     this.questionChoices=[];
     this.singleQuestion=[];
@@ -31,6 +29,7 @@ export class QuestionController {
     this.currentScore = 0;
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.listAwards = [];
+    this.correctanswernumber=0;
     
     $scope.launch = function() {
           dialogs.notify('Congrats','U won the Bronze Medal');
@@ -97,11 +96,11 @@ export class QuestionController {
 
   call_question() {
 
-
     this.$http.get('/api/answers/pickone/'+this.$stateParams.game_id)
     .then(response => {
       this.singleQuestion = response.data[0];
 
+    /* Concept Ilimination */
 	  
 	  this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
@@ -115,6 +114,7 @@ export class QuestionController {
 
       });
 
+      /* !!! !!! */
       this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
       .then(response => {
         this.detailedQuestion = response.data;
@@ -218,6 +218,8 @@ export class QuestionController {
           console.log("on appele validation")
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
 
+            this.correctanswernumber++;
+
             this.$http.put('/api/answers/'+ this.singleQuestion._id,{
               _id :this.singleQuestion._id,
               earnedPoint : this.$scope.seconds
@@ -294,7 +296,12 @@ export class QuestionController {
             myEl.removeAttr('disabled');
           }
           else {
-            this.$scope.launch();
+            /* Badge && Award Winner */
+            if (this.correctanswernumber == 2)
+            {
+              this.$scope.launch();
+            }
+            
             this.$timeout(function() {  
 
               //var variable2 = '#quiz';
