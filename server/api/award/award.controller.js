@@ -65,11 +65,14 @@ export function awards(req, res) {
 //    group: [ 'UserId', 'ConceptId', 'BadgeId'],
     order : [ [ 'date','ASC'] ],
     include: [{
-      model: db.User,      
+      model: db.User,
+      attributes: ['_id','name','avatar']      
     }, {
       model: db.Concept,
+      attributes: ['_id','name']
     }, {
       model: db.Badge,
+      attributes: ['_id','name','description']
     }] 
 
   })
@@ -94,11 +97,14 @@ export function userAwards(req, res) {
     }],
     order : [ [ 'date','DESC'] ],
     include: [{
-      model: db.User,      
+      model: db.User,
+      attributes: ['_id','name','avatar']      
     }, {
       model: db.Concept,
+      attributes: ['_id','name']
     }, {
       model: db.Badge,
+      attributes: ['_id','name']
     }] 
 
   })
