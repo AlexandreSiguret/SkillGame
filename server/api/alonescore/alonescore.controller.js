@@ -31,9 +31,10 @@ export function three(req,res){
     where: {
       ConceptId: req.params.id,
     },
+    attributes: [[Sequelize.fn('max', Sequelize.col('alonescore')), 'alonescore'],"_id","UserId"],
+    group: 'UserId',
     order: [
-      ['alonescore','DESC'],
-      [Sequelize.fn('max' , Sequelize.col('UserId')), 'DESC']
+      [ Sequelize.col('alonescore'),"DESC"]
     ],
     group: 'UserId',
     limit: 3,
