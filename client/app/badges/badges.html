@@ -1,22 +1,26 @@
 <div>
-
-        <div class="col-md-9 col-sm-8">
-            
-                <center>
-                    <div style="width:400px;">
-                      <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
-                      <div style="float:left;">
-                            <img style="width:80px; height:82px;" src="assets/images/{{badgesCtrl.listAwards[0].User.avatar}}" />
-                      </div>
-                      <table border=0 width="300">               
-                          <tr ng-repeat="badge in badgesCtrl.listAwards">
-                            <td width="150" align="center" >{{badge.Concept.name}}</td>
-                            <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
-                            <td width="100" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
-                          </tr>
-                      </table>
-                    </div> 
-                </center>
+  <div class="col-md-9 col-sm-8">
+    <center>
+      <div style="width:400px;">
+        <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
+        <div style="float:left;">
+          <img style="width:80px; height:82px;" src="assets/images/{{badgesCtrl.listAwards[0].User.avatar}}" />
         </div>
-
+        <table border=0 width="300">               
+          <tr ng-repeat="badge in badgesCtrl.listAwards">
+            <td width="150" align="center" >{{badge.Concept.name}}</td>
+            <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
+            <td width="100" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
+          </tr>
+        </table>
+      </div> 
+    </center>
+  </div>
+  <div class="col-md-9 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <button class="btn btn-default" ng-click="badgesCtrl.$scope.launch()">Notify Dialog</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -5,6 +5,8 @@ import ngFileUpload from 'ng-file-upload';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+import ngAnimate from 'angular-animate';
+import angularDialogService from 'angular-dialog-service';
 //import ngFileUpload from '../assets/js/ng-file-upload.js';
 
 import 'angular-socket-io';
@@ -44,7 +46,7 @@ require('angular-tag-cloud');
 
 import './app.css';
 
-angular.module('skillGameApp', [ngCookies, ngFileUpload, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
+angular.module('skillGameApp', [ngCookies, angularDialogService, ngAnimate, ngFileUpload, ngResource, ngSanitize, 'btford.socket-io', uiRouter,QuestionComponent,
   uiBootstrap, _Auth, account, admin, 'validation.match', navbar, awardstable, footer, main, constants,
   socket, util, JeuComponent, header, sidebarleft, Questions, Affrontement, Classement, ListQuestions,
   GameComponent, Jeuchrono, GameComponent, MessengerComponent, BadgesComponent,

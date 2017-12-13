@@ -9,9 +9,10 @@ export class QuestionController {
   socket;
   stopped;
   getCurrentUser : Function;
+
   
   /*@ngInject*/
-  constructor($http, $scope, socket, $timeout,$stateParams, Auth) {
+  constructor($http, $scope, socket, $timeout,$stateParams, Auth,$rootScope,dialogs) {
     this.$timeout=$timeout;
     this.$scope=$scope;
     this.$stateParams = $stateParams;
@@ -19,6 +20,7 @@ export class QuestionController {
     this.socket = socket;
     $scope.counter = 30;
     $scope.stopped = false;
+    var vm = this;
        
     this.errormessage = ""
     this.questionChoices=[];
@@ -30,6 +32,10 @@ export class QuestionController {
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.listAwards = [];
     
+    $scope.launch = function() {
+          dialogs.notify('Congrats','U won the Bronze Medal');
+          //this.$scope.launch();
+    }; // end launch
 
 
     $scope.$on('$destroy', function() {
@@ -85,7 +91,7 @@ export class QuestionController {
   }
 
   $onInit() {
-    this.call_question()
+    this.call_question();
   }
 
   call_question() {
@@ -187,7 +193,7 @@ export class QuestionController {
 		      	this.$http.get("/api/scores/"+this.concept) 
             .then(response => {
               this.putUserAward();
-              this.getUserAwards();                                
+              this.getUserAwards();                             
               console.log("reussi") 
               .then(response => {
                 this.idNewScore = response.data._id;
@@ -255,6 +261,7 @@ export class QuestionController {
             myEl.removeAttr('disabled');
           }
           else {
+            this.$scope.launch();
             this.$timeout(function() {  
 
               //var variable2 = '#quiz';
@@ -269,6 +276,9 @@ export class QuestionController {
               myEl.removeAttr('style');
               myE2.attr('style',"display: inline;");
 
+              //vm.$scope.launch();
+
+              //alert('Hello');
             //this.valeur=true;/*alert('Test Terminer !! Redirection vers la page ..... !!');*/
 
           }, 2000);
