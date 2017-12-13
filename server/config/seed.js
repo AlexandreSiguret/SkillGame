@@ -135,11 +135,7 @@ export default function seedDatabaseIfNeeded() {
         UserId: 5,
         ConceptId: 1,
         BadgeId: 3,
-        date: 123456789
-      },{
-        UserId: 5,
-        ConceptId: 1,
-        BadgeId: 2,
+        badgeCount: 1,
         date: 123456789
       }
     ]);

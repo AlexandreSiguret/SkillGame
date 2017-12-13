@@ -37,13 +37,12 @@
               <td><center>{{s.score}}</center></td>
               <td><center>{{ awardstableComponent.getUserAwards(s.User._id) }}</center></td>   
             </tr> 
-            <br/><br/>
             <table class="table" ng-hide="$ctrl.showme">
             <thead class="thead-default"  >
               <tr>
                 <td width="100"><center><h2>Avatar</h2></center></td>
                 <td width="100"><center><h2>Name</h2></center></td>
-                <td width="100"><center><h2>ScoreAlone</h2></center></td> 
+                <td width="100"><center><h2>Score</h2></center></td> 
                 <td width="100"><center><h2></h2></center></td>
               </tr>
               </thead>
@@ -52,10 +51,8 @@
                 <td><center><a href="/affrontement" >{{s.User.name}}</a></td>
                 <td><center>{{s.alonescore}}</center></td>
                 <td><center>{{ awardstableComponent.getUserAwards(s.User._id) }}</center></td>   
-              </tr>
-
+              </tr>  
           </center> 
-          <br/><br/>
         </div>
         <!-- Antonio's CODE Dont Delete -->
 
