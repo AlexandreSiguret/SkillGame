@@ -204,12 +204,7 @@ export class QuestionsController {
   }
 
   getUserAwards(){
-
-<<<<<<< HEAD
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.currentConcept._id+'/'+ 20 )
-=======
           this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 20 )
->>>>>>> bb11642254540f152109f45e6559be56a96d7d7c
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
@@ -244,11 +239,7 @@ export class QuestionsController {
           
           //var aa = this.existUserBadge(this.getCurrentUser()._id, this.currentConcept._id, this.currentConcept._id );
           
-<<<<<<< HEAD
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.currentConcept._id+'/'+ 20)
-=======
           this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+1+'/'+ 20)
->>>>>>> bb11642254540f152109f45e6559be56a96d7d7c
           .then(response => {
             this.detailAwards = response.data;
             this.$scope.detailAwards = this.detailAwards;
@@ -257,11 +248,7 @@ export class QuestionsController {
             if(this.detailAwards.length == 0){
               this.$http.post("/api/awards", {
                 UserId : this.getCurrentUser()._id,
-<<<<<<< HEAD
-                ConceptId : this.currentConcept._id,
-=======
                 ConceptId : 1,
->>>>>>> bb11642254540f152109f45e6559be56a96d7d7c
                 BadgeId : 20,
                 badgeCount : 1,
                 date: new Date(),
