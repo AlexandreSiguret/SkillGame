@@ -294,9 +294,15 @@ export class QuestionController {
             /* Badge && Award Winner */
             if (this.correctanswernumber == 2)
             {
-              this.$scope.launch();
+              //this.$scope.launch();
               this.putUserAward();
               this.getUserAwards();
+
+              var variable2 = '#badge-award';
+              var myE2 = angular.element( document.querySelector( variable2 ) );
+              myEl.removeAttr('style');
+              myE2.attr('style',"display: inline;");
+      
             }
             
             this.$timeout(function() {  

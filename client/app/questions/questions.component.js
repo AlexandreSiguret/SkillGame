@@ -43,6 +43,18 @@ export class QuestionsController {
   }
 
   $onInit() {
+
+    var variable2 = '#badge-award';
+    var myE2 = angular.element( document.querySelector( variable2 ) );
+    myE2.removeAttr('style');
+    myE2.attr('style',"display: none;");
+
+    var variable2 = '#required_field';
+    var myE2 = angular.element( document.querySelector( variable2 ) );
+    myE2.removeAttr('style');
+    myE2.attr('style',"display: none;");
+
+
    
     this.$http.get('/api/concepts')
       .then(response => {
@@ -102,6 +114,7 @@ export class QuestionsController {
 
 
   addQuestion() {
+
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {
       console.log("tu as tout rempli génial")
       this.$http.post("/api/questions", {
@@ -132,19 +145,35 @@ export class QuestionsController {
         }
         
       )
-      this.goodAnswer =""
-      this.WrongAnswer1 =""
-      this.WrongAnswer2 =""
-      this.WrongAnswer3 = ""
-      this.question = ""
-      this.message ="La question à bien été ajouté"
+      this.goodAnswer ="";
+      this.WrongAnswer1 ="";
+      this.WrongAnswer2 ="";
+      this.WrongAnswer3 = "";
+      this.question = "";
+
+      var variable2 = '#badge-award';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: inline;");
+
+      var variable2 = '#required_field';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: none;");
+
       })
-
-
-    
     }
     else {
-      this.message="tu as oublié un champ"
+      var variable2 = '#required_field';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: inline;");
+
+      var variable2 = '#badge-award';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: none;");
+
     }
     console.log(this.message)
   }
