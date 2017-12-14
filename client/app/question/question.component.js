@@ -46,8 +46,6 @@ export class QuestionController {
     $scope.onTimeout = function(){
 
       if($scope.counter == 0) {
-
-        
         
         var variable = '#label-choices-'+this.detailedQuestion._id;
         var myEl = angular.element( document.querySelector( variable ) );
@@ -105,7 +103,7 @@ export class QuestionController {
 	  
 	  this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
-        this.concept = response.data.ConceptId; 
+        this.concept = response.data.ConceptId;
     
       });
 	  
@@ -195,12 +193,13 @@ export class QuestionController {
         }
         
         putUserAward(){
-          var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, this.concept );
+
+          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, this.concept );
           
           this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept  )
           .then(response => {
             this.detailAwards = response.data;
-            this.$scope.detailAwards = this.detailAwards;
+            //this.$scope.detailAwards = this.detailAwards;
             console.log(response.status, response.data.length);
 
             if(this.detailAwards.length == 0){
@@ -224,14 +223,10 @@ export class QuestionController {
               });
 
               console.log("Apres Else PutUser");
-              console.log(this.detailAwards);
-              
+              console.log(this.detailAwards); 
             }
 
           });
-          
-          console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept );
-          
           
           }
         
