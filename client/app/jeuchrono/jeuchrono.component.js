@@ -103,8 +103,14 @@ export class JeuchronoController {
 
       var variable2 = '#quiz-resulats';
       var myE2 = angular.element(document.querySelector(variable2));
-      myEl.removeAttr('style');
+      myE2.removeAttr('style');
       myE2.attr('style', "display: inline;");
+
+      var variable1 = '#badge-award';
+        var myE1 = angular.element( document.querySelector( variable1 ) );
+        myE1.removeAttr('style');
+        myE1.attr('style',"display: inline;");
+
 
       this.game_finish()
     }
@@ -191,6 +197,11 @@ export class JeuchronoController {
         var myE2 = angular.element(document.querySelector(variable2));
         myEl.removeAttr('style');
         myE2.attr('style', "display: inline;");
+
+        var variable1 = '#badge-award';
+        var myE1 = angular.element( document.querySelector( variable1 ) );
+        myE1.removeAttr('style');
+        myE1.attr('style',"display: inline;");
 
       }, 2000);
     }
