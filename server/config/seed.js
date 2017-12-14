@@ -2172,7 +2172,7 @@ export default function seedDatabaseIfNeeded() {
                 _id: 20,
                 picture: 'badge/question.png',
                 name: 'Question Contribution',
-                description: 'Quest Contribution',
+                description: 'Question Contribution',
               }, {
                 _id: 21,
                 picture: 'badge/time.png',
