@@ -31,6 +31,7 @@ export class QuestionController {
     this.listAwards = [];
     this.correctanswernumber=0;
     this.lastAward = [];
+    var vm = this;
     
     $scope.launch = function() {
           dialogs.notify('Congrats','U won the Bronze Medal');
@@ -46,21 +47,20 @@ export class QuestionController {
     $scope.onTimeout = function(){
 
       if($scope.counter == 0) {
-        
-        var variable = '#label-choices-'+this.detailedQuestion._id;
+        console.log("Je rentre ici ");
+        var variable = '#label-choices-'+vm.detailedQuestion._id;
         var myEl = angular.element( document.querySelector( variable ) );
         myEl.removeAttr('class');
         myEl.attr('class',"false");
 
-      
         
-        for (var i = 0; i < this.idChoices.length; i++) {
-          var variable = '#choices-'+this.idChoices[i];
+        for (var i = 0; i < vm.idChoices.length; i++) {
+          var variable = '#choices-'+vm.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
           myEl.attr('disabled',"");
         }
 
-        if(this.num < 1)
+        if(vm.num < 1)
         {
           var myEl = angular.element(document.querySelector('#next-question-button'));
           myEl.removeAttr('disabled');
@@ -312,7 +312,7 @@ export class QuestionController {
           }
           else {
             /* Badge && Award Winner */
-            if (this.correctanswernumber == 2)
+            if (this.correctanswernumber == 2)   
             {
               //this.$scope.launch();
               this.putUserAward();
@@ -322,7 +322,7 @@ export class QuestionController {
               console.log(this.lastAward);
 
               var variable2 = '#badge-award';
-              var myE2 = angular.element( document.querySelector( variable2 ) );
+              var myE2 = angular.element( document.querySelector( variable2 ) ); 
               myEl.removeAttr('style');
               myE2.attr('style',"display: inline;");
       
@@ -331,7 +331,7 @@ export class QuestionController {
             this.$timeout(function() {  
 
               //var variable2 = '#quiz';
-              //var myE2 = angular.element( document.querySelector( variable2 ) );
+              //var myE2 = angular.element( document.querySelector( variable2 ) ); 
               //myE2.attr('style',"display: none;");
               
             var myEl = angular.element(document.querySelector('#report-question-button'));

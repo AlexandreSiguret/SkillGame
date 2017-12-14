@@ -133,7 +133,7 @@ export function upsert(req, res) {
     .catch(handleError(res));
 }
 
-// Updates an existing Alonescore in the DB
+// Updates an existing Alonescore in the DB   
 export function patch(req, res) {
   if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
