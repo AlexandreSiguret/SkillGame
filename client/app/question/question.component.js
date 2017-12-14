@@ -30,6 +30,7 @@ export class QuestionController {
     this.getCurrentUser = Auth.getCurrentUserSync;
     this.listAwards = [];
     this.correctanswernumber=0;
+    this.lastAward = [];
     
     $scope.launch = function() {
           dialogs.notify('Congrats','U won the Bronze Medal');
@@ -164,50 +165,74 @@ export class QuestionController {
         }
 
         getUserAwards(){
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id)
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept )
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
-            console.log(this.listAwards._id);
+            console.log("List aqards --");
+            console.log(this.listAwards);
           });
           
         }
 
        existUserBadge(uId,cId,bId){
+
           this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
           .then(response => {
             this.detailAwards = response.data;
             console.log(response.status, response.data.length);
           });
-          if(this.detailAwards.length === 0) {
+          
+          if(this.detailAwards.length == 0) {
             console.log("logitud 0 ?");
             return false;
           }
-          else if(this.detailAwards[0]._id > 0){
-            console.log(this.detailAwards[0]._id);
+          else {
+            console.log("True Exist");
             return true;
           }
 
         }
         
         putUserAward(){
-          var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, 3 );
-          console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.concept+'/'+ 3 );
-          if(!aa){
+          var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, this.concept );
+          
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept  )
+          .then(response => {
+            this.detailAwards = response.data;
+            this.$scope.detailAwards = this.detailAwards;
+            console.log(response.status, response.data.length);
+
+            if(this.detailAwards.length == 0){
               this.$http.post("/api/awards", {
                 UserId : this.getCurrentUser()._id,
                 ConceptId : this.concept,
-                BadgeId : 3,
+                BadgeId : this.concept,
                 badgeCount : 1,
                 date: new Date(),
               });
               
             }else{
+              
+              console.log("avant Else PutUser");
+              console.log(this.detailAwards);
+              
+              var badgeC = this.detailAwards[0].badgeCount + 1;
               this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
-                badgeCount : this.detailAwards[0].badgeCount + 1,
+                badgeCount : badgeC,
                 _id: this.detailAwards[0]._id
               });
+
+              console.log("Apres Else PutUser");
+              console.log(this.detailAwards);
+              
             }
+
+          });
+          
+          console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept );
+          
+          
           }
         
         // ajout modal winning award
@@ -297,6 +322,9 @@ export class QuestionController {
               //this.$scope.launch();
               this.putUserAward();
               this.getUserAwards();
+
+              console.log("Last Awards");
+              console.log(this.lastAward);
 
               var variable2 = '#badge-award';
               var myE2 = angular.element( document.querySelector( variable2 ) );

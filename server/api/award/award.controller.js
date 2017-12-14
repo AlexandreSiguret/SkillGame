@@ -72,7 +72,7 @@ export function awards(req, res) {
       attributes: ['_id','name']
     }, {
       model: db.Badge,
-      attributes: ['_id','name','description']
+      attributes: ['_id','name','picture']
     }] 
 
   })
@@ -104,7 +104,7 @@ export function userAwards(req, res) {
       attributes: ['_id','name']
     }, {
       model: db.Badge,
-      attributes: ['_id','name']
+      attributes: ['_id','name','picture']
     }] 
 
   })
