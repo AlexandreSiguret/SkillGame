@@ -18,6 +18,7 @@ export class BadgesComponent {
     this.listBadges = [];
     this.listAwards = [];
     this.listPlayers = [];
+    this.i = 0;
 
     $scope.launch = function() {
           dialogs.notify();
@@ -38,7 +39,25 @@ export class BadgesComponent {
     dialogs.wait('Creating User','Please wait while we attempt to create user "Michael Conroy."<br><br>This should only take a moment.',50);
   }
 
-  $onInit() {    
+  howManyStars(badge) {
+    this.$scope.items = ['1.png', '2.png', '3.png', '4.png','5.png'];
+
+    if ( badge.badgeCount < 5 && badge.badgeCount > 0 ) {
+      return this.$scope.items[0];
+    } else if ( badge.badgeCount < 10 && badge.badgeCount >= 5 ) {
+      return this.$scope.items[1];
+    } else if ( badge.badgeCount < 15 && badge.badgeCount >= 10 ) {
+      return this.$scope.items[2];
+    } else if ( badge.badgeCount < 20 && badge.badgeCount >= 15 ) {
+      return this.$scope.items[3];
+    } else {
+      return this.$scope.items[4];
+    }
+
+  }
+
+
+  $onInit() {
     
         this.$http.get("/api/users")
         .then(response =>{
@@ -48,8 +67,14 @@ export class BadgesComponent {
         this.$http.get('/api/awards/'+this.getCurrentUser()._id)
         .then(response => {
           this.listAwards = response.data;
-    //      this.listAwards2 = response.data;
-          console.log(this.listAwards);
+         
+         //      this.listAwards2 = response.data;
+
+          /*for (var i = 0; i < this.listAwards.length; i++) {
+            this.listAwards[i].badgeCount
+          }*/
+         
+        console.log(this.listAwards);
         });
         this.$http.get("/api/badges")
         .then(response =>{
