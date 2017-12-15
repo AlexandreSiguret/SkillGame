@@ -2292,8 +2292,8 @@ export default function seedDatabaseIfNeeded() {
               }, {
                 _id: 23,
                 picture: 'badge/challenge.png',
-                name: 'Challenges Won',
-                description: 'Challenges Won',
+                name: 'Won Challenges',
+                description: 'Won Challenges',
               }
       
               ]);

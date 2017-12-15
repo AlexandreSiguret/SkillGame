@@ -170,8 +170,8 @@ export function changePassword(req, res) {
 }
 
 export function uploadFiles(req,res){
-  
-  console.log("Charger Fichier Function");
+
+console.log("Charger Fichier Function");
   
 var storage = multer.diskStorage({
     destination: config.storage,
