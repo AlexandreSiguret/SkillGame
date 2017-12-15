@@ -52,6 +52,7 @@ export function awards(req, res) {
       'UserId',
       'ConceptId',
       'BadgeId',
+      'badgeCount',
       'date'
     ], 
     where : [{
@@ -64,11 +65,14 @@ export function awards(req, res) {
 //    group: [ 'UserId', 'ConceptId', 'BadgeId'],
     order : [ [ 'date','ASC'] ],
     include: [{
-      model: db.User,      
+      model: db.User,
+      attributes: ['_id','name','avatar']      
     }, {
       model: db.Concept,
+      attributes: ['_id','name']
     }, {
       model: db.Badge,
+      attributes: ['_id','name','picture', 'description']
     }] 
 
   })
@@ -85,6 +89,7 @@ export function userAwards(req, res) {
       'UserId',
       'ConceptId',
       'BadgeId',
+      'badgeCount',
       'date'
     ], 
     where : [{
@@ -92,11 +97,14 @@ export function userAwards(req, res) {
     }],
     order : [ [ 'date','DESC'] ],
     include: [{
-      model: db.User,      
+      model: db.User,
+      attributes: ['_id','name','avatar']      
     }, {
       model: db.Concept,
+      attributes: ['_id','name']
     }, {
       model: db.Badge,
+      attributes: ['_id','name','picture','description']
     }] 
 
   })
@@ -115,6 +123,36 @@ export function show(req, res) {
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
+
+// Updates an existing award in the DB
+export function patch(req, res) {
+  if (req.body._id) {
+    Reflect.deleteProperty(req.body, '_id');
+  }
+  return Award.find({
+    where: {
+      _id: req.params.id
+    }
+  })
+    .then(handleEntityNotFound(res))
+    .then(patchUpdates(req.body))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
+// Upserts the given Award in the DB at the specified ID
+export function upsert(req, res) {
+ // req.body.UserId = req.user._id 
+  
+  return Award.upsert(req.body, {
+    where: {
+      _id: req.params.id
+    }
+  }).then(regularisation(req.params.id,req.user._id))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 
 /**
  * Creates a new award

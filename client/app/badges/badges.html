@@ -1,22 +1,66 @@
-<div>
-
-        <div class="col-md-9 col-sm-8">
-            
-                <center>
-                    <div style="width:400px;">
-                      <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
-                      <div style="float:left;">
-                            <img style="width:80px; height:82px;" src="assets/images/{{badgesCtrl.listAwards[0].User.avatar}}" />
-                      </div>
-                      <table border=0 width="300">               
-                          <tr ng-repeat="badge in badgesCtrl.listAwards">
-                            <td width="150" align="center" >{{badge.Concept.name}}</td>
-                            <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
-                            <td width="100" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
-                          </tr>
-                      </table>
-                    </div> 
-                </center>
+<!-- <div>
+  <div class="col-md-9 col-sm-8" style="min-height:400px;">            
+    <center>
+      <div style="width:600px;">
+        <center><h2 style="color: #166e70;" class="page-header">Your Awards !</h2></center>
+        <div style="float:left;">
+          <img style="width:80px; height:82px;" src="assets/images/{{badgesCtrl.listAwards[0].User.avatar}}" />
         </div>
+        <table border=0 width="300">               
+          <tr ng-repeat="badge in badgesCtrl.listAwards">
+            <td width="200" align="center" >{{badge.Concept.name}}</td>
+            <td width="60" align="center"><img height="42" width="40" src="assets/images/{{badge.Badge.picture}}" /></td>
+            <td width="150" align="center">{{badge.date | date:'yyyy-MM-dd' }}</td> 
+          </tr>
+        </table>
+      </div> 
+    </center>
+  </div>
+</div> -->
 
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-11">
+    <h1 style="color: #166e70;" class="page-header"> Awards
+      </h1>
+    </div>
+
+    <div class="col-sm-2" ng-repeat="badge in badgesCtrl.listAwards">
+      <center>
+        <img height="90" width="90" src="assets/images/{{badge.Badge.picture}}">
+        <img height="20" width="90" src="assets/images/star/{{badgesCtrl.howManyStars(badge)}}">
+        <h3>{{badge.Badge.description}}</h3>
+      </center>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col-lg-11">
+      <h1 style="color: #166e70;" class="page-header"> Awards To Win
+      </h1>
+    </div>
+    
+    <div class="col-sm-2" ng-repeat="bdg in badgesCtrl.listBadges">
+      <center>
+        <img height="90" width="90" src="assets/images/{{bdg.picture}}">
+        <h3>{{bdg.name}}</h3>
+      </center>
+    </div>
+
+  </div>
 </div>
+
+
+    <!-- <div id="bdg-container">
+      <div class="tbl-bdg" >
+        <div class="badgeImg">
+          <img height="62" width="60" src="assets/images/{{}}" />
+        </div>
+          <h4></h4>
+          <p></p>
+      </div>
+    </div> -->

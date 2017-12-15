@@ -25,7 +25,6 @@ export class JeuchronoController {
     this.socket = socket;
     $scope.counter = 99;
     $scope.stopped = false;
-
     this.errormessage = ""
     this.questionChoices = [];
     this.idChoices = [];
@@ -33,7 +32,10 @@ export class JeuchronoController {
     this.myIndice = 0;
     this.earnedPoint = 0;
     this.getCurrentUser = Auth.getCurrentUserSync;
-
+    this.listAwards = [];
+    this.correctanswernumber=0;
+    this.lastAward = [];
+    this.trueNum=0;
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('question');
@@ -103,8 +105,20 @@ export class JeuchronoController {
 
       var variable2 = '#quiz-resulats';
       var myE2 = angular.element(document.querySelector(variable2));
-      myEl.removeAttr('style');
+      myE2.removeAttr('style');
       myE2.attr('style', "display: inline;");
+
+      if (this.trueNum == 4) {
+
+        this.putUserAward();
+        this.getUserAwards();
+
+        var variable1 = '#badge-award';
+        var myE1 = angular.element( document.querySelector( variable1 ) );
+        myE1.removeAttr('style');
+        myE1.attr('style',"display: inline;");
+
+      }
 
       this.game_finish()
     }
@@ -137,10 +151,82 @@ export class JeuchronoController {
     }
   }
 
+  getUserAwards(){
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 21 )
+          .then(response => {
+            this.listAwards = response.data;
+            this.socket.syncUpdates('award', this.listAwards);
+            console.log("List awards --");
+            console.log(this.listAwards);
+          });
+          
+        }
+
+/*
+       existUserBadge(uId,cId,bId){
+
+          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
+          .then(response => {
+            this.detailAwards = response.data;
+            console.log(response.status, response.data.length);
+          });
+          
+          if(this.detailAwards.length == 0) {
+            console.log("logitud 0 ?");
+            return false;
+          }
+          else {
+            console.log("True Exist");
+            return true;
+          }
+
+        }
+  */
+
+        putUserAward(){
+          
+          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.currentConcept._id, this.currentConcept._id );
+          
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 21)
+          .then(response => {
+            this.detailAwards = response.data;
+            //this.$scope.detailAwards = this.detailAwards;
+            console.log(response.status, response.data.length);
+
+            if(this.detailAwards.length == 0){
+              this.$http.post("/api/awards", {
+                UserId : this.getCurrentUser()._id,
+                ConceptId : 1,
+                BadgeId : 21,
+                badgeCount : 1,
+                date: new Date(),
+              });
+              
+            } else {
+              
+              console.log("avant Else PutUser");
+              console.log(this.detailAwards);
+              
+              var badgeC = this.detailAwards[0].badgeCount + 1;
+              this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
+                badgeCount : badgeC,
+                _id: this.detailAwards[0]._id
+              });
+
+              console.log("Apres Else PutUser");
+              console.log(this.detailAwards); 
+            }
+
+          });
+          //console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.currentConcept._id+'/'+ this.currentConcept._id );
+          }
+
 
 
   validation(select) {
-    console.log("on appele validation")
+
+    console.log("on appele validation");
+
     if (this.detailedQuestion.goodAnswer == select.statement) {
       this.earnedPoint++;
 
@@ -154,6 +240,8 @@ export class JeuchronoController {
         var myEl = angular.element(document.querySelector(variable));
         myEl.attr('disabled', "");
       }
+
+      this.trueNum++;
     }
     else {
 
@@ -185,6 +273,20 @@ export class JeuchronoController {
       myEl.removeAttr('disabled');
     }
     else {
+
+      if (this.trueNum == 5) {
+
+        this.putUserAward();
+        this.getUserAwards();
+
+        var variable1 = '#badge-award';
+        var myE1 = angular.element( document.querySelector( variable1 ) );
+        myE1.removeAttr('style');
+        myE1.attr('style',"display: inline;");
+
+      }
+
+
       this.$timeout(function () {
 
         var variable2 = '#quiz-resulats';

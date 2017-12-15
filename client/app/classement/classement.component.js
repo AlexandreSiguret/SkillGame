@@ -81,7 +81,7 @@ export class ClassementController {
     });
   }
 
-  showButtonHandler() {
+  showButtonHandler() { 
 
     if(this.showme == true) {
       this.showme = false;
@@ -89,16 +89,13 @@ export class ClassementController {
       this.showme = true;
     }
 
-    if(this.showus == true) {     
+    if(this.showus == true) {    
       this.showus = false;
     } else {
       this.showus = true;
-    }
-    
+    }  
   }
-
 }   
-
 
 export default angular.module('skillGameApp.classement', [uiRouter])
   .config(routing)

@@ -27,14 +27,34 @@
        </center>
        <br>
       <ng-tag-cloud ng-show="$ctrl.showme" class="custom-1" cloud-width="750" cloud-height="250" cloud-data="cloud" ng-click = "$ctrl.test(cloud)"></ng-tag-cloud>
-      <br>
+      <br><br>
+
       <div ng-if="$ctrl.choice == true">
         <div ng-if="$ctrl.choice == true">
+
+        <div id="badge-award" style="display: none;">
+                <center>
+                  <div class="alert alert-success">
+                    <strong>Question Submitted : You Won !</strong>
+                    <center>
+                    <br>
+                    <img height="90" width="90" src="assets/images/{{$ctrl.listAwards[0].Badge.picture}}">
+                    </center>
+                    <h3 style="color: #000000;"> {{$ctrl.listAwards[0].Badge.name}} </h3>
+                  </div>
+                </center>
+              </div>
+
+              <div id="required_field" style="display: none;">
+                <center>
+                  <div class="alert alert-danger">
+                    <strong>Missing Required Field !</strong>
+                  </div>
+                </center>
+              </div>
+
           <!-- <p> Vous avez choisis le concept {{$ctrl.currentConcept.name}} </p> -->
-          <br> 
-
-
-          <br/>
+          <br><br/>
           
           <form ng-if="$ctrl.choice == true">
 
@@ -66,7 +86,10 @@
               <button type="submit" class="btn btn-primary" ng-click="$ctrl.addQuestion()">Add the question</button>
             </center>
           </form>
-          <p> {{$ctrl.message}} </p>
+          <div class="col-md-9 col-sm-8">
+          </div>
+
+
         </div>
 
 

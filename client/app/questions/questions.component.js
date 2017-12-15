@@ -18,19 +18,24 @@ export class QuestionsController {
   WrongAnswer2 = ""
   WrongAnswer3 = ""
   idNewQuestion = ""
-  message = ""
+  message = "";
+
  
 
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $window,$stateParams) {
+  constructor($http, $scope, socket, $window,$stateParams, Auth) {
     this.$http = $http;
     this.socket = socket;
     this.$window=$window;
     this.$stateParams = $stateParams;
     this.showme = true;
     this.showus = true;
-    
+    this.currentScore = 0;
+    this.getCurrentUser = Auth.getCurrentUserSync;
+    this.listAwards = [];
+    this.correctanswernumber=0;
+    this.lastAward = [];
 
 
    $scope.cloud = [],
@@ -43,6 +48,18 @@ export class QuestionsController {
   }
 
   $onInit() {
+
+    var variable2 = '#badge-award';
+    var myE2 = angular.element( document.querySelector( variable2 ) );
+    myE2.removeAttr('style');
+    myE2.attr('style',"display: none;");
+
+    var variable2 = '#required_field';
+    var myE2 = angular.element( document.querySelector( variable2 ) );
+    myE2.removeAttr('style');
+    myE2.attr('style',"display: none;");
+
+
    
     this.$http.get('/api/concepts')
       .then(response => {
@@ -102,6 +119,7 @@ export class QuestionsController {
 
 
   addQuestion() {
+
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {
       console.log("tu as tout rempli génial")
       this.$http.post("/api/questions", {
@@ -132,19 +150,38 @@ export class QuestionsController {
         }
         
       )
-      this.goodAnswer =""
-      this.WrongAnswer1 =""
-      this.WrongAnswer2 =""
-      this.WrongAnswer3 = ""
-      this.question = ""
-      this.message ="La question à bien été ajouté"
+      this.goodAnswer ="";
+      this.WrongAnswer1 ="";
+      this.WrongAnswer2 ="";
+      this.WrongAnswer3 = "";
+      this.question = "";
+
+      var variable2 = '#badge-award';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: inline;");
+
+      this.putUserAward();
+      this.getUserAwards();
+
+      var variable2 = '#required_field';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: none;");
+
       })
-
-
-    
     }
     else {
-      this.message="tu as oublié un champ"
+      var variable2 = '#required_field';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: inline;");
+
+      var variable2 = '#badge-award';
+      var myE2 = angular.element( document.querySelector( variable2 ) );
+      myE2.removeAttr('style');
+      myE2.attr('style',"display: none;");
+
     }
     console.log(this.message)
   }
@@ -165,6 +202,78 @@ export class QuestionsController {
     }
     
   }
+
+  getUserAwards(){
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 20 )
+          .then(response => {
+            this.listAwards = response.data;
+            this.socket.syncUpdates('award', this.listAwards);
+            console.log("List aqards --");
+            console.log(this.listAwards);
+          });
+          
+        }
+
+/*
+       existUserBadge(uId,cId,bId){
+
+          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
+          .then(response => {
+            this.detailAwards = response.data;
+            console.log(response.status, response.data.length);
+          });
+          
+          if(this.detailAwards.length == 0) {
+            console.log("logitud 0 ?");
+            return false;
+          }
+          else {
+            console.log("True Exist");
+            return true;
+          }
+
+        }
+  */
+
+        putUserAward(){
+          
+          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.currentConcept._id, this.currentConcept._id );
+          
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+1+'/'+ 20)
+          .then(response => {
+            this.detailAwards = response.data;
+            this.$scope.detailAwards = this.detailAwards;
+            console.log(response.status, response.data.length);
+
+            if(this.detailAwards.length == 0){
+              this.$http.post("/api/awards", {
+                UserId : this.getCurrentUser()._id,
+                ConceptId : 1,
+                BadgeId : 20,
+                badgeCount : 1,
+                date: new Date(),
+              });
+              
+              
+            }else{
+              
+              console.log("avant Else PutUser");
+              console.log(this.detailAwards);
+              
+              var badgeC = this.detailAwards[0].badgeCount + 1;
+              this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
+                badgeCount : badgeC,
+                _id: this.detailAwards[0]._id
+              });
+
+              console.log("Apres Else PutUser");
+              console.log(this.detailAwards); 
+            }
+            this.getUserAwards();
+
+          });
+                    
+          }
   
 
 }
