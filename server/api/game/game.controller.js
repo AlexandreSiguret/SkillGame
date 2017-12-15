@@ -134,7 +134,17 @@ export function game(req, res) {
     model : db.Concept
   }
 ]
-  }).then(handleEntityNotFound(res))
+  }).then(response => {
+
+    if (response.length <1){
+      console.log("on a pas de partie")
+    }
+    else{
+      response[0].dataValues["me"] = req.user._id
+    }
+    return response
+  })
+  .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -156,8 +166,10 @@ export function show(req, res) {
 function allcreation(tab, donne, iduser,res) {
 
 console.log("all creation")
+
   var taille = tab.length;
   var idquizz = donne._id
+  console.log(idquizz)
   for (var i = 0; i < taille; i++) {
 
     var creation1 = {
@@ -236,6 +248,41 @@ function ajoutmultiple(tab,idplayer){
       }
     })
   }
+}
+
+export function endgame(req,res){
+  console.log("c est l heure du duellllll")
+  console.log(req.params.id)
+  var me = req.user._id
+
+  return Game.find({
+    where :{
+      _id: req.params.id
+    }
+  }).then(response =>{
+    console.log("ici toi ")
+    console.log(response.dataValues)
+
+    if(response.dataValues.User1Id == me){
+      var obj = {
+        _id : req.params.id,
+        user1Ended:true
+      }
+    }
+    else{
+      var obj = {
+        _id : req.params.id,
+        user2Ended:true
+      }
+    }
+      
+    return Game.upsert(obj,{
+      where : {
+        _id : req.params.id
+      }
+    })
+  })
+  .then(respondWithResult(res))
 }
 
 // Upserts the given Game in the DB at the specified ID

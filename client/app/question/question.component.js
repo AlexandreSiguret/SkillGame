@@ -245,10 +245,7 @@ export class QuestionController {
             console.log("on va appeler score")
 		      	this.$http.get("/api/scores/"+this.concept) 
             .then(response => {                             
-              console.log("reussi") 
-              .then(response => {
-                this.idNewScore = response.data._id;
-              });
+              console.log("reussi") ;
               this.currentScore = response.data.score;              
               this.$http.put('/api/scores/'+ response.data._id,{
                 score : this.currentScore + this.$scope.seconds,
@@ -310,6 +307,7 @@ export class QuestionController {
             myEl.removeAttr('disabled');
             var myEl = angular.element(document.querySelector('#report-question-button'));
             myEl.removeAttr('disabled');
+            
           }
           else {
             /* Badge && Award Winner */
@@ -343,12 +341,13 @@ export class QuestionController {
               myEl.removeAttr('style');
               myE2.attr('style',"display: inline;");
 
-              //vm.$scope.launch();
-
-              //alert('Hello');
-            //this.valeur=true;/*alert('Test Terminer !! Redirection vers la page ..... !!');*/
 
           }, 2000);
+          console.log("quizz fini ")
+          this.$http.get("api/games/endgame/"+this.$stateParams.game_id).then(response =>{
+            console.log(response)
+          })
+
           }
           this.$scope.stopped=true;
         }
