@@ -180,6 +180,9 @@ export default function seedDatabaseIfNeeded() {
         }, {
           name: 'Computer sciences',
           _id: 16
+        }, {
+          name: 'Pokemon',
+          _id: 17
         }
         ]);
 
@@ -905,6 +908,40 @@ export default function seedDatabaseIfNeeded() {
           nbContestation: 1,
           ConceptId: 16,
           goodAnswer: "Marie Antoinette"
+        }, {
+          _id: 62,
+          owner: 7,
+          question: "What is the name of the famous electric-type that follows Ash Ketchum around and refuses to enter a Poké ball?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId: 17,
+          goodAnswer: "Pikachu"
+        }, {
+          _id: 63,
+          owner: 7,
+          question: "What species is Weedle?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId: 17,
+          goodAnswer: "The Bug Pokemon"
+        },
+
+        {
+          _id: 64,
+          owner: 7,
+          question: "What was the first Pokemon that Ash caught himself?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId: 17,
+          goodAnswer: "Caterpie"
+        }, {
+          _id: 65,
+          owner: 7,
+          question: "What legendary Pokemon did Ash see on the first day of his Pokemon journey?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId: 17,
+          goodAnswer: "Ho-oh"
         }
         ]);
 
@@ -2023,109 +2060,192 @@ export default function seedDatabaseIfNeeded() {
           _id: 243,
           QuestionId: 61,
           statement: "Maria Carolina"
+        }, {
+          _id: 244,
+          QuestionId: 62,
+          statement: "Pikachu"
+        }, {
+          _id: 245,
+          QuestionId: 62,
+          statement: "Raichu"
+        }, {
+          _id: 246,
+          QuestionId: 62,
+          statement: "Bulbasaur"
+        }, {
+          _id: 247,
+          QuestionId: 62,
+          statement: "Squirtle"
+        }, {
+          _id: 248,
+          QuestionId: 63,
+          statement: "The Bug Pokemon"
+        }, {
+          _id: 249,
+          QuestionId: 63,
+          statement: "The Lizard Pokemon"
+        }, {
+          _id: 250,
+          QuestionId: 63,
+          statement: "The Seed Pokemon"
+        }, {
+          _id: 251,
+          QuestionId: 63,
+          statement: "The Shadow Pokemon"
+        }, {
+          _id: 252,
+          QuestionId: 64,
+          statement: "Caterpie "
+        }, {
+          _id: 253,
+          QuestionId: 64,
+          statement: "Metapod"
+        }, {
+          _id: 254,
+          QuestionId: 64,
+          statement: "Weedle"
+        }, {
+          _id: 255,
+          QuestionId: 64,
+          statement: "Butterfree"
+        }, {
+          _id: 256,
+          QuestionId: 65,
+          statement: "Ho-oh"
+        }, {
+          _id: 257,
+          QuestionId: 65,
+          statement: "Lugia"
+        }, {
+          _id: 258,
+          QuestionId: 65,
+          statement: "Mewtwo"
+        }, {
+          _id: 259,
+          QuestionId: 65,
+          statement: "Raikou"
         }
+
         ]);
+
       })
-      .then(() => console.log('finished populating things'))
-      .catch(err => console.log('error populating things', err));
+
+      .then(() => console.log('finished populating badges'))
+
+      .catch(err => console.log('error populating badges', err));
+
+
+
+
     Badge.destroy({ where: {} })
       .then(() => {
-        let badge = Badge.bulkCreate([{
-          _id: 1,
-          picture: 'badge/art.png',
-          name: 'Art',
-          description: 'Art',
-        }, {
-          _id: 2,
-          picture: 'badge/iphonex.png',
-          name: 'IphoneX',
-          description: 'IphoneX',
-        }, {
-          _id: 3,
-          picture: 'badge/judo.png',
-          name: 'Judo',
-          description: 'Judo',
-        }, {
-          _id: 4,
-          picture: 'badge/france.png',
-          name: 'France',
-          description: 'France',
-        }, {
-          _id: 5,
-          picture: 'badge/animal.png',
-          name: 'Animal',
-          description: 'Animal',
-        }, {
-          _id: 6,
-          picture: 'badge/biology.png',
-          name: 'Biology',
-          description: 'Biology',
-        }, {
-          _id: 7,
-          picture: 'badge/birds.png',
-          name: 'Birds',
-          description: 'Birds',
-        }, {
-          _id: 8,
-          picture: 'badge/earth.png',
-          name: 'Earth',
-          description: 'Earth',
-        }, {
-          _id: 9,
-          picture: 'badge/computer.png',
-          name: 'Computer',
-          description: 'Computer',
-        }, {
-          _id: 10,
-          picture: 'badge/world.png',
-          name: 'World',
-          description: 'Around the World',
-        }, {
-          _id: 11,
-          picture: 'badge/sport.png',
-          name: 'Sport',
-          description: 'Sport',
-        }, {
-          _id: 12,
-          picture: 'badge/space.png',
-          name: 'Space',
-          description: 'Space',
-        }, {
-          _id: 13,
-          picture: 'badge/science.png',
-          name: 'Science',
-          description: 'Science',
-        }, {
-          _id: 14,
-          picture: 'badge/music.png',
-          name: 'Music',
-          description: 'Music',
-        }, {
-          _id: 15,
-          picture: 'badge/harrypotter.png',
-          name: 'Harry Potter',
-          description: 'Harry Potter',
-        }, {
-          _id: 16,
-          picture: 'badge/computerscience.png',
-          name: 'Computer Science',
-          description: 'Computer Science',
-        }, {
-          _id: 20,
-          picture: 'badge/question.png',
-          name: 'Question Contribution',
-          description: 'Question Contribution',
-        }, {
-          _id: 21,
-          picture: 'badge/time.png',
-          name: 'Time Clock Quiz',
-          description: 'Time Clock',
-        }, {
-          _id: 22,
-          picture: 'badge/777.png',
-          name: 'Random Quiz',
-          description: 'Random Quiz',
-        }
+        let badge = Badge.bulkCreate([
+          {
+            _id: 1,
+            picture: 'badge/art.png',
+            name: 'Art',
+            description: 'Art',
+          }, {
+            _id: 2,
+            picture: 'badge/iphonex.png',
+            name: 'IphoneX',
+            description: 'IphoneX',
+          }, {
+            _id: 3,
+            picture: 'badge/judo.png',
+            name: 'Judo',
+            description: 'Judo',
+          }, {
+            _id: 4,
+            picture: 'badge/france.png',
+            name: 'France',
+            description: 'France',
+          }, {
+            _id: 5,
+            picture: 'badge/animal.png',
+            name: 'Animal',
+            description: 'Animal',
+          }, {
+            _id: 6,
+            picture: 'badge/biology.png',
+            name: 'Biology',
+            description: 'Biology',
+          }, {
+            _id: 7,
+            picture: 'badge/birds.png',
+            name: 'Birds',
+            description: 'Birds',
+          }, {
+            _id: 8,
+            picture: 'badge/earth.png',
+            name: 'Earth',
+            description: 'Earth',
+          }, {
+            _id: 9,
+            picture: 'badge/computer.png',
+            name: 'Computer',
+            description: 'Computer',
+          }, {
+            _id: 10,
+            picture: 'badge/world.png',
+            name: 'World',
+            description: 'Around the World',
+          }, {
+            _id: 11,
+            picture: 'badge/sport.png',
+            name: 'Sport',
+            description: 'Sport',
+          }, {
+            _id: 12,
+            picture: 'badge/space.png',
+            name: 'Space',
+            description: 'Space',
+          }, {
+            _id: 13,
+            picture: 'badge/science.png',
+            name: 'Science',
+            description: 'Science',
+          }, {
+            _id: 14,
+            picture: 'badge/music.png',
+            name: 'Music',
+            description: 'Music',
+          }, {
+            _id: 15,
+            picture: 'badge/harrypotter.png',
+            name: 'Harry Potter',
+            description: 'Harry Potter',
+          }, {
+            _id: 16,
+            picture: 'badge/computerscience.png',
+            name: 'Computer Science',
+            description: 'Computer Science',
+          }, {
+            _id: 17,
+            picture: 'badge/pokemon.png',
+            name: 'Gotta Catch Em All',
+            description: 'Gotta Catch Em All',
+          }, {
+            _id: 20,
+            picture: 'badge/question.png',
+            name: 'Question Contribution',
+            description: 'Question Contribution',
+          }, {
+            _id: 21,
+            picture: 'badge/time.png',
+            name: 'Time Clock Quiz',
+            description: 'Time Clock',
+          }, {
+            _id: 22,
+            picture: 'badge/random.png',
+            name: 'Random Quiz',
+            description: 'Random Quiz',
+          }, {
+            _id: 23,
+            picture: 'badge/challenge.png',
+            name: 'Challenges Won',
+            description: 'Challenges Won',
+          }
 
         ]);
 

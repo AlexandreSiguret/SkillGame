@@ -76,8 +76,10 @@ export class JeuchronoController {
 
         for (var i = 0; i < 4; i++) {
           this.idChoices[i] = this.questionChoices[i]._id;
-          if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
+          if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer) {
             this.detailedQuestion._id = this.questionChoices[i]._id;
+
+            }
         }
       });
   }
@@ -87,6 +89,12 @@ export class JeuchronoController {
   Check_next() {
     this.myIndice++;
     this.num++;
+
+    console.log("AwesomeAllQuestion length");
+    console.log(this.awesomeAllQuestion.length);
+
+    console.log("true Num");
+    console.log(this.trueNum);
 
     if (this.num < this.awesomeAllQuestion.length) {
       this.call_question()
@@ -108,7 +116,7 @@ export class JeuchronoController {
       myE2.removeAttr('style');
       myE2.attr('style', "display: inline;");
 
-      if (this.trueNum == 4) {
+      if (this.trueNum == this.awesomeAllQuestion.length) {
 
         this.putUserAward();
         this.getUserAwards();
@@ -229,7 +237,8 @@ export class JeuchronoController {
 
     if (this.detailedQuestion.goodAnswer == select.statement) {
       this.earnedPoint++;
-
+      this.trueNum++;
+      
       var variable = '#label-choices-' + select._id;
       var myEl = angular.element(document.querySelector(variable));
       myEl.removeAttr('class');
@@ -240,8 +249,6 @@ export class JeuchronoController {
         var myEl = angular.element(document.querySelector(variable));
         myEl.attr('disabled', "");
       }
-
-      this.trueNum++;
     }
     else {
 
@@ -274,7 +281,7 @@ export class JeuchronoController {
     }
     else {
 
-      if (this.trueNum == 5) {
+      /*if (this.trueNum == 5) {
 
         this.putUserAward();
         this.getUserAwards();
@@ -284,7 +291,7 @@ export class JeuchronoController {
         myE1.removeAttr('style');
         myE1.attr('style',"display: inline;");
 
-      }
+      }*/
 
 
       this.$timeout(function () {
