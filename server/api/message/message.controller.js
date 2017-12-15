@@ -30,6 +30,27 @@ function handleError(res, statusCode) {
   };
 }
 
+function handleEntityNotFound(res) {
+  return function(entity) {
+    if(!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+}
+
+function removeEntity(res) {
+  return function(entity) {
+    if(entity) {
+      return entity.destroy()
+        .then(() => {
+          res.status(204).end();
+        });
+    }
+  };
+}
+
 // Gets a list of All Messages
 export function index(req, res) {
   return Message.findAll()
@@ -87,7 +108,7 @@ export function create(req, res) {
   var newMessage = Message.build(req.body);
   //newMessage.setDataValue('msg_type', '1');
   return newMessage.save()
-    .catch(validationError(res));
+    .catch(handleError(res));
 }
 
 
