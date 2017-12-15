@@ -35,8 +35,15 @@ export default function(sequelize, DataTypes) {
         key : '_id',
       }
     },*/
-    
-    ended : DataTypes.BOOLEAN,
+  
+    user1Ended : {
+     type : DataTypes.BOOLEAN,
+     defaultValue : false
+    },
+    user2Ended : {
+      type :DataTypes.BOOLEAN,
+      defaultValue : false
+     }
     
   });
 }

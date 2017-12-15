@@ -2201,14 +2201,15 @@ export default function seedDatabaseIfNeeded() {
           User1Id : 7,
           //User2bisId:1,
           ConceptId : 1,
-          ended : false
+          user1Ended : true
   
   
         }, {
            User1Id : 7,
            User2Id : 8,
            ConceptId : 1,
-           ended : true
+           user1Ended : true,
+           user2Ended : true
 
         }]);
       })
