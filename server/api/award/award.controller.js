@@ -2,8 +2,8 @@
  * Using Rails-like standard naming convention for endpoints.
  * GET     /api/awards              ->  index
  * POST    /api/awards              ->  create
- * GET     /api/awards/:id          ->  awards      by user Id
- * GET     /api/awards/by/:id       ->  show        by id
+ * GET     /api/awards/:id          ->  awards by user Id
+ * GET     /api/awards/by/:id       ->  show awards by id
  * DELETE  /api/awards/:id          ->  destroy
  */
 
@@ -33,6 +33,27 @@ function handleError(res, statusCode) {
   };
 }
 
+function handleEntityNotFound(res) {
+  return function(entity) {
+    if(!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+}
+
+function removeEntity(res) {
+  return function(entity) {
+    if(entity) {
+      return entity.destroy()
+        .then(() => {
+          res.status(204).end();
+        });
+    }
+  };
+}
+
 // Gets a list of All awards
 export function index(req, res) {
 
@@ -47,7 +68,6 @@ export function awards(req, res) {
   return Award.findAll({
 
     attributes: [
-//      [Sequelize.fn('COUNT', Sequelize.col('Award._id') ), 'count'],
       '_id',
       'UserId',
       'ConceptId',
@@ -148,7 +168,7 @@ export function upsert(req, res) {
     where: {
       _id: req.params.id
     }
-  }).then(regularisation(req.params.id,req.user._id))
+  })
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
@@ -160,7 +180,7 @@ export function upsert(req, res) {
 export function create(req, res) {
   var newAward = Award.build(req.body);
   return newAward.save()
-    .catch(validationError(res));
+    .catch(handleError(res));
 }
 
 
