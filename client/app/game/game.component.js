@@ -7,36 +7,70 @@ import routes from './game.routes';
 
 export class GameComponent {
   /*@ngInject*/
-  constructor($http, $scope, socket, $window) {
+
+
+  
+  constructor($http, $scope, socket, $window, Auth) {
+    this.Auth = Auth;
     this.$http = $http;
     this.$window = $window;
     this.socket = socket;
     this.finishGame = []
     this.openGame = []
+    this.waitGame = []
     this.message = 'Hello';
     this.listUsers = [];
     this.listConcepts = [];
+    
+ 
 
   }
   $onInit(){
 
     this.$http.get("/api/games/mygame")
     .then(response =>{
+     
       this.myAwesomeGame = response.data
+      if(this.myAwesomeGame.length >0){
+        console.log("tu as une partie")
+        var roh = this.myAwesomeGame[0]["me"]
+        console.log(roh)
       for(var i = 0; i < this.myAwesomeGame.length ; i++){
-        if(this.myAwesomeGame[i].ended ==true){
+        console.log("ici")
+        console.log(roh)
+
+
+        if(this.myAwesomeGame[i].user1Ended ==true && this.myAwesomeGame[i].user2Ended == true){
           this.finishGame.push(this.myAwesomeGame[i])
         }
-        else{
+       /* else if (this.myAwesomeGame[i]["user1Ended"] == false && this.myAwesomeGame[i]["user2Ended"]== false){ 
+          console.log("personne a jouer")
+          this.openGame.push(this.myAwesomeGame[i])
+        }*/
+        else if (this.myAwesomeGame[i]["user1Ended"] == false && this.myAwesomeGame[i]["User1Id"]== this.myAwesomeGame[0]["me"]){
+          console.log("condition 2 ")
           this.openGame.push(this.myAwesomeGame[i])
         }
-      }
-      console.log(this.finishGame);
-      console.log("mes parties non finie mtn");
-      console.log(this.openGame);
+        else if (this.myAwesomeGame[i]["user2Ended"] == false && this.myAwesomeGame[i]["User2Id"]== this.myAwesomeGame[0]["me"]){
+          console.log("condition 3 ")
+          this.openGame.push(this.myAwesomeGame[i])
+        }
+        else{
+          this.waitGame.push(this.myAwesomeGame[i])
+        }
 
+        console.log(this.myAwesomeGame[i]["user2Ended"])
+        console.log(this.myAwesomeGame[i])
+        console.log("et la")
+        console.log(this.myAwesomeGame[0]["me"])
+      }
+      console.log(this.openGame);
+      console.log(this.waitGame);
+      console.log(this.finishGame);
+ /*
       for (var i = 0; i < this.openGame.length; i++) {
 
+       
         if (this.openGame[i].User1 == null) {
             this.openGame[i].User2 = [];
             this.openGame[i].User1.name = "Unknown";
@@ -49,9 +83,13 @@ export class GameComponent {
           this.openGame[i].User2.avatar = 'inconnu.png' //src=""
         }
 
-      }
+      }*/
 
-    })
+    }
+    else{
+      console.log("tu n as pas de partie abruti")
+    }
+  })
   }
 
   playAGame(player) {
@@ -60,6 +98,7 @@ export class GameComponent {
     console.log(player.Concept._id);
     console.log(player._id);
 */
+    
     this.$window.location.href = '/question/'+player._id; 
 
     //console.log(player._id);
