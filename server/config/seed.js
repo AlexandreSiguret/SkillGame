@@ -2277,13 +2277,9 @@ export default function seedDatabaseIfNeeded() {
         }]);
       })
 
-
-
       .then(() => console.log('finished populating things'))
-
       .catch(err => console.log('error populating things', err));
-
-
+      
     Score.destroy({ where: {} })
       .then(() => {
         let score = Score.bulkCreate([{
