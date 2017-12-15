@@ -195,6 +195,9 @@ export default function seedDatabaseIfNeeded() {
         },{
           name: 'Computer sciences',
           _id:16
+        },{
+          name: 'Pokemon',
+          _id:17
         }
         ]);
 
@@ -932,6 +935,40 @@ export default function seedDatabaseIfNeeded() {
           nbContestation: 1,
           ConceptId:16,
           goodAnswer:"Marie Antoinette"
+        } ,{
+          _id: 62,
+          owner: 7,
+          question :"What is the name of the famous electric-type that follows Ash Ketchum around and refuses to enter a Poké ball?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId:17,
+          goodAnswer:"Pikachu"
+        }, {
+          _id: 63,
+          owner: 7,
+          question :"What species is Weedle?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId:17,
+          goodAnswer:"The Bug Pokemon"
+        },
+ 
+        {
+          _id: 64,
+          owner: 7,
+          question :"What was the first Pokemon that Ash caught himself?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId:17,
+          goodAnswer:"Caterpie"
+        }, {
+          _id: 65,
+          owner: 7,
+          question :"What legendary Pokemon did Ash see on the first day of his Pokemon journey?",
+          nbAppearance: 5,
+          nbContestation: 1,
+          ConceptId:17,
+          goodAnswer:"Ho-oh"
         }
         ]);
 
@@ -2056,6 +2093,70 @@ export default function seedDatabaseIfNeeded() {
           _id: 243,
           QuestionId :61,
           statement:"Maria Carolina"
+         },{ 
+          _id:244,
+          QuestionId :62,
+          statement:"Pikachu"
+         },{
+          _id:245,
+          QuestionId :62,
+          statement:"Raichu"
+         },{
+          _id:246,
+          QuestionId :62,
+          statement:"Bulbasaur"
+         },{
+          _id: 247,
+          QuestionId :62,
+          statement:"Squirtle"
+         },{
+          _id:248,
+          QuestionId :63,
+          statement:"The Bug Pokemon"
+         },{
+          _id:249,
+          QuestionId :63,
+          statement:"The Lizard Pokemon"
+         },{
+          _id:250,
+          QuestionId :63,
+          statement:"The Seed Pokemon"
+         },{
+          _id: 251,
+          QuestionId :63,
+          statement:"The Shadow Pokemon"
+         },{ 
+          _id:252,
+          QuestionId :64,
+          statement:"Caterpie "
+         },{
+          _id:253,
+          QuestionId :64,
+          statement:"Metapod"
+         },{
+          _id:254,
+          QuestionId :64,
+          statement:"Weedle"
+         },{
+          _id: 255,
+          QuestionId :64,
+          statement:"Butterfree"
+         },{
+          _id:256,
+          QuestionId :65,
+          statement:"Ho-oh"
+         },{
+          _id:257,
+          QuestionId :65,
+          statement:"Lugia"
+         },{
+          _id:258,
+          QuestionId :65,
+          statement:"Mewtwo"
+         },{
+          _id: 259,
+          QuestionId :65,
+          statement:"Raikou"
          }
 
         ]);
@@ -2168,6 +2269,11 @@ export default function seedDatabaseIfNeeded() {
                 picture: 'badge/computerscience.png',
                 name: 'Computer Science',
                 description: 'Computer Science',
+              }, {
+                _id: 17,
+                picture: 'badge/pokemon.png',
+                name: 'Gotta Catch Em All',
+                description: 'Gotta Catch Em All',
               } , {
                 _id: 20,
                 picture: 'badge/question.png',
@@ -2180,9 +2286,14 @@ export default function seedDatabaseIfNeeded() {
                 description: 'Time Clock',
               }, {
                 _id: 22,
-                picture: 'badge/777.png',
+                picture: 'badge/random.png',
                 name: 'Random Quiz',
                 description: 'Random Quiz',
+              }, {
+                _id: 23,
+                picture: 'badge/challenge.png',
+                name: 'Challenges Won',
+                description: 'Challenges Won',
               }
       
               ]);
