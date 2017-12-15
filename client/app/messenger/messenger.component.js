@@ -38,7 +38,6 @@ export class MessengerComponent {
   }
 
   choix_user(user) {
-    //this.clearAll();
     this.userChoisi = user;
     this.getUserMessages(this.userChoisi._id);
     this.jChoisi = true;
@@ -99,11 +98,6 @@ export class MessengerComponent {
       
       console.log(this.getCurrentUser().email+' '+this.userChoisi.email+' '+this.chat_message);
       document.getElementById('input_chat').value='';
-  /*    document.getElementById('msgInfo').innerHTML = myMessage;
-      setTimeout(function(){
-        document.getElementById("msgInfo").innerHTML = "";
-      }, 6000);
-      myMessage = '';  */
       this.chat_message = '';
       
     }
