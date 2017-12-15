@@ -254,6 +254,7 @@ export class QuestionsController {
                 date: new Date(),
               });
               
+              
             }else{
               
               console.log("avant Else PutUser");
@@ -268,11 +269,10 @@ export class QuestionsController {
               console.log("Apres Else PutUser");
               console.log(this.detailAwards); 
             }
+            this.getUserAwards();
 
           });
-          
-          //console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.currentConcept._id+'/'+ this.currentConcept._id );
-          
+                    
           }
   
 

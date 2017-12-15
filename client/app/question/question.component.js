@@ -225,6 +225,7 @@ export class QuestionController {
               console.log("Apres Else PutUser");
               console.log(this.detailAwards); 
             }
+            this.getUserAwards();
 
           });
           
