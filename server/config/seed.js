@@ -2095,7 +2095,7 @@ export default function seedDatabaseIfNeeded() {
         }, {
           _id: 252,
           QuestionId: 64,
-          statement: "Caterpie"
+          statement: "Caterpie "
         }, {
           _id: 253,
           QuestionId: 64,
