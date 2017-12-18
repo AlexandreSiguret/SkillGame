@@ -205,36 +205,15 @@ export class QuestionsController {
   }
 
   getUserAwards(){
-          this.$http.get('/api/awards/')
+          this.$http.get('/api/awards/'+this.getCurrentUser()._id)
           .then(response => {
             this.listAwards = response.data;
-            this.socket.syncUpdates('award', this.listAwards);
+    //        this.socket.syncUpdates('award', this.listAwards);
             console.log("List aqards --");
             console.log(this.listAwards);
           });
           
         }
-
-/*
-       existUserBadge(uId,cId,bId){
-
-          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
-          .then(response => {
-            this.detailAwards = response.data;
-            console.log(response.status, response.data.length);
-          });
-          
-          if(this.detailAwards.length == 0) {
-            console.log("logitud 0 ?");
-            return false;
-          }
-          else {
-            console.log("True Exist");
-            return true;
-          }
-
-        }
-  */
 
         putUserAward(){
                     

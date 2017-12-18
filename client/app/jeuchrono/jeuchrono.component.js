@@ -119,7 +119,7 @@ export class JeuchronoController {
       if (this.trueNum == this.awesomeAllQuestion.length) {
 
         this.putUserAward();
-        this.getUserAwards();
+        this.getUserAwards(21);
 
         var variable1 = '#badge-award';
         var myE1 = angular.element( document.querySelector( variable1 ) );
@@ -158,7 +158,7 @@ export class JeuchronoController {
       })
     }
   }
-
+  //  list awards for user logged and badgeId
   getUserAwards(){
           this.$http.get('/api/awards/'+ 21 )
           .then(response => {
@@ -170,26 +170,6 @@ export class JeuchronoController {
           
         }
 
-/*
-       existUserBadge(uId,cId,bId){
-
-          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
-          .then(response => {
-            this.detailAwards = response.data;
-            console.log(response.status, response.data.length);
-          });
-          
-          if(this.detailAwards.length == 0) {
-            console.log("logitud 0 ?");
-            return false;
-          }
-          else {
-            console.log("True Exist");
-            return true;
-          }
-
-        }
-  */
 
         putUserAward(){
                     

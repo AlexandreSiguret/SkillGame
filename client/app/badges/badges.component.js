@@ -54,28 +54,28 @@ export class BadgesComponent {
 
 
   $onInit() {
-        this.$http.get('/api/awards/'+this.getCurrentUser()._id)
+        this.$http.get('/api/awards/user/')
         .then(response => {
           this.listAwards = response.data;
 
-          for (var i = 0; i < this.listAwards.length; i++) {
-            this.listAwards2[i]= this.listAwards[i].BadgeId;
-          }
+         // for (var i = 0; i < this.listAwards.length; i++) {
+          //  this.listAwards2[i]= this.listAwards[i].BadgeId;
+          //}
          
-        console.log("this.listAwards");
-        console.log(this.listAwards);
+      //  console.log("this.listAwards");
+      //  console.log(this.listAwards);
 
-        console.log("this.listAwards2");
-        console.log(this.listAwards2);
+      //  console.log("this.listAwards2");
+      //  console.log(this.listAwards2);
 
         this.$http.get("/api/badges")
         .then(response =>{
           this.listBadges = response.data;
 
-        console.log("this.listBadges");
-        console.log(this.listBadges);
+        //console.log("this.listBadges");
+      //  console.log(this.listBadges);
 
-          this.listBadges2 = [];
+        //  this.listBadges2 = [];
 
           /*this.k=0;
 
@@ -93,8 +93,8 @@ export class BadgesComponent {
             }
           }*/
 
-          console.log("this.listBadges2");
-        console.log(this.listBadges2);
+       //   console.log("this.listBadges2");
+       //   console.log(this.listBadges2);
         });
 
 
