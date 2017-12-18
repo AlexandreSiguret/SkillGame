@@ -9,8 +9,8 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/user/',auth.isAuthenticated(),controller.userAwards);
-router.get('/badge/:bId',auth.isAuthenticated(),controller.awards);
-router.get('/by/:id', controller.show);
+router.get('/user/badge/:bId',auth.isAuthenticated(),controller.awards);
+router.get('/:id', controller.show);
 router.post('/create/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.upsert);
 router.delete('/:id', controller.destroy);

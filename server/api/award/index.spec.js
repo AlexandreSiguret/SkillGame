@@ -45,8 +45,15 @@ describe('Award API Router:', function() {
     });
   });
 
+  describe('GET /api/awards/user', function() {
+    it('should route to award.controller.userAwards', function() {
+      routerStub.get
+        .withArgs('/', 'awardCtrl.userAwards')
+        .should.have.been.calledOnce;
+    });
+  });
 
-  describe('GET /api/awards/:id', function() {
+  describe('GET /api/awards/user/badge/:id', function() {
     it('should route to award.controller.awards', function() {
       routerStub.get
         .withArgs('/:id', 'awardCtrl.awards')
@@ -54,8 +61,16 @@ describe('Award API Router:', function() {
     });
   });
 
+  describe('GET /api/awards/:id', function() {
+    it('should route to award.controller.show', function() {
+      routerStub.get
+        .withArgs('/:id', 'awardCtrl.show')
+        .should.have.been.calledOnce;
+    });
+  });
 
-  describe('POST /api/awards', function() {
+
+  describe('POST /api/awards/create', function() {
     it('should route to award.controller.create', function() {
       routerStub.post
         .withArgs('/', 'awardCtrl.create')

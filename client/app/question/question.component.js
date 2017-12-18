@@ -55,6 +55,9 @@ export class QuestionController {
         myEl.attr('class',"false");
 
         
+
+
+        
         for (var i = 0; i < vm.idChoices.length; i++) {
           var variable = '#choices-'+vm.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
@@ -171,7 +174,6 @@ export class QuestionController {
           this.$http.get('/api/awards/user/')
           .then(response => {
             this.listAwards = response.data;
-            //this.socket.syncUpdates('award', this.listAwards);
             console.log("List aqards --");
             console.log(this.listAwards);
           });
@@ -203,7 +205,7 @@ export class QuestionController {
         
         putUserAward(){
           
-          this.$http.get('/api/awards/badge/'+ this.concept  )
+          this.$http.get('/api/awards/user/badge/'+ this.concept  )
           .then(response => {
             this.detailAwards = response.data;
             //this.$scope.detailAwards = this.detailAwards;
@@ -211,8 +213,6 @@ export class QuestionController {
 
             if(this.detailAwards.length == 0){
               this.$http.post("/api/awards/create/", {
-                UserId : this.getCurrentUser()._id,
-                ConceptId : this.concept,
                 BadgeId : this.concept,
                 badgeCount : 1,
                 date: new Date(),
