@@ -9,7 +9,7 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id',auth.isAuthenticated(),controller.userAwards);
-router.get('/:uId/:cId/:bId',auth.isAuthenticated(),controller.awards);
+router.get('/badge/:bId',auth.isAuthenticated(),controller.awards);
 router.get('/by/:id', controller.show);
 router.post('/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.upsert);

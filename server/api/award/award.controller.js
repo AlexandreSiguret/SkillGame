@@ -70,26 +70,20 @@ export function awards(req, res) {
     attributes: [
       '_id',
       'UserId',
-      'ConceptId',
+//      'ConceptId',
       'BadgeId',
       'badgeCount',
       'date'
     ], 
     where : [{
-      UserId : req.params.uId
-    }, {
-      ConceptId: req.params.cId
+      UserId : req.user._id
     }, {
       BadgeId: req.params.bId
     }],
-//    group: [ 'UserId', 'ConceptId', 'BadgeId'],
     order : [ [ 'date','ASC'] ],
     include: [{
       model: db.User,
-      attributes: ['_id','name','avatar']      
-    }, {
-      model: db.Concept,
-      attributes: ['_id','name']
+//      attributes: ['_id','name','avatar']      
     }, {
       model: db.Badge,
       attributes: ['_id','name','picture', 'description']
@@ -113,7 +107,7 @@ export function userAwards(req, res) {
       'date'
     ], 
     where : [{
-      UserId : req.params.id
+      UserId : req.user._id
     }],
     order : [ [ 'date','DESC'] ],
     include: [{

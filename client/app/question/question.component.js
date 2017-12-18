@@ -163,7 +163,7 @@ export class QuestionController {
         }
 
         getUserAwards(){
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept )
+          this.$http.get('/api/awards/usr/')
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
@@ -172,7 +172,7 @@ export class QuestionController {
           });
           
         }
-
+/*
        existUserBadge(uId,cId,bId){
 
           this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
@@ -191,12 +191,11 @@ export class QuestionController {
           }
 
         }
+ */
         
         putUserAward(){
-
-          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, this.concept );
           
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept  )
+          this.$http.get('/api/awards/badge/'+ this.concept  )
           .then(response => {
             this.detailAwards = response.data;
             //this.$scope.detailAwards = this.detailAwards;

@@ -204,7 +204,7 @@ export class QuestionsController {
   }
 
   getUserAwards(){
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 20 )
+          this.$http.get('/api/awards/')
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
@@ -236,10 +236,8 @@ export class QuestionsController {
   */
 
         putUserAward(){
-          
-          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.currentConcept._id, this.currentConcept._id );
-          
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+1+'/'+ 20)
+                    
+          this.$http.get('/api/awards/badge/'+ 20)
           .then(response => {
             this.detailAwards = response.data;
             this.$scope.detailAwards = this.detailAwards;
