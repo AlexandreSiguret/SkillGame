@@ -872,7 +872,7 @@ export default function seedDatabaseIfNeeded() {
           question: "Who is the former drummer for Nirvana that went on to become the frontman for the Foo Fighters?",
           nbAppearance: 5,
           nbContestation: 1,
-          ConceptId: 15,
+          ConceptId: 14,
           goodAnswer: "David Grohl"
         }, {
           _id: 58,

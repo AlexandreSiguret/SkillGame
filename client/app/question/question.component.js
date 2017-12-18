@@ -98,6 +98,7 @@ export class QuestionController {
   }
 
   $onInit() {
+
     this.call_question();
   }
 
@@ -112,6 +113,12 @@ export class QuestionController {
 	  this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
         this.concept = response.data.ConceptId;
+
+        this.$http.get('/api/badges/'+this.concept)
+          .then(response => {
+            this.badge = response.data;
+            console.log(this.badge);
+      });
     
       });
 	  
@@ -323,7 +330,6 @@ export class QuestionController {
               //this.$scope.launch();
 
               this.putUserAward();
-              this.getUserAwards();
 
               console.log("Last Awards");
               console.log(this.lastAward);

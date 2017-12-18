@@ -9,7 +9,5 @@ export default function(sequelize, DataTypes) {
       autoIncrement: true
     },
     badgeCount: DataTypes.INTEGER,
-    date: DataTypes.INTEGER,
- 
   });
 }

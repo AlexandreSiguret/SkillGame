@@ -73,8 +73,7 @@ export function awards(req, res) {
       '_id',
       'UserId',
       'BadgeId',
-      'badgeCount',
-      'date'
+      'badgeCount'
     ], 
     where : [{
       UserId : req.user._id
