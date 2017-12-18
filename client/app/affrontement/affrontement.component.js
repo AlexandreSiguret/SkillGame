@@ -13,36 +13,23 @@ export class AffrontementController {
 
   constructor($http, $scope, socket, Auth, $location,$window ) { 
 
-
     this.$http = $http;
     this.socket = socket;
     this.$location = $location;
-    this.jChoice = true;
-    this.jChoisi = false;
-    this.cChoisi = false;
     this.$window = $window
-
-
-
     this.getCurrentUser = Auth.getCurrentUserSync;
- 
-    $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('user');
-      socket.unsyncUpdates('concept');
-    });
+
   }
 
   $onInit() {
     this.$http.get('/api/users/notme')
     .then(response => {
       this.listUsers = response.data;
-      this.socket.syncUpdates('user', this.listUsers);
     });
 
     this.$http.get('/api/concepts')
     .then(response => {
       this.listConcepts = response.data;
-      this.socket.syncUpdates('concept', this.listConcepts);
     });
 
   }

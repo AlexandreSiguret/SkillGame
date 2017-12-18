@@ -17,7 +17,6 @@ export class BadgesComponent {
     this.socket = socket;
     this.listBadges = [];
     this.listAwards = [];
-    this.listPlayers = [];
     this.i = 0;
     this.listBadges2 = [];
     this.listAwards2 = [];
@@ -25,17 +24,11 @@ export class BadgesComponent {
 
     $scope.launch = function() {
           dialogs.notify();
-          //this.$scope.launch();
 
     }; // end launch
     
     this.getCurrentUser = Auth.getCurrentUserSync;
 
-    $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('user');
-      socket.unsyncUpdates('award');
-      socket.unsyncUpdates('badge');
-    });
   }
 
   install() {
@@ -61,13 +54,6 @@ export class BadgesComponent {
 
 
   $onInit() {
-    
-        this.$http.get("/api/users")
-        .then(response =>{
-          this.listPlayers = response.data;
-          //console.log(this.listPlayers)
-        });
-
         this.$http.get('/api/awards/'+this.getCurrentUser()._id)
         .then(response => {
           this.listAwards = response.data;
