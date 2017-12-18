@@ -119,7 +119,7 @@ export class JeuchronoController {
       if (this.trueNum == this.awesomeAllQuestion.length) {
 
         this.putUserAward();
-        this.getUserAwards(21);
+        this.getUserAwards();
 
         var variable1 = '#badge-award';
         var myE1 = angular.element( document.querySelector( variable1 ) );
@@ -160,7 +160,7 @@ export class JeuchronoController {
   }
   //  list awards for user logged and badgeId
   getUserAwards(){
-          this.$http.get('/api/awards/'+ 21 )
+          this.$http.get('/api/awards/user/' )
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
@@ -180,7 +180,7 @@ export class JeuchronoController {
             console.log(response.status, response.data.length);
 
             if(this.detailAwards.length == 0){
-              this.$http.post("/api/awards", {
+              this.$http.post("/api/awards/create/", {
                 UserId : this.getCurrentUser()._id,
                 ConceptId : 1,
                 BadgeId : 21,

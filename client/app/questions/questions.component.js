@@ -205,10 +205,9 @@ export class QuestionsController {
   }
 
   getUserAwards(){
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id)
+          this.$http.get('/api/awards/user/')
           .then(response => {
             this.listAwards = response.data;
-    //        this.socket.syncUpdates('award', this.listAwards);
             console.log("List aqards --");
             console.log(this.listAwards);
           });
@@ -224,7 +223,7 @@ export class QuestionsController {
             console.log(response.status, response.data.length);
 
             if(this.detailAwards.length == 0){
-              this.$http.post("/api/awards", {
+              this.$http.post("/api/awards/create/", {
                 UserId : this.getCurrentUser()._id,
                 ConceptId : 1,
                 BadgeId : 20,
