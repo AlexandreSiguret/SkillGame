@@ -133,7 +133,7 @@ export default function seedDatabaseIfNeeded() {
     Concept.destroy({ where: {} })
       .then(() => {
         let concept = Concept.bulkCreate([{
-          name: 'Art',
+          name: 'Computer science',
           _id: 1
         }, {
           name: 'Iphone X',
@@ -142,7 +142,7 @@ export default function seedDatabaseIfNeeded() {
           name: 'Judo',
           _id: 3
         }, {
-          name: 'France',
+          name: 'Art',
           _id: 4
         }, {
           name: 'Animal',
@@ -178,7 +178,7 @@ export default function seedDatabaseIfNeeded() {
           name: 'Harry Potter',
           _id: 15
         }, {
-          name: 'Computer sciences',
+          name: 'France',
           _id: 16
         }, {
           name: 'Pokemon',
@@ -2095,7 +2095,7 @@ export default function seedDatabaseIfNeeded() {
         }, {
           _id: 252,
           QuestionId: 64,
-          statement: "Caterpie"
+          statement: "Caterpie "
         }, {
           _id: 253,
           QuestionId: 64,
@@ -2142,9 +2142,9 @@ export default function seedDatabaseIfNeeded() {
         let badge = Badge.bulkCreate([
           {
             _id: 1,
-            picture: 'badge/art.png',
-            name: 'Art',
-            description: 'Art',
+            picture: 'badge/computerscience.png',
+            name: 'Computer Science',
+            description: 'Computer Science',
           }, {
             _id: 2,
             picture: 'badge/iphonex.png',
@@ -2157,9 +2157,9 @@ export default function seedDatabaseIfNeeded() {
             description: 'Judo',
           }, {
             _id: 4,
-            picture: 'badge/france.png',
-            name: 'France',
-            description: 'France',
+            picture: 'badge/art.png',
+            name: 'Art',
+            description: 'Art',
           }, {
             _id: 5,
             picture: 'badge/animal.png',
@@ -2215,11 +2215,11 @@ export default function seedDatabaseIfNeeded() {
             picture: 'badge/harrypotter.png',
             name: 'Harry Potter',
             description: 'Harry Potter',
-          }, {
+          },{
             _id: 16,
-            picture: 'badge/computerscience.png',
-            name: 'Computer Science',
-            description: 'Computer Science',
+            picture: 'badge/france.png',
+            name: 'France',
+            description: 'France',
           }, {
             _id: 17,
             picture: 'badge/pokemon.png',
@@ -2247,19 +2247,18 @@ export default function seedDatabaseIfNeeded() {
             description: 'Challenges Won',
           }
 
-        ]);
-
-      })
-
-      .then(() => console.log('finished populating badges'))
-
-      .catch(err => console.log('error populating badges', err));
-
+        ]);      
+            })
+      
+            .then(() => console.log('finished populating badges'))
+      
+            .catch(err => console.log('error populating badges', err));
 
 
+     
 
-    Game.destroy({ where: {} })
-      .then(() => {
+      Game.destroy({where:{}})
+      .then(() =>{
         let game = Game.bulkCreate([{
 
           User1Id: 7,
@@ -2278,13 +2277,9 @@ export default function seedDatabaseIfNeeded() {
         }]);
       })
 
-
-
       .then(() => console.log('finished populating things'))
-
       .catch(err => console.log('error populating things', err));
-
-
+      
     Score.destroy({ where: {} })
       .then(() => {
         let score = Score.bulkCreate([{
