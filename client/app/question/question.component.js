@@ -46,7 +46,8 @@ export class QuestionController {
 
     $scope.onTimeout = function(){
 
-      if($scope.counter == 0) {
+      if($scope.counter == 0 && $scope.stopped == false) {
+
         console.log("Je rentre ici ");
         var variable = '#label-choices-'+vm.detailedQuestion._id;
         var myEl = angular.element( document.querySelector( variable ) );
@@ -67,20 +68,24 @@ export class QuestionController {
 
           var myEl = angular.element(document.querySelector('#report-question-button'));
           myEl.removeAttr('disabled');
-        }       
-
-        
+        }
+    
        
         $scope.stopped=true;
+        console.log("juste ici")
 
-        this.$http.put('/api/answers/'+ this.singleQuestion._id,{
-          _id :this.singleQuestion._id,
+        vm.$http.put('/api/answers/'+ vm.singleQuestion._id,{
+          _id :vm.singleQuestion._id,
           earnedPoint : 0
-        })
+        });
+         
       }
 
-      if($scope.stopped != true)
+      if($scope.stopped != true){
         {$scope.counter--;}
+        console.log("on diminue")
+      }
+        
 
       $scope.minutes = Math.floor((($scope.counter / 60)));
       $scope.seconds = Math.floor($scope.counter - ($scope.minutes * 60));
@@ -244,10 +249,7 @@ export class QuestionController {
             console.log("on va appeler score")
 		      	this.$http.get("/api/scores/"+this.concept) 
             .then(response => {                             
-              console.log("reussi") 
-              .then(response => {
-                this.idNewScore = response.data._id;
-              });
+              
               this.currentScore = response.data.score;              
               this.$http.put('/api/scores/'+ response.data._id,{
                 score : this.currentScore + this.$scope.seconds,
@@ -316,8 +318,8 @@ export class QuestionController {
             if (this.correctanswernumber == 2)   
             {
               //this.$scope.launch();
-              this.putUserAward();
-              this.getUserAwards();
+            //  this.putUserAward();
+              //this.getUserAwards();
 
               console.log("Last Awards");
               console.log(this.lastAward);
@@ -346,7 +348,7 @@ export class QuestionController {
 
           }, 2000);
           console.log("quizz fini ")
-          this.$http.get("api/games/endgame/"+this.$stateParams.game_id).then(response =>{
+          this.$http.put("api/games/endgame/"+this.$stateParams.game_id).then(response =>{
             console.log(response)
           })
 

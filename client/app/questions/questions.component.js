@@ -61,21 +61,22 @@ export class QuestionsController {
 
 
    
-    this.$http.get('/api/concepts')
+    this.$http.get('/api/concepts/numberquestion')
       .then(response => {
         this.awesomeConcept = response.data;
+        console.log(this.awesomeConcept)
         this.$scope.cloud = []
         for (var i = 0; i < response.data.length; i++) {
-         var a = { text :  response.data[i].name, weight: i , link :"http://"+ this.$window.location.host + "/questions/"+ response.data[i]._id}
+         var a = { text :  response.data[i]["Concept"].name, weight: response.data[i]["total"] , link :"http://"+ this.$window.location.host + "/questions/"+ response.data[i].ConceptId}
          this.$scope.cloud.push(a)
-          this.awesomeConceptId[response.data[i]._id] = {name :response.data[i].name }      
+          this.awesomeConceptId[response.data[i]["Concept"]._id] = {name :response.data[i]["Concept"].name, nombre : response.data[i].total }      
         }
-
-        if(this.awesomeConceptId[this.$stateParams.id] != undefined){
-         
-          
-          this.currentConcept = {"_id" : this.$stateParams.id,name : this.awesomeConceptId[this.$stateParams.id]["name"] }
         
+
+        console.log(this.awesomeConceptId)
+        if(this.awesomeConceptId[this.$stateParams.id] != undefined){ 
+          console.log("on passe dans le if")   
+          this.currentConcept = {"ConceptId" : this.$stateParams.id,name : this.awesomeConceptId[this.$stateParams.id]["name"] }
           this.choice = true;
         }
 
@@ -105,7 +106,7 @@ export class QuestionsController {
     color: #fff;
     background-color: #166e70*/
 
-    this.currentConcept = concept;
+    this.currentConcept = concept.Concept;
     console.log(this.currentConcept)
     this.choice = true;
    // console.log(this.controleQuestion)

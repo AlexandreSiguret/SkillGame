@@ -12,6 +12,9 @@
 
 import jsonpatch from 'fast-json-patch';
 import {Concept} from '../../sqldb';
+import {Question} from "../../sqldb"
+import Sequelize from 'sequelize';
+import db from '../../sqldb';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -69,6 +72,18 @@ export function index(req, res) {
   return Concept.findAll()
     .then(respondWithResult(res))
     .catch(handleError(res));
+}
+
+export function question(req,res){
+  return Question.findAll({
+    attributes: [[Sequelize.fn('COUNT', Sequelize.col('ConceptId')), 'total'],"ConceptId",],
+    group : "ConceptId",
+    include: [{
+      model: db.Concept,      
+  }]
+  })
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Gets a single Concept from the DB

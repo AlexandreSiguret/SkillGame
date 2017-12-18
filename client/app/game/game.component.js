@@ -21,6 +21,7 @@ export class GameComponent {
     this.message = 'Hello';
     this.listUsers = [];
     this.listConcepts = [];
+    this.id_finish = []
     
  
 
@@ -42,6 +43,7 @@ export class GameComponent {
 
         if(this.myAwesomeGame[i].user1Ended ==true && this.myAwesomeGame[i].user2Ended == true){
           this.finishGame.push(this.myAwesomeGame[i])
+          this.id_finish.push(this.myAwesomeGame[i]._id)
         }
        /* else if (this.myAwesomeGame[i]["user1Ended"] == false && this.myAwesomeGame[i]["user2Ended"]== false){ 
           console.log("personne a jouer")
@@ -67,6 +69,7 @@ export class GameComponent {
       console.log(this.openGame);
       console.log(this.waitGame);
       console.log(this.finishGame);
+      console.log(this.id_finish)
  /*
       for (var i = 0; i < this.openGame.length; i++) {
 

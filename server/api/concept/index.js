@@ -26,6 +26,8 @@ var router = express.Router();
  */
 router.get('/', controller.index);
 
+router.get("/numberquestion",controller.question)
+
 /**
  * @api {get} /concepts/:id Read data of Concept by id
  * 
