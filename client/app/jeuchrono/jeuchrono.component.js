@@ -119,7 +119,6 @@ export class JeuchronoController {
       if (this.trueNum == this.awesomeAllQuestion.length) {
 
         this.putUserAward();
-        this.getUserAwards();
 
         var variable1 = '#badge-award';
         var myE1 = angular.element( document.querySelector( variable1 ) );
@@ -172,39 +171,34 @@ export class JeuchronoController {
 
 
         putUserAward(){
-                    
-          this.$http.get('/api/awards/badge/'+ 21)
+          
+          this.$http.get('/api/awards/user/badge/'+ 21)
           .then(response => {
+
             this.detailAwards = response.data;
-            //this.$scope.detailAwards = this.detailAwards;
-            console.log(response.status, response.data.length);
+
+            console.log(this.detailAwards);
 
             if(this.detailAwards.length == 0){
+
               this.$http.post("/api/awards/create/", {
-                UserId : this.getCurrentUser()._id,
-                ConceptId : 1,
                 BadgeId : 21,
                 badgeCount : 1,
                 date: new Date(),
               });
-              
+
             } else {
               
-              console.log("avant Else PutUser");
-              console.log(this.detailAwards);
-              
               var badgeC = this.detailAwards[0].badgeCount + 1;
+
               this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
                 badgeCount : badgeC,
                 _id: this.detailAwards[0]._id
               });
-
-              console.log("Apres Else PutUser");
-              console.log(this.detailAwards); 
             }
 
           });
-          //console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.currentConcept._id+'/'+ this.currentConcept._id );
+                    
           }
 
 
