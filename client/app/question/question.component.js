@@ -177,6 +177,8 @@ export class QuestionController {
           });
           
         }
+
+
 /*
        existUserBadge(uId,cId,bId){
 
@@ -197,6 +199,7 @@ export class QuestionController {
 
         }
  */
+ 
         
         putUserAward(){
           
