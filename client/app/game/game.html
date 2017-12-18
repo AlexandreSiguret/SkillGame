@@ -1,17 +1,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3 col-sm-16 sidebar">
-            <ul class="nav nav-stacked nav-pills">
-                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-            </ul>
-        </div>
-        <div class="col-md-3 col-sm-16 sidebar">
-        </div>
-        <div class="col-md-3 col-sm-16 sidebar">
-        </div>
-        <div class="col-md-3 col-sm-16 sidebar">
-        </div>
+
 
         <div class="col-md-9 col-sm-8">
         <!-- <h1 >Mes parties en cours {{ $ctrl.getCurrentUser().name }}</h1> -->
@@ -41,8 +31,11 @@
 
                 <div class="col-sm-3"> 
                 <center>
-                    <img height="90" width="80" src="assets/images/{{player.User2.avatar}}">
-                    <h4>{{player.User2.name}}</h4>
+                        <img height="90" width="80" src="assets/images/{{player.User2.avatar}}" ng-if ="player.User2 !=undefined">
+                        <h4 ng-if ="player.User2 !=undefined">{{player.User2.name}}</h4>
+
+                    <img height="90" width="80" src="assets/images/inconnu.png"ng-if ="player.User2 ==undefined">
+                    <h4 ng-if ="player.User2 ==undefined" > not player </h4>
                     </center>
                     <br><br>
                 </div>
@@ -78,8 +71,12 @@
     
                     <div class="col-sm-3"> 
                     <center>
-                        <img height="90" width="80" src="assets/images/{{player.User2.avatar}}">
-                        <h4>{{player.User2.name}}</h4>
+                        <img height="90" width="80" src="assets/images/inconnu.png"ng-if ="player.User2 ==undefined">
+                        <h4 ng-if ="player.User2 ==undefined" > not player </h4>
+
+                        <img height="90" width="80" src="assets/images/{{player.User2.avatar}}" ng-if ="player.User2 !=undefined">
+                        <h4 ng-if ="player.User2 !=undefined">{{player.User2.name}}</h4>
+
                         </center>
                         <br><br>
                     </div>
@@ -92,7 +89,7 @@
         </div>
 
         <div class="col-md-9 col-sm-8">
-        <!-- <h1 >Mes parties en cours {{ $ctrl.getCurrentUser().name }}</h1> -->
+
             <h1 class="page-header" style="color: #166e70;">Ended games</h1>
 
             <div class="col-md-9 col-sm-8" ng-repeat="player in gameCtrl.finishGame">

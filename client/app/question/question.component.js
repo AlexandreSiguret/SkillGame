@@ -344,7 +344,7 @@ export class QuestionController {
 
           }, 2000);
           console.log("quizz fini ")
-          this.$http.get("api/games/endgame/"+this.$stateParams.game_id).then(response =>{
+          this.$http.put("api/games/endgame/"+this.$stateParams.game_id).then(response =>{
             console.log(response)
           })
 
