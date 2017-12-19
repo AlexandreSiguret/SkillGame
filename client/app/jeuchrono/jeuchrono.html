@@ -33,8 +33,10 @@
             {{$ctrl.errormessage}}    
           </div>
 
+         
+          <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button>
           <button disabled ng-click="$ctrl.Check_next()" class="btn" id="next-question-button"><i class="fa fa-arrow-right fa-2x"></i></button>
-          <button disabled ng-click="$ctrl.report($ctrl.awesomeQuestion[$ctrl.num]._id)" class="btn" id="report-question-button"><i class="fa fa-flag fa-2x"></i></button> <br> <br>
+          <br> <br>
           <br><br/>
         </div>
 
