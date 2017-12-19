@@ -52,6 +52,8 @@ router.get("/pickone/:id", auth.isAuthenticated(), controller.one)
 
 router.get("/pickall/:id", auth.isAuthenticated(), controller.all)
 
+router.get("/score/:tab",auth.isAuthenticated(),controller.score)
+
 /**
  * @api {get} /answers/:id  get the data of one question in a game
  * 

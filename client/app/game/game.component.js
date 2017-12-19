@@ -66,10 +66,16 @@ export class GameComponent {
         console.log("et la")
         console.log(this.myAwesomeGame[0]["me"])
       }
+      var string = JSON.stringify(this.id_finish)
+
+      this.$http.get("api/answers/score/" + string)
+      .then( res =>{
+        console.log(res.data)
+      })
       console.log(this.openGame);
       console.log(this.waitGame);
       console.log(this.finishGame);
-      console.log(this.id_finish)
+      console.log(string)
  /*
       for (var i = 0; i < this.openGame.length; i++) {
 

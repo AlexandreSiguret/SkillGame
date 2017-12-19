@@ -63,18 +63,20 @@ export class AffrontementController {
           if(response.data.length == 0){       
             this.$http.post("/api/games", {          
               ConceptId: idconcept,
-              ended : false,
-            })
+            }).then( res => {
+               this.$window.location.href = "/question/"+ res.data._id
+            }
+            )
           }
           else{
             console.log(this.freeAwesomeGames)
             this.$http.put("/api/games/" + this.freeAwesomeGames[0]._id, {
-             /* user1 : this.freeAwesomeGames[0].user1,
-              concept: this.freeAwesomeGames[0].concept,
-              ended : this.freeAwesomeGames[0].ended*/
               _id : this.freeAwesomeGames[0]._id
-            })
+            }).then(
+              this.$window.location.href = '/question/'+ this.freeAwesomeGames[0]._id
+            )
           }
+          
           console.log(this.freeAwesomeGames)
             });
     

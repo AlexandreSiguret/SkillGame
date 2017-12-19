@@ -49,6 +49,8 @@ export class QuestionsController {
 
   $onInit() {
 
+    //this.$http.delete("/api/questions/78").then(console.log('coucou'))
+
     var variable2 = '#badge-award';
     var myE2 = angular.element( document.querySelector( variable2 ) );
     myE2.removeAttr('style');
@@ -106,7 +108,7 @@ export class QuestionsController {
     color: #fff;
     background-color: #166e70*/
 
-    this.currentConcept = concept.Concept;
+    this.currentConcept =  {ConceptId : concept.Concept._id, name : concept.Concept.name}
     console.log(this.currentConcept)
     this.choice = true;
    // console.log(this.controleQuestion)
@@ -120,6 +122,7 @@ export class QuestionsController {
 
 
   addQuestion() {
+    console.log(this.currentConcept)
 
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {
       console.log("tu as tout rempli génial")
@@ -127,7 +130,7 @@ export class QuestionsController {
         question: this.question,
         nbAppearance: 0,
         nbContestation: 0,
-        ConceptId: this.currentConcept._id,
+        ConceptId: this.currentConcept.ConceptId,
         goodAnswer: this.goodAnswer,
       })
       .then(response => {

@@ -283,6 +283,7 @@ export function endgame(req,res){
     })
   })
   .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Upserts the given Game in the DB at the specified ID

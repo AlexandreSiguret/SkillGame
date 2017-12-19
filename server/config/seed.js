@@ -18,7 +18,8 @@ import config from './environment/';
 
 export default function seedDatabaseIfNeeded() {
 
-  if (config.seedDB) {
+ /* if (config.seedDB) {
+    console.log("on vend")
 
     let Thing = sqldb.Thing;
     let User = sqldb.User;
@@ -34,8 +35,7 @@ export default function seedDatabaseIfNeeded() {
     let Award = sqldb.Award;
 
 
-    Answer.destroy({ where: {} })
-      .then(console.log("réponse détruire"));
+    Answer.destroy({ where: {} }).then(console.log("réponse détruire"));
 
     Message.destroy({ where: {} })
       .then(() => Message.bulkCreate([{
@@ -194,7 +194,6 @@ export default function seedDatabaseIfNeeded() {
 
     User.destroy({ where: {} })
       .then(() => User.bulkCreate([{
-
         provider: 'local',
 
         name: 'Test User',
@@ -329,7 +328,6 @@ export default function seedDatabaseIfNeeded() {
         .catch(err => console.log('error populating users', err)));
 
     Question.destroy({ where: {} })
-
       .then(() => {
 
         let concept = Question.bulkCreate([{
@@ -2343,6 +2341,6 @@ export default function seedDatabaseIfNeeded() {
       })
       .then(() => console.log('finished alonescore'))
 
-  }
+  }*/
 
 }

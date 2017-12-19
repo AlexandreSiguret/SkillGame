@@ -40,9 +40,9 @@ export class QuestionController {
     this.detailAwards = [];
 
 
-    $scope.$on('$destroy', function() {
+   /* $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
-    });
+    });*/
 
     $scope.onTimeout = function(){
 
@@ -349,7 +349,8 @@ export class QuestionController {
 
           }, 2000);
           console.log("quizz fini ")
-          this.$http.put("api/games/endgame/"+this.$stateParams.game_id).then(response =>{
+          this.$http.put("api/games/endgame/"+this.$stateParams.game_id)
+          .then(response =>{
             console.log(response)
           })
 

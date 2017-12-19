@@ -115,6 +115,19 @@ export function all(req,res){
   ).then(respondWithResult(res))
 }
 
+export function score(req,res){
+  console.log("on passe dans la fonction")
+ var tableau =  JSON.parse(req.params.tab)
+ console.log(tableau)
+  return Answer.findAll({
+    where : {
+      GameId : tableau
+    },
+    group : ["UserId", "GameId"],
+    attributes : [[Sequelize.fn('SUM', Sequelize.col('earnedPoint') ), "score"],"UserId","GameId"]
+  }).then(respondWithResult(res))
+}
+
 // Gets a single Answer from the DB
 export function show(req, res) {
   return Answer.find({
@@ -136,6 +149,7 @@ export function create(req, res) {
 
 // Upserts the given Answer in the DB at the specified ID
 export function upsert(req, res) {
+  console.log("ici put")
 /*  if(req.body._id) {
     Reflect.deleteProperty(req.body, '_id');
   }
@@ -148,7 +162,7 @@ export function upsert(req, res) {
       _id: req.params.id
     }
   })
-    .then(respondWithResult(res))
+    .then(respondWithResult(res,201))
     .catch(handleError(res));
 }
 
