@@ -22,6 +22,7 @@ export class GameComponent {
     this.listUsers = [];
     this.listConcepts = [];
     this.id_finish = []
+    this.score = {}
     
  
 
@@ -70,7 +71,15 @@ export class GameComponent {
 
       this.$http.get("api/answers/score/" + string)
       .then( res =>{
-        console.log(res.data)
+        
+        for(var i = 0; i < res.data.length ; i++){
+          var current = res.data[i]
+          if( this.score[current["GameId"]] == undefined){
+          this.score[current["GameId"]] = {}
+          }
+          this.score[current["GameId"]][current["UserId"]] = current["score"]
+        }
+        console.log(this.score)
       })
       console.log(this.openGame);
       console.log(this.waitGame);
