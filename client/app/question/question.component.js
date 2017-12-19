@@ -114,7 +114,7 @@ export class QuestionController {
       .then(response => {
         this.concept = response.data.ConceptId;
 
-        this.$http.get('/api/badges/'+this.concept)
+    this.$http.get('/api/badges/'+this.concept)
           .then(response => {
             this.badge = response.data;
             console.log(this.badge);
@@ -126,10 +126,7 @@ export class QuestionController {
       .then(response => {
         this.questionChoices = response.data;
 
-      });
-
-      /* !!! !!! */
-      this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
+        this.$http.get("/api/questions/"+this.singleQuestion.Question._id)
       .then(response => {
         this.detailedQuestion = response.data;
 
@@ -141,6 +138,11 @@ export class QuestionController {
           }
 
       });
+
+      });
+
+      /* !!! !!! */
+      
     });
   }
   
@@ -247,10 +249,23 @@ export class QuestionController {
         
         // ajout modal winning award
         validation(select){
+          
           console.log("on appele validation")
+
           if ( this.detailedQuestion.goodAnswer == select.statement ) {
 
             this.correctanswernumber++;
+
+            for (var i = 0; i < this.idChoices.length; i++) {
+              var variable = '#choices-'+this.idChoices[i];
+              var myEl = angular.element( document.querySelector( variable ) ); 
+              myEl.attr('disabled',"");
+            }
+
+            var variable = '#label-choices-'+select._id;
+            var myEl = angular.element( document.querySelector( variable ) );
+            myEl.removeAttr('class');
+            myEl.attr('class',"true");
 
             this.$http.put('/api/answers/'+ this.singleQuestion._id,{
               _id :this.singleQuestion._id,
@@ -277,27 +292,15 @@ export class QuestionController {
               console.log("on s'active")
               }
             )
-            
-			
-            var variable = '#label-choices-'+select._id;
-            var myEl = angular.element( document.querySelector( variable ) );
-            myEl.removeAttr('class');
-            myEl.attr('class',"true");
+          }
+          else {
 
             for (var i = 0; i < this.idChoices.length; i++) {
               var variable = '#choices-'+this.idChoices[i];
-              var myEl = angular.element( document.querySelector( variable ) ); 
+              var myEl = angular.element( document.querySelector(variable) );
               myEl.attr('disabled',"");
-            }
-          }
-          else {
+            } 
            
-
-            this.$http.put('/api/answers/'+ this.singleQuestion._id,{ 
-              _id :this.singleQuestion._id,
-              earnedPoint : 0
-            })
-
             var variable = '#label-choices-'+this.detailedQuestion._id;
             var myEl = angular.element( document.querySelector( variable ) );
             myEl.removeAttr('class');
@@ -308,11 +311,10 @@ export class QuestionController {
             myE2.removeAttr('class');
             myE2.attr('class',"false");
 
-            for (var i = 0; i < this.idChoices.length; i++) {
-              var variable = '#choices-'+this.idChoices[i];
-              var myEl = angular.element( document.querySelector( variable ) );
-              myEl.attr('disabled',"");
-            } 
+            this.$http.put('/api/answers/'+ this.singleQuestion._id,{ 
+              _id :this.singleQuestion._id,
+              earnedPoint : 0
+            })
 
           }
 
@@ -327,7 +329,6 @@ export class QuestionController {
             /* Badge && Award Winner */
             if (this.correctanswernumber == 2)   
             {
-              //this.$scope.launch();
 
               this.putUserAward();
 
