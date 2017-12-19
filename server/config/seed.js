@@ -18,7 +18,7 @@ import config from './environment/';
 
 export default function seedDatabaseIfNeeded() {
 
- /* if (config.seedDB) {
+  if (config.seedDB) {
     console.log("on vend")
 
     let Thing = sqldb.Thing;
@@ -2341,6 +2341,6 @@ export default function seedDatabaseIfNeeded() {
       })
       .then(() => console.log('finished alonescore'))
 
-  }*/
+  }
 
 }
