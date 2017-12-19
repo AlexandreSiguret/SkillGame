@@ -90,13 +90,17 @@ export class JeuchronoController {
     this.myIndice++;
     this.num++;
 
-    console.log("AwesomeAllQuestion length");
-    console.log(this.awesomeAllQuestion.length);
-
     console.log("true Num");
     console.log(this.trueNum);
 
     if (this.num < this.awesomeAllQuestion.length) {
+      this.errormessage = "";
+      var myEl = angular.element(document.querySelector('#next-question-button'));
+      myEl.attr('disabled', "");
+
+      var myEl = angular.element(document.querySelector('#report-question-button'));
+      myEl.attr('disabled', "");
+
       this.call_question()
     } else {
       this.errormessage = "";
