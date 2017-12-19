@@ -136,7 +136,6 @@ export class QuestionController {
             if (this.questionChoices[i].statement == this.detailedQuestion.goodAnswer)
               this.detailedQuestion._id = this.questionChoices[i]._id;
           }
-
       });
 
       });

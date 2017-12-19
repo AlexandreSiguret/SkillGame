@@ -3,11 +3,11 @@
     <div class="row">
 
 
-        <div class="col-md-9 col-sm-8">
+        <div class="col-md-9 col-md-offset-1 col-sm-8">
         <!-- <h1 >Mes parties en cours {{ $ctrl.getCurrentUser().name }}</h1> -->
             <h1 class="page-header" style="color: #166e70;"> Games in progress </h1>
 
-            <div class="col-md-9 col-sm-8" ng-repeat="player in gameCtrl.openGame">
+            <div class="col-md-9 col-md-offset-1 col-sm-8" ng-repeat="player in gameCtrl.openGame">
 
                 <div class="col-sm-2">
                 </div>
@@ -44,11 +44,11 @@
                 <!--   {{player.User1.name}} vs {{player.User2.name}}  -->
         </div>
 
-        <div class="col-md-9 col-sm-8">
+        <div class="col-md-9 col-md-offset-1 col-sm-8">
             <!-- <h1 >Mes parties en cours {{ $ctrl.getCurrentUser().name }}</h1> -->
                 <h1 class="page-header" style="color: #166e70;"> Games in wait </h1>
     
-                <div class="col-md-9 col-sm-8" ng-repeat="player in gameCtrl.waitGame">
+                <div class="col-md-9 col-md-offset-1 col-sm-8" ng-repeat="player in gameCtrl.waitGame">
     
                     <div class="col-sm-2">
                     </div>
@@ -84,17 +84,13 @@
                 </div>
                     <!--   {{player.User1.name}} vs {{player.User2.name}}  -->
             </div>
-
-        <div class="col-md-3 col-sm-16   sidebar">
-        </div>
-
         <!-- partie fini mtn -->
 
-        <div class="col-md-9 col-sm-8">
+        <div class="col-md-9 col-md-offset-1 col-sm-8">
 
             <h1 class="page-header" style="color: #166e70;">Ended games </h1>
 
-            <div class="col-md-9 col-sm-8" ng-repeat="player in gameCtrl.finishGame">
+            <div class="col-md-9  col-md-offset-1 col-sm-8" ng-repeat="player in gameCtrl.finishGame">
 
                 <div class="col-sm-2">
                 </div>
