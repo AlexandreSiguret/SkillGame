@@ -30,8 +30,8 @@ db.Question = db.sequelize.import('../api/question/question.model');
 db.Thing = db.sequelize.import('../api/thing/thing.model');
 db.User = db.sequelize.import('../api/user/user.model');
 
-db.Award.belongsTo(db.Concept);
-db.Concept.hasMany(db.Award);
+//db.Award.belongsTo(db.Concept);
+//db.Concept.hasMany(db.Award);
 db.Award.belongsTo(db.User);
 db.User.hasMany(db.Award);
 db.Award.belongsTo(db.Badge);

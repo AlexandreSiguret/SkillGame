@@ -4,7 +4,7 @@ import routing from './questions.routes';
 
 export class QuestionsController {
   $http;
-  socket;
+  //socket;
   allConceptId=[];
   awesomeConcept = [];
   awesomeConceptId = {}
@@ -24,9 +24,9 @@ export class QuestionsController {
 
 
   /*@ngInject*/
-  constructor($http, $scope, socket, $window,$stateParams, Auth) {
+  constructor($http, $scope /*, socket*/, $window,$stateParams, Auth) {
     this.$http = $http;
-    this.socket = socket;
+    //this.socket = socket;
     this.$window=$window;
     this.$stateParams = $stateParams;
     this.showme = true;
@@ -43,7 +43,7 @@ export class QuestionsController {
   this.$scope = $scope
 
     $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('concept');
+      //socket.unsyncUpdates('concept');
     });
   }
 
@@ -66,7 +66,7 @@ export class QuestionsController {
     this.$http.get('/api/concepts/numberquestion')
       .then(response => {
         this.awesomeConcept = response.data;
-        console.log(this.awesomeConcept)
+      //  console.log(this.awesomeConcept)
         this.$scope.cloud = []
         for (var i = 0; i < response.data.length; i++) {
          var a = { text :  response.data[i]["Concept"].name, weight: response.data[i]["total"] , link :"http://"+ this.$window.location.host + "/questions/"+ response.data[i].ConceptId}
@@ -75,46 +75,24 @@ export class QuestionsController {
         }
         
 
-        console.log(this.awesomeConceptId)
+       // console.log(this.awesomeConceptId)
         if(this.awesomeConceptId[this.$stateParams.id] != undefined){ 
           console.log("on passe dans le if")   
           this.currentConcept = {"ConceptId" : this.$stateParams.id,name : this.awesomeConceptId[this.$stateParams.id]["name"] }
           this.choice = true;
         }
 
-        
-       
-      }
-      
-    )
-
-      
-      ;
+      });
   }
 
 
 
   choix_concept(concept) {
-/*
-    
-    for (var i = 0; i < this.allConceptId.length; i++) {
-      var variable = '#concept-'+this.allConceptId[i];
-      var myEl = angular.element( document.querySelector( variable ) );
-      myEl.removeAttr('class');
-    }
-    var variable = '#concept-'+concept._id;
-    var myEl = angular.element( document.querySelector( variable ) );
-    myEl.attr('class',"active");
-    color: #fff;
-    background-color: #166e70*/
 
     this.currentConcept =  {ConceptId : concept.Concept._id, name : concept.Concept.name}
     console.log(this.currentConcept)
     this.choice = true;
-   // console.log(this.controleQuestion)
 
-   // console.log(" Je suis this.currentConcept._id");
-   // console.log(this.currentConcept._id);
   }
 
 
@@ -124,6 +102,7 @@ export class QuestionsController {
   addQuestion() {
     console.log(this.currentConcept)
 
+    
     if (this.goodAnswer != "" && this.question != "" && this.WrongAnswer1 != "" && this.WrongAnswer2 != "" && this.WrongAnswer3 != "") {
       console.log("tu as tout rempli génial")
       this.$http.post("/api/questions", {
@@ -154,6 +133,7 @@ export class QuestionsController {
         }
         
       )
+
       this.goodAnswer ="";
       this.WrongAnswer1 ="";
       this.WrongAnswer2 ="";
@@ -165,17 +145,24 @@ export class QuestionsController {
       myE2.removeAttr('style');
       myE2.attr('style',"display: inline;");
 
-      this.putUserAward();
-      this.getUserAwards();
-
       var variable2 = '#required_field';
-      var myE2 = angular.element( document.querySelector( variable2 ) );
+      var myE2 = angular.element( document.querySelector(variable2) );
       myE2.removeAttr('style');
       myE2.attr('style',"display: none;");
+
+      this.$http.get('/api/badges/'+20)
+          .then(response => {
+            this.badge = response.data;
+            console.log(this.badge);
+      });
+
+
+      this.putUserAward();
 
       })
     }
     else {
+
       var variable2 = '#required_field';
       var myE2 = angular.element( document.querySelector( variable2 ) );
       myE2.removeAttr('style');
@@ -207,73 +194,32 @@ export class QuestionsController {
     
   }
 
-  getUserAwards(){
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 20 )
-          .then(response => {
-            this.listAwards = response.data;
-            this.socket.syncUpdates('award', this.listAwards);
-            console.log("List aqards --");
-            console.log(this.listAwards);
-          });
-          
-        }
-
-/*
-       existUserBadge(uId,cId,bId){
-
-          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
-          .then(response => {
-            this.detailAwards = response.data;
-            console.log(response.status, response.data.length);
-          });
-          
-          if(this.detailAwards.length == 0) {
-            console.log("logitud 0 ?");
-            return false;
-          }
-          else {
-            console.log("True Exist");
-            return true;
-          }
-
-        }
-  */
-
         putUserAward(){
           
-          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.currentConcept._id, this.currentConcept._id );
-          
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+1+'/'+ 20)
+          this.$http.get('/api/awards/user/badge/'+ 20)
           .then(response => {
+
             this.detailAwards = response.data;
-            this.$scope.detailAwards = this.detailAwards;
-            console.log(response.status, response.data.length);
+
+            console.log(this.detailAwards);
 
             if(this.detailAwards.length == 0){
-              this.$http.post("/api/awards", {
-                UserId : this.getCurrentUser()._id,
-                ConceptId : 1,
+
+              this.$http.post("/api/awards/create/", {
                 BadgeId : 20,
                 badgeCount : 1,
                 date: new Date(),
               });
-              
-              
-            }else{
-              
-              console.log("avant Else PutUser");
-              console.log(this.detailAwards);
+
+            } else {
               
               var badgeC = this.detailAwards[0].badgeCount + 1;
+
               this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
                 badgeCount : badgeC,
                 _id: this.detailAwards[0]._id
               });
-
-              console.log("Apres Else PutUser");
-              console.log(this.detailAwards); 
             }
-            this.getUserAwards();
 
           });
                     

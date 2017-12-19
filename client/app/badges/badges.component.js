@@ -22,17 +22,19 @@ export class BadgesComponent {
     this.listAwards2 = [];
 
 
+    /*
     $scope.launch = function() {
           dialogs.notify();
 
     }; // end launch
-    
+    */
+
     this.getCurrentUser = Auth.getCurrentUserSync;
 
   }
 
   install() {
-    dialogs.wait('Creating User','Please wait while we attempt to create user "Michael Conroy."<br><br>This should only take a moment.',50);
+    //dialogs.wait('Creating User','Please wait while we attempt to create user "Michael Conroy."<br><br>This should only take a moment.',50);
   }
 
   howManyStars(badge) {
@@ -54,57 +56,36 @@ export class BadgesComponent {
 
 
   $onInit() {
-        this.$http.get('/api/awards/'+this.getCurrentUser()._id)
+/*
+        this.$http.post("/api/awards/create/", {
+          BadgeId : 1,
+          badgeCount : 1,
+          date: new Date(),
+        });
+
+*/
+
+/*
+        this.$http.put("/api/awards/"+1, {
+          badgeCount : 15,
+          _id: 5
+        });
+*/
+
+        this.$http.get('/api/awards/user/')
         .then(response => {
           this.listAwards = response.data;
-
-          for (var i = 0; i < this.listAwards.length; i++) {
-            this.listAwards2[i]= this.listAwards[i].BadgeId;
-          }
-         
-        console.log("this.listAwards");
-        console.log(this.listAwards);
-
-        console.log("this.listAwards2");
-        console.log(this.listAwards2);
+        });
 
         this.$http.get("/api/badges")
         .then(response =>{
           this.listBadges = response.data;
-
-        console.log("this.listBadges");
-        console.log(this.listBadges);
-
-          this.listBadges2 = [];
-
-          /*this.k=0;
-
-          
-          if( this.listAwards2.length == 0) {
-            this.listBadges2 = this.listBadges;
-          } else {
-            for (var i = 0; i < this.listBadges.length; i++) {
-              for (var j = 0; j < this.listAwards2.length; j++) {
-                if(this.listBadges[i]._id == this.listAwards2[j]) {
-                  this.listBadges2[this.k] = this.listBadges[i];
-                  this.k++;
-                }
-              }
-            }
-          }*/
-
-          console.log("this.listBadges2");
-        console.log(this.listBadges2);
         });
-
-
-        });
+        
     }
 
-
-
-
 }
+
 
 export default angular.module('skillGameApp.badges', [uiRouter])
   .config(routes)

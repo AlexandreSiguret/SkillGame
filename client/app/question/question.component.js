@@ -55,6 +55,9 @@ export class QuestionController {
         myEl.attr('class',"false");
 
         
+
+
+        
         for (var i = 0; i < vm.idChoices.length; i++) {
           var variable = '#choices-'+vm.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
@@ -95,6 +98,7 @@ export class QuestionController {
   }
 
   $onInit() {
+
     this.call_question();
   }
 
@@ -109,6 +113,12 @@ export class QuestionController {
 	  this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
         this.concept = response.data.ConceptId;
+
+        this.$http.get('/api/badges/'+this.concept)
+          .then(response => {
+            this.badge = response.data;
+            console.log(this.badge);
+      });
     
       });
 	  
@@ -168,16 +178,17 @@ export class QuestionController {
         }
 
         getUserAwards(){
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept )
+          this.$http.get('/api/awards/user/')
           .then(response => {
             this.listAwards = response.data;
-            this.socket.syncUpdates('award', this.listAwards);
             console.log("List aqards --");
             console.log(this.listAwards);
           });
           
         }
 
+
+/*
        existUserBadge(uId,cId,bId){
 
           this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
@@ -196,21 +207,19 @@ export class QuestionController {
           }
 
         }
+ */
+ 
         
         putUserAward(){
-
-          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.concept, this.concept );
           
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+this.concept+'/'+ this.concept  )
+          this.$http.get('/api/awards/user/badge/'+ this.concept  )
           .then(response => {
             this.detailAwards = response.data;
             //this.$scope.detailAwards = this.detailAwards;
             console.log(response.status, response.data.length);
 
             if(this.detailAwards.length == 0){
-              this.$http.post("/api/awards", {
-                UserId : this.getCurrentUser()._id,
-                ConceptId : this.concept,
+              this.$http.post("/api/awards/create/", {
                 BadgeId : this.concept,
                 badgeCount : 1,
                 date: new Date(),
@@ -319,8 +328,8 @@ export class QuestionController {
             if (this.correctanswernumber == 2)   
             {
               //this.$scope.launch();
-            //  this.putUserAward();
-              //this.getUserAwards();
+
+              this.putUserAward();
 
               console.log("Last Awards");
               console.log(this.lastAward);

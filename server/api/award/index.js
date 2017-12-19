@@ -8,10 +8,10 @@ var controller = require('./award.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/:id',auth.isAuthenticated(),controller.userAwards);
-router.get('/:uId/:cId/:bId',auth.isAuthenticated(),controller.awards);
-router.get('/by/:id', controller.show);
-router.post('/', auth.isAuthenticated(), controller.create);
+router.get('/user/',auth.isAuthenticated(),controller.userAwards);
+router.get('/user/badge/:bId',auth.isAuthenticated(),controller.awards);
+router.get('/:id', controller.show);
+router.post('/create/', auth.isAuthenticated(), controller.create);
 router.put('/:id', auth.isAuthenticated(), controller.upsert);
 router.delete('/:id', controller.destroy);
 

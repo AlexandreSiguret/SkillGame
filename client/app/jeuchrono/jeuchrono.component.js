@@ -119,7 +119,6 @@ export class JeuchronoController {
       if (this.trueNum == this.awesomeAllQuestion.length) {
 
         this.putUserAward();
-        this.getUserAwards();
 
         var variable1 = '#badge-award';
         var myE1 = angular.element( document.querySelector( variable1 ) );
@@ -158,9 +157,9 @@ export class JeuchronoController {
       })
     }
   }
-
+  //  list awards for user logged and badgeId
   getUserAwards(){
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 21 )
+          this.$http.get('/api/awards/user/' )
           .then(response => {
             this.listAwards = response.data;
             this.socket.syncUpdates('award', this.listAwards);
@@ -170,63 +169,36 @@ export class JeuchronoController {
           
         }
 
-/*
-       existUserBadge(uId,cId,bId){
-
-          this.$http.get('/api/awards/'+uId+'/'+cId+'/'+bId)
-          .then(response => {
-            this.detailAwards = response.data;
-            console.log(response.status, response.data.length);
-          });
-          
-          if(this.detailAwards.length == 0) {
-            console.log("logitud 0 ?");
-            return false;
-          }
-          else {
-            console.log("True Exist");
-            return true;
-          }
-
-        }
-  */
 
         putUserAward(){
           
-          //var aa = this.existUserBadge(this.getCurrentUser()._id, this.currentConcept._id, this.currentConcept._id );
-          
-          this.$http.get('/api/awards/'+this.getCurrentUser()._id+'/'+ 1 +'/'+ 21)
+          this.$http.get('/api/awards/user/badge/'+ 21)
           .then(response => {
+
             this.detailAwards = response.data;
-            //this.$scope.detailAwards = this.detailAwards;
-            console.log(response.status, response.data.length);
+
+            console.log(this.detailAwards);
 
             if(this.detailAwards.length == 0){
-              this.$http.post("/api/awards", {
-                UserId : this.getCurrentUser()._id,
-                ConceptId : 1,
+
+              this.$http.post("/api/awards/create/", {
                 BadgeId : 21,
                 badgeCount : 1,
                 date: new Date(),
               });
-              
+
             } else {
               
-              console.log("avant Else PutUser");
-              console.log(this.detailAwards);
-              
               var badgeC = this.detailAwards[0].badgeCount + 1;
+
               this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
                 badgeCount : badgeC,
                 _id: this.detailAwards[0]._id
               });
-
-              console.log("Apres Else PutUser");
-              console.log(this.detailAwards); 
             }
 
           });
-          //console.log('existe ? : '+aa+' para : '+this.getCurrentUser()._id+'/'+this.currentConcept._id+'/'+ this.currentConcept._id );
+                    
           }
 
 

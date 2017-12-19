@@ -43,6 +43,8 @@ function handleEntityNotFound(res) {
   };
 }
 
+
+
 function removeEntity(res) {
   return function(entity) {
     if(entity) {
@@ -70,26 +72,18 @@ export function awards(req, res) {
     attributes: [
       '_id',
       'UserId',
-      'ConceptId',
       'BadgeId',
-      'badgeCount',
-      'date'
+      'badgeCount'
     ], 
     where : [{
-      UserId : req.params.uId
-    }, {
-      ConceptId: req.params.cId
+      UserId : req.user._id
     }, {
       BadgeId: req.params.bId
     }],
-//    group: [ 'UserId', 'ConceptId', 'BadgeId'],
     order : [ [ 'date','ASC'] ],
     include: [{
       model: db.User,
-      attributes: ['_id','name','avatar']      
-    }, {
-      model: db.Concept,
-      attributes: ['_id','name']
+//      attributes: ['_id','name','avatar']      
     }, {
       model: db.Badge,
       attributes: ['_id','name','picture', 'description']
@@ -107,21 +101,17 @@ export function userAwards(req, res) {
     attributes: [
       '_id',
       'UserId',
-      'ConceptId',
       'BadgeId',
       'badgeCount',
       'date'
     ], 
     where : [{
-      UserId : req.params.id
+      UserId : req.user._id
     }],
     order : [ [ 'date','DESC'] ],
     include: [{
       model: db.User,
       attributes: ['_id','name','avatar']      
-    }, {
-      model: db.Concept,
-      attributes: ['_id','name']
     }, {
       model: db.Badge,
       attributes: ['_id','name','picture','description']
@@ -178,9 +168,10 @@ export function upsert(req, res) {
  * Creates a new award
  */
 export function create(req, res) {
-  var newAward = Award.build(req.body);
-  return newAward.save()
-    .catch(handleError(res));
+  req.body.UserId = req.user._id
+  return Award.create(req.body)
+  .then(respondWithResult(res, 201))
+  .catch(handleError(res));
 }
 
 
