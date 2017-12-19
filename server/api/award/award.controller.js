@@ -70,8 +70,6 @@ export function awards(req, res) {
   return Award.findAll({
 
     attributes: [
-      '_id',
-      'UserId',
       'BadgeId',
       'badgeCount'
     ], 
@@ -80,7 +78,6 @@ export function awards(req, res) {
     }, {
       BadgeId: req.params.bId
     }],
-    order : [ [ 'date','ASC'] ],
     include: [{
       model: db.User,
 //      attributes: ['_id','name','avatar']      
@@ -99,26 +96,17 @@ export function userAwards(req, res) {
    
   return Award.findAll({
     attributes: [
-      '_id',
-      'UserId',
-      'BadgeId',
-      'badgeCount',
-      'date'
+      'badgeCount'
     ], 
     where : [{
       UserId : req.user._id
     }],
-    order : [ [ 'date','DESC'] ],
     include: [{
-      model: db.User,
-      attributes: ['_id','name','avatar']      
-    }, {
       model: db.Badge,
       attributes: ['_id','name','picture','description']
     }] 
 
-  })
-    .then(respondWithResult(res))
+  }).then(respondWithResult(res))
     .catch(handleError(res));
 }
 
