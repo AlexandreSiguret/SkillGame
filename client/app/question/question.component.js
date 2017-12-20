@@ -54,9 +54,6 @@ export class QuestionController {
         myEl.attr('class',"false");
 
         
-
-
-        
         for (var i = 0; i < vm.idChoices.length; i++) {
           var variable = '#choices-'+vm.idChoices[i];
           var myEl = angular.element( document.querySelector( variable ) );
@@ -108,8 +105,8 @@ export class QuestionController {
       this.singleQuestion = response.data[0];
 
     /* Concept Ilimination */
-	  
-	  this.$http.get("/api/questions/"+response.data[0].Question._id)
+    
+    this.$http.get("/api/questions/"+response.data[0].Question._id)
       .then(response => {
         this.concept = response.data.ConceptId;
 
@@ -120,7 +117,7 @@ export class QuestionController {
       });
     
       });
-	  
+    
       this.$http.get("/api/choices/question/"+this.singleQuestion.Question._id)
       .then(response => {
         this.questionChoices = response.data;
@@ -209,6 +206,7 @@ export class QuestionController {
         }
  */
  
+ /*
         
         putUserAward(){
           
@@ -243,7 +241,52 @@ export class QuestionController {
           });
           
           }
-        
+   */
+
+         putUserAward(){
+            
+            this.$http.get('/api/awards/user/badge/'+ this.concept)
+            .then(response => {
+
+              
+              console.log(response)
+                console.log("on modifie ")
+
+                if ( response.data.badgeCount == 4 ||  response.data.badgeCount == 9 || response.data.badgeCount == 14 || response.data.badgeCount == 19 || response.data.badgeCount==24) {
+                  var variable2 = '#badge-award';
+                  var myE2 = angular.element( document.querySelector( variable2 ) );
+                  myE2.removeAttr('style');
+                  myE2.attr('style',"display: inline;");
+                }
+
+                this.$http.put("/api/awards/"+response.data._id, {
+                  badgeCount : response.data.badgeCount + 1,
+                  _id: response.data._id
+                });
+
+            
+              
+              },response =>{
+
+                console.log("echec")
+
+                var variable2 = '#badge-award';
+                var myE2 = angular.element( document.querySelector( variable2 ) );
+                myE2.removeAttr('style');
+                myE2.attr('style',"display: inline;");
+                
+                this.$http.post("/api/awards/create/", {
+                  BadgeId : this.concept,
+                  badgeCount : 1,
+                  date: new Date(),
+                });
+
+                
+
+              });
+                      
+            }
+
         // ajout modal winning award
         validation(select){
           
@@ -269,7 +312,7 @@ export class QuestionController {
               earnedPoint : this.$scope.seconds
             })
             console.log("on va appeler score")
-		      	this.$http.get("/api/scores/"+this.concept) 
+            this.$http.get("/api/scores/"+this.concept) 
             .then(response => {                             
               
               this.currentScore = response.data.score;              
@@ -331,10 +374,10 @@ export class QuestionController {
 
               this.putUserAward();
 
-              var variable2 = '#badge-award';
+              /*var variable2 = '#badge-award';
               var myE2 = angular.element( document.querySelector( variable2 ) ); 
               myE2.removeAttr('style');
-              myE2.attr('style',"display: inline;");
+              myE2.attr('style',"display: inline;");*/
       
             }
             

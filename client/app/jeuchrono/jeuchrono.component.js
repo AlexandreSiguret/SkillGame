@@ -124,11 +124,6 @@ export class JeuchronoController {
 
         this.putUserAward();
 
-        var variable1 = '#badge-award';
-        var myE1 = angular.element( document.querySelector( variable1 ) );
-        myE1.removeAttr('style');
-        myE1.attr('style',"display: inline;");
-
       }
 
       this.game_finish()
@@ -175,35 +170,48 @@ export class JeuchronoController {
 
 
         putUserAward(){
-          
-          this.$http.get('/api/awards/user/badge/'+ 21)
-          .then(response => {
+            
+            this.$http.get('/api/awards/user/badge/'+ 21)
+            .then(response => {
 
-            this.detailAwards = response.data;
-
-            console.log(this.detailAwards);
-
-            if(this.detailAwards.length == 0){
-
-              this.$http.post("/api/awards/create/", {
-                BadgeId : 21,
-                badgeCount : 1,
-                date: new Date(),
-              });
-
-            } else {
               
-              var badgeC = this.detailAwards[0].badgeCount + 1;
+              console.log(response)
+                console.log("on modifie ")
 
-              this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
-                badgeCount : badgeC,
-                _id: this.detailAwards[0]._id
+                if ( response.data.badgeCount == 4 ||  response.data.badgeCount == 9 || response.data.badgeCount == 14 || response.data.badgeCount == 19 || response.data.badgeCount==24) {
+                  var variable2 = '#badge-award';
+                  var myE2 = angular.element( document.querySelector( variable2 ) );
+                  myE2.removeAttr('style');
+                  myE2.attr('style',"display: inline;");
+                }
+
+                this.$http.put("/api/awards/"+response.data._id, {
+                  badgeCount : response.data.badgeCount + 1,
+                  _id: response.data._id
+                });
+
+            
+              
+              },response =>{
+
+                console.log("echec")
+
+                var variable2 = '#badge-award';
+                var myE2 = angular.element( document.querySelector( variable2 ) );
+                myE2.removeAttr('style');
+                myE2.attr('style',"display: inline;");
+                
+                this.$http.post("/api/awards/create/", {
+                  BadgeId : 21,
+                  badgeCount : 1,
+                  date: new Date(),
+                });
+
+                
+
               });
+                      
             }
-
-          });
-                    
-          }
 
 
 
