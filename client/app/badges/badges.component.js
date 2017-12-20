@@ -75,14 +75,14 @@ export class BadgesComponent {
         this.$http.get('/api/awards/user/')
         .then(response => {
           this.listAwards = response.data;
+          console.log(this.listAwards)
+        });
 
-          this.$http.get("/api/badges")
+        this.$http.get("/api/badges")
           .then(response =>{
             this.listBadges = response.data;
             console.log(this.listBadges)
           });
-
-        });
 
         
         

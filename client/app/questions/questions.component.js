@@ -36,6 +36,7 @@ export class QuestionsController {
     this.listAwards = [];
     this.correctanswernumber=0;
     this.lastAward = [];
+    $scope.badgeExistes = true;
 
 
    $scope.cloud = [],
@@ -160,7 +161,6 @@ export class QuestionsController {
         this.putUserAward();
       } catch (e) {
         console.log("Got an error!",e);
-        //throw e;
       }
 
       })
@@ -211,18 +211,21 @@ export class QuestionsController {
 
               this.$http.post("/api/awards/create/", {
                 BadgeId : 20,
-                badgeCount : 1,
-                date: new Date(),
+                badgeCount : 1
               });
+
+              this.$scope.badgeExistes = false;
 
             } else {
               
               var badgeC = this.detailAwards[0].badgeCount + 1;
 
-              this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
+              this.$http.put("/api/awards/user.badge/"+ 20, {
                 badgeCount : badgeC,
-                _id: this.detailAwards[0]._id
+                _id: 20
               });
+
+              this.$scope.badgeExistes = true;
             }
 
           });

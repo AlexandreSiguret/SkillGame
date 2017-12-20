@@ -32,7 +32,7 @@
       <div ng-if="$ctrl.choice == true">
         <div ng-if="$ctrl.choice == true">
 
-        <div id="badge-award" style="display: none;">
+        <div id="badge-award" ng-if="$ctrl.$scope.badgeExistes == false" style="display: none;">
                 <center>
                   <div class="alert alert-success">
                     <strong>Question Submitted : You Won !</strong>

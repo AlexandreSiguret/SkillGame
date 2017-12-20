@@ -239,7 +239,6 @@ export class QuestionController {
               console.log("Apres Else PutUser");
               console.log(this.detailAwards); 
             }
-            this.getUserAwards();
 
           });
           
@@ -324,18 +323,17 @@ export class QuestionController {
             
           }
           else {
+
             /* Badge && Award Winner */
+
             if (this.correctanswernumber == 2)   
             {
 
               this.putUserAward();
 
-              console.log("Last Awards");
-              console.log(this.lastAward);
-
               var variable2 = '#badge-award';
               var myE2 = angular.element( document.querySelector( variable2 ) ); 
-              myEl.removeAttr('style');
+              myE2.removeAttr('style');
               myE2.attr('style',"display: inline;");
       
             }
