@@ -39,7 +39,6 @@ export class QuestionController {
     }; // end launch
     this.detailAwards = [];
 
-
    /* $scope.$on('$destroy', function() {
       socket.unsyncUpdates('question');
     });*/
@@ -153,7 +152,7 @@ export class QuestionController {
 
     var myEl = angular.element(document.querySelector('#report-question-button'));
     myEl.attr('disabled',"");  
-
+    
     this.call_question() 
 
 

@@ -67,7 +67,7 @@ export function index(req, res) {
 // Get a list of my awards
 export function awards(req, res) {
   
-  return Award.findAll({
+  return Award.find({
 
     attributes: [
       'BadgeId',
