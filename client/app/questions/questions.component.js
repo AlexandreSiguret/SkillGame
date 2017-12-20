@@ -193,7 +193,7 @@ export class QuestionsController {
     }
     
   }
-
+/*
         putUserAward(){
           
           this.$http.get('/api/awards/user/badge/'+ 20)
@@ -201,9 +201,11 @@ export class QuestionsController {
 
             this.detailAwards = response.data;
 
-            console.log(this.detailAwards);
+            console.log("c est la base");
+            console.log(this.detailAwards)
 
             if(this.detailAwards.length == 0){
+              console.log("on creait")
 
               this.$http.post("/api/awards/create/", {
                 BadgeId : 20,
@@ -212,7 +214,8 @@ export class QuestionsController {
               });
 
             } else {
-              
+              console.log("on modifie ")
+              console.log(this.detailAwards)
               var badgeC = this.detailAwards[0].badgeCount + 1;
 
               this.$http.put("/api/awards/"+this.detailAwards[0]._id, {
@@ -223,7 +226,29 @@ export class QuestionsController {
 
           });
                     
-          }
+        }*/
+
+          putUserAward(){
+            
+            this.$http.get('/api/awards/user/badge/'+ 20)
+            .then(response => {  
+              console.log(response)
+                console.log("on modifie ")
+                  this.$http.put("/api/awards/"+response.data._id, {
+                  badgeCount : response.data.badgeCount + 1,
+                  _id: response.data._id
+                });
+              
+              },response =>{
+                console.log("echec")
+                this.$http.post("/api/awards/create/", {
+                  BadgeId : 20,
+                  badgeCount : 1,
+                  date: new Date(),
+                })
+              });
+                      
+            }
   
 
 }
