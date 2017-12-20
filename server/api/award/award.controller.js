@@ -70,6 +70,7 @@ export function awards(req, res) {
   return Award.find({
 
     attributes: [
+      "_id",
       'BadgeId',
       'badgeCount'
     ], 
@@ -79,16 +80,14 @@ export function awards(req, res) {
       BadgeId: req.params.bId
     }],
     include: [{
-      model: db.User,
-//      attributes: ['_id','name','avatar']      
-    }, {
       model: db.Badge,
       attributes: ['_id','name','picture', 'description']
     }] 
 
   })
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 // Get a list of awards by userId
@@ -140,7 +139,7 @@ export function patch(req, res) {
 
 // Upserts the given Award in the DB at the specified ID
 export function upsert(req, res) {
- // req.body.UserId = req.user._id 
+
   
   return Award.upsert(req.body, {
     where: {
