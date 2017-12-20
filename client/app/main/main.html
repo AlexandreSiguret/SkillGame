@@ -15,12 +15,18 @@
                           <td width="100"><center><h2></h2></center></td>
                         </tr>
                         </thead>
-                        <tr ng-repeat="s in $ctrl.classement">
-                          <td><center><img id="classementImg"  height="{{s.total}}" width="{{s.total}}" src="assets/images/{{s.User.avatar}}"></a></center></td>
-                          <td><center>{{s.User.name}}</a></center></td>
-                          <td><center>{{s.total}}</center></td>
                         
-                        </tr>
+                            <tr  ng-repeat="s in $ctrl.classement">
+                                
+                                <td><center>
+                                    <img ng-if="s.total < 300" id="classementImg"  height="{{s.total}}" width="{{s.total}}" src="assets/images/{{s.User.avatar}}">
+                                    <img ng-if="s.total > 300" id="classementImg"  height="300" width="300" src="assets/images/{{s.User.avatar}}">
+                                </center></td>                                
+                                <td><center>{{s.User.name}}</center></td>
+                                <td><center>{{s.total}}</center></td>
+                                
+                            </tr>
+                       
                     </table>
                 </div>
             </center>

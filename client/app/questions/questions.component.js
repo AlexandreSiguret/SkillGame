@@ -156,8 +156,12 @@ export class QuestionsController {
             console.log(this.badge);
       });
 
-
-      this.putUserAward();
+      try{
+        this.putUserAward();
+      } catch (e) {
+        console.log("Got an error!",e);
+        //throw e;
+      }
 
       })
     }
