@@ -9,7 +9,7 @@
             <input ng-model="searchText" type="text" class="form-control">
           </div>
         <li>
-        <li ng-repeat="concept in $ctrl.awesomeConcept "  >
+        <li ng-repeat="concept in $ctrl.awesomeConcept | filter:{Concept : {name : searchText}} "  >
           <a href="#" ng-click = "$ctrl.choix_concept(concept)" ng-style = "concept.Concept.name == $ctrl.currentConcept.name && {'color': '#fff' , 'background-color': '#166e70'}">{{concept.Concept.name}} ({{concept.total}}) </a>
         </li>
       </ul>
