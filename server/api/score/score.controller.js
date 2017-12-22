@@ -143,6 +143,7 @@ export function upsert(req, res) {
 
     }
   })
+  .then(res.status(204).end())
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

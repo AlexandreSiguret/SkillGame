@@ -282,6 +282,7 @@ export function endgame(req,res){
       }
     })
   })
+  .then(res.status(204).end())
   .then(respondWithResult(res))
   .catch(handleError(res));
 }
@@ -298,6 +299,7 @@ export function upsert(req, res) {
       _id: req.params.id
     }
   }).then(regularisation(req.params.id,req.user._id))
+  .then(res.status(204).end())
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

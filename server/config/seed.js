@@ -35,6 +35,7 @@ export default function seedDatabaseIfNeeded() {
     let Award = sqldb.Award;
 
 
+    Award.destroy({ where: {} }).then(console.log("récompense détruite "));
     Answer.destroy({ where: {} }).then(console.log("réponse détruire"));
 
     Message.destroy({ where: {} })

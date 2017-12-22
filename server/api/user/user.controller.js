@@ -156,8 +156,11 @@ export function changePassword(req, res) {
     }
   })
     .then(user => {
+      console.log(user)
       if(user.authenticate(oldPass)) {
         user.password = newPass;
+        console.log("vas y")
+        console.log(user.password)
         return user.save()
           .then(() => {
             res.status(204).end();

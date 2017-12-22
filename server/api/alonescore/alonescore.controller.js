@@ -129,6 +129,7 @@ export function upsert(req, res) {
       // UserId : req.user._id
     }
   })
+  .then(res.status(204).end())
     .then(respondWithResult(res))
     .catch(handleError(res));
 }

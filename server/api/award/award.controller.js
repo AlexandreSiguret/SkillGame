@@ -145,8 +145,8 @@ export function upsert(req, res) {
     where: {
       _id: req.params.id
     }
-  })
-    .then(respondWithResult(res))
+  })  
+    .then(res.status(204).end())
     .catch(handleError(res));
 }
 

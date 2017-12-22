@@ -81,8 +81,10 @@ export class QuestionsController {
           this.currentConcept = {"ConceptId" : this.$stateParams.id,name : this.awesomeConceptId[this.$stateParams.id]["name"] }
           this.choice = true;
         }
-
+        console.log(this.awesomeConcept)
       });
+
+   
   }
 
 
