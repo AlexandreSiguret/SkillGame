@@ -21,7 +21,7 @@ export default class SettingsController {
   Auth;
 
   /*@ngInject*/
-  constructor(Auth, Upload, $http) {
+  constructor(Auth, Upload) {
     this.Auth = Auth;
     this.Upload = Upload;
 

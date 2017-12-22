@@ -175,6 +175,7 @@ export function changePassword(req, res) {
 
 export function uploadFiles(req,res){
 
+console.log(req.body)
 console.log("Charger Fichier Function");
 var iduser = req.user._id
  
@@ -183,14 +184,19 @@ var storage = multer.diskStorage({
 
     filename: function (request, file, callback) {
       callback(null, file.originalname)
-      file.originalname = iduser + file.originalname 
-      console.log("on essaye");
-      console.log(file.originalname)
+      file.originalname = file.originalname 
+
     }
+ 
   });
   // Définition d'un seul parametre
   var upload = multer({storage: storage}).single('file');
   upload(req, res, function(err) {
+     
+  
+    console.log(req.file.originalname)
+    console.log("coucou toi ")
+    
     if(err) {
       console.log(err);
       return;
@@ -198,6 +204,16 @@ var storage = multer.diskStorage({
     // Retourne le path
     // TODO retourner le bon path, pour l'instant uniquement le nom du fichier
     // et le path est adpater coté client
+    return User.find({
+      where : {
+        _id : iduser
+      }
+    })
+    .then(response =>{
+      response.avatar =  "/avatar/" + iduser + "/"+ req.file.originalname
+      return response.save().then(res.end())   
+   
+    })
     res.end("fin");
   })
 
