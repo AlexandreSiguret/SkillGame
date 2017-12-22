@@ -21,10 +21,13 @@ export default class SettingsController {
   Auth;
 
   /*@ngInject*/
-  constructor(Auth, Upload) {
+  constructor(Auth, Upload, $http) {
     this.Auth = Auth;
     this.Upload = Upload;
+
   }
+
+
 
   addFile(){
 
@@ -35,6 +38,22 @@ export default class SettingsController {
       this.nameFile = this.file.name;
       this.Upload.upload({
         url :'api/users/upload',/* https://angular-file-upload-cors-srv.appspot.com/upload */
+        data : {file : this.file}
+      }).then(this.ChargerFichier());
+    }
+
+    else if(/PNG$/.test(this.file.name)) {
+      this.nameFile = this.file.name;
+      this.Upload.upload({
+        url :'api/users/upload',
+        data : {file : this.file}
+      }).then(this.ChargerFichier());
+    }
+
+    else if(/JPG$/.test(this.file.name)) {
+      this.nameFile = this.file.name;
+      this.Upload.upload({
+        url :'api/users/upload',
         data : {file : this.file}
       }).then(this.ChargerFichier());
     }

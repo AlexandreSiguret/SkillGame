@@ -39,7 +39,10 @@ export default function(sequelize, DataTypes) {
     provider: DataTypes.STRING,
     points: DataTypes.INTEGER,
     salt: DataTypes.STRING,
-    avatar: DataTypes.STRING,
+    avatar: {
+    type : DataTypes.STRING,
+    defaultValue : "anonyme.png"
+    },
     facebook: DataTypes.JSON,
     google: DataTypes.JSON,
     github: DataTypes.JSON

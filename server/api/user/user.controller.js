@@ -5,6 +5,7 @@ import config from '../../config/environment';
 import Sequelize from 'sequelize';
 import db from '../../sqldb';
 import jwt from 'jsonwebtoken';
+import multer from 'multer';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -175,11 +176,14 @@ export function changePassword(req, res) {
 export function uploadFiles(req,res){
 
 console.log("Charger Fichier Function");
-  
+var iduser = req.user._id
+ 
 var storage = multer.diskStorage({
-    destination: config.storage,
+    destination: config.storage + "/avatar/" + iduser,
+
     filename: function (request, file, callback) {
       callback(null, file.originalname)
+      file.originalname = iduser + file.originalname 
       console.log("on essaye");
       console.log(file.originalname)
     }

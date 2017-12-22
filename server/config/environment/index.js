@@ -45,6 +45,8 @@ var all = {
     }
   },
 
+  storage : './client/assets/images/',
+
   facebook: {
     clientID: process.env.FACEBOOK_ID || 'id',
     clientSecret: process.env.FACEBOOK_SECRET || 'secret',
